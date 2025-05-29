@@ -7,80 +7,59 @@
 <title>${pageTitle }</title>
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
-<!-- 제이쿼리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
 
-<!-- 폰트어썸 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<!-- 폰트어썸 FREE 아이콘 리스트 : https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free -->
+<body class="text-neutral-600">
+
+	<div class="header flex items-center w-full px-14 bg-neutral-300" style="height: 11vh">
+
+		<div class="logo">
+		<a href="/">
+			<i class="fa-solid fa-star"></i>
+		</a>
+		</div>
+
+		<div class="flex-grow"></div>
+
+		<div class="nav_box flex items-center h-full text-2xl font-black">
+			<ul class="flex mx-14">
+				<li class="top_bar_first_menu relative">
+					<a class="block px-6" href="/">HUB</a>
+					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">전체 게시판</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">공지사항</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">자유 게시판</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">QnA</a></li>
+					</ul>
+				</li>
+				<li class="hover:text-neutral-400"><a class="block px-6" href="/">WORK BOOK</a></li>
+				<li class="top_bar_first_menu relative">
+					<a class="block px-6" href="../article/list">COMMUNITY</a>
+					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">전체 게시판</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">공지사항</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">자유 게시판</a></li>
+						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">QnA</a></li>
+					</ul>
+				</li>
+				<li class="hover:text-neutral-400"><a class="block px-6" href="/">WALLET</a></li>
+			</ul>
+			<div class="">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+	</div>
 
 <!-- 테일윈드 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.4/tailwind.min.css">
-<!-- 테일윈드 치트시트 : https://nerdcave.com/tailwind-cheat-sheet -->
-
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- 데이지 UI -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.12.23/full.css" />
-</head>
-<body>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-	<header>
-		<div class="flex h-20 mx-auto items-center text-3xl">
-			<a href="/">LOGO</a>
-			<div class="flex-grow"></div>
-			<ul class="flex">
-				<li>
-					<a class="hover:underline" href="/">HOME</a>
-				</li>
-				<li>
-					<div class="dropdown dropdown-hover">
-						<div tabindex="0" role="button">
-							<a href="../article/list?boardId=1">LIST</a>
-						</div>
-						<ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-							<li>
-								<a href="../article/list?boardId=1">NOTICE</a>
-							</li>
-							<li>
-								<a href="../article/list?boardId=2">FREE</a>
-							</li>
-							<li>
-								<a href="../article/list?boardId=3">QnA</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<!-- 				<li> -->
-				<!-- 					<a class="hover:underline" href="../article/list?boardId=1">LIST</a> -->
-				<!-- 					<ul> -->
-				<!-- 						<li> -->
-				<!-- 							<a class="hover:underline" href="../article/list?boardId=1">NOTICE</a> -->
-				<!-- 						</li> -->
-				<!-- 						<li> -->
-				<!-- 							<a class="hover:underline" href="../article/list?boardId=2">FREE</a> -->
-				<!-- 						</li> -->
-				<!-- 						<li> -->
-				<!-- 							<a class="hover:underline" href="../article/list?boardId=3">QnA</a> -->
-				<!-- 						</li> -->
-				<!-- 					</ul> -->
-				<!-- 				</li> -->
-				<c:if test="${!rq.isLogined() }">
-					<li>
-						<a class="hover:underline" href="../member/login">LOGIN</a>
-					</li>
-					<li>
-						<a class="hover:underline" href="../member/join">JOIN</a>
-					</li>
-				</c:if>
-				<c:if test="${rq.isLogined() }">
-					<li>
-						<a class="hover:underline" href="../article/write">WRITE</a>
-					</li>
-					<li>
-						<a onclick="if(confirm('로그아웃 하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-	</header>
 
-	<h1>${pageTitle }</h1>
+</body>
+</html>

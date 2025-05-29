@@ -1,16 +1,14 @@
 @charset "UTF-8";
 
 @font-face {
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
+	font-family: 'SUIT-Regular';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 
 html>body {
-	font-family: 'GmarketSansMedium', sans;
+	font-family: 'SUIT-Regular', sans;
 }
 
 a {
@@ -21,21 +19,15 @@ li {
 	list-style: none;
 }
 
-header>div>ul>li {
-	margin-right: 30px;
+.top_bar_first_menu:hover > a {
+	color: oklch(70.9% 0.01 56.259);
 }
 
-/*네비게이션 2차메뉴 */
-header>div>ul>li>ul>li {
-	padding-bottom: 30px;
-}
-
-header>div>ul>li>ul {
-	background-color: white;
-	display: none;
-	position: absolute;
-}
-
-header>div>ul>li:hover>ul {
+.top_bar_first_menu:hover > ul {
+	z-index: 20;
 	display: block;
+}
+
+.comments-box hr:first-of-type {
+	display: none;
 }
