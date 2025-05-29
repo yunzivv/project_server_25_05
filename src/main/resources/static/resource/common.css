@@ -20,7 +20,7 @@ li {
 }
 
 .top_bar_first_menu:hover > a {
-	color: oklch(70.9% 0.01 56.259);
+	/*color: oklch(70.9% 0.01 56.259);*/
 }
 
 .top_bar_first_menu:hover > ul {
@@ -30,4 +30,16 @@ li {
 
 .comments-box hr:first-of-type {
 	display: none;
+}
+
+.nav_box > ul > li:hover .highlight {
+	display: block;
+}
+
+i.highlight {
+	display: none;
+	position: absolute;
+	top: 30%;
+	right: 8px;
+	font-size: .5rem;
 }

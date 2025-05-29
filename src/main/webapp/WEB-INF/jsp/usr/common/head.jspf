@@ -21,28 +21,31 @@
 
 		<div class="flex-grow"></div>
 
-		<div class="nav_box flex items-center h-full text-2xl font-black">
+		<div class="nav_box flex h-full text-2xl font-black">
 			<ul class="flex mx-14">
 				<li class="top_bar_first_menu relative">
-					<a class="block px-6" href="/">HUB</a>
+					<a class="block px-6 flex items-center h-full" href="/">HUB
+						<i class="highlight fa-solid fa-circle"></i></a>
 					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">전체 게시판</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">공지사항</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">자유 게시판</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">QnA</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
 					</ul>
 				</li>
-				<li class="hover:text-neutral-400"><a class="block px-6" href="/">WORK BOOK</a></li>
+				<li class="relative"><a class="block px-6 flex items-center h-full" href="/">WORK BOOK
+					<i class="highlight fa-solid fa-circle"></i></a></li>
 				<li class="top_bar_first_menu relative">
-					<a class="block px-6" href="../article/list">COMMUNITY</a>
+					<a class="block px-6 flex items-center h-full" href="../article/list">COMMUNITY
+						<i class="highlight fa-solid fa-circle"></i></a>
 					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">전체 게시판</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">공지사항</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">자유 게시판</a></li>
-						<li><a href="#" class="block h-full p-1 hover:text-neutral-400">QnA</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">공지사항</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">시험후기</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">QNA</a></li>
+						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자유게시판</a></li>
 					</ul>
 				</li>
-				<li class="hover:text-neutral-400"><a class="block px-6" href="/">WALLET</a></li>
+				<li class="relative"><a class="block px-6 flex items-center h-full" href="/">WALLET
+					<i class="highlight fa-solid fa-circle"></i></a></li>
 			</ul>
 			<div class="">
 				<i class="fa-solid fa-bars"></i>
