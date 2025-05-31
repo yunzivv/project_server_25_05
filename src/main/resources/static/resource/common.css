@@ -32,14 +32,16 @@ li {
 	display: none;
 }
 
-.nav_box > ul > li:hover .highlight {
-	display: block;
-}
-
 i.highlight {
-	display: none;
 	position: absolute;
 	top: 30%;
 	right: 8px;
+	font-size: 0rem;
+	opacity: 0;
+	transition: font-size .1s;
+}
+
+.nav_box > ul > li:hover .highlight {
+	opacity: 100%;
 	font-size: .5rem;
 }
