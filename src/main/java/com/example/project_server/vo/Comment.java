@@ -20,6 +20,7 @@ public class Comment {
 
 	private String extra__writer;
 
+	private boolean userReaction;
 	private boolean userCanModify;
 	private boolean userCanDelete;
 

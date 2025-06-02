@@ -5,26 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.project_server.service.MemberService;
-import com.example.project_server.util.Ut;
-import com.example.project_server.vo.Member;
+import com.example.project_server.service.ArticleService;
+import com.example.project_server.service.ReactionService;
 import com.example.project_server.vo.ResultData;
 import com.example.project_server.vo.Rq;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
-public class UsrMemberController {
+public class UsrReactionController {
 
 	@Autowired
 	private Rq rq;
 
 	@Autowired
-	private MemberService memberService;
+	private ReactionService reactionPointService;
 
-	@RequestMapping("/usr/member/myPage")
-	public String showMyPage() {
-		return "/usr/home/main";
-	}
+	@Autowired
+	private ArticleService articleService;
+
 
 }

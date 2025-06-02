@@ -3,8 +3,7 @@ package com.example.project_server.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.project_server.repository.ReactionPointRepository;
-import com.example.project_server.vo.ResultData;
+import com.example.project_server.repository.ReactionRepository;
 
 @Service
 public class ReactionService {
@@ -13,9 +12,9 @@ public class ReactionService {
 	private ArticleService articleService;
 
 	@Autowired
-	private ReactionPointRepository reactionPointRepository;
+	private ReactionRepository reactionPointRepository;
 
-	public ReactionService(ReactionPointRepository reactionPointRepository) {
+	public ReactionService(ReactionRepository reactionPointRepository) {
 		this.reactionPointRepository = reactionPointRepository;
 	}
 

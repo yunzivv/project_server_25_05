@@ -5,6 +5,11 @@
 
 <mapper namespace="com.example.project_server.repository.BoardRepository">
 
-
+    <select id="getBoardById" parameterType="int"
+            resultType="com.example.project_server.vo.Board">
+        SELECT *
+        FROM board
+        WHERE id = #{id} AND delStatus = 0
+    </select>
 
 </mapper>

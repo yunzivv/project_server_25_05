@@ -5,6 +5,112 @@
 
 <mapper namespace="com.example.project_server.repository.ArticleRepository">
 
+    <insert id="writeArticle" parameterType="map">
+        INSERT INTO article
+        SET
+            regDate = NOW(),
+		updateDate = NOW(),
+		title = #{title},
+            body = #{body},
+            memberId = #{memberId},
+            boardId = #{boardId}
+    </insert>
 
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM article
+        WHERE id = #{id}
+    </delete>
+
+    <update id="modifyArticle" parameterType="map">
+        UPDATE article
+        <set>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="body != null and body != ''">`body` = #{body},</if>
+            updateDate = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="getArticleById" parameterType="int"
+            resultType="com.example.project_server.vo.Article">
+        SELECT *
+        FROM article
+        WHERE id = #{id}
+    </select>
+    <select id="getArticleForPrint" parameterType="int"
+            resultType="com.example.project_server.vo.Article">
+        SELECT A.*, M.nickName, B.code AS extra__boardCode,
+        IFNULL(COUNT(R.id), 0) AS 'extra__sumReaction'
+        FROM article A
+        JOIN `member` M
+        ON A.memberId = M.id
+        JOIN board B
+        ON A.boardId = B.id
+        LEFT JOIN reaction R
+        ON A.id = R.relId
+        WHERE A.id = #{id}
+        GROUP BY A.id
+        ORDER BY A.id DESC;
+    </select>
+
+    <select id="getArticles"
+            resultType="com.example.project_server.vo.Article">
+        SELECT A.*, M.nickName AS extra__writer, B.code AS extra__boardCode,
+        IFNULL(COUNT(R.id), 0) AS 'extra__sumReaction'
+        FROM article A
+        JOIN `member` M
+        ON A.memberId = M.id
+        JOIN board B
+        ON A.boardId = B.id
+        LEFT JOIN reaction R
+        ON A.id = R.relId
+        <where>
+            <if test="boardId != 0 and boardId != null">
+                AND A.boardId = #{boardId}
+            </if>
+            <if test="searchItem == 1 and keyword != null">
+                AND A.title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchItem == 2 and keyword != null">
+                AND A.body LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchItem == 3 and keyword != null">
+                AND M.nickName LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        GROUP BY A.id
+        ORDER BY A.id DESC
+        LIMIT #{limitFrom}, #{itemsInAPage}
+    </select>
+
+    <select id="getArticlesCnt">
+        SELECT COUNT(*)
+        FROM article A
+        JOIN `member` M
+        ON A.memberId = M.id
+        <where>
+            <if test="boardId != 0 and boardId != null">
+                AND A.boardId = #{boardId}
+            </if>
+            <if test="searchItem == 1 and keyword != null">
+                AND A.title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchItem == 2 and keyword != null">
+                AND A.body LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchItem == 3 and keyword != null">
+                AND M.nickName LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getLastInsertId" parameterType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <select id="getArticleCnt" parameterType="int">
+        SELECT COUNT(*)
+        FROM article
+    </select>
 
 </mapper>

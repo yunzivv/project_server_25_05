@@ -21,4 +21,10 @@ public class UsrCertificateController {
 		return "/usr/cert/analysis";
 	}
 
+	@RequestMapping("/usr/cert/library")
+	public String showlibrary() {
+		return "/usr/cert/analysis";
+	}
+
+
 }

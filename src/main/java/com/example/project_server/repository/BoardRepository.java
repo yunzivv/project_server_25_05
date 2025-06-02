@@ -7,5 +7,6 @@ import com.example.project_server.vo.Board;
 @Mapper
 public interface BoardRepository {
 
+    public Board getBoardById(int id);
 
 }

@@ -16,4 +16,8 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 	}
 
+	public Board getBoardById(int boardId) {
+
+		return boardRepository.getBoardById(boardId);
+	}
 }

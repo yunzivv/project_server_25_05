@@ -18,13 +18,20 @@ public class Article {
 	private int boardId;
 	private String title;
 	private String body;
-	private int hitCount;
-	private int reactionPoints;
+	private int hits;
 
+	private int extra__sumReaction;
 	private String extra__writer;
-	
 	private String extra__commentsCount;
+	private String extra__boardCode;
 
 	private boolean userCanModify;
 	private boolean userCanDelete;
+
+	public Article(String title, String body, int memberId, int boardId) {
+		this.title = title;
+		this.body = body;
+		this.memberId = memberId;
+		this.boardId = boardId;
+	}
 }
