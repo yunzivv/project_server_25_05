@@ -8,6 +8,8 @@
 }
 
 html>body {
+	padding: 0;
+	margin: 0;
 	font-family: 'SUIT-Regular', sans;
 }
 
@@ -32,6 +34,7 @@ li {
 	display: none;
 }
 
+
 i.highlight {
 	position: absolute;
 	top: 30%;
@@ -41,7 +44,13 @@ i.highlight {
 	transition: font-size .1s;
 }
 
-.nav_box > ul > li:hover .highlight {
+.nav_box > ul > li:hover .highlight,
+.nav_box > ul > li i.active{
 	opacity: 100%;
 	font-size: .5rem;
+}
+
+.side_bar > ul > li > a.active {
+	background-color: #0118D8;
+	color: snow;
 }

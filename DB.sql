@@ -143,7 +143,7 @@ CREATE TABLE certMention (
                              jobCodeId INT UNSIGNED NOT NULL,
                              certId INT UNSIGNED NOT NULL,
                              gno INT UNSIGNED NOT NULL,
-                             `source` VARCHAR(20) NOT NULL DEFAULT "jobkorea",
+                             `source` VARCHAR(20) NOT NULL DEFAULT 'jobkorea',
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL
 );

@@ -19,6 +19,7 @@ public class Comment {
 	private int reactionPoint;
 
 	private String extra__writer;
+	private String extra__sumReaction;
 
 	private boolean userReaction;
 	private boolean userCanModify;

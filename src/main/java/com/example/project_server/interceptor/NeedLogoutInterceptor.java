@@ -20,7 +20,8 @@ public class NeedLogoutInterceptor implements HandlerInterceptor {
 
 		if (rq.isLogined()) {
 
-			rq.printHistoryBack("로그아웃 후 사용 할 수 있습니다. 로그아웃 하시겠습니까?");
+			rq.printConfirmAndRedirect("로그아웃 후 사용 할 수 있습니다. 로그아웃 하시겠습니까?",
+					"../member/doLogout");
 			return false;
 		}
 

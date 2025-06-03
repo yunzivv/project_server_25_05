@@ -5,5 +5,27 @@
 
 <mapper namespace="com.example.project_server.repository.CommentRepository">
 
+    <select id="getComments" parameterType="int">
+        SELECT C.*, M.nickName AS extra_writer,
+               IFNULL(COUNT(R.id), 0) AS 'extra__sumReaction'
+        FROM `comment` C
+                 JOIN `member` M
+                      ON C.memberId = M.id
+                 LEFT JOIN reaction R
+                           ON C.id = R.relId
+        WHERE C.relId = #{relId}
+        GROUP BY C.id
+        ORDER BY C.id DESC;
+    </select>
 
+    <insert id="doCommentWrtie">
+        INSERT INTO `comment`
+        SET
+            regDate = NOW(),
+            updateDate = NOW(),
+            memberId = #{memberId},
+            relTypeCode = #{relTypeCode},
+            relId = #{relId},
+            `body` = #{body}
+    </insert>
 </mapper>

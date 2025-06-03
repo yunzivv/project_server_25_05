@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.project_server.repository.MemberRepository">
 
+    <insert id="doJoin" parameterType="map">
+        INSERT INTO `member`
+        SET regDate    = NOW(),
+            updateDate = NOW(),
+            loginId    = #{loginId},
+            loginPw    = #{loginPw},
+            `name`     = #{name},
+            nickname   = #{nickName},
+            cellPhone  = #{cellPhone},
+            email      = #{email}
+    </insert>
+
+    <select id="getLastInsertId" parameterType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <select id="getMemberById" parameterType="int"
+            resultType="com.example.project_server.vo.Member">
+        SELECT *
+        FROM `member`
+        WHERE id = #{id}
+    </select>
+
+    <select id="isJoinableLogInId" parameterType="String">
+        SELECT COUNT(*)
+        FROM `member`
+        WHERE loginId = #{loginId}
+    </select>
+
+    <select id="isExistsNameNEmail" parameterType="String">
+        SELECT COUNT(*)
+        FROM `member`
+        WHERE `name` = #{name}
+          AND email = #{email}
+    </select>
+
+    <select id="getMemberByLoginId" parameterType="String"
+            resultType="com.example.project_server.vo.Member">
+        SELECT *
+        FROM `member`
+        WHERE loginId = #{loginId}
+    </select>
+
+    <update id="modifyMember" parameterType="map">
+        UPDATE `member`
+        <set>
+            <if test="loginId != null and loginId != ''">loginId = #{loginId},</if>
+            <if test="loginPw != null and loginPw != ''">loginPw = #{loginPw},</if>
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="nickname != null and nickname != ''">nickname = #{nickName},</if>
+            <if test="cellPhone != null and cellPhone != ''">cellPhone = #{cellPhone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            updateDate = NOW()
+        </set>
+        WHERE id = #{loginedMemberId}
+    </update>
 
 </mapper>

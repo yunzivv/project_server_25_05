@@ -5,8 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
+
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
+
+<!-- 테일윈드 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 데이지 UI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 
 <body class="text-neutral-600">
@@ -24,19 +36,19 @@
 		<div class="nav_box flex h-full text-2xl font-black">
 			<ul class="flex mx-14">
 				<li class="top_bar_first_menu relative">
-					<a class="block px-6 flex items-center h-full" href="/">HUB
+					<a class="block px-8 flex items-center h-full" href="../cert/analysis">HUB
 						<i class="highlight fa-solid fa-circle"></i></a>
-					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
-						<li><a href="#" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>
-						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
+					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap bg-blue-300">
+						<li><a href="../cert/analysis" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>
+						<li><a href="../cert/library" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
 					</ul>
 				</li>
-				<li class="relative"><a class="block px-6 flex items-center h-full" href="/">WORK BOOK
+				<li class="relative"><a class="block px-6 flex items-center h-full" href="../cert/workbook">WORK BOOK
 					<i class="highlight fa-solid fa-circle"></i></a></li>
 				<li class="top_bar_first_menu relative">
 					<a class="block px-6 flex items-center h-full" href="../article/list">COMMUNITY
 						<i class="highlight fa-solid fa-circle"></i></a>
-					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap">
+					<ul class="absolute hidden w-full t-full py-5 text-center text-lg whitespace-nowrap bg-red-300">
 						<li><a href="#" class="block h-full p-3 hover:text-neutral-">공지사항</a></li>
 						<li><a href="#" class="block h-full p-3 hover:text-neutral-">시험후기</a></li>
 						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
@@ -44,25 +56,13 @@
 						<li><a href="#" class="block h-full p-3 hover:text-neutral-">자유게시판</a></li>
 					</ul>
 				</li>
-				<li class="relative"><a class="block px-6 flex items-center h-full" href="/">WALLET
+				<li class="relative"><a class="block px-6 flex items-center h-full" href="../member/myPage">WALLET
 					<i class="highlight fa-solid fa-circle"></i></a></li>
 			</ul>
-			<div class="">
+			<div class="my-auto">
 				<i class="fa-solid fa-bars"></i>
 			</div>
 		</div>
 	</div>
 
-<!-- 테일윈드 -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- 폰트어썸 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<!-- 제이쿼리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- 데이지 UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
-</body>
-</html>

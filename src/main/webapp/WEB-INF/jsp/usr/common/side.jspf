@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+<div class="side_bar fixed top-60 left-16 py-6 text-lg font-black rounded-3xl bg-neutral-200">
+	<ul class="hub_sub_menu hidden flex flex-col items-center w-52 h-96">
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/analysis">우대 자격증 분석</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/library">자격증 정보</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myPage">내 자격증</a></li>
+	</ul>
+
+	<ul class="community_sub_menu hidden flex flex-col items-center w-52 h-96">
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=0">전체 게시판</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=1">공지사항</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=2">시험 후기</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=3">자료실</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=4">QnA</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?id=4">자유게시판</a></li>
+	</ul>
+</div>

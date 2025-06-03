@@ -52,6 +52,27 @@ public class Rq {
 		resp.getWriter().close();
 	}
 
+	public void printConfirmAndRedirect(String msg, String redirectUrl) throws IOException {
+		resp.setContentType("text/html; charset=UTF-8");
+		println("<script>");
+
+		if (!Ut.isEmpty(msg)) {
+			// 'msg'를 confirm 메시지로 사용
+			println("if (confirm('" + msg.replace("'", "\\'") + "')) {");
+			println("    location.href = '" + redirectUrl + "';");
+			println("} else {");
+			println("    history.back();");
+			println("}");
+		} else {
+			// 메시지가 없으면 그냥 이동
+			println("location.href = '../member/login';");
+		}
+
+		println("</script>");
+		resp.getWriter().flush();
+		resp.getWriter().close();
+	}
+
 	private void println(String str) throws IOException {
 		print(str + "\n");
 	}

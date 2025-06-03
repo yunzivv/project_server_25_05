@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Article {
+public class  Article {
 
 	private int id;
 	private String regDate;
@@ -27,6 +27,7 @@ public class Article {
 
 	private boolean userCanModify;
 	private boolean userCanDelete;
+	private boolean userReaction;
 
 	public Article(String title, String body, int memberId, int boardId) {
 		this.title = title;
