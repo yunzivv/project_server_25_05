@@ -41,4 +41,25 @@
         ORDER BY id;
     </select>
 
+    <select id="getJobCatNameById" parameterType="int">
+        SELECT COALESCE(`name`, '전체') AS `name`
+        FROM jobCat
+        WHERE id = #{jobCatId}
+        UNION
+        SELECT '전체' AS NAME
+        WHERE NOT EXISTS (
+            SELECT 1 FROM jobCat WHERE id = #{jobCatId}
+        );
+    </select>
+
+    <select id="getJobCodeNameById" parameterType="int">
+        SELECT COALESCE(`name`, '전체') AS `name`
+        FROM jobCode
+        WHERE id = #{jobCodeId}
+        UNION
+        SELECT '전체' AS NAME
+            WHERE NOT EXISTS (
+            SELECT 1 FROM jobCode WHERE id = #{jobCodeId}
+                );
+    </select>
 </mapper>

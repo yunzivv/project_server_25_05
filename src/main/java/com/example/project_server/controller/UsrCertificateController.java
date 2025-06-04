@@ -1,12 +1,9 @@
 package com.example.project_server.controller;
 
-import com.example.project_server.vo.JobCat;
-import com.example.project_server.vo.JobCode;
+import com.example.project_server.vo.*;
 import org.springframework.ui.Model;
 import com.example.project_server.service.CertificateService;
 import com.example.project_server.service.MemberService;
-import com.example.project_server.vo.Certificate;
-import com.example.project_server.vo.Rq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,30 +27,35 @@ public class UsrCertificateController {
 							   @RequestParam(defaultValue = "0")int jobCodeId) {
 
 		List<JobCat> jobCats = certificateService.getJobCats();
-		List<JobCode> jobCodes = null;
+		ResultData jobCodes = null;
 		if(jobCatId != 0) {
 			jobCodes = certificateService.getJobCodes(jobCatId);
 		}
-		List<Certificate> certRanking = certificateService.getCertRankByCode(jobCodeId);
+		ResultData certRanking = certificateService.getCertRankByCode(jobCodeId);
+		List<Certificate> certList = (List<Certificate>)certRanking.getData1();
 
 		model.addAttribute("jobCats", jobCats);
 		model.addAttribute("jobCodes", jobCodes);
 
-		model.addAttribute("certRanking", certRanking);
-		model.addAttribute("certRankingSize", Math.min(certRanking.size(), 10));
+		model.addAttribute("certRanking", certRanking.getData1());
+		model.addAttribute("certRankingSize", Math.min(certList.size(), 10));
 
 		return "/usr/cert/analysis";
 	}
 
 	@GetMapping("/usr/api/jobCodes")
 	@ResponseBody
-	public List<JobCode> getJobCodesByCat(int jobCatId) {
+	public ResultData getJobCodesByCat(int jobCatId) {
+
+		if(jobCatId == 0) return null;
 		return certificateService.getJobCodes(jobCatId);
 	}
 
 	@GetMapping("/usr/api/certRankByJobCode")
 	@ResponseBody
-	public List<Certificate> getCertRankByCode(int jobCodeId) {
+	public ResultData getCertRankByCode(int jobCodeId) {
+
+		if(jobCodeId == 0) return null;
 		return certificateService.getCertRankByCode(jobCodeId);
 	}
 

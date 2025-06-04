@@ -5,6 +5,7 @@ import com.example.project_server.repository.CertificateRepository;
 import com.example.project_server.vo.Certificate;
 import com.example.project_server.vo.JobCat;
 import com.example.project_server.vo.JobCode;
+import com.example.project_server.vo.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,26 @@ public class CertificateService {
 		this.certificateRepository = certificateRepository;
 	}
 
-    public List<Certificate> getCertRankByCode(int jobCodeId) {
-		return certificateRepository.getCertRankByCode(jobCodeId);
-    }
-
 	public List<JobCat> getJobCats() {
 		return certificateRepository.getJobCats();
 	}
 
-	public List<JobCode> getJobCodes(int jobCatId) {
-		return certificateRepository.getJobCodes(jobCatId);
+
+//	public List<JobCode> getJobCodes(int jobCatId) {
+//
+//		return certificateRepository.getJobCodes(jobCatId);
+//	}
+	public ResultData getJobCodes(int jobCatId) {
+
+		String jobCatName =  certificateRepository.getJobCatNameById(jobCatId);
+		return ResultData.from("S-1", jobCatName," 분야 직무 코드",
+				certificateRepository.getJobCodes(jobCatId));
+	}
+
+	public ResultData getCertRankByCode(int jobCodeId) {
+
+		String jobCodeName = certificateRepository.getJobCodeNameById(jobCodeId);
+		return ResultData.from("S-1", jobCodeName," 직무 자격증 언급 랭킹",
+				certificateRepository.getCertRankByCode(jobCodeId));
 	}
 }

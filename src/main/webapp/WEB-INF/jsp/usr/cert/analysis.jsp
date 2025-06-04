@@ -26,8 +26,8 @@
                         const $list = $('.jobCode_list');
                         $list.empty(); // 이전 목록 비우기
 
-                        data.forEach(function (jobCode) {
-                            $list.append('<li class="p-2" data-id="' + jobCode.id +
+                        data.data1.forEach(function (jobCode) {
+                            $list.append('<li class="p-2 cursor-pointer" data-id="' + jobCode.id +
                             '">' + jobCode.name + '</li>');
                         });
                     },
@@ -38,7 +38,6 @@
             });
             $('.jobCode_list').on('click', 'li', function () {
             const jobCodeId = $(this).data('id');
-            console.log(jobCodeId);
 
             $('.jobCode_list li').removeClass('text-blue-2');
             $(this).addClass('text-blue-2');
@@ -52,12 +51,12 @@
                     const $box = $('.topCertsByField');
                     $box.empty();
 
-                    if (data.length === 0) {
+                    if (data.data1.length === 0) {
                         $box.append('<div>관련 자격증이 없습니다.</div>');
                         return;
                     }
 
-                    data.slice(0, 10).forEach(function (cert) {
+                    data.data1.slice(0, 10).forEach(function (cert) {
                         $box.append('<div>' + cert.name + '</div>');
                     });
                 },
@@ -77,7 +76,9 @@
     <div class="block min-[1280px]:hidden w-1/12">
     </div>
     <div class="flex flex-col flex-grow" style="min-width: 770px">
+
         <div class="title px-8 pt-20 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
+
         <div class="analysis_1 flex p-2 " style="height: 200px;">
             <div class="select_box flex w-2/3 mr-2 p-2 border-blue-2 rounded-xl">
 
@@ -101,7 +102,8 @@
                 dd
             </div>
         </div>
-        <div class="p-2">
+
+        <div class="analysis_2 p-2">
             <div class="topCertsByField border-blue-2">
             <c:forEach var="certificate" items="${certRanking }" varStatus="status">
                <c:if test="${status.index < 10}">
@@ -110,6 +112,16 @@
             </c:forEach>
             </div>
         </div>
+
+        <div class="analysis_3 p-2">
+            <div class="totalCertCount">
+
+            </div>
+            <div class="">
+
+            </div>
+        </div>
+
         <div class="p-2">
             <div class=" ">aaaaa</div>
         </div>

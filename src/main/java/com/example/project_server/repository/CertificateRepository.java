@@ -15,4 +15,8 @@ public interface CertificateRepository {
     List<JobCat> getJobCats();
 
     List<JobCode> getJobCodes(int jobCatId);
+
+    String getJobCatNameById(int jobCatId);
+
+    String getJobCodeNameById(int jobCodeId);
 }
