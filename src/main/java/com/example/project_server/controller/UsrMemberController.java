@@ -23,9 +23,13 @@ public class UsrMemberController {
 	private MemberService memberService;
 
 	@RequestMapping("/usr/member/myPage")
-	public String showMyPage() {
-		int id = rq.getLoginedMemberId();
-		Member member = memberService.getMemberById(id);
+	public String showMyPage(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+
 		return "/usr/member/myPage";
 	}
 
@@ -79,7 +83,7 @@ public class UsrMemberController {
 
 		rq.login(member);
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), "/");
 	}
 
 	@RequestMapping("/usr/member/doLogout")

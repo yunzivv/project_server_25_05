@@ -4,18 +4,27 @@
 
 <div class="side_bar_left fixed top-60 left-16 py-6 text-lg font-black rounded-3xl bg-neutral-200">
 	<ul class="hub_sub_menu hidden flex flex-col items-center w-52 h-96">
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/analysis">우대 자격증 분석</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/library">자격증 정보</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myPage">내 자격증</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/analysis">우대 자격증 분석
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/library">자격증 정보
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myPage">내 자격증
+			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
 
 	<ul class="community_sub_menu hidden flex flex-col items-center w-52 h-96">
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=0">전체 게시판</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=1">공지사항</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=2">시험 후기</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=3">자료실</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=4">QnA</a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=5">자유게시판</a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=0">전체 게시판
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=1">공지사항
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=2">시험 후기
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=3">자료실
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=4">QnA
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=5">자유게시판
+			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
 </div>
 

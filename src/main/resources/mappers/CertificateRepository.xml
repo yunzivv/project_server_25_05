@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.project_server.repository.CertificateRepository">
 
-    <select id="getCertRanking" parameterType="int"
+    <select id="getCertRankByCode" parameterType="int"
             resultType="com.example.project_server.vo.Certificate">
         SELECT C.*, COUNT(CM.certId) AS extra__certCount
         FROM certMention CM
@@ -24,6 +24,21 @@
             </otherwise>
         </choose>
         ORDER BY extra__certCount DESC;
+    </select>
+
+    <select id="getJobCats"
+            resultType="com.example.project_server.vo.JobCat">
+        SELECT *
+        FROM jobCat
+        ORDER BY id;
+    </select>
+
+    <select id="getJobCodes" parameterType="int"
+            resultType="com.example.project_server.vo.JobCode">
+        SELECT *
+        FROM jobCode
+        WHERE jobCatId = #{jobCatId}
+        ORDER BY id;
     </select>
 
 </mapper>

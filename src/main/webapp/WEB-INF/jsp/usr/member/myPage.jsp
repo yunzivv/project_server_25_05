@@ -5,12 +5,28 @@
 <c:set var="pageTitle" value="MY PAGE"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<button onclick="history.back()" class="block text-4xl pl-10 cursor-pointer">
-	<i class="fa-solid fa-angle-left"></i>
-</button>
+<script>
+		$(document).ready(function () {
+
+			$('.nav_box > ul > li:nth-child(4) i').addClass('active');
+		});
+</script>
+
+
+<%--<button onclick="history.back()" class="block text-4xl pl-10 cursor-pointer">--%>
+<%--	<i class="fa-solid fa-angle-left"></i>--%>
+<%--</button>--%>
 
 <div class="container w-11/12 mx-auto mt-16 p-4">
 	<div class="flex items-end m-2">
+		<div class="certCard w-96 h-60 rounded-2xl bg-red-300">
+			<div class="front">
+
+			</div>
+			<div class="back">
+
+			</div>
+		</div>
 		<div class="avatar m-2">
 		  <div class="w-24 rounded-lg">
 		    <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
@@ -45,5 +61,8 @@
 		</table>
 	</div>
 </div>
+
+
+
 
 <%@ include file="../common/foot.jspf"%>

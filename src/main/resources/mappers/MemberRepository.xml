@@ -12,7 +12,7 @@
             loginId    = #{loginId},
             loginPw    = #{loginPw},
             `name`     = #{name},
-            nickname   = #{nickName},
+            nickName   = #{nickName},
             cellPhone  = #{cellPhone},
             email      = #{email}
     </insert>
@@ -54,7 +54,7 @@
             <if test="loginId != null and loginId != ''">loginId = #{loginId},</if>
             <if test="loginPw != null and loginPw != ''">loginPw = #{loginPw},</if>
             <if test="name != null and name != ''">`name` = #{name},</if>
-            <if test="nickname != null and nickname != ''">nickname = #{nickName},</if>
+            <if test="nickName != null and nickName != ''">nickname = #{nickName},</if>
             <if test="cellPhone != null and cellPhone != ''">cellPhone = #{cellPhone},</if>
             <if test="email != null and email != ''">email = #{email},</if>
             updateDate = NOW()

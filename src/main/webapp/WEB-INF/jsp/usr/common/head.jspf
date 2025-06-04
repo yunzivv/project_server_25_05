@@ -36,7 +36,7 @@
 		<div class="nav_box flex h-full text-2xl font-black whitespace-nowrap">
 			<ul class="flex mx-14">
 				<li class="top_bar_first_menu relative">
-					<a class="block px-8 flex items-center h-full" href="../cert/analysis">HUB
+					<a class="block px-6 flex items-center h-full" href="../cert/analysis">HUB
 						<i class="highlight fa-solid fa-circle"></i></a>
 					<ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-blue-300">
 						<li><a href="../cert/analysis" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>
