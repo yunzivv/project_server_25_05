@@ -163,6 +163,7 @@ CREATE TABLE jobCertRel (
 CREATE TABLE `comment` (
                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                            memberId INT UNSIGNED NOT NULL,
+                           `body` TEXT NOT NULL,
                            relTypeCode VARCHAR(20) NOT NULL,
                            relId INT UNSIGNED NOT NULL,
                            regDate DATETIME NOT NULL,

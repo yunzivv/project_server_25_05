@@ -5,6 +5,25 @@
 
 <mapper namespace="com.example.project_server.repository.CertificateRepository">
 
-
+    <select id="getCertRanking" parameterType="int"
+            resultType="com.example.project_server.vo.Certificate">
+        SELECT C.*, COUNT(CM.certId) AS extra__certCount
+        FROM certMention CM
+        JOIN certificate C ON CM.certId = C.id
+        <where>
+            <if test="jobCodeId != 0">
+                CM.jobCodeId = #{jobCodeId}
+            </if>
+        </where>
+        <choose>
+            <when test="jobCodeId != 0">
+                GROUP BY CM.jobCodeId, CM.certId
+            </when>
+            <otherwise>
+                GROUP BY CM.certId
+            </otherwise>
+        </choose>
+        ORDER BY extra__certCount DESC;
+    </select>
 
 </mapper>

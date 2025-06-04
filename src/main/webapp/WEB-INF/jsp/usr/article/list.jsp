@@ -5,11 +5,13 @@
 <%@ include file="../common/head.jspf"%>
 
 <script>
-	$(document).ready(function () {
+	$(document).ready(function() {
+
+		var boardId = ${boardId} + 1;
 
 		$('.nav_box > ul > li:nth-child(3) i').addClass('active');
-		$('.side_bar > .community_sub_menu ').removeClass('hidden');
-		$('.side_bar > .community_sub_menu > li:nth-child(1) > a').addClass('active');
+		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
+		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('active');
 	});
 </script>
 

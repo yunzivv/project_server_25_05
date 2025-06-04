@@ -15,8 +15,10 @@ public class Certificate {
 
 	private int id;
 	private String name;
-	private int parendId;
-	private int national;
+	private int parentId;
+	private int isNational;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+
+	private int extra__certCount;
 }

@@ -50,7 +50,7 @@ i.highlight {
 	font-size: .5rem;
 }
 
-.side_bar > ul > li > a.active {
-	background-color: #0118D8;
-	color: snow;
+.side_bar_left > ul > li > a.active {
+	background-color: #213555;
+	color: #F0F0F0;
 }

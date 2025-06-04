@@ -62,6 +62,8 @@ public class UsrArticleController {
 
 		List<Article> articles = articleService.getArticles(keyword, boardId, searchItem, limitFrom, itemsInAPage);
 
+//		model.addAttribute("boardId", boardId);
+
 		model.addAttribute("articles", articles);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("boardId", boardId);

@@ -9,8 +9,8 @@
 		$(document).ready(function () {
 
 			$('.nav_box > ul > li:nth-child(1) i').addClass('active');
-            $('.side_bar > .hub_sub_menu ').removeClass('hidden');
-            $('.side_bar > .hub_sub_menu > li:nth-child(2) > a').addClass('active');
+            $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
+            $('.side_bar_left > .hub_sub_menu > li:nth-child(2) > a').addClass('active');
 		});
 </script>
 
