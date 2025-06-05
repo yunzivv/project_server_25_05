@@ -62,4 +62,12 @@
             SELECT 1 FROM jobCode WHERE id = #{jobCodeId}
                 );
     </select>
+
+    <select id="getJobCatNameByCodeId" parameterType="int">
+        SELECT cat.name
+        FROM jobCat  cat
+                 JOIN jobCode `code`
+                      ON cat.id = code.jobCatId
+        WHERE code.id = #{jobCodeId};
+    </select>
 </mapper>

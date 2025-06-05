@@ -4,73 +4,6 @@
 <c:set var="pageTitle" value="ANYAYSIS"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<script>
-		$(document).ready(function () {
-
-			$('.nav_box > ul > li:nth-child(1) i').addClass('active');
-            $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
-            $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a').addClass('active');
-            $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
-            $('.jobCat_list').on('click', 'li', function () {
-                const jobCatId = $(this).data('id');
-
-                // 선택된 항목 시각적 표시 (선택사항)
-                $('.jobCat_list li').removeClass('text-blue-1').find('.arrow').remove();
-                $(this).addClass('text-blue-1').append('<span class="arrow">&nbsp;&nbsp; &gt; </span>');
-
-                $.ajax({
-                    url: '/usr/api/jobCodes?jobCatId=' + jobCatId,
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        const $list = $('.jobCode_list');
-                        $list.empty(); // 이전 목록 비우기
-
-                        data.data1.forEach(function (jobCode) {
-                            $list.append('<li class="p-2 cursor-pointer" data-id="' + jobCode.id +
-                            '">' + jobCode.name + '</li>');
-                        });
-                    },
-                    error: function (err) {
-                        console.error("직무 코드 불러오기 실패", err);
-                    }
-                });
-            });
-            $('.jobCode_list').on('click', 'li', function () {
-            const jobCodeId = $(this).data('id');
-
-            $('.jobCode_list li').removeClass('text-blue-1');
-            $(this).addClass('text-blue-1');
-
-            // AJAX로 자격증 랭킹 요청
-            $.ajax({
-                url: '/usr/api/certRankByJobCode?jobCodeId=' + jobCodeId,
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    const $box = $('.topCertsByField');
-                    let jobCodeName_box = $('.job_code_name');
-
-                    jobCodeName_box.empty()
-                    $box.empty();
-
-                    jobCodeName_box.append(data.msg + ' 분야 자격증 언급 랭킹');
-                    if (data.data1.length === 0) {
-                        $box.append('<div>관련 자격증이 없습니다.</div>');
-                        return;
-                    }
-
-                    data.data1.slice(0, 10).forEach(function (cert) {
-                        $box.append('<div>' + cert.name + '</div>');
-                    });
-                },
-                error: function () {
-                    alert('자격증 정보를 불러오는 데 실패했습니다.');
-                }
-            });
-        });
-    });
-</script>
 
 
 <div class="flex w-full h-screen">
@@ -109,14 +42,54 @@
 
         <div class="analysis_2 p-2">
             <div class="job_code_name">
-                전체 분야 TOP 10
+                전체 직무 TOP 10
             </div>
-            <div class="topCertsByField border-blue-2">
-            <c:forEach var="certificate" items="${certRanking }" varStatus="status">
-               <c:if test="${status.index < 10}">
-                    ${certificate.name}
-               </c:if>
-            </c:forEach>
+            <div class="topCertsByField p-2 border-blue-2">
+<%--            <c:forEach var="certificate" items="${certRanking }" varStatus="status">--%>
+<%--               <c:if test="${status.index < 10}">--%>
+<%--               <div>--%>
+<%--                    <span>${certificate.name}</span>--%>
+
+<%--                </div>--%>
+
+<%--               </c:if>--%>
+<%--            </c:forEach>--%>
+                <canvas id="certChart" width="300" height="100" style="margin-top:20px;"></canvas>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    const labels = ${labels};
+                    const values = ${values};
+                    /*]]>*/
+                    const backgroundColors = values.map((_, idx) => idx === 0 ? '#1f418c' : '#afafaf');
+
+                    console.log(labels);
+                    console.log(values);
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const ctx = document.getElementById('certChart').getContext('2d');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                label: '언급 횟수',
+                                data: values,
+                                backgroundColor: backgroundColors
+                            }]},
+                            options: {
+                                indexAxis: 'y',
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            precision: 0
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
             </div>
         </div>
 
@@ -130,7 +103,7 @@
         </div>
 
         <div class="p-2">
-            <div class=" ">aaaaa</div>
+            <div class=""></div>
         </div>
     </div>
     <div class="side hidden xl:block w-32">
@@ -139,5 +112,110 @@
     <div class="block min-[1280px]:hidden w-1/12">
     </div>
 </div>
+<script>
+		$(document).ready(function () {
+
+			$('.nav_box > ul > li:nth-child(1) i').addClass('active');
+            $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
+            $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a').addClass('active');
+            $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
+            $('.jobCat_list').on('click', 'li', function () {
+                const jobCatId = $(this).data('id');
+
+                // 선택된 항목 시각적 표시 (선택사항)
+                $('.jobCat_list li').removeClass('text-blue-1').find('.arrow').remove();
+                $(this).addClass('text-blue-1').append('<span class="arrow">&nbsp;&nbsp; &gt; </span>');
+
+                $.ajax({
+                    url: '/usr/api/jobCodes?jobCatId=' + jobCatId,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        const $list = $('.jobCode_list');
+                        const jobCatName = data.msg;
+                        $list.empty(); // 이전 목록 비우기
+
+                        data.data1.forEach(function (jobCode) {
+                            $list.append('<li class="p-2 cursor-pointer" data-id="' + jobCode.id +
+                            '">' + jobCode.name + '</li>');
+                        });
+                    },
+                    error: function (err) {
+                        console.error("직무 코드 불러오기 실패", err);
+                    }
+                });
+            });
+            $('.jobCode_list').on('click', 'li', function () {
+            const jobCodeId = $(this).data('id');
+
+            $('.jobCode_list li').removeClass('text-blue-1');
+            $(this).addClass('text-blue-1');
+
+            // AJAX로 자격증 랭킹 요청
+            // AJAX로 자격증 랭킹 요청
+$.ajax({
+    url: '/usr/api/certRankByJobCode?jobCodeId=' + jobCodeId,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+        const $box = $('.topCertsByField');
+        const jobCodeName_box = $('.job_code_name');
+
+        const jobCatName = data.data1;
+        const jobCodeName = data.data2;
+
+        jobCodeName_box.empty();
+        $box.empty();
+
+        jobCodeName_box.append(jobCatName + " > " + jobCodeName + " 자격증 언급 TOP 10");
+
+        if (!data.data1 || data.data1.length === 0) {
+            $box.append('<div>관련 자격증이 없습니다.</div>');
+            return;
+        }
+
+        // 차트 그릴 캔버스 추가
+        $box.append('<canvas id="certChart" width="400" height="300"></canvas>');
+
+        const labels = data.data1.map(cert => cert.name);
+        const values = data.data1.map(cert => cert.extra__certCount);
+
+        const ctx = document.getElementById('certChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '언급 횟수',
+                    data: values,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            },
+            options: {
+                indexAxis: 'y', // 👉 수평 막대 그래프 핵심
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    },
+    error: function () {
+        alert('자격증 정보를 불러오는 데 실패했습니다.');
+    }
+});
+
+        });
+    });
+</script>
+
+
+
 
 <%@ include file="../common/foot.jspf"%>

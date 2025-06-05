@@ -29,8 +29,17 @@ li {
 	color: #1f418c;
 }
 
+.text-grey-1 {
+	color: #808080;
+}
+
 .border-blue-2 {
 	border: #1f418c solid 1px;
+	border-radius: 0.8rem;
+}
+
+.border-grey-1 {
+	border: #808080 solid 1px;
 }
 
 .top_bar_first_menu:hover > a {

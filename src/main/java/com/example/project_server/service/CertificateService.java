@@ -25,11 +25,6 @@ public class CertificateService {
 		return certificateRepository.getJobCats();
 	}
 
-
-//	public List<JobCode> getJobCodes(int jobCatId) {
-//
-//		return certificateRepository.getJobCodes(jobCatId);
-//	}
 	public ResultData getJobCodes(int jobCatId) {
 
 		String jobCatName =  certificateRepository.getJobCatNameById(jobCatId);
@@ -39,8 +34,10 @@ public class CertificateService {
 
 	public ResultData getCertRankByCode(int jobCodeId) {
 
+		String jobCatName =  certificateRepository.getJobCatNameByCodeId(jobCodeId);
 		String jobCodeName = certificateRepository.getJobCodeNameById(jobCodeId);
-		return ResultData.from("S-1", jobCodeName," 직무 자격증 언급 랭킹",
+		return ResultData.from("S-1", "직무 카테고리 > 코드 자격증 언급 랭킹 가져오기 성공",
+				"직무 카테고리", jobCatName, "직무 코드", jobCodeName, "언급 랭킹",
 				certificateRepository.getCertRankByCode(jobCodeId));
 	}
 }
