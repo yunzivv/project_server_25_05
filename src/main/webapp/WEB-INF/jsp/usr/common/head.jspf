@@ -29,8 +29,13 @@
 	<div class="header flex items-center w-full px-14 bg-neutral-300" style="height: 11vh">
 
 		<div class="logo">
-		<a href="/">
-			<i class="fa-solid fa-star"></i>
+		<a href="/" class="font-bold text-4xl">
+<%--			<svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">--%>
+<%--				<text x="0" y="40" font-family="SUIT-Regular, sans-serif" font-size="36" font-weight="bold" fill="#2563EB">--%>
+<%--					CERTIFY--%>
+<%--				</text>--%>
+<%--			</svg>--%>
+			CERTIFY
 		</a>
 		</div>
 

@@ -90,7 +90,9 @@ CREATE TABLE jobCode (
 CREATE TABLE certificate (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              `name` VARCHAR(50) NOT NULL,
-                             isNational BOOLEAN,
+                             certGrade INT UNSIGNED,
+                             isNational TINYINT,
+                             agency VARCHAR(100),
                              parentId INT UNSIGNED,
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL
@@ -140,6 +142,7 @@ CREATE TABLE certSubject (
 # 자격증 언급 테이블
 CREATE TABLE certMention (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                             jobCatId INT UNSIGNED NOT NULL,
                              jobCodeId INT UNSIGNED NOT NULL,
                              certId INT UNSIGNED NOT NULL,
                              gno INT UNSIGNED NOT NULL,

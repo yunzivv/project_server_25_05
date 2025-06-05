@@ -21,6 +21,11 @@ li {
 	list-style: none;
 }
 
+hr {
+	border: none;
+	border-top: 3px solid #afafaf;
+}
+
 .text-blue-1 {
 	color: #0099FF;
 }
