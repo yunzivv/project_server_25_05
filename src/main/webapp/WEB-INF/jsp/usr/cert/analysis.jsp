@@ -15,8 +15,8 @@
                 const jobCatId = $(this).data('id');
 
                 // 선택된 항목 시각적 표시 (선택사항)
-                $('.jobCat_list li').removeClass('text-white').find('.arrow').remove();
-                $(this).addClass('text-blue-2').append('<span class="arrow">&nbsp;&nbsp; &gt; </span>');
+                $('.jobCat_list li').removeClass('text-blue-1').find('.arrow').remove();
+                $(this).addClass('text-blue-1').append('<span class="arrow">&nbsp;&nbsp; &gt; </span>');
 
                 $.ajax({
                     url: '/usr/api/jobCodes?jobCatId=' + jobCatId,
@@ -39,8 +39,8 @@
             $('.jobCode_list').on('click', 'li', function () {
             const jobCodeId = $(this).data('id');
 
-            $('.jobCode_list li').removeClass('text-blue-2');
-            $(this).addClass('text-blue-2');
+            $('.jobCode_list li').removeClass('text-blue-1');
+            $(this).addClass('text-blue-1');
 
             // AJAX로 자격증 랭킹 요청
             $.ajax({
@@ -49,8 +49,12 @@
                 dataType: 'json',
                 success: function (data) {
                     const $box = $('.topCertsByField');
+                    let jobCodeName_box = $('.job_code_name');
+
+                    jobCodeName_box.empty()
                     $box.empty();
 
+                    jobCodeName_box.append(data.msg + ' 분야 자격증 언급 랭킹');
                     if (data.data1.length === 0) {
                         $box.append('<div>관련 자격증이 없습니다.</div>');
                         return;
@@ -104,6 +108,9 @@
         </div>
 
         <div class="analysis_2 p-2">
+            <div class="job_code_name">
+                전체 분야 TOP 10
+            </div>
             <div class="topCertsByField border-blue-2">
             <c:forEach var="certificate" items="${certRanking }" varStatus="status">
                <c:if test="${status.index < 10}">
