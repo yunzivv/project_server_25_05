@@ -11,6 +11,7 @@
 
 		$('.nav_box > ul > li:nth-child(3) i').addClass('active');
 		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
+		$('.side_bar_left > .community_sub_menu > li:nth-child(' + boardId + ') > a > i').addClass('active');
 		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('active');
 	});
 </script>
@@ -19,13 +20,14 @@
 <%--	<i class="fa-solid fa-angle-left"></i>--%>
 <%--</button>--%>
 
-<div class="flex w-full h-screen">
-    <div class="side w-80 bg-blue-300">
-        <%@ include file="../common/side.jspf"%>
+<div class="flex w-full">
+    <div class="side hidden xl:block w-96 shrink-0" style="min-width: 320px;">
+        <%@ include file="../common/side.jspf" %>
     </div>
+    <div class="block min-[1280px]:hidden w-1/12"></div>
 
-	<div class="flex-grow bg-red-300">
-		<div class="title px-8 pt-20 pb-12 text-4xl font-black bg-blue-500">게시판</div>
+	<div class="flex-grow bg-red-300" style="min-width: 770px">
+		<div class="title px-8 pt-20 pb-12 text-4xl font-black">게시판</div>
 		<div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
 			<div class="articleCnt font-normal mx-4">
 			총 게시 글 : ${totalCnt }
@@ -39,10 +41,10 @@
 						<option value="0" disabled ${boardId eq 0 ? 'selected' : ''} hidden class="text-neutral-400">게시판 선택</option>
 						<option value="0">전체 게시판</option>
 						<option value="1" ${boardId eq 1 ? 'selected' : ''}>공지사항</option>
-						<option value="1" ${boardId eq 2 ? 'selected' : ''}>시험후기</option>
-						<option value="1" ${boardId eq 3 ? 'selected' : ''}>자료실</option>
-						<option value="3" ${boardId eq 4 ? 'selected' : ''}>QnA</option>
-						<option value="2" ${boardId eq 5 ? 'selected' : ''}>자유 게시판</option>
+						<option value="2" ${boardId eq 2 ? 'selected' : ''}>시험후기</option>
+						<option value="3" ${boardId eq 3 ? 'selected' : ''}>자료실</option>
+						<option value="4" ${boardId eq 4 ? 'selected' : ''}>QnA</option>
+						<option value="5" ${boardId eq 5 ? 'selected' : ''}>자유 게시판</option>
 					  </select>
 					</label>
 
@@ -130,8 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="side w-60 bg-blue-300">
-
-    </div>
+	<div class="side hidden xl:block w-40"></div>
+    <div class="block min-[1280px]:hidden w-1/12"></div>
 </div>
 <%@ include file="../common/foot.jspf"%>

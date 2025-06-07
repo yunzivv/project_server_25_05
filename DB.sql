@@ -80,23 +80,30 @@ CREATE TABLE jobCat (
 # 직무 코드 테이블
 CREATE TABLE jobCode (
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                         `name` VARCHAR(50) NOT NULL,
                          jobCatId INT UNSIGNED NOT NULL,
+                         jobCatName VARCHAR(50) NOT NULL,
+                         `code` INT UNSIGNED NOT NULL,
+                         `name` VARCHAR(50) NOT NULL,
                          regDate DATETIME NOT NULL,
                          updateDate DATETIME NOT NULL
 );
+
+SELECT * FROM jobCat;
 
 # 자격증 테이블
 CREATE TABLE certificate (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              `name` VARCHAR(50) NOT NULL,
                              certGrade INT UNSIGNED,
-                             isNational TINYINT,
+                             isNational TINYINT UNSIGNED COMMENT '0=국가공인민간자격 1 = 국가기술자격',
                              agency VARCHAR(100),
                              parentId INT UNSIGNED,
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL
 );
+
+SELECT * FROM certificate;
+
 
 # 자격증 시험 테이블
 CREATE TABLE exam (
@@ -142,11 +149,10 @@ CREATE TABLE certSubject (
 # 자격증 언급 테이블
 CREATE TABLE certMention (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                             jobCatId INT UNSIGNED NOT NULL,
                              jobCodeId INT UNSIGNED NOT NULL,
                              certId INT UNSIGNED NOT NULL,
                              gno INT UNSIGNED NOT NULL,
-                             `source` VARCHAR(20) NOT NULL DEFAULT 'jobkorea',
+                             `source` VARCHAR(20) NOT NULL DEFAULT "jobkorea",
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL
 );
@@ -166,9 +172,9 @@ CREATE TABLE jobCertRel (
 CREATE TABLE `comment` (
                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                            memberId INT UNSIGNED NOT NULL,
-                           `body` TEXT NOT NULL,
                            relTypeCode VARCHAR(20) NOT NULL,
                            relId INT UNSIGNED NOT NULL,
+                           `body` TEXT NOT NULL,
                            regDate DATETIME NOT NULL,
                            updateDate DATETIME NOT NULL
 );
@@ -199,34 +205,34 @@ CREATE TABLE board (
 
 # 게시판 테이블 데이터 추가
 INSERT INTO board SET
-	`code` = 'notice',
-	`name` = '공지사항',
-	regdate = NOW(),
-	updatedate = NOW();
+                      `code` = 'notice',
+                      `name` = '공지사항',
+                      regdate = NOW(),
+                      updatedate = NOW();
 
 INSERT INTO board SET
-    `code` = 'review',
-	`name` = '시험후기',
-	regdate = NOW(),
-	updatedate = NOW();
+                      `code` = 'review',
+                      `name` = '시험후기',
+                      regdate = NOW(),
+                      updatedate = NOW();
 
 INSERT INTO board SET
-    `code` = 'library',
-	`name` = '자료실',
-	regdate = NOW(),
-	updatedate = NOW();
+                      `code` = 'library',
+                      `name` = '자료실',
+                      regdate = NOW(),
+                      updatedate = NOW();
 
 INSERT INTO board SET
-    `code` = 'QnA',
-	`name` = '질문과 답변',
-	regdate = NOW(),
-	updatedate = NOW();
+                      `code` = 'QnA',
+                      `name` = '질문과 답변',
+                      regdate = NOW(),
+                      updatedate = NOW();
 
 INSERT INTO board SET
-    `code` = 'free',
-	`name` = '자유게시판',
-	regdate = NOW(),
-	updatedate = NOW();
+                      `code` = 'free',
+                      `name` = '자유게시판',
+                      regdate = NOW(),
+                      updatedate = NOW();
 
 # 회원 자격증 테이블
 CREATE TABLE memberCert (

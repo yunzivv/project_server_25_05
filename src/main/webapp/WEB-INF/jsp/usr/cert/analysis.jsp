@@ -4,14 +4,13 @@
 <c:set var="pageTitle" value="ANYAYSIS"></c:set>
 <%@ include file="../common/head.jspf" %>
 
-
 <div class="flex w-full">
-    <div class="side hidden xl:block w-96" style="min-width: 320px;">
+    <div class="side hidden xl:block shrink-0 w-96" style="min-width: 320px;">
         <%@ include file="../common/side.jspf" %>
     </div>
-    <div class="block min-[1280px]:hidden w-1/12">
-    </div>
-    <div class="flex flex-col flex-grow" style="min-width: 770px">
+    <div class="block min-[1280px]:hidden w-1/12"></div>
+
+    <div class="flex flex-col flex-grow bg-red-300" style="min-width: 770px">
 
         <div class="title px-8 pt-20 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
@@ -33,6 +32,7 @@
 
                     <%--직무 코드--%>
                     <ul class="jobCode_list w-1/2 flex flex-wrap overflow-y-scroll">
+                        <li class="w-1/2 p-2 cursor-pointer text-sm" data-id="*">전체</li>
                         <c:if test="${jobCodes != null}">
                             <c:forEach var="jobCode" items="${jobCodes }">
                                 <li class="w-1/2 p-2 cursor-pointer text-sm" data-id="${jobCode.id}">${jobCode.name}</li>
@@ -114,11 +114,10 @@
             <div class=""></div>
         </div>
     </div>
-    <div class="side hidden xl:block w-40">
 
-    </div>
-    <div class="block min-[1280px]:hidden w-1/12">
-    </div>
+    <div class="side hidden xl:block w-40"></div>
+    <div class="block min-[1280px]:hidden w-1/12"></div>
+
 </div>
 <script>
     $(document).ready(function () {
