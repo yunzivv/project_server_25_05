@@ -34,7 +34,7 @@ public class UsrCertificateController {
 		if(jobCatId != 0) {
 			jobCodes = certificateService.getJobCodes(jobCatId);
 		}
-		ResultData certRanking = certificateService.getCertRankByCode(jobCodeId);
+		ResultData certRanking = certificateService.getCertRank(jobCatId, jobCodeId);
 		List<Certificate> certList = (List<Certificate>)certRanking.getData3();
 
 		int[] count = new int[10];
@@ -58,7 +58,14 @@ public class UsrCertificateController {
 		model.addAttribute("jobCodes", jobCodes);
 
 		model.addAttribute("certRanking", certList);
-		model.addAttribute("certRankingSize", Math.min(certList.size(), 10));
+
+		model.addAttribute("postCount", certificateService.getPostCount(0, 0));
+		model.addAttribute("certCount", certificateService.getCertCount(0, 0));
+		model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));
+
+		System.out.println(certificateService.getPostCount(0, 0) + " " +
+				certificateService.getCertCount(0, 0) + " " +
+				certificateService.getMentionCount(0, 0));
 
 		return "/usr/cert/analysis";
 	}
@@ -73,10 +80,9 @@ public class UsrCertificateController {
 
 	@GetMapping("/usr/api/certRankByJobCode")
 	@ResponseBody
-	public ResultData getCertRankByCode(int jobCodeId) {
+	public ResultData getCertRankByCode(int jobCatId ,int jobCodeId) {
 
-		if(jobCodeId == 0) return null;
-		return certificateService.getCertRankByCode(jobCodeId);
+		return certificateService.getCertRank(jobCatId, jobCodeId);
 	}
 
 	@RequestMapping("/usr/cert/library")

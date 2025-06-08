@@ -26,6 +26,15 @@
 		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=5">자유게시판
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
+
+	<ul class="myPage_sub_menu hidden flex flex-col items-center w-52 h-96">
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="#info">내 정보
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="#cert">내 자격증
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block w-56 rounded-xl px-8 py-4" href="#article">내 글
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+	</ul>
 </div>
 
 <div class="side_bar_right hidden">

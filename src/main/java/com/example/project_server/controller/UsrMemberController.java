@@ -1,5 +1,7 @@
 package com.example.project_server.controller;
 
+import com.example.project_server.service.CertificateService;
+import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import com.example.project_server.service.MemberService;
 import com.example.project_server.util.Ut;
-import com.example.project_server.vo.Member;
-import com.example.project_server.vo.ResultData;
-import com.example.project_server.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class UsrMemberController {
@@ -22,13 +24,19 @@ public class UsrMemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private CertificateService certificateService;
+
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage(Model model, HttpServletRequest req) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 
+		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+
 		model.addAttribute("member", member);
+		model.addAttribute("certlist", certlist);
 
 		return "/usr/member/myPage";
 	}
@@ -41,7 +49,7 @@ public class UsrMemberController {
 	// 액션메서드
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, String nickName, String cellPhone, String email) {
+	public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, String nickName, String cellPhone, String email) throws IOException {
 
 		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 쓰시오");
 		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 쓰시오");
@@ -58,7 +66,9 @@ public class UsrMemberController {
 
 		Member member = memberService.getMemberById(id);
 
-		return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하", nickName), "/");
+		rq.printConfirmAndRedirect(Ut.f("%s님 가입을 축하합니다.", name), "/");
+
+		return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
 	}
 
 	@RequestMapping("/usr/member/login")
@@ -96,17 +106,6 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("S-1", "로그아웃 되었습니다", "/");
 
-	}
-
-	@RequestMapping("/usr/member/myInfo")
-	public String myInfo(Model model, HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-
-		model.addAttribute("member", member);
-
-		return "/usr/member/myInfo";
 	}
 
 	@RequestMapping("/usr/member/modify")
@@ -152,6 +151,6 @@ public class UsrMemberController {
 
 		int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
-		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정 완료", nickName), "../member/myInfo");
+		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정 완료", nickName), "../member/myPage");
 	}
 }

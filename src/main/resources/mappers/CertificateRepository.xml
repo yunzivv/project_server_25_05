@@ -5,25 +5,16 @@
 
 <mapper namespace="com.example.project_server.repository.CertificateRepository">
 
-    <select id="getCertRankByCode" parameterType="int"
+    <select id="getCertRank" parameterType="map"
             resultType="com.example.project_server.vo.Certificate">
         SELECT C.*, COUNT(CM.certId) AS extra__certCount
         FROM certMention CM
         JOIN certificate C ON CM.certId = C.id
-        <where>
-            <if test="jobCodeId != 0">
-                CM.jobCodeId = #{jobCodeId}
-            </if>
-        </where>
-        <choose>
-            <when test="jobCodeId != 0">
-                GROUP BY CM.jobCodeId, CM.certId
-            </when>
-            <otherwise>
-                GROUP BY CM.certId
-            </otherwise>
-        </choose>
-        ORDER BY extra__certCount DESC;
+        WHERE (#{jobCatId} = 0 OR CM.jobCatId = #{jobCatId})
+          AND (#{jobCodeId} = 0 OR CM.jobCodeId = #{jobCodeId})
+        GROUP BY CM.certId
+        ORDER BY extra__certCount DESC
+        LIMIT 10;
     </select>
 
     <select id="getJobCats"
@@ -41,33 +32,71 @@
         ORDER BY id;
     </select>
 
-    <select id="getJobCatNameById" parameterType="int">
-        SELECT COALESCE(`name`, '전체') AS `name`
+    <select id="getJobCatById" parameterType="int">
+        SELECT *
         FROM jobCat
         WHERE id = #{jobCatId}
-        UNION
-        SELECT '전체' AS NAME
-        WHERE NOT EXISTS (
-            SELECT 1 FROM jobCat WHERE id = #{jobCatId}
-        );
     </select>
 
-    <select id="getJobCodeNameById" parameterType="int">
-        SELECT COALESCE(`name`, '전체') AS `name`
+    <select id="getJobCodeById" parameterType="int">
+        SELECT *
         FROM jobCode
         WHERE id = #{jobCodeId}
-        UNION
-        SELECT '전체' AS NAME
-            WHERE NOT EXISTS (
-            SELECT 1 FROM jobCode WHERE id = #{jobCodeId}
-                );
     </select>
 
-    <select id="getJobCatNameByCodeId" parameterType="int">
-        SELECT cat.name
-        FROM jobCat  cat
-                 JOIN jobCode `code`
-                      ON cat.id = code.jobCatId
-        WHERE code.id = #{jobCodeId};
+    <select id="getMemberCerts" parameterType="int">
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS extra__rankNum
+        FROM memberCert
+        WHERE memberId = #{loginedMemberId}
+        ORDER BY extra__rankNum DESC;
     </select>
+
+    <select id="getPostCount" parameterType="map" resultType="int">
+        SELECT COUNT(DISTINCT gno)
+        FROM certmention
+        <where>
+            <if test="jobCatId != 0">
+                jobCatId = #{jobCatId}
+            </if>
+            <if test="jobCodeId != 0">
+                <if test="jobCatId != 0">
+                    AND
+                </if>
+                jobCodeId = #{jobCodeId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCertCount" parameterType="map" resultType="int">
+        SELECT COUNT(DISTINCT certId)
+        FROM certmention
+        <where>
+            <if test="jobCatId != 0">
+                jobCatId = #{jobCatId}
+            </if>
+            <if test="jobCodeId != 0">
+                <if test="jobCatId != 0">
+                    AND
+                </if>
+                jobCodeId = #{jobCodeId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMentionCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM certmention
+        <where>
+            <if test="jobCatId != 0">
+                jobCatId = #{jobCatId}
+            </if>
+            <if test="jobCodeId != 0">
+                <if test="jobCatId != 0">
+                    AND
+                </if>
+                jobCodeId = #{jobCodeId}
+            </if>
+        </where>
+    </select>
+
 </mapper>

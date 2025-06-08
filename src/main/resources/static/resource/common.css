@@ -54,6 +54,8 @@ hr {
 .top_bar_first_menu:hover > ul {
 	z-index: 20;
 	display: block;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .comments-box hr:first-of-type {
@@ -85,5 +87,3 @@ li i.active{
 	background-color: #1f418c;
 	color: #F0F0F0;
 }
-
-

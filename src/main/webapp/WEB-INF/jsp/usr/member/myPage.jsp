@@ -1,68 +1,93 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="pageTitle" value="MY PAGE"></c:set>
-<%@ include file="../common/head.jspf"%>
+<%@ include file="../common/head.jspf" %>
 
 <script>
-		$(document).ready(function () {
+    $(document).ready(function () {
 
-			$('.nav_box > ul > li:nth-child(4) i').addClass('active');
-		});
+        $('.nav_box > ul > li:nth-child(4) i').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
+
+    });
 </script>
 
 
-<%--<button onclick="history.back()" class="block text-4xl pl-10 cursor-pointer">--%>
-<%--	<i class="fa-solid fa-angle-left"></i>--%>
-<%--</button>--%>
+<div class="flex w-full">
+    <div class="side hidden xl:block shrink-0 w-96">
+        <%@ include file="../common/side.jspf" %>
+    </div>
+    <div class="block min-[1280px]:hidden w-1/12"></div>
 
-<div class="container w-11/12 mx-auto mt-16 p-4">
-	<div class="flex items-end m-2">
-		<div class="certCard w-96 h-60 rounded-2xl bg-red-300">
-			<div class="front">
+    <div class="flex flex-col flex-grow">
 
-			</div>
-			<div class="back">
+        <div class="bg-red-300 m-2">
 
-			</div>
-		</div>
-		<div class="avatar m-2">
-		  <div class="w-24 rounded-lg">
-		    <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
-		  </div>
-		</div>
-		<div class=" text-xl m-2">
-		  <strong>${member.nickName} 님</strong> 반갑습니다.
-		 </div>
-		 <div class="flex-grow"></div>
-		 <div class="updateProfile">
-		 	<a href="modify" class="block p-3 text-base flex items-center 
+            <div class="flex-grow"></div>
+            <div class="updateProfile">
+                <a href="modify" class="block p-3 text-base flex items-center
 		 	justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">
-				회원 정보 수정</a>
-		 </div>
-	</div>
-	
-	<div class="mt-10 px-2">
-	<div class="m-3 text-lg font-bold">회원 정보</div>
-		<table class="bg-neutral-300 rounded-xl">
-			<tr>
-				<th class="px-6 py-4">이름</th>
-				<td class="px-10 py-4">${member.name}</td>
-			</tr>
-			<tr>
-				<th class="px-6 py-4">전화번호</th>
-				<td class="px-10 py-4">${member.cellPhone}</td>
-			</tr>
-			<tr>
-				<th class="px-6 py-4">이메일</th>
-				<td class="px-10 py-4">${member.email}</td>
-			</tr>
-		</table>
-	</div>
+                    회원 정보 수정</a>
+            </div>
+        </div>
+
+
+        <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
+            <div class="flex">
+            총 자격증: ${certlist.size()}개
+            <div class="flex-grow"></div>
+            <button onclick=""
+            class="block ml-6 px-5 whitespace-nowrap text-base flex items-center justify-center font-large rounded-md hover:bg-neutral-300">
+                자격증 등록
+            </button>
+            </div>
+
+            <div>
+            <form action="a">
+            <input type="text" name="certName" placeholder="자격증명">
+            <input type="text" name="certificateNumber" placeholder="자격번호">
+            <input type="date" name="startDate" placeholder="취득일">
+            <input type="date" name="endDate" placeholder="만료일">
+            </form>
+            </div>
+            <table>
+                <thead class="h-5 text-base text-neutral-200 bg-neutral-800">
+					<tr>
+						<th scope="col" class="px-6 py-4">NO</th>
+						<th scope="col" class="px-6 py-4">자격증명</th>
+						<th scope="col" class="px-6 py-4">자격번호</th>
+						<th scope="col" class="px-6 py-4">취득일</th>
+						<th scope="col" class="px-6 py-4">만료일</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <c:forEach var="cert" items="${certlist }">
+                    <tr class="border-b bg-neutral-200 border-neutral-300 hover:bg-neutral-300">
+							<td class="px-5 py-3">${cert.extra__rankNum }</td>
+							<td class="px-5 py-3">${cert.certname}</td>
+							<td class="px-5 py-3">${cert.certificateNumber}</td>
+							<td class="px-5 py-3">${cert.startDate.toString().substring(0, 10)}</td>
+							<td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}</td>
+                    </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div id="article" class="h-screen bg-blue-400"></div>
+
+
+        <div class="side hidden xl:block w-52"></div>
+        <div class="block min-[1280px]:hidden w-1/12"></div>
+    </div>
+
+    <div class="side hidden xl:block shrink-0 w-96">
+        <%@ include file="../common/side.jspf" %>
+    </div>
+    <div class="block min-[1280px]:hidden w-1/12"></div>
 </div>
 
 
-
-
-<%@ include file="../common/foot.jspf"%>
+    <%@ include file="../common/foot.jspf" %>

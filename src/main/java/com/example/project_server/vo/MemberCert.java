@@ -11,13 +11,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class JobCode {
+public class MemberCert {
 
 	private int id;
-	private int jobCatId;
-	private String jobCatName;
-	private int code;
-	private String name;
+	private int certId;
+	private String certname;
+	private String certificateNumber;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+
+	private int extra__rankNum;
 }

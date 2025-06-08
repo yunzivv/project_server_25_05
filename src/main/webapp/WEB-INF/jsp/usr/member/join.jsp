@@ -13,16 +13,16 @@
 
 		<div calss="flex flex-col justify-center">
 
-			<input type="text" name="loginId" id="loginId" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5" placeholder="ID">
+			<input type="text" name="loginId" id="loginId" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="ID">
 <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter at least 4 letters and numbers</div> -->
-			<input type="password" name="loginPw" id="loginPw" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="Password">
+			<input type="password" name="loginPw" id="loginPw" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="Password">
 <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter at least 4 letters and numbers</div> -->
-			<input type="password" name="checkLoginPw" id="checkLoginPw" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="Password Check">
+			<input type="password" name="checkLoginPw" id="checkLoginPw" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="Password Check">
 <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter your password again to confirm it</div> -->
-			<input type="text" name="name" id="name" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="Name">
-			<input type="text" name="nickName" id="nickName" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="NickName">
-			<input type="text" name="cellPhone" id="cellPhone" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="cell-phone">
-			<input type="email" name="email" id="email" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5" placeholder="e-mail">
+			<input type="text" name="name" id="name" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="Name">
+			<input type="text" name="nickName" id="nickName" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="NickName">
+			<input type="text" name="cellPhone" id="cellPhone" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="cell-phone">
+			<input type="email" name="email" id="email" class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white" placeholder="e-mail">
  		</div>
  		<button type="submit" class="py-2.5 px-5 me-2 mb-2 w-96 text-sm font-large bg-neutral-800 text-neutral-200 rounded-lg hover:bg-neutral-700">Join</button>
 	</form>

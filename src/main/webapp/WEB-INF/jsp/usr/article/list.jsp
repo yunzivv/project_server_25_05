@@ -132,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="side hidden xl:block w-40"></div>
+	<div class="side hidden xl:block w-52"></div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 </div>
 <%@ include file="../common/foot.jspf"%>
