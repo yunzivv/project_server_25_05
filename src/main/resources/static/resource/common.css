@@ -26,6 +26,13 @@ hr {
 	border-top: 3px solid #afafaf;
 }
 
+.bg-blue-1 {
+	background-color: #0099FF;
+}
+.bg-blue-2 {
+	background-color: #1f418c;
+}
+
 .text-blue-1 {
 	color: #0099FF;
 }

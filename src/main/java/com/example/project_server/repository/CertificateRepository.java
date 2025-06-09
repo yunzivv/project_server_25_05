@@ -6,6 +6,7 @@ import com.example.project_server.vo.JobCode;
 import com.example.project_server.vo.MemberCert;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -30,4 +31,8 @@ public interface CertificateRepository {
     public int getCertCount(int jobCatId, int jobCodeId);
 
     public int getMentionCount(int jobCatId, int jobCodeId);
+
+    public Certificate getCertByName(String certname);
+
+    public void doAdd(int memberId, String certname, int certid, LocalDate startDate, LocalDate endDate, String certificateNumber);
 }

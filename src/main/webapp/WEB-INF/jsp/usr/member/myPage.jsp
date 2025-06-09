@@ -22,9 +22,9 @@
 
     <div class="flex flex-col flex-grow">
 
+
         <div class="bg-red-300 m-2">
 
-            <div class="flex-grow"></div>
             <div class="updateProfile">
                 <a href="modify" class="block p-3 text-base flex items-center
 		 	justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">
@@ -83,9 +83,7 @@
         <div class="block min-[1280px]:hidden w-1/12"></div>
     </div>
 
-    <div class="side hidden xl:block shrink-0 w-96">
-        <%@ include file="../common/side.jspf" %>
-    </div>
+    <div class="side hidden xl:block w-52"></div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 </div>
 

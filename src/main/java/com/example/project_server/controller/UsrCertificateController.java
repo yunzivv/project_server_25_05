@@ -1,8 +1,10 @@
 package com.example.project_server.controller;
 
+import com.example.project_server.util.Ut;
 import com.example.project_server.vo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import com.example.project_server.service.CertificateService;
 import com.example.project_server.service.MemberService;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,5 +97,24 @@ public class UsrCertificateController {
 	@RequestMapping("/usr/cert/workbook")
 	public String showWorkbook() {
 		return "/usr/cert/workbook";
+	}
+
+	@RequestMapping("/usr/cert/doAdd")
+	@ResponseBody
+	public String doAdd(HttpServletRequest req, String certname, LocalDate startDate, LocalDate endDate, String certificateNumber) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		if (Ut.isEmpty(certname))
+			return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
+
+		Certificate certificate = certificateService.getCertByName(certname);
+		if(certificate == null) {
+			certificate = new Certificate();
+			certificate.setId(0);
+		}
+
+		certificateService.doAdd(rq.getLoginedMemberId(), certname, certificate.getId(), startDate, endDate, certificateNumber);
+		return null;
 	}
 }

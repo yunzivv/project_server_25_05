@@ -12,6 +12,7 @@
             loginId    = #{loginId},
             loginPw    = #{loginPw},
             `name`     = #{name},
+            birthday   = #{birthday},
             nickName   = #{nickName},
             cellPhone  = #{cellPhone},
             email      = #{email}

@@ -10,7 +10,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow bg-red-300">
+    <div class="flex flex-col flex-grow">
 
         <div class="title px-8 pt-20 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <div class="side hidden xl:block w-52"></div>
+    <div class="side hidden xl:block w-52" style="min-width: 208px;"></div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
 </div>
@@ -167,6 +167,8 @@
 
                     const jobCatName = data.data1;      // 직무 대분류 이름
                     const jobCodeName = data.data2;     // 직무 소분류 이름
+                    console.log(jobCodeName);
+                    console.log(jobCodeId);
                     const certs = data.data3;           // 자격증 배열
 
                     jobCodeName_box.empty();

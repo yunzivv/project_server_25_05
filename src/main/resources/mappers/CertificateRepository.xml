@@ -41,7 +41,7 @@
     <select id="getJobCodeById" parameterType="int">
         SELECT *
         FROM jobCode
-        WHERE id = #{jobCodeId}
+        WHERE `code` = #{jobCodeId}
     </select>
 
     <select id="getMemberCerts" parameterType="int">
@@ -98,5 +98,24 @@
             </if>
         </where>
     </select>
+
+    <select id="getCertByName" parameterType="String">
+        SELECT *
+        FROM certificate
+        WHERE `name` = #{certname}
+    </select>
+
+    <insert id="doAdd" parameterType="map">
+        INSERT INTO memberCert
+        SET
+            memberId = #{memberId},
+            certId = #{certId},
+            certname = #{certname},
+            certificateNumber = #{certificateNumber},
+            startDate = #{startDate},
+            endDate = #{endDate},
+            regDate = NOW(),
+            updateDate = NOW()
+    </insert>
 
 </mapper>

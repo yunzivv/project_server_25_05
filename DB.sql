@@ -27,7 +27,6 @@ SET regDate = NOW(),
     certId = 1;
 
 
-
 # 회원 테이블
 CREATE TABLE `member`(
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -38,11 +37,13 @@ CREATE TABLE `member`(
                          `authLevel` TINYINT UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반/7=관리자)',
                          `name` VARCHAR(20) NOT NULL,
                          nickName VARCHAR(20) NOT NULL,
+                         birthday DATE NOT NULL,
                          cellPhone VARCHAR(254) NOT NULL,
                          email VARCHAR(100) NOT NULL, # 이메일은 이론상 254자까지 가능
-        delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(0=존재/1=탈퇴)',
+                         delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(0=존재/1=탈퇴)',
                          delDate DATETIME COMMENT '탈퇴날짜'
 );
+
 
 # admin 회원 데이터 추가
 INSERT INTO `member`
@@ -52,6 +53,7 @@ SET regDate = NOW(),
     loginPw = 'admin',
     `authLevel` = 7,
     `name` = 'admin',
+    birthday = '2020-10-10',
     nickName = 'admin',
     cellPhone = '01012345678',
     email = 'admin@spring.com';
@@ -62,6 +64,7 @@ SET regDate = NOW(),
     updateDate = NOW(),
     loginId = CONCAT('id', '1'),
     loginPw = CONCAT('pw', '1'),
+    birthday = '2020-10-10',
     `name` = CONCAT('이름', '1'),
     nickName = CONCAT('닉네임', '1'),
     cellPhone = CONCAT('010123456', SUBSTRING(RAND() *1000 FROM 1 FOR 2)),
@@ -88,22 +91,19 @@ CREATE TABLE jobCode (
                          updateDate DATETIME NOT NULL
 );
 
-SELECT * FROM jobCat;
 
 # 자격증 테이블
 CREATE TABLE certificate (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              `name` VARCHAR(50) NOT NULL,
                              certGrade INT UNSIGNED,
-                             isNational TINYINT UNSIGNED COMMENT '0=국가공인민간자격 1 = 국가기술자격',
+                             isNational TINYINT UNSIGNED COMMENT '0=국가공인민간자격 1 = 국가기술자격, -1 = 민간자격',
                              agency VARCHAR(100),
                              parentId INT UNSIGNED,
+                             href VARCHAR(500),
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL
 );
-
-SELECT * FROM certificate;
-
 
 # 자격증 시험 테이블
 CREATE TABLE exam (
@@ -149,6 +149,7 @@ CREATE TABLE certSubject (
 # 자격증 언급 테이블
 CREATE TABLE certMention (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                             jobCatId INT UNSIGNED NOT NULL,
                              jobCodeId INT UNSIGNED NOT NULL,
                              certId INT UNSIGNED NOT NULL,
                              gno INT UNSIGNED NOT NULL,
@@ -238,9 +239,26 @@ INSERT INTO board SET
 CREATE TABLE memberCert (
                             id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                             memberId INT UNSIGNED NOT NULL,
-                            certId INT UNSIGNED NOT NULL,
-                            startDate DATETIME COMMENT '취득일',
-                            endDate DATETIME COMMENT '만료일',
+                            certId INT UNSIGNED,
+                            certname VARCHAR(100) NOT NULL,
+                            startDate DATE COMMENT '취득일',
+                            endDate DATE COMMENT '만료일',
                             regDate DATETIME NOT NULL,
-                            updateDate DATETIME NOT NULL
+                            updateDate DATETIME NOT NULL,
+                            certificateNumber VARCHAR(100) COMMENT '자격번호'
 );
+
+INSERT INTO memberCert SET
+                           memberid = 3,
+                           certId = 3,
+                           certname = 'ㅇ요요요',
+                           startDate = NOW(),
+                           endDate = NOW(),
+                           regDate = NOW(),
+                           updateDate = NOW(),
+                           certificateNumber = 11144541;
+
+SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS rank_num
+FROM memberCert
+WHERE memberId = 4
+ORDER BY rank_num DESC;

@@ -13,6 +13,7 @@ import com.example.project_server.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -49,17 +50,18 @@ public class UsrMemberController {
 	// 액션메서드
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, String nickName, String cellPhone, String email) throws IOException {
+	public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) throws IOException {
 
-		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 쓰시오");
-		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 쓰시오");
-		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 쓰시오");
-		if(Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-4", "닉네임을 쓰시오");
-		if(Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-5", "전화번호 좀 쓰시오");
-		if(Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-6", "이메일 정확히 쓰시오");
-		if(!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-7", "비밀번호가 일치하지 않소");
+		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성해주세요.");
+		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성해주세요.");
+		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성해주세요.");
+		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-4", "생일을 작성해주세요.");
+		if(Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-5", "닉네임를 작성해주세요.");
+		if(Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-6", "전화번호를 작성해주세요.");
+		if(Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-7", "이메일을 작성해주세요.");
+		if(!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-8", "비밀번호가 일치하지 않습니다.");
 
-		int id = memberService.doJoin(loginId, loginPw, name, nickName, cellPhone, email);
+		int id = memberService.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
 
 		if(id == -1) return Ut.jsHistoryBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
 		if(id == -2) return Ut.jsHistoryBack("F-9", Ut.f("이름 %s과 이메일 %s은(는) 이미 사용 중입니다.", loginId, email));

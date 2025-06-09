@@ -5,6 +5,7 @@ import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,7 +51,6 @@ public class CertificateService {
 			jobCode.setJobCatName(jobCat.getName());
 		}
 
-
 		List<Certificate> certRank = certificateRepository.getCertRank(jobCatId, jobCodeId);
 
 		return ResultData.from("S-2", "직무 카테고리 > 코드 자격증 언급 랭킹 가져오기 성공",
@@ -68,5 +68,13 @@ public class CertificateService {
 
 	public int getMentionCount(int jobCatId, int jobCodeId) {
 		return certificateRepository.getMentionCount(jobCatId, jobCodeId);
+	}
+
+	public Certificate getCertByName(String certname) {
+		return certificateRepository.getCertByName(certname);
+	}
+
+	public void doAdd(int memberId, String certname, int certid, LocalDate startDate, LocalDate endDate, String certificateNumber) {
+		certificateRepository.doAdd(memberId, certname, certid, startDate, endDate, certificateNumber);
 	}
 }

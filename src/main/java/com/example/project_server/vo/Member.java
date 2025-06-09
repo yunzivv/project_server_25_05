@@ -1,5 +1,6 @@
 package com.example.project_server.vo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class Member {
 	private String loginId;
 	private String loginPw;
 	private String name;
+	private LocalDate birthday;
 	private String nickName;
 	private String cellPhone;
 	private String email;
