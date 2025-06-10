@@ -74,6 +74,7 @@ i.highlight {
 	position: relative;
 	bottom: 15px;
 	left: 8px;
+	z-index: 100;
 	font-size: 0rem;
 	opacity: 0;
 	transition: font-size .1s;

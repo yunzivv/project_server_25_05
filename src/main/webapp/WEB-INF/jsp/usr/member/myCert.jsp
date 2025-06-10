@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:set var="pageTitle" value="MY PAGE"></c:set>
+<c:set var="pageTitle" value="MY CERT"></c:set>
 <%@ include file="../common/head.jspf" %>
 
 <script>
@@ -9,6 +9,8 @@
 
         $('.nav_box > ul > li:nth-child(4) i').addClass('active');
         $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(1) > a').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(1) > a > i').addClass('active');
 
     });
 </script>
@@ -21,17 +23,6 @@
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
     <div class="flex flex-col flex-grow">
-
-
-        <div class="bg-red-300 m-2">
-
-            <div class="updateProfile">
-                <a href="modify" class="block p-3 text-base flex items-center
-		 	justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">
-                    회원 정보 수정</a>
-            </div>
-        </div>
-
 
         <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
             <div class="flex">

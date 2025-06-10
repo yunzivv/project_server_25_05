@@ -131,7 +131,7 @@
 					</c:if>
 					<c:if test="${article.userCanDelete}">
 						<button class="btn rounded-xl mx-1 px-3 hover:bg-neutral-300">
-							<a onclick="return confirm('정말 삭제할거야? ㅠㅠ😢?');"
+							<a onclick="return confirm('게시글을 삭제하시겠습니까?');"
 								href="doDelete?id=${article.id}">Delete</a>
 						</button>
 					</c:if>

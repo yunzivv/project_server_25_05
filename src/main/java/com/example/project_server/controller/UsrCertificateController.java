@@ -67,10 +67,6 @@ public class UsrCertificateController {
 		model.addAttribute("certCount", certificateService.getCertCount(0, 0));
 		model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));
 
-		System.out.println(certificateService.getPostCount(0, 0) + " " +
-				certificateService.getCertCount(0, 0) + " " +
-				certificateService.getMentionCount(0, 0));
-
 		return "/usr/cert/analysis";
 	}
 

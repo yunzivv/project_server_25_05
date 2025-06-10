@@ -24,9 +24,11 @@
 					  <select name="boardId" id="boardId" required
 					    class="block flex justify-center items-center px-8 border border-solid border-neutral-500 rounded-lg overflow-hidden">
 					    <option value="0" disabled selected hidden class="text-neutral-400">게시판 선택</option>
-					    <option value="1">공지사항</option>  <%-- ${memberId != 1 ? 'disabled' : ''} --%>
-					    <option value="2">자유 게시판</option>
-					    <option value="3">질문과 답변</option>
+					    <option value="1">공지사항</option>
+					    <option value="2">시험후기</option>
+					    <option value="3">자료실</option>
+					    <option value="4">QnA</option>
+					    <option value="5">자유게시판</option>
 					  </select>
 					</label>
 					<div class="flex-grow">

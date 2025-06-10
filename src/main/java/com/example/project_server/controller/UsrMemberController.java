@@ -28,7 +28,7 @@ public class UsrMemberController {
 	@Autowired
 	private CertificateService certificateService;
 
-	@RequestMapping("/usr/member/myPage")
+	@RequestMapping("/usr/member/myCert")
 	public String showMyPage(Model model, HttpServletRequest req) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
@@ -39,7 +39,35 @@ public class UsrMemberController {
 		model.addAttribute("member", member);
 		model.addAttribute("certlist", certlist);
 
-		return "/usr/member/myPage";
+		return "/usr/member/myCert";
+	}
+
+	@RequestMapping("/usr/member/myInfo")
+	public String showMyInfo(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certlist", certlist);
+
+		return "/usr/member/myInfo";
+	}
+
+	@RequestMapping("/usr/member/myPost")
+	public String showMyPost(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certlist", certlist);
+
+		return "/usr/member/myPost";
 	}
 
 	@RequestMapping("/usr/member/join")
