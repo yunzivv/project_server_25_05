@@ -95,3 +95,9 @@ li i.active{
 	background-color: #1f418c;
 	color: #F0F0F0;
 }
+
+.topCertsByField .chart_container {
+	max-height: 450px; /* 최대 높이, 필요하면 조절 */
+	position: relative;
+	overflow: hidden;
+}

@@ -49,10 +49,61 @@
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
             </div>
             <div class="postsWithCert w-1/4 p-5 border-blue-2 text-right">
-                <i class="fa-solid fa-file"></i>
-                <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>
-                <br>자격증이 언급된 공고<br>
-                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
+
+                <canvas id="postsWithCert" width="200" height="200"></canvas>
+
+                <script>
+                const ctx = document.getElementById('postsWithCert').getContext('2d');
+
+                const postCount = ${postCount};      // 서버에서 넘어온 값으로 치환
+                const totalPosts = ${totalPosts};    // 서버에서 넘어온 값으로 치환
+
+                const percent = totalPosts === 0 ? 0 : ((postCount / totalPosts) * 100).toFixed(1);
+
+                const data = {
+                    labels: ['조회됨', '남은부분'],
+                    datasets: [{
+                        data: [percent, 100 - percent],
+                        backgroundColor: ['#1f418c', '#e0e0e0'],
+                        borderWidth: 0
+                    }]
+                };
+
+                const centerTextPlugin = {
+                    id: 'centerText',
+                    afterDraw(chart) {
+                        const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
+                        ctx.save();
+
+                        ctx.font = 'bold 30px "SUIT-Regular"';
+                        ctx.fillStyle = '#1f418c';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+
+                        const centerX = left + width / 2 + 5;
+                        const centerY = top + height / 2 + 6;
+                        ctx.fillText(percent + '%', centerX, centerY);
+
+                        ctx.restore();
+                    }
+                };
+
+                const options = {
+                    cutout: '70%',
+                    responsive: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                };
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: options,
+                    plugins: [centerTextPlugin]
+                });
+            </script>
             </div>
         </div>
 
@@ -62,7 +113,7 @@
                 <div class="job_code_name p-2 font-bold">
                     전체 직무 자격증 언급 TOP 10
                 </div>
-                <canvas id="certChart" width="300" height="100" style="margin:20px 30px;"></canvas>
+                <div class="chart_container"><canvas id="certChart" width="300" height="100" style="margin:20px 30px;"></canvas></div>
                 <script th:inline="javascript">
                     /*<![CDATA[*/
                     const labels = ${labels};
@@ -99,6 +150,7 @@
                         });
                     });
                 </script>
+
             </div>
         </div>
 
@@ -172,7 +224,7 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    const $box = $('.topCertsByField');
+                    const $box = $('.topCertsByField .chart_container');
                     const jobCodeName_box = $('.job_code_name');
 
                     const jobCatName = data.data1;      // 직무 대분류 이름
