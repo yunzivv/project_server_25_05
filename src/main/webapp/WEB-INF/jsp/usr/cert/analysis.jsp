@@ -14,9 +14,9 @@
 
         <div class="title px-8 pt-20 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
-        <div class="analysis_1 flex p-2 " style="height: 200px;">
+        <div class="analysis_1 flex p-5 " style="height: 300px;">
 
-            <div class="select_box flex flex-col w-2/3 mr-2 p-2 border-blue-2 rounded-xl">
+            <div class="select_box flex flex-col w-1/2 mr-2 p-5 border-blue-2">
                 <div class="select_box_title flex">
                     <div class="flex-grow font-bold p-2">직무 선택</div>
                     <div class="flex-grow font-bold p-2">전문 분야 선택</div>
@@ -32,7 +32,6 @@
 
                     <%--직무 코드--%>
                     <ul class="jobCode_list w-1/2 flex flex-wrap overflow-y-scroll">
-                        <li class="w-1/2 p-2 cursor-pointer text-sm" data-id="0">전체</li>
                         <c:if test="${jobCodes != null}">
                             <c:forEach var="jobCode" items="${jobCodes }">
                                 <li class="w-1/2 p-2 cursor-pointer text-sm"
@@ -43,16 +42,26 @@
                 </div>
 
             </div>
-            <div class="postsWithCert w-1/3 bg-neutral-300">
-                dd
+            <div class="postsWithCert w-1/4 p-5 mr-2 border-blue-2 text-right">
+                <i class="fa-solid fa-file"></i>
+                <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>
+                <br>자격증이 언급된 공고<br>
+                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
+            </div>
+            <div class="postsWithCert w-1/4 p-5 border-blue-2 text-right">
+                <i class="fa-solid fa-file"></i>
+                <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>
+                <br>자격증이 언급된 공고<br>
+                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
             </div>
         </div>
 
-        <div class="analysis_2 p-2">
-            <div class="job_code_name p-3">
-                전체 직무 자격증 언급 TOP 10
-            </div>
-            <div class="topCertsByField p-2 border-blue-2">
+        <div class="analysis_2 p-5">
+
+            <div class="topCertsByField p-5 border-blue-2">
+                <div class="job_code_name p-2 font-bold">
+                    전체 직무 자격증 언급 TOP 10
+                </div>
                 <canvas id="certChart" width="300" height="100" style="margin:20px 30px;"></canvas>
                 <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -93,7 +102,7 @@
             </div>
         </div>
 
-        <div class="analysis_3 p-2">
+        <div class="analysis_3 p-5">
             <div class="totalCertCount">
 
             </div>
@@ -102,7 +111,7 @@
             </div>
         </div>
 
-        <div class="p-2">
+        <div class="p-5">
             <div class=""></div>
         </div>
     </div>
@@ -118,6 +127,7 @@
         $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
         $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a').addClass('active');
         $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
+
 
         let selectedJobCatId = null;
         $('.jobCat_list').on('click', 'li', function () {
@@ -176,13 +186,19 @@
 
                     jobCodeName_box.append(jobCatName + " > " + jobCodeName + " 자격증 언급 TOP 10");
 
+                    const barHeight = 40; // 막대 1개의 높이
+                    const minHeight = 100; // 최소 높이 보장
+                    const canvasHeight = Math.max(certs.length * barHeight, minHeight);
+
                     if (!certs || certs.length === 0) {
                         $box.append('<div>관련 자격증이 없습니다.</div>');
                         return;
                     }
 
+                    $box.append(`<canvas id="certChart" width="300" height="` + canvasHeight + `" style="margin:20px 30px;"></canvas>`);
+
                     // 차트 캔버스 추가
-                    $box.append('<canvas id="certChart" width="300" height="100" style="margin:20px 30px;"></canvas>');
+                    // $box.append('<canvas id="certChart" width="300" height="100" style="margin:20px 30px;"></canvas>');
 
                     const labels = certs.map(cert => cert.name);
                     const values = certs.map(cert => cert.extra__certCount);
@@ -203,6 +219,7 @@
                         options: {
                             indexAxis: 'y',
                             responsive: true,
+                            maintainAspectRatio: false,
                             scales: {
                                 x: {
                                     beginAtZero: true,

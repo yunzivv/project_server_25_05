@@ -63,6 +63,7 @@ public class UsrCertificateController {
 
 		model.addAttribute("certRanking", certList);
 
+		model.addAttribute("totalPosts", 31256);
 		model.addAttribute("postCount", certificateService.getPostCount(0, 0));
 		model.addAttribute("certCount", certificateService.getCertCount(0, 0));
 		model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));

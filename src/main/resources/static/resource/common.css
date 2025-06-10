@@ -47,7 +47,7 @@ hr {
 
 .border-blue-2 {
 	border: #1f418c solid 1px;
-	border-radius: 0.8rem;
+	border-radius: 1.5rem;
 }
 
 .border-grey-1 {
@@ -59,7 +59,7 @@ hr {
 }
 
 .top_bar_first_menu:hover > ul {
-	z-index: 20;
+	z-index: 100;
 	display: block;
 	left: 50%;
 	transform: translateX(-50%);

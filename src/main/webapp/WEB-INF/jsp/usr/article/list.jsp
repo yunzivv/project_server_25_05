@@ -26,7 +26,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-	<div class="flex-grow bg-red-300" style="min-width: 770px">
+	<div class="flex-grow" style="min-width: 770px">
 		<div class="title px-8 pt-20 pb-12 text-4xl font-black">게시판</div>
 		<div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
 			<div class="articleCnt font-normal mx-4">
