@@ -33,7 +33,7 @@ CREATE TABLE `member`(
                          regDate DATETIME NOT NULL,
                          updateDate DATETIME NOT NULL,
                          loginId VARCHAR(20) NOT NULL UNIQUE,
-                         loginPw VARCHAR(20) NOT NULL,
+                         loginPw VARCHAR(100) NOT NULL,
                          `authLevel` TINYINT UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반/7=관리자)',
                          `name` VARCHAR(20) NOT NULL,
                          nickName VARCHAR(20) NOT NULL,

@@ -30,7 +30,11 @@ hr {
 	background-color: #0099FF;
 }
 .bg-blue-2 {
-	background-color: #1f418c;
+	background-color: #2f73d9;
+}
+
+.bg-grey-1 {
+	background-color: #d9d9d9;
 }
 
 .text-blue-1 {
@@ -38,20 +42,20 @@ hr {
 }
 
 .text-blue-2 {
-	color: #1f418c;
+	color: #2f73d9;
 }
 
 .text-grey-1 {
-	color: #808080;
+	color: #d9d9d9;
 }
 
 .border-blue-2 {
-	border: #1f418c solid 1px;
+	border: #2f73d9 solid 1px;
 	border-radius: 1.5rem;
 }
 
 .border-grey-1 {
-	border: #808080 solid 1px;
+	border: #d9d9d9 solid 1px;
 }
 
 .top_bar_first_menu:hover > a {
@@ -92,12 +96,22 @@ li i.active{
 }
 
 .side_bar_left > ul > li > a.active {
-	background-color: #1f418c;
-	color: #F0F0F0;
+	border: #d9d9d9 solid 2px;
+	border-radius: 32px;
+	color: #d9d9d9;
 }
 
 .topCertsByField .chart_container {
 	max-height: 450px; /* 최대 높이, 필요하면 조절 */
 	position: relative;
 	overflow: hidden;
+}
+
+.hub_sub_menu {
+	width: 100%; /* 부모 너비 꽉 차기 */
+}
+
+.hub_sub_menu a {
+	width: 100%; /* 링크도 꽉 차기 */
+	display: block; /* block 요소 */
 }

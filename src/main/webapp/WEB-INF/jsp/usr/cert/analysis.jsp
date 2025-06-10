@@ -5,18 +5,18 @@
 <%@ include file="../common/head.jspf" %>
 
 <div class="flex w-full">
-    <div class="side hidden xl:block shrink-0 w-96">
+    <div class="side hidden xl:block shrink-0" style="width: 250px;">
         <%@ include file="../common/side.jspf" %>
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow">
+    <div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
 
         <div class="title px-8 pt-20 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
-        <div class="analysis_1 flex p-5 " style="height: 300px;">
+        <div class="analysis_1 flex p-5" style="height: 300px;">
 
-            <div class="select_box flex flex-col w-1/2 mr-2 p-5 border-blue-2">
+            <div class="select_box flex flex-col w-1/2 mr-2 p-5 bg-white">
                 <div class="select_box_title flex">
                     <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
                     <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
@@ -42,14 +42,15 @@
                 </div>
 
             </div>
-            <div class="postsWithCert w-1/4 p-5 mr-2 border-blue-2 text-right">
+            <div class="postsWithCert w-1/4 p-5 mr-2 bg-white text-right">
+                <i class="fa-solid fa-circle"></i>
                 <i class="fa-solid fa-file"></i>
                 <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>
                 <br>자격증이 언급된 공고<br>
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
             </div>
-            <div class="postsWithCert w-1/4 p-5 border-blue-2 text-right">
-
+            <div class="postsWithCert w-1/4 p-5 bg-white text-right">
+                <i class="fa-solid fa-circle"></i> 전체 공고 ??
                 <canvas id="postsWithCert" width="200" height="200"></canvas>
 
                 <script>
@@ -81,7 +82,7 @@
                         ctx.textBaseline = 'middle';
 
                         const centerX = left + width / 2 + 5;
-                        const centerY = top + height / 2 + 6;
+                        const centerY = top + height / 2 + 5;
                         ctx.fillText(percent + '%', centerX, centerY);
 
                         ctx.restore();
@@ -107,9 +108,34 @@
             </div>
         </div>
 
-        <div class="analysis_2 p-5">
+        <div class="analysis_2 p-5 flex">
+            <div class="select_box flex flex-col w-2/5 p-5 bg-white">
+                <div class="select_box_title flex">
+                    <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
+                    <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
+                </div>
+                <hr class="my-1">
+                <div class="flex overflow-y-hidden">
+                    <%--직무 카테고리--%>
+                    <ul class="jobCat_list w-1/2 flex flex-wrap overflow-y-scroll">
+                        <c:forEach var="jobCat" items="${jobCats }">
+                            <li class="w-1/2 p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
+                        </c:forEach>
+                    </ul>
 
-            <div class="topCertsByField p-5 border-blue-2">
+                    <%--직무 코드--%>
+                    <ul class="jobCode_list w-1/2 flex flex-wrap overflow-y-scroll">
+                        <c:if test="${jobCodes != null}">
+                            <c:forEach var="jobCode" items="${jobCodes }">
+                                <li class="w-1/2 p-2 cursor-pointer text-sm"
+                                    data-id="${jobCode.id}">${jobCode.name}</li>
+                            </c:forEach>
+                        </c:if>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="topCertsByField p-5 bg-white w-3/5">
                 <div class="job_code_name p-2 font-bold">
                     전체 직무 자격증 언급 TOP 10
                 </div>
@@ -168,8 +194,8 @@
         </div>
     </div>
 
-    <div class="side hidden xl:block w-52" style="min-width: 208px;"></div>
-    <div class="block min-[1280px]:hidden w-1/12"></div>
+    <div class="side hidden xl:block w-28 bg-grey-1"></div>
+    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 
 </div>
 <script>

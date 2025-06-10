@@ -21,12 +21,12 @@
 <%--</button>--%>
 
 <div class="flex w-full">
-    <div class="side hidden xl:block w-96 shrink-0" style="min-width: 320px;">
+    <div class="side hidden xl:block shrink-0" style="width: 250px;">
         <%@ include file="../common/side.jspf" %>
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-	<div class="flex-grow" style="min-width: 770px">
+	<div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
 		<div class="title px-8 pt-20 pb-12 text-4xl font-black">게시판</div>
 		<div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
 			<div class="articleCnt font-normal mx-4">
@@ -132,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="side hidden xl:block w-52"></div>
-    <div class="block min-[1280px]:hidden w-1/12"></div>
+	<div class="side hidden xl:block w-28 bg-grey-1"></div>
+    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 </div>
 <%@ include file="../common/foot.jspf"%>

@@ -3,7 +3,7 @@
 
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
-
+<%@ include file="../common/toastUiEditorLib.jspf"%>
 
 <script>
 	const params = {};
@@ -144,6 +144,9 @@
 
 		<div class="content mt-2 p-4">
 			${article.body}
+		</div>
+		<div class="toast-ui-viewer content mt-2 p-4">
+			<script type="text/x-template">${article.body}</script>
 		</div>
 		<div class="hidden">
 			<button class="btn btn-xl btn-circle hover:bg-neutral-300 font-black felx flex-col"

@@ -17,12 +17,12 @@
 
 
 <div class="flex w-full">
-    <div class="side hidden xl:block shrink-0 w-96">
+    <div class="side hidden xl:block shrink-0" style="width: 250px;">
         <%@ include file="../common/side.jspf" %>
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow">
+    <div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
 
         <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
             <div class="flex">
@@ -74,8 +74,8 @@
         <div class="block min-[1280px]:hidden w-1/12"></div>
     </div>
 
-    <div class="side hidden xl:block w-52"></div>
-    <div class="block min-[1280px]:hidden w-1/12"></div>
+    <div class="side hidden xl:block w-28 bg-grey-1"></div>
+    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 </div>
 
 

@@ -2,39 +2,40 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<div class="side_bar_left fixed top-60 left-16 py-6 text-lg font-black rounded-3xl bg-neutral-200">
-	<ul class="hub_sub_menu hidden flex flex-col items-center w-52 h-96">
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/analysis">우대 자격증 분석
+<div class="side_bar_left h-screen fixed py-20 pl-8 text-lg font-black bg-blue-2" style="width: 250px;">
+	<ul class="hub_sub_menu hidden flex flex-col p-2 w-full">
+		<li><a class="block p-4" href="../cert/analysis">우대 자격증 분석
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../cert/library">자격증 정보
+		<li><a class="block p-4" href="../cert/library">자격증 정보
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myPage">내 자격증
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-	</ul>
-
-	<ul class="community_sub_menu hidden flex flex-col items-center w-52 h-96">
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=0">전체 게시판
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=1">공지사항
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=2">시험 후기
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=3">자료실
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=4">QnA
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../article/list?boardId=5">자유게시판
+		<li><a class="block p-4" href="../member/myPage">내 자격증
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
 
-	<ul class="myPage_sub_menu hidden flex flex-col items-center w-52 h-96">
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myCert">내 자격증
+	<ul class="community_sub_menu hidden flex flex-col p-2 w-full">
+		<li><a class="block p-4" href="../article/list?boardId=0">전체 게시판
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myInfo">내 정보
+		<li><a class="block p-4" href="../article/list?boardId=1">공지사항
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-56 rounded-xl px-8 py-4" href="../member/myPost">내 글
+		<li><a class="block p-4" href="../article/list?boardId=2">시험 후기
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block p-4" href="../article/list?boardId=3">자료실
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block p-4" href="../article/list?boardId=4">QnA
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block p-4" href="../article/list?boardId=5">자유게시판
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
+
+	<ul class="myPage_sub_menu hidden flex flex-col p-2 w-full">
+		<li><a class="block p-4" href="../member/myCert">내 자격증
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block p-4" href="../member/myInfo">내 정보
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block p-4" href="../member/myPost">내 글
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+	</ul>
+<%--	<div class="fixed bg-blue-2 w-80 h-80" style="top: 100px; left: 250px;"></div>--%>
 </div>
 
 <div class="side_bar_right hidden">
