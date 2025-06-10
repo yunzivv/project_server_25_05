@@ -18,8 +18,8 @@
 
             <div class="select_box flex flex-col w-1/2 mr-2 p-5 border-blue-2">
                 <div class="select_box_title flex">
-                    <div class="flex-grow font-bold p-2">직무 선택</div>
-                    <div class="flex-grow font-bold p-2">전문 분야 선택</div>
+                    <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
+                    <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
                 </div>
                 <hr class="my-1">
                 <div class="flex overflow-y-hidden">
@@ -191,7 +191,8 @@
                     const canvasHeight = Math.max(certs.length * barHeight, minHeight);
 
                     if (!certs || certs.length === 0) {
-                        $box.append('<div>관련 자격증이 없습니다.</div>');
+                        $box.append('<div class="text-center p-4">' + jobCatName + " > " + jobCodeName +
+                                    '<br>' + '언급된 자격증이 없습니다.</div>');
                         return;
                     }
 
