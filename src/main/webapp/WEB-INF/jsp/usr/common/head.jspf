@@ -28,7 +28,7 @@
 
 <body class="text-neutral-600 bg-blue-2">
 
-	<div class="header fixed flex items-center w-full px-14 bg-blue-2 text-white" style="height: 100px">
+	<div class="header fixed flex items-center w-full px-14 bg-blue-2 text-grey-1" style="height: 100px">
 
 		<div class="logo">
 		<a href="/" class="font-bold text-4xl">

@@ -41,8 +41,8 @@
         <div class="block min-[1280px]:hidden w-1/12"></div>
     </div>
 
-    <div class="side hidden xl:block w-28 bg-grey-1"></div>
-    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
+<%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
+<%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
 
 

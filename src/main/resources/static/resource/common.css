@@ -33,6 +33,11 @@ hr {
 	background-color: #2f73d9;
 }
 
+.analysis-element {
+	background-color: rgba(224,224,224, 1);
+	border-radius: 2rem;
+}
+
 .bg-grey-1 {
 	background-color: #d9d9d9;
 }
@@ -42,6 +47,10 @@ hr {
 }
 
 .text-blue-2 {
+	color: #2f73d9;
+}
+
+.text-blue-2t {
 	color: #2f73d9;
 }
 
@@ -93,16 +102,18 @@ li i.active{
 .side_bar_left > ul > li > a {
 	background-color: transparent;
 	transition: background-color 5s;
+	color: #d9d9d9;
 }
 
 .side_bar_left > ul > li > a.active {
 	border: #d9d9d9 solid 2px;
 	border-radius: 32px;
-	color: #d9d9d9;
+	background-color: #d9d9d9;
+	color: #2f73d9;
 }
 
 .topCertsByField .chart_container {
-	max-height: 450px; /* 최대 높이, 필요하면 조절 */
+	max-height: 300px; /* 최대 높이, 필요하면 조절 */
 	position: relative;
 	overflow: hidden;
 }

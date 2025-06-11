@@ -14,7 +14,7 @@
           AND (#{jobCodeId} = 0 OR CM.jobCodeId = #{jobCodeId})
         GROUP BY CM.certId
         ORDER BY extra__certCount DESC
-        LIMIT 10;
+        LIMIT 7;
     </select>
 
     <select id="getJobCats"
