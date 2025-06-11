@@ -5,6 +5,7 @@ import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import com.example.project_server.service.MemberService;
@@ -182,5 +183,32 @@ public class UsrMemberController {
 		int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
 		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정 완료", nickName), "../member/myPage");
+	}
+
+	@RequestMapping("/usr/member/findLoginPw")
+	public String showFindLoginPw() {
+
+		return "usr/member/findLoginPw";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginPw")
+	@ResponseBody
+	public String doFindLoginPw(@RequestParam(defaultValue = "/") String afterFindLoginPwUri, String loginId,
+								String email) {
+
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			return Ut.jsHistoryBack("F-2", "일치하는 이메일이 없는데?");
+		}
+
+		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
+
+		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
+				afterFindLoginPwUri);
 	}
 }

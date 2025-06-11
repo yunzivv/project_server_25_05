@@ -5,7 +5,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: yunzivv@gmail.com
-    password:
+    password: dhor hdgc sktc pqoh
     properties:
       mail:
         smtp:
@@ -26,7 +26,7 @@ mybatis:
   mapper-locations: classpath:/mappers/**/*.xml
 
 custom:
-  siteName: 25_05_Spring
+  siteName: certify
   siteMainUri: http://localhost:8080
   emailFrom: no-reply@localhost
-  emailFromName: 25_05_Spring
+  emailFromName: certify
