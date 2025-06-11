@@ -10,7 +10,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 4rem;">
+    <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 4rem;">
 
             <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
@@ -118,6 +118,7 @@
                     <div class="flex overflow-y-hidden">
                         <%--직무 카테고리--%>
                         <ul class="jobCat_list w-1/2 flex flex-col overflow-y-scroll">
+                            <li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>
                             <c:forEach var="jobCat" items="${jobCats }">
                                 <li class="p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
                             </c:forEach>
@@ -176,6 +177,14 @@
                                             beginAtZero: true,
                                             ticks: {
                                                 precision: 0
+                                            },
+                                            grid: {
+                                                display: false
+                                            }
+                                        },
+                                        y: {
+                                            grid: {
+                                                display: false
                                             }
                                         }
                                     }
@@ -209,11 +218,55 @@
 <script>
     $(document).ready(function () {
 
+        const activeSideMenu =  $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a')
+
+        $('.side_bar_left').addClass('active');
         $('.nav_box > ul > li:nth-child(1) i').addClass('active');
         $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
-        $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a').addClass('active');
-        $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
+        // activeSideMenu.addClass('active');
+        // activeSideMenu.children('i').addClass('active');
 
+        // const up = `
+        //     <div class="absolute" style="top: 100%; left: auto; right: 0%;">
+        //         <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        //             <defs>
+        //                 <mask id="cutout-xy">
+        //                     <g transform="scale(-1, -1) translate(-60, -60)">
+        //                         <g transform="rotate(90 30 30)">
+        //                             <rect width="60" height="60" fill="white" />
+        //                             <circle cx="60" cy="0" r="60" fill="black" />
+        //                         </g>
+        //                     </g>
+        //                 </mask>
+        //             </defs>
+        //             <rect width="60" height="60" fill="#2f73d9" mask="url(#cutout-xy)" />
+        //         </svg>
+        //     </div>`;
+
+        // const down = `
+        //     <div class="absolute" style="top: 100%; left: auto; right: 0%;">
+        //         <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        //             <defs>
+        //                 <mask id="cutout-x">
+        //                     <g transform="scale(-1, 1) translate(-60, 0)">
+        //                         <g transform="rotate(90 30 30)">
+        //                             <rect width="60" height="60" fill="white" />
+        //                             <circle cx="60" cy="0" r="60" fill="black" />
+        //                         </g>
+        //                     </g>
+        //                 </mask>
+        //             </defs>
+        //             <rect width="60" height="60" fill="#2f73d9" mask="url(#cutout-x)" />
+        //         </svg>
+        //     </div>`;
+        //
+        //   // DOM 요소로 변환
+        // const parser = new DOMParser();
+        // const first = parser.parseFromString(up, "image/svg+xml").documentElement;
+        // const last = parser.parseFromString(down, "image/svg+xml").documentElement;
+        //
+        // activeSideMenu.prepend(first);
+        // activeSideMenu.append(last);
 
         let selectedJobCatId = null;
         $('.jobCat_list').on('click', 'li', function () {
@@ -231,7 +284,6 @@
                 success: function (data) {
                     console.log(data);
                     const $list = $('.jobCode_list');
-                    const jobCatName = data.msg;
                     $list.empty(); // 이전 목록 비우기
 
                     $list.append('<li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>');
@@ -242,6 +294,9 @@
                     });
                 },
                 error: function (err) {
+                    const $list = $('.jobCode_list');
+                    $list.empty();
+                    $list.append('<li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>');
                     console.error("직무 코드 불러오기 실패", err);
                 }
             });
@@ -318,6 +373,14 @@
                                     beginAtZero: true,
                                     ticks: {
                                         precision: 0
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        display: false
                                     }
                                 }
                             }

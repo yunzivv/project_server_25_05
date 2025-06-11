@@ -12,7 +12,7 @@
 		$('.nav_box > ul > li:nth-child(3) i').addClass('active');
 		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
 		$('.side_bar_left > .community_sub_menu > li:nth-child(' + boardId + ') > a > i').addClass('active');
-		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('active');
+		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('actived');
 	});
 </script>
 
@@ -26,7 +26,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-	<div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
+	<div class="flex flex-col flex-grow px-28 bg-grey-1 h-screen">
 		<div class="title px-8 pt-20 pb-12 text-4xl font-black">게시판</div>
 		<div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
 			<div class="articleCnt font-normal mx-4">
@@ -132,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="side hidden xl:block w-28 bg-grey-1"></div>
-    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
+<%--	<div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
+<%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
 <%@ include file="../common/foot.jspf"%>

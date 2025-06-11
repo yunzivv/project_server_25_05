@@ -27,14 +27,14 @@ hr {
 }
 
 .bg-blue-1 {
-	background-color: #0099FF;
+	background-color: #155893;
 }
 .bg-blue-2 {
-	background-color: #2f73d9;
+	background-color: #155893;
 }
 
 .analysis-element {
-	background-color: rgba(224,224,224, 1);
+	background-color: rgba(224,224,224, 0.7);
 	border-radius: 2rem;
 }
 
@@ -106,8 +106,14 @@ li i.active{
 }
 
 .side_bar_left > ul > li > a.active {
-	border: #d9d9d9 solid 2px;
 	border-radius: 32px;
+	background-color: #d9d9d9;
+	color: #2f73d9;
+}
+.side_bar_left > ul > li > a.actived{
+	position: relative;
+	border-top-left-radius: 32px;
+	border-bottom-left-radius: 32px;
 	background-color: #d9d9d9;
 	color: #2f73d9;
 }

@@ -26,12 +26,12 @@
 
 </head>
 
-<body class="text-neutral-600 bg-blue-2">
+<body class="text-neutral-600">
 
 	<div class="header fixed flex items-center w-full px-14 bg-blue-2 text-grey-1" style="height: 100px">
 
 		<div class="logo">
-		<a href="/" class="font-bold text-4xl">
+		<a href="/" class="font-black text-4xl">
 			CERTIFY
 		</a>
 		</div>

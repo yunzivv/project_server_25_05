@@ -22,6 +22,13 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
+    <c:if test="${ empty member}">
+<%--    <div class="flex justify-center items-center text-5xl font-semibold h-screen">--%>
+<%--        <span><a href="../member/login" class="text-blue-1">로그인</a>--%>
+<%--        하여 자격증을 쉽게 관리할 수 있습니다!</span>--%>
+<%--    </div>--%>
+    </c:if>
+    <c:if test="${not empty member}">
     <div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
 
         <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
@@ -73,7 +80,7 @@
         <div class="side hidden xl:block w-52"></div>
         <div class="block min-[1280px]:hidden w-1/12"></div>
     </div>
-
+    </c:if>
 <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
 <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
