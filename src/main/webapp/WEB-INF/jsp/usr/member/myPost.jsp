@@ -22,11 +22,23 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow px-12 bg-grey-1" style="border-top-left-radius: 3rem;">
-
-
-
+    <div id="memberPosts" class="bg-red-300">
+        <c:forEach var="article" items="${articles }">
+            <div>
+                <div>${article.title }</div>
+                <div>${article.body}</div>
+                <div>${article.regDate}</div>
+                <div>${article.extra__sumComment}</div>
+                <div>${article.extra__sumComment}</div>
+            </div>
+        </c:forEach>
+        <c:if test="${empty articles }">
+            <div>작성된 게시물이 없습니다.</div>
+        </c:if>
     </div>
+
+
+</div>
 
 <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
 <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
@@ -44,4 +56,4 @@
     });
 </script>
 
-    <%@ include file="../common/foot.jspf" %>
+<%@ include file="../common/foot.jspf" %>

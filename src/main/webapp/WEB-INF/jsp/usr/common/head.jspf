@@ -61,7 +61,7 @@
 						<li><a href="../article/list?boardId=5" class="block h-full p-3 hover:text-neutral-">자유게시판</a></li>
 					</ul>
 				</li>
-				<li class="top_bar_first_menu relative"><a class="block px-6 flex items-center h-full" href="../member/myCert">WALLET
+				<li class="top_bar_first_menu relative"><a class="block px-6 flex items-center h-full" href="../member/myInfo">WALLET
 					<i class="highlight fa-solid fa-circle"></i></a>
 					<ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-red-300">
 						<li><a href="../member/myCert" class="block h-full p-3 hover:text-neutral-">내 자격증</a></li>
