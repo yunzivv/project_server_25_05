@@ -221,6 +221,8 @@
         const activeSideMenu =  $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a')
 
         $('.side_bar_left').addClass('active');
+        $('.header').addClass('active');
+        // $('.side_bar_left').addClass('active');
         $('.nav_box > ul > li:nth-child(1) i').addClass('active');
         $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
         // activeSideMenu.addClass('active');

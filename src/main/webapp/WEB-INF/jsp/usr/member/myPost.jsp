@@ -31,6 +31,17 @@
 <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
 <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
+<script>
+    $(document).ready(function () {
 
+        $('.header').addClass('active');
+        $('.side_bar_left').addClass('active');
+        $('.nav_box > ul > li:nth-child(4) i').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(3) > a').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(3) > a > i').addClass('active');
+
+    });
+</script>
 
     <%@ include file="../common/foot.jspf" %>

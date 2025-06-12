@@ -5,6 +5,7 @@
 <%@ include file="../common/head.jspf"%>
 
 <script>
+
 		$(document).ready(function () {
 
 			$('.nav_box > ul > li:nth-child(2) i').addClass('active');

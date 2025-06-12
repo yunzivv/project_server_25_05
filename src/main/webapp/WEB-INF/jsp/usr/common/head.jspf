@@ -28,8 +28,8 @@
 
 <body class="text-neutral-600">
 
-	<div class="header fixed flex items-center w-full pl-14 bg-blue-2 text-grey-1" style="height: 100px">
-
+	<div class="header fixed bg-blue-2" style="height: 100px; width: 2000px;">
+		<div class="h-full w-screen flex items-center pl-14 text-grey-1">
 		<div class="logo">
 		<a href="/" class="font-black text-4xl">
 			CERTIFY
@@ -39,7 +39,7 @@
 		<div class="flex-grow"></div>
 
 		<div class="nav_box flex h-full text-2xl font-black whitespace-nowrap">
-			<ul class="flex mx-14">
+			<ul class="flex mx-10">
 				<li class="top_bar_first_menu relative">
 					<a class="block px-6 flex items-center h-full" href="../cert/analysis">HUB
 						<i class="highlight fa-solid fa-circle"></i></a>
@@ -69,7 +69,7 @@
 						<li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>
 					</ul>
 				</li>
-				<li class="w-16"></li>
+				<li class="w-20"></li>
 				<li>
 					<div class="hamburger px-6 flex items-center h-full">
 						<div class="hamburger_icon">
@@ -84,6 +84,7 @@
 			<div class="">
 
 			</div>
+		</div>
 		</div>
 	</div>
 	<div style="height: 101px;"></div>

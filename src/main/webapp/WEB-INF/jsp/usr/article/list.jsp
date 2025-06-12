@@ -4,17 +4,7 @@
 <c:set var="pageTitle" value="POST LIST"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<script>
-	$(document).ready(function() {
 
-		var boardId = ${boardId} + 1;
-
-		$('.nav_box > ul > li:nth-child(3) i').addClass('active');
-		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
-		$('.side_bar_left > .community_sub_menu > li:nth-child(' + boardId + ') > a > i').addClass('active');
-		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('actived');
-	});
-</script>
 
 <%--<button onclick="history.back()" class="block text-4xl pl-10 cursor-pointer">--%>
 <%--	<i class="fa-solid fa-angle-left"></i>--%>
@@ -26,7 +16,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-	<div class="flex flex-col flex-grow px-28 bg-grey-1 h-screen">
+	<div class="flex flex-col flex-grow px-28 h-screen">
 		<div class="title px-8 pt-20 pb-12 text-4xl font-black">게시판</div>
 		<div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
 			<div class="articleCnt font-normal mx-4">
@@ -135,4 +125,18 @@
 <%--	<div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
 <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
+
+<script>
+	$(document).ready(function() {
+
+		var boardId = ${boardId} + 1;
+
+		$('.header').addClass('active');
+        $('.side_bar_left').addClass('active');
+		$('.nav_box > ul > li:nth-child(3) i').addClass('active');
+		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
+		$('.side_bar_left > .community_sub_menu > li:nth-child(' + boardId + ') > a > i').addClass('active');
+		$('.community_sub_menu > li:nth-child(' + boardId + ') > a').addClass('actived');
+	});
+</script>
 <%@ include file="../common/foot.jspf"%>

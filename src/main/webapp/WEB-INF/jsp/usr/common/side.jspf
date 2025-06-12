@@ -2,13 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<div class="side_bar_left fixed top-[100px] h-[calc(100vh-100px)] py-32 pl-8 text-lg font-black bg-blue-2" style="width: 250px;">
+<div class="side_bar_left fixed h-[calc(100vh-100px)] py-32 pl-8 text-lg font-black bg-blue-2" style="width: 250px;">
 	<ul class="hub_sub_menu hidden flex flex-col w-full">
 		<li><a class="block w-52 py-4 px-8" href="../cert/analysis">우대 자격증 분석
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../member/myPage">내 자격증
+		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
 
@@ -26,7 +26,7 @@
 							</g>
 						</mask>
 					</defs>
-					<rect width="30" height="30" fill="#d9d9d9" mask="url(#cutout-xy)" />
+					<rect width="30" height="30" fill="#ffffff" mask="url(#cutout-xy)" />
 				</svg>
 			</div>
 			<a class="block py-4 px-8" href="../article/list?boardId=0">전체 게시판
@@ -43,7 +43,7 @@
 							</g>
 						</mask>
 					</defs>
-					<rect width="30" height="30" fill="#d9d9d9" mask="url(#cutout-x)" />
+					<rect width="30" height="30" fill="#ffffff" mask="url(#cutout-x)" />
 				</svg>
 			</div></li>
 		<li><a class="block py-4 px-8" href="../article/list?boardId=1">공지사항

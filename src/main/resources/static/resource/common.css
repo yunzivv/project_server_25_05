@@ -124,12 +124,25 @@ li i.active{
 	overflow: hidden;
 }
 
+.header {
+	top: -250px;
+	left: -250px;
+	transition: all .5s;
+}
+
+.header.active{
+	top: 0;
+	left: 0;
+}
+
 .side_bar_left {
+	top: -250px;
 	left: -100%;
-	transition: left 1s;
+	transition: all .5s;
 }
 
 .side_bar_left.active{
+	top: 100px;
 	left:0;
 }
 
