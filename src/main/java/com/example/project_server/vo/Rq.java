@@ -108,4 +108,31 @@ public class Rq {
 
 		return currentUri;
 	}
+	public String getEncodedCurrentUri() {
+		return Ut.getEncodedCurrentUri(getCurrentUri());
+	}
+
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+
+	private String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getFindLoginIdUri() {
+		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+	}
+
+	private String getAfterFindLoginIdUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getFindLoginPwUri() {
+		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+	}
+
+	private String getAfterFindLoginPwUri() {
+		return getEncodedCurrentUri();
+	}
 }

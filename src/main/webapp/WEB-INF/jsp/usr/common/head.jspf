@@ -28,7 +28,7 @@
 
 <body class="text-neutral-600">
 
-	<div class="header fixed flex items-center w-full px-14 bg-blue-2 text-grey-1" style="height: 100px">
+	<div class="header fixed flex items-center w-full pl-14 bg-blue-2 text-grey-1" style="height: 100px">
 
 		<div class="logo">
 		<a href="/" class="font-black text-4xl">
@@ -69,11 +69,30 @@
 						<li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>
 					</ul>
 				</li>
+				<li class="w-16"></li>
+				<li>
+					<div class="hamburger px-6 flex items-center h-full">
+						<div class="hamburger_icon">
+							<span class="hamberger_border1"></span>
+							<span class="hamberger_border2"></span>
+							<span class="hamberger_border3"></span>
+						</div>
+						<span class="text"></span>
+					</div>
+				</li>
 			</ul>
-			<div class="my-auto">
-				<i class="fa-solid fa-bars"></i>
+			<div class="">
+
 			</div>
 		</div>
 	</div>
 	<div style="height: 101px;"></div>
+
+	<script>
+		$(function () {
+			$(".hamburger_icon").click(function () {
+				$(this).toggleClass("active");
+			});
+		});
+	</script>
 

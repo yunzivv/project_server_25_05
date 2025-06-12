@@ -35,7 +35,7 @@ public class MemberService {
 
 	public int doJoin(String loginId, String loginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) {
 
-		if(memberRepository.isJoinableLogInId(loginId) == 1) return -1; // 중복 아이디
+		if(memberRepository.getMemberByLogInId(loginId) == 1) return -1; // 중복 아이디
 		if(memberRepository.isExistsNameNEmail(name, email) == 1) return -2; // 중복 이름, 이메일
 
 		memberRepository.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
@@ -50,9 +50,8 @@ public class MemberService {
 	public int modifyMember(int loginedMemberId, String loginId, String loginPw, String name, String nickName, String cellPhone, String email) {
 		return memberRepository.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 	}
-
-	public boolean isUsableLoginId(String loginId) {
-		return memberRepository.isJoinableLogInId(loginId) != 1;
+	public boolean isJoinableLogInId(String loginId) {
+		return memberRepository.getMemberByLogInId(loginId) != 1;
 	}
 
 	public ResultData notifyTempLoginPwByEmail(Member actor) {
@@ -73,6 +72,11 @@ public class MemberService {
 	}
 
 	private void setTempPassword(Member actor, String tempPassword) {
-		memberRepository.modifyMember(actor.getId(), Ut.sha256(tempPassword), null, null, null, null, null);
+		memberRepository.modifyMember(actor.getId(), null, Ut.sha256(tempPassword), null, null, null, null);
+	}
+
+    public Member getMemberByNameAndEmail(String name, String email) {
+		return memberRepository.getMemberByNameAndEmail(name, email);
+
 	}
 }

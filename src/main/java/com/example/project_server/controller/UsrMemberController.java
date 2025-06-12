@@ -120,7 +120,11 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if(member == null) return Ut.jsHistoryBack("F-3", "존재하지 않는 아이디에요");
-		if(!member.getLoginPw().equals(loginPw)) return Ut.jsHistoryBack("F-A", "올바르지 않은 비밀번호에요");
+		System.out.println(Ut.sha256(loginPw));
+
+		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다!!!!!"));
+		}
 
 		rq.login(member);
 
@@ -184,6 +188,27 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정 완료", nickName), "../member/myPage");
 	}
+
+	@RequestMapping("/usr/member/findLoginId")
+	public String showFindLoginId() {
+
+		return "usr/member/findLoginId";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginId")
+	@ResponseBody
+	public String doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
+								String email) {
+
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
+		}
+
+		return Ut.jsReplace("S-1", Ut.f("너의 아이디는 [ %s ] 야", member.getLoginId()), afterFindLoginIdUri);
+	}
+
 
 	@RequestMapping("/usr/member/findLoginPw")
 	public String showFindLoginPw() {

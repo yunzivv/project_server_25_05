@@ -124,6 +124,16 @@ li i.active{
 	overflow: hidden;
 }
 
+.side_bar_left {
+	left: -100%;
+	transition: left 1s;
+}
+
+.side_bar_left.active{
+	left:0;
+}
+
+
 .hub_sub_menu {
 	width: 100%; /* 부모 너비 꽉 차기 */
 }
@@ -131,4 +141,46 @@ li i.active{
 .hub_sub_menu a {
 	width: 100%; /* 링크도 꽉 차기 */
 	display: block; /* block 요소 */
+}
+
+
+.hamburger_icon {
+	position: relative;
+	width: 35px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.hamburger_icon span {
+	position: absolute;
+	left: 0;
+	display: inline-block;
+	width: 100%;
+	height: 4px;
+	border-radius: 5px;
+	background: white;
+	transition: all 0.3s;
+}
+
+.hamburger_icon .hamberger_border1 {
+	top: 0;
+}
+
+.hamburger_icon .hamberger_border2 {
+	top: 40%;
+}
+
+.hamburger_icon .hamberger_border3 {
+	bottom: 0;
+}
+
+/* 클릭 시: 가위표 형태 */
+.hamburger_icon.active .hamberger_border1 {
+	transform: translateY(11px) rotate(45deg);
+}
+.hamburger_icon.active .hamberger_border2 {
+	opacity: 0;
+}
+.hamburger_icon.active .hamberger_border3 {
+	transform: translateY(-11px) rotate(-45deg);
 }
