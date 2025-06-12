@@ -39,13 +39,13 @@ public class UsrCertificateController {
 			jobCodes = certificateService.getJobCodes(jobCatId);
 		}
 		ResultData certRanking = certificateService.getCertRank(jobCatId, jobCodeId);
-		List<Certificate> certList = (List<Certificate>)certRanking.getData3();
+		List<Certificate> certsRanking = (List<Certificate>)certRanking.getData3();
 
 		int[] count = new int[10];
 		List<String> certNames = new ArrayList<>();
 
 		int index = 0;
-		for(Certificate cert : certList) {
+		for(Certificate cert : certsRanking) {
 			count[index++] = cert.getExtra__certCount();
 			certNames.add(cert.getName());
 		}
@@ -55,13 +55,12 @@ public class UsrCertificateController {
 		String valuesJson = mapper.writeValueAsString(count);
 		String labelsJson = mapper.writeValueAsString(certNames);
 
-		model.addAttribute("values", valuesJson);
+		// 자격증 랭킹 labels: 자격증명 values: 언급 수
 		model.addAttribute("labels", labelsJson);
+		model.addAttribute("values", valuesJson);
 
+		// 직무 카테고리
 		model.addAttribute("jobCats", jobCats);
-		model.addAttribute("jobCodes", jobCodes);
-
-		model.addAttribute("certRanking", certList);
 
 		model.addAttribute("totalPosts", 31256);
 		model.addAttribute("postCount", certificateService.getPostCount(0, 0));

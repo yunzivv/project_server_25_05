@@ -32,6 +32,12 @@
                 <a href="modify" class="block p-3 text-base flex items-center
 		 	justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">
                     회원 정보 수정</a>
+                    ${member.nickName}
+                    ${member.birthday}
+                    ${member.regDate}
+                    ${member.name}
+                    ${member.cellPhone}
+
             </div>
         </div>
 

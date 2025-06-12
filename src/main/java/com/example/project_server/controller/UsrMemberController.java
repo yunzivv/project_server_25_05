@@ -198,21 +198,6 @@ public class UsrMemberController {
 				afterFindLoginPwUri);
 	}
 
-	@RequestMapping("/usr/member/myCert")
-	public String showMyPage(Model model, HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-
-		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
-		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
-
-		model.addAttribute("member", member);
-		model.addAttribute("certlist", certlist);
-
-		return "/usr/member/myCert";
-	}
-
 	@RequestMapping("/usr/member/myInfo")
 	public String showMyInfo(Model model, HttpServletRequest req) {
 
@@ -221,8 +206,6 @@ public class UsrMemberController {
 
 		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
 		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
-		System.out.println(rq.getLoginedMemberId());
-		System.out.println(certs.size());
 
 		model.addAttribute("member", member);
 		model.addAttribute("certs", certs);
@@ -231,16 +214,32 @@ public class UsrMemberController {
 		return "/usr/member/myInfo";
 	}
 
+	@RequestMapping("/usr/member/myCert")
+	public String showMyPage(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certs", certs);
+
+		return "/usr/member/myCert";
+	}
+
 	@RequestMapping("/usr/member/myPost")
 	public String showMyPost(Model model, HttpServletRequest req) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 
-		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
 
 		model.addAttribute("member", member);
-		model.addAttribute("certlist", certlist);
+		model.addAttribute("articles", articles);
 
 		return "/usr/member/myPost";
 	}

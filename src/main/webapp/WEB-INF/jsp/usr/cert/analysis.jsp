@@ -126,12 +126,12 @@
 
                         <%--직무 코드--%>
                         <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
-                            <c:if test="${jobCodes != null}">
-                                <c:forEach var="jobCode" items="${jobCodes }">
-                                    <li class="w-1/2 p-2 cursor-pointer text-sm"
-                                        data-id="${jobCode.id}">${jobCode.name}</li>
-                                </c:forEach>
-                            </c:if>
+<%--                            <c:if test="${jobCodes != null}">--%>
+<%--                                <c:forEach var="jobCode" items="${jobCodes }">--%>
+<%--                                    <li class="w-1/2 p-2 cursor-pointer text-sm"--%>
+<%--                                        data-id="${jobCode.id}">${jobCode.name}</li>--%>
+<%--                                </c:forEach>--%>
+<%--                            </c:if>--%>
                         </ul>
                     </div>
 

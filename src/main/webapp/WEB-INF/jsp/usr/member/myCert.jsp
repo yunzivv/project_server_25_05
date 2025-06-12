@@ -24,7 +24,7 @@
 
         <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
             <div class="flex">
-            총 자격증: ${certlist.size()}개
+            총 자격증: ${certs.size()}개
             <div class="flex-grow"></div>
             <button onclick=""
             class="block ml-6 px-5 whitespace-nowrap text-base flex items-center justify-center font-large rounded-md hover:bg-neutral-300">
@@ -51,7 +51,7 @@
 					</tr>
 				</thead>
 				<tbody>
-                    <c:forEach var="cert" items="${certlist }">
+                    <c:forEach var="cert" items="${certs }">
                     <tr class="border-b bg-neutral-200 border-neutral-300 hover:bg-neutral-300">
 							<td class="px-5 py-3">${cert.extra__rankNum }</td>
 							<td class="px-5 py-3">${cert.certname}</td>
