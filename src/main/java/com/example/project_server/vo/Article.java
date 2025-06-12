@@ -21,8 +21,8 @@ public class  Article {
 	private int hits;
 
 	private int extra__sumReaction;
+	private int extra__sumComment;
 	private String extra__writer;
-	private String extra__commentsCount;
 	private String extra__boardCode;
 
 	private boolean userCanModify;

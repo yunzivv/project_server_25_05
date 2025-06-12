@@ -1,5 +1,6 @@
 package com.example.project_server.controller;
 
+import com.example.project_server.service.ArticleService;
 import com.example.project_server.service.CertificateService;
 import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,54 +29,15 @@ public class UsrMemberController {
 
 	@Autowired
 	private CertificateService certificateService;
-
-	@RequestMapping("/usr/member/myCert")
-	public String showMyPage(Model model, HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-
-		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
-
-		model.addAttribute("member", member);
-		model.addAttribute("certlist", certlist);
-
-		return "/usr/member/myCert";
-	}
-
-	@RequestMapping("/usr/member/myInfo")
-	public String showMyInfo(Model model, HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-
-		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
-
-		model.addAttribute("member", member);
-		model.addAttribute("certlist", certlist);
-
-		return "/usr/member/myInfo";
-	}
-
-	@RequestMapping("/usr/member/myPost")
-	public String showMyPost(Model model, HttpServletRequest req) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-
-		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
-
-		model.addAttribute("member", member);
-		model.addAttribute("certlist", certlist);
-
-		return "/usr/member/myPost";
-	}
+    @Autowired
+    private ArticleService articleService;
 
 	@RequestMapping("/usr/member/join")
 	public String join() {
 
 		return "/usr/member/join";
 	}
+
 	// 액션메서드
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
@@ -101,7 +63,6 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
 	}
-
 	@RequestMapping("/usr/member/login")
 	public String login() {
 
@@ -169,6 +130,7 @@ public class UsrMemberController {
 	}
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크
+
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(HttpServletRequest req, String loginId, String loginPw, String name, String nickName, String cellPhone, String email) {
@@ -188,7 +150,6 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정 완료", nickName), "../member/myPage");
 	}
-
 	@RequestMapping("/usr/member/findLoginId")
 	public String showFindLoginId() {
 
@@ -235,5 +196,52 @@ public class UsrMemberController {
 
 		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
 				afterFindLoginPwUri);
+	}
+
+	@RequestMapping("/usr/member/myCert")
+	public String showMyPage(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certlist", certlist);
+
+		return "/usr/member/myCert";
+	}
+
+	@RequestMapping("/usr/member/myInfo")
+	public String showMyInfo(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+		System.out.println(rq.getLoginedMemberId());
+		System.out.println(certs.size());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certs", certs);
+		model.addAttribute("articles", articles);
+
+		return "/usr/member/myInfo";
+	}
+
+	@RequestMapping("/usr/member/myPost")
+	public String showMyPost(Model model, HttpServletRequest req) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+
+		List<MemberCert> certlist = certificateService.getMemberCerts(rq.getLoginedMemberId());
+
+		model.addAttribute("member", member);
+		model.addAttribute("certlist", certlist);
+
+		return "/usr/member/myPost";
 	}
 }

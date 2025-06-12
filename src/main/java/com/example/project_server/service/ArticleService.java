@@ -97,4 +97,7 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시글 삭제 권한 있음", article.getId()));
 	}
 
+    public List<Article> getArticlesByMemberId(int loginedMemberId) {
+		return articleRepository.getArticlesByMemberId(loginedMemberId);
+    }
 }

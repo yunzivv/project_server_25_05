@@ -59,10 +59,9 @@
 	</ul>
 
 	<ul class="myPage_sub_menu hidden flex flex-col w-full p-2">
-		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
-			<i class="highlight fa-solid fa-circle"></i></a>
-			</li>
 		<li><a class="block py-4 px-8" href="../member/myInfo">내 정보
+			<i class="highlight fa-solid fa-circle"></i></a></li>
+		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 		<li><a class="block py-4 px-8" href="../member/myPost">내 글
 			<i class="highlight fa-solid fa-circle"></i></a></li>

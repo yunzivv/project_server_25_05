@@ -5,5 +5,12 @@
 <%@ include file="../common/head.jspf"%>
 
 main
+<script>
+	$(document).ready(function() {
 
+		var boardId = ${boardId} + 1;
+
+		$('.header').addClass('active');
+	});
+</script>
 <%@ include file="../common/foot.jspf"%>

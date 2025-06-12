@@ -27,5 +27,7 @@ public interface ArticleRepository {
 
     public int getArticlesCnt(String keyword, int boardId, int searchItem);
 
+    public List<Article> getArticlesByMemberId(int loginedMemberId);
+
 //    public int getHits(int id);
 }
