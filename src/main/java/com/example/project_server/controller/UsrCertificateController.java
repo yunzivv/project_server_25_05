@@ -97,21 +97,15 @@ public class UsrCertificateController {
 
 	@RequestMapping("/usr/cert/doAdd")
 	@ResponseBody
-	public String doAdd(HttpServletRequest req, String certname, LocalDate startDate, LocalDate endDate, String certificateNumber) {
+	public String doAdd(HttpServletRequest req, @RequestParam(defaultValue = "0")int certId, String certName, LocalDate startDate, LocalDate endDate, String certificateNumber) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
-		if (Ut.isEmpty(certname))
+		if (Ut.isEmpty(certName))
 			return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
 
-		Certificate certificate = certificateService.getCertByName(certname);
-		if(certificate == null) {
-			certificate = new Certificate();
-			certificate.setId(0);
-		}
-
-		certificateService.doAdd(rq.getLoginedMemberId(), certname, certificate.getId(), startDate, endDate, certificateNumber);
-		return null;
+		certificateService.doAdd(rq.getLoginedMemberId(), certName, certId, startDate, endDate, certificateNumber);
+		return Ut.jsReplace("S-1", "자격증 등록이 완료되었습니다.", "../member/myCert");
 	}
 
 //	@RequestMapping("/usr/cert/doModify")

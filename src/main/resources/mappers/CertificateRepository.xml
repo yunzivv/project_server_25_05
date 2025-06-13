@@ -102,7 +102,7 @@
     <select id="getCertByName" parameterType="String">
         SELECT *
         FROM certificate
-        WHERE `name` = #{certname}
+        WHERE `name` = #{certName}
     </select>
 
     <insert id="doAdd" parameterType="map">
@@ -110,7 +110,7 @@
         SET
             memberId = #{memberId},
             certId = #{certId},
-            certname = #{certname},
+            certname = #{certName},
             certificateNumber = #{certificateNumber},
             startDate = #{startDate},
             endDate = #{endDate},
@@ -120,7 +120,7 @@
 
     <select id="getAutoCompleteCerts" parameterType="String"
             resultType="com.example.project_server.vo.Certificate">
-        SELECT *
+        SELECT id, `name`
         FROM certificate
         WHERE `name` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY LENGTH(`name`) ASC

@@ -31,7 +31,7 @@
                 </div>
 
                 <div>
-                    <form action="a" class="relative">
+                    <form action="/usr/cert/doAdd" method="post" class="relative">
                         <input type="hidden" name="certId" id="certIdHidden">
                         <input type="text" name="certName" id="certNameInput" placeholder="자격증명" autocomplete="off">
                         <script>
@@ -61,6 +61,7 @@
                                             item.textContent = cert.name; // 필드명 맞으면 OK
                                             item.style.padding = "5px";
                                             item.style.cursor = "pointer";
+                                            document.querySelectorAll("#certNameInput")
 
                                             item.addEventListener("click", () => {
                                                 document.getElementById("certNameInput").value = cert.name;
@@ -100,6 +101,7 @@
                         <input type="text" name="certificateNumber" placeholder="자격번호">
                         <input type="date" name="startDate" placeholder="취득일">
                         <input type="date" name="endDate" placeholder="만료일">
+                        <button type="submit">확인</button>
                     </form>
                 </div>
                 <table>

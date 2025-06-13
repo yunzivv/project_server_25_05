@@ -32,9 +32,9 @@ public interface CertificateRepository {
 
     public int getMentionCount(int jobCatId, int jobCodeId);
 
-    public Certificate getCertByName(String certname);
+    public Certificate getCertByName(String certName);
 
-    public void doAdd(int memberId, String certname, int certid, LocalDate startDate, LocalDate endDate, String certificateNumber);
+    public void doAdd(int memberId, String certName, int certId, LocalDate startDate, LocalDate endDate, String certificateNumber);
 
     public List<Certificate> getAutoCompleteCerts(String keyword);
 }
