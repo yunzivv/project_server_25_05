@@ -113,4 +113,33 @@ public class UsrCertificateController {
 		certificateService.doAdd(rq.getLoginedMemberId(), certname, certificate.getId(), startDate, endDate, certificateNumber);
 		return null;
 	}
+
+//	@RequestMapping("/usr/cert/doModify")
+//	@ResponseBody
+//	public String doModify(HttpServletRequest req, int memberCertId, String certname, LocalDate startDate, LocalDate endDate, String certificateNumber) {
+//
+//		Rq rq = (Rq) req.getAttribute("rq");
+//
+//		if (Ut.isEmpty(certname))
+//			return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
+//
+//		Certificate certificate = certificateService.getCertByName(certname);
+//		if(certificate == null) {
+//			certificate = new Certificate();
+//			certificate.setId(0);
+//		}
+//
+//		certificateService.doModify(rq.getLoginedMemberId(), certname, certificate.getId(), startDate, endDate, certificateNumber);
+//		return null;
+//	}
+
+
+	@RequestMapping("/usr/cert/autoComplete")
+	@ResponseBody
+	public List<Certificate> autoComplete(HttpServletRequest req, String keyword) {
+		
+		List<Certificate> autoCompleteCerts = certificateService.getAutoCompleteCerts(keyword);
+
+		return autoCompleteCerts;
+	}
 }

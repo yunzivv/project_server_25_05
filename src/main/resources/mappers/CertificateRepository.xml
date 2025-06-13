@@ -118,4 +118,12 @@
             updateDate = NOW()
     </insert>
 
+    <select id="getAutoCompleteCerts" parameterType="String"
+            resultType="com.example.project_server.vo.Certificate">
+        SELECT *
+        FROM certificate
+        WHERE `name` LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY LENGTH(`name`) ASC
+        LIMIT 10;
+    </select>
 </mapper>

@@ -35,4 +35,6 @@ public interface CertificateRepository {
     public Certificate getCertByName(String certname);
 
     public void doAdd(int memberId, String certname, int certid, LocalDate startDate, LocalDate endDate, String certificateNumber);
+
+    public List<Certificate> getAutoCompleteCerts(String keyword);
 }

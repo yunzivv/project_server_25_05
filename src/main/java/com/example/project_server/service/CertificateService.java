@@ -77,4 +77,8 @@ public class CertificateService {
 	public void doAdd(int memberId, String certname, int certid, LocalDate startDate, LocalDate endDate, String certificateNumber) {
 		certificateRepository.doAdd(memberId, certname, certid, startDate, endDate, certificateNumber);
 	}
+
+	public List<Certificate> getAutoCompleteCerts(String keyword) {
+		return certificateRepository.getAutoCompleteCerts(keyword);
+	}
 }
