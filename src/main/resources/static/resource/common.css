@@ -7,6 +7,7 @@
 	font-style: normal;
 }
 
+/*normalizing*/
 html>body {
 	padding: 0;
 	margin: 0;
@@ -26,16 +27,25 @@ hr {
 	border-top: 3px solid #afafaf;
 }
 
+
+
+input {
+	z-index: 1;
+}
+
+.comments-box hr:first-of-type {
+	display: none;
+}
+
+
+
+/*lib*/
 .bg-blue-1 {
 	background-color: #155893;
 }
+
 .bg-blue-2 {
 	background-color: #155893;
-}
-
-.analysis-element {
-	background-color: rgba(224,224,224, 0.7);
-	border-radius: 2rem;
 }
 
 .bg-grey-1 {
@@ -67,8 +77,18 @@ hr {
 	border: #d9d9d9 solid 1px;
 }
 
-.top_bar_first_menu:hover > a {
-	/*color: oklch(70.9% 0.01 56.259);*/
+
+/*top-bar*/
+.header {
+	top: -250px;
+	left: -250px;
+	transition: all .5s;
+	z-index: 100;
+}
+
+.header.active{
+	top: 0;
+	left: 0;
 }
 
 .top_bar_first_menu:hover > ul {
@@ -77,85 +97,6 @@ hr {
 	left: 50%;
 	transform: translateX(-50%);
 }
-
-.comments-box hr:first-of-type {
-	display: none;
-}
-
-
-i.highlight {
-	position: relative;
-	bottom: 15px;
-	left: 8px;
-	z-index: 100;
-	font-size: 0rem;
-	opacity: 0;
-	transition: font-size .1s;
-}
-
-li:hover .highlight,
-li i.active{
-	opacity: 100%;
-	font-size: .5rem;
-}
-
-.side_bar_left > ul > li > a {
-	background-color: transparent;
-	transition: background-color 5s;
-	color: #d9d9d9;
-}
-
-.side_bar_left > ul > li > a.active {
-	border-radius: 32px;
-	background-color: #d9d9d9;
-	color: #2f73d9;
-}
-.side_bar_left > ul > li > a.actived{
-	position: relative;
-	border-top-left-radius: 32px;
-	border-bottom-left-radius: 32px;
-	background-color: #d9d9d9;
-	color: #2f73d9;
-}
-
-.topCertsByField .chart_container {
-	max-height: 300px; /* 최대 높이, 필요하면 조절 */
-	position: relative;
-	overflow: hidden;
-}
-
-.header {
-	top: -250px;
-	left: -250px;
-	transition: all .5s;
-}
-
-.header.active{
-	top: 0;
-	left: 0;
-}
-
-.side_bar_left {
-	top: -250px;
-	left: -100%;
-	transition: all .5s;
-}
-
-.side_bar_left.active{
-	top: 100px;
-	left:0;
-}
-
-
-.hub_sub_menu {
-	width: 100%; /* 부모 너비 꽉 차기 */
-}
-
-.hub_sub_menu a {
-	width: 100%; /* 링크도 꽉 차기 */
-	display: block; /* block 요소 */
-}
-
 
 .hamburger_icon {
 	position: relative;
@@ -187,13 +128,87 @@ li i.active{
 	bottom: 0;
 }
 
-/* 클릭 시: 가위표 형태 */
 .hamburger_icon.active .hamberger_border1 {
 	transform: translateY(11px) rotate(45deg);
 }
+
 .hamburger_icon.active .hamberger_border2 {
 	opacity: 0;
 }
+
 .hamburger_icon.active .hamberger_border3 {
 	transform: translateY(-11px) rotate(-45deg);
+}
+
+/*sub-menu highlight*/
+i.highlight {
+	position: relative;
+	bottom: 15px;
+	left: 8px;
+	z-index: 100;
+	font-size: 0rem;
+	opacity: 0;
+	transition: font-size .1s;
+}
+
+li:hover .highlight,
+li i.active{
+	opacity: 100%;
+	font-size: .5rem;
+}
+
+
+
+/*side-bar*/
+.side_bar_left > ul > li > a {
+	background-color: transparent;
+	transition: background-color 5s;
+	color: #d9d9d9;
+}
+
+.side_bar_left > ul > li > a.active {
+	border-radius: 32px;
+	background-color: #d9d9d9;
+	color: #2f73d9;
+}
+
+.side_bar_left > ul > li > a.actived{
+	position: relative;
+	border-top-left-radius: 32px;
+	border-bottom-left-radius: 32px;
+	background-color: #d9d9d9;
+	color: #2f73d9;
+}
+
+.side_bar_left {
+	top: -250px;
+	left: -100%;
+	transition: all .5s;
+}
+
+.side_bar_left.active{
+	top: 100px;
+	left:0;
+}
+
+.hub_sub_menu {
+	width: 100%;
+}
+
+.hub_sub_menu a {
+	width: 100%;
+	display: block;
+}
+
+
+/*analysis*/
+.analysis-element {
+	background-color: rgba(224,224,224, 0.7);
+	border-radius: 2rem;
+}
+
+.topCertsByField .chart_container {
+	max-height: 300px;
+	position: relative;
+	overflow: hidden;
 }

@@ -4,12 +4,19 @@
 <c:set var="pageTitle" value="WORK BOOK"></c:set>
 <%@ include file="../common/head.jspf"%>
 
+
 <script>
+    $(document).ready(function () {
+        $('.header').addClass('active');
+        $('.nav_box > ul > li:nth-child(4) i').addClass('active');
 
-		$(document).ready(function () {
 
-			$('.nav_box > ul > li:nth-child(2) i').addClass('active');
-		});
+        $('.side_bar_left').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a > i').addClass('active');
+    });
+
 </script>
 
 work book

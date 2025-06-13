@@ -157,7 +157,6 @@
         }
 
     });
-
     <%--const input = document.getElementById("certNameInput");--%>
     <%--const hiddenInput = document.getElementById("certIdHidden");--%>
     <%--const box = document.getElementById("autocompleteBox");--%>
@@ -201,13 +200,11 @@
     <%--        });--%>
     <%--}, 300);--%>
 
-
-    // // 바깥 클릭 시 자동완성 박스 숨기기
-    // document.addEventListener("click", function (e) {
-    //     if (!box.contains(e.target) && e.target !== input) {
-    //         box.style.display = "none";
-    //     }
-    // });
+    <%--document.addEventListener("click", function (e) {--%>
+    <%--    if (!box.contains(e.target) && e.target !== input) {--%>
+    <%--        box.style.display = "none";--%>
+    <%--    }--%>
+    <%--});--%>
 
 </script>
 
