@@ -121,6 +121,7 @@ CREATE TABLE questions (
                            examId INT UNSIGNED NOT NULL,
                            questNum SMALLINT UNSIGNED NOT NULL,
                            `body` TEXT NOT NULL,
+                           img TEXT,
                            regDate DATETIME NOT NULL,
                            updateDate DATETIME NOT NULL
 );
@@ -130,6 +131,7 @@ CREATE TABLE choices (
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          questId INT UNSIGNED NOT NULL,
                          label TINYINT UNSIGNED NOT NULL,
+                         isText BOOLEAN NOT NULL,
                          `body` TEXT NOT NULL,
                          isCorrect BOOLEAN NOT NULL,
                          regDate DATETIME NOT NULL,
