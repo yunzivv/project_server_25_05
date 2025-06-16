@@ -97,7 +97,7 @@ CREATE TABLE certificate (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              `name` VARCHAR(50) NOT NULL,
                              certGrade INT UNSIGNED,
-                             isNational TINYINT UNSIGNED COMMENT '0=국가공인민간자격 1 = 국가기술자격, -1 = 민간자격',
+                             isNational TINYINT COMMENT '0=국가공인민간자격 1 = 국가기술자격, -1 = 민간자격',
                              agency VARCHAR(100),
                              parentId INT UNSIGNED,
                              href VARCHAR(500),
@@ -109,6 +109,7 @@ CREATE TABLE certificate (
 CREATE TABLE exam (
                       id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                       certId INT UNSIGNED NOT NULL,
+                      category CHAR(10) NOT NULL,
                       examDate DATE NOT NULL,
                       regDate DATETIME NOT NULL,
                       updateDate DATETIME NOT NULL
