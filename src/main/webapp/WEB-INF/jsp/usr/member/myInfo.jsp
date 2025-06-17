@@ -20,13 +20,7 @@
                 <div class="updateProfile">
 
                     <a href="modify" class="block p-3 text-base flex items-center
-		 	        justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">
-                        회원 정보 수정</a>
-                        ${member.nickName}
-                        ${member.birthday}
-                        ${member.regDate}
-                        ${member.name}
-                        ${member.cellPhone}
+		 	        justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">수정</a>
 
                     <div id="infoCard" class="w-96 h-60 p-3 rounded-xl overflow-hidden border border-solid bg-grey-1">
                         <div class="cardHead h-1/5 text-center text-xl font-bold tracking-widest border border-solid">회원정보자격</div>
@@ -36,11 +30,13 @@
                                 <span>성    명: ${member.name}</span>
                                 <span>생년월일: ${member.birthday}</span>
                                 <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
-                                <span>전화번호: ${member.cellPhone}</span>
+                                <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
                                 <span>이 메 일: ${member.email}</span>
                             </div>
                         </div>
-                        <div class="cardHead h-1/5 border border-solid"></div>
+                        <div class="cardBottom h-1/5 border border-solid text-right">
+                            <a href="modify" class="rounded-md hover:bg-neutral-300 border border-neutral-300">수정</a>
+                        </div>
                     </div>
 
                 </div>

@@ -16,8 +16,9 @@
 
         <div class="analysis_1 flex p-5">
 
-            <div class="flex flex-col w-1/2 mr-2 p-5 analysis-element">
-                <div>
+            <div class="flex flex-col w-1/2 mr-2 p-5 analysis-element h-full border-blue-2">
+                <div>자격증이 가장 많이 언급된 직무</div>
+                <div class="">
                     <canvas id="topJobCat" style="height: 250px; width: 400px;"></canvas>
                 </div>
                 <script th:inline="javascript">
@@ -65,9 +66,8 @@
                         }
                     });
                 </script>
-
-
             </div>
+
             <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element border-blue-2">
                 <%--                    <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>--%>
                 <%--                    <br>자격증이 언급된 공고<br>--%>
@@ -75,7 +75,7 @@
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
                                                          groupingUsed="true"/>개</span>
             </div>
-            <div class="postsWithCert w-1/4 p-5 analysis-element">
+            <div class="postsWithCert w-1/4 p-5 analysis-element border-blue-2">
                 <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br>
                 <canvas id="postsWithCert" width="200" height="250"></canvas>
 

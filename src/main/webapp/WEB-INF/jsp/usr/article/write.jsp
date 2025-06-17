@@ -3,6 +3,7 @@
 
 <c:set var="pageTitle" value="ARTICLE WRITE"></c:set>
 <%@ include file="../common/head.jspf"%>
+<%@ include file="../common/toastUiEditorLib.jspf"%>
 
 <script>
 	$(document).ready(function () {
@@ -13,9 +14,7 @@
 
 	<div class="container mx-auto mt-8 p-6 w-4/5 border border-solid border-neutral-300 rounded-xl overflow-hidden">
 
-
 		<div class="font-semibold text-4xl text-neutral-800 px-1 py-6">Article Write</div>
-
 
 		<form action="doWrite" method="POST" class="w-full">
 			<div class="flex justify-center flex-col">
