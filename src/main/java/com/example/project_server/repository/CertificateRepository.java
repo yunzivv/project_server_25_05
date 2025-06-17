@@ -37,4 +37,6 @@ public interface CertificateRepository {
     public void doAdd(int memberId, String certName, int certId, LocalDate startDate, LocalDate endDate, String certificateNumber);
 
     public List<Certificate> getAutoCompleteCerts(String keyword);
+
+    public List<JobCat> getJobCatMentionRank();
 }

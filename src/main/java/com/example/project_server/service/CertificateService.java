@@ -81,4 +81,8 @@ public class CertificateService {
 	public List<Certificate> getAutoCompleteCerts(String keyword) {
 		return certificateRepository.getAutoCompleteCerts(keyword);
 	}
+
+	public List<JobCat> getJobCatMentionRank() {
+		return certificateRepository.getJobCatMentionRank();
+	}
 }

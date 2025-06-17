@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UsrCertificateController {
@@ -33,34 +34,37 @@ public class UsrCertificateController {
 	public String showAnalysis(Model model, @RequestParam(defaultValue = "0")int jobCatId,
 							   @RequestParam(defaultValue = "0")int jobCodeId) throws JsonProcessingException {
 
-		List<JobCat> jobCats = certificateService.getJobCats();
-		ResultData jobCodes = null;
-		if(jobCatId != 0) {
-			jobCodes = certificateService.getJobCodes(jobCatId);
-		}
-		ResultData certRanking = certificateService.getCertRank(jobCatId, jobCodeId);
-		List<Certificate> certsRanking = (List<Certificate>)certRanking.getData3();
-
-		int[] count = new int[10];
-		List<String> certNames = new ArrayList<>();
-
-		int index = 0;
-		for(Certificate cert : certsRanking) {
-			count[index++] = cert.getExtra__certCount();
-			certNames.add(cert.getName());
-		}
-
 		ObjectMapper mapper = new ObjectMapper();
 
-		String valuesJson = mapper.writeValueAsString(count);
-		String labelsJson = mapper.writeValueAsString(certNames);
+		List<JobCat> jobCats = certificateService.getJobCats();
 
-		// 자격증 랭킹 labels: 자격증명 values: 언급 수
-		model.addAttribute("labels", labelsJson);
-		model.addAttribute("values", valuesJson);
+		List<Certificate> certMentionRank = (List<Certificate>)certificateService.getCertRank(jobCatId, jobCodeId).getData3();
+		List<JobCat> jobCatMentionRank = certificateService.getJobCatMentionRank();
+
+		List<Integer> topCertCounts = certMentionRank.stream()
+				.map(Certificate::getExtra__certCount)
+				.collect(Collectors.toList());
+		List<String> topCertNames = certMentionRank.stream()
+				.map(Certificate::getName)
+				.collect(Collectors.toList());
+
+		List<Integer> topJobCatCounts = jobCatMentionRank.stream()
+				.map(JobCat::getExtra__jobCatMentionCount)
+				.collect(Collectors.toList());
+		List<String> topJobCatNames = jobCatMentionRank.stream()
+				.map(JobCat::getName)
+				.collect(Collectors.toList());
 
 		// 직무 카테고리
 		model.addAttribute("jobCats", jobCats);
+
+		// 자격증 언급 랭킹 labels: 자격증명 values: 언급 수
+		model.addAttribute("topCertLabels", mapper.writeValueAsString(topCertNames));
+		model.addAttribute("topCertValues", mapper.writeValueAsString(topCertCounts));
+
+		// 직무 카테고리 언급 랭킹 labels: 카테고리명 values: 언급 수
+		model.addAttribute("topJobCatLabels", mapper.writeValueAsString(topJobCatNames));
+		model.addAttribute("topJobCatValues", mapper.writeValueAsString(topJobCatCounts));
 
 		model.addAttribute("totalPosts", 31256);
 		model.addAttribute("postCount", certificateService.getPostCount(0, 0));

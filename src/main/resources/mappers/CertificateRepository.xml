@@ -126,4 +126,30 @@
         ORDER BY LENGTH(`name`) ASC
         LIMIT 10;
     </select>
+
+    <select id="getJobCatMentionRank"
+            resultType="com.example.project_server.vo.JobCat">
+        SELECT id, `name`, extra__jobCatMentionCount
+        FROM (SELECT t.jobCatId AS `id`,
+                     jCat.name  AS `name`,
+                     t.cnt      AS extra__jobCatMentionCount,
+                     0          AS sort_order
+              FROM (SELECT jobCatId, COUNT(*) AS cnt
+                    FROM certMention
+                    GROUP BY jobCatId
+                    ORDER BY cnt DESC LIMIT 4) AS t
+                       JOIN jobCat jCat ON jCat.id = t.jobCatId
+              UNION ALL
+              SELECT 00000    AS `id`,
+                     '기타'     AS `name`,
+                     COUNT(*) AS extra__jobCatMentionCount,
+                     1        AS sort_order
+              FROM certMention
+              WHERE jobCatId NOT IN (SELECT jobCatId
+                                     FROM (SELECT jobCatId
+                                           FROM certMention
+                                           GROUP BY jobCatId
+                                           ORDER BY COUNT(*) DESC LIMIT 4) AS top_ids)) AS combined
+        ORDER BY sort_order ASC, extra__jobCatMentionCount DESC;
+    </select>
 </mapper>

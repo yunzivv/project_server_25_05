@@ -12,52 +12,78 @@
 
     <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 4rem;">
 
-            <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
+        <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
-            <div class="analysis_1 flex p-5" style="height: 300px;">
+        <div class="analysis_1 flex p-5">
 
-                <div class="select_box flex flex-col w-1/2 mr-2 p-5 analysis-element">
-                    <div class="select_box_title flex">
-                        <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
-                        <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
-                    </div>
-                    <hr class="my-1">
-                    <div class="flex overflow-y-hidden">
-                        <%--직무 카테고리--%>
-                        <ul class="jobCat_list w-1/2 flex flex-wrap overflow-y-scroll">
-                            <c:forEach var="jobCat" items="${jobCats }">
-                                <li class="w-1/2 p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
-                            </c:forEach>
-                        </ul>
-
-                        <%--직무 코드--%>
-                        <ul class="jobCode_list w-1/2 flex flex-wrap overflow-y-scroll">
-                            <c:if test="${jobCodes != null}">
-                                <c:forEach var="jobCode" items="${jobCodes }">
-                                    <li class="w-1/2 p-2 cursor-pointer text-sm"
-                                        data-id="${jobCode.id}">${jobCode.name}</li>
-                                </c:forEach>
-                            </c:if>
-                        </ul>
-                    </div>
-
+            <div class="flex flex-col w-1/2 mr-2 p-5 analysis-element">
+                <div>
+                    <canvas id="topJobCat" style="height: 250px; width: 400px;"></canvas>
                 </div>
-                <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element text-right">
-                    <i class="fa-solid fa-circle"></i>
-                    <i class="fa-solid fa-file"></i>
-                    <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>
-                    <br>자격증이 언급된 공고<br>
-                    <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number" groupingUsed="true" />개</span>
-                </div>
-                <div class="postsWithCert w-1/4 p-5 analysis-element text-right">
-                    <i class="fa-solid fa-circle"></i> 전체 공고 ??
-                    <canvas id="postsWithCert" width="200" height="200"></canvas>
+                <script th:inline="javascript">
+                    // 컨트롤러에서 전달한 데이터 (Thymeleaf 문법)
+                    const topJobCatLabels = ${topJobCatLabels};
+                    const topJobCatValues = ${topJobCatValues};
 
-                    <script>
-                    const ctx = document.getElementById('postsWithCert').getContext('2d');
+                    // 전체 합 계산
+                    const total = topJobCatValues.reduce((sum, val) => sum + val, 0);
+                    // 퍼센트 계산
+                    const percentages = topJobCatValues.map(val => ((val / total) * 100).toFixed(2));
 
-                    const postCount = ${postCount};      // 서버에서 넘어온 값으로 치환
-                    const totalPosts = ${totalPosts};    // 서버에서 넘어온 값으로 치환
+                    // 도넛 차트 그리기
+                    const jobCatCtx = document.getElementById('topJobCat').getContext('2d');
+                    new Chart(jobCatCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: topJobCatLabels,
+                            datasets: [{
+                                data: percentages,
+                                backgroundColor: [
+                                    '#2f73d9', '#e0e0e0', '#e0e0e0', '#e0e0e0', '#e0e0e0'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const label = context.label || '';
+                                            const percent = context.dataset.data[context.dataIndex];
+                                            const count = topJobCatValues[context.dataIndex];
+                                            return percent + '% (' + count + '회)';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+
+            </div>
+            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element border-blue-2">
+                <%--                    <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>--%>
+                <%--                    <br>자격증이 언급된 공고<br>--%>
+                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br><br>
+                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
+                                                         groupingUsed="true"/>개</span>
+            </div>
+            <div class="postsWithCert w-1/4 p-5 analysis-element">
+                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br>
+                <canvas id="postsWithCert" width="200" height="250"></canvas>
+
+                <script th:inline="javascript">
+                    const postsCtx = document.getElementById('postsWithCert').getContext('2d');
+
+                    const postCount = ${postCount};
+                    const totalPosts = ${totalPosts};
 
                     const percent = totalPosts === 0 ? 0 : ((postCount / totalPosts) * 100).toFixed(1);
 
@@ -93,132 +119,134 @@
                         cutout: '70%',
                         responsive: false,
                         plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false }
+                            legend: {display: false},
+                            tooltip: {enabled: false}
                         }
                     };
 
-                    new Chart(ctx, {
+                    new Chart(postsCtx, {
                         type: 'doughnut',
                         data: data,
                         options: options,
                         plugins: [centerTextPlugin]
                     });
                 </script>
-                </div>
             </div>
+        </div>
 
-            <div class="analysis_2 p-5 flex h-80">
-                <div class="select_box flex flex-col w-1/3 p-5 mr-2 analysis-element rounded-3xl">
-                    <div class="select_box_title flex">
-                        <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
-                        <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
-                    </div>
-                    <hr class="my-1">
-                    <div class="flex overflow-y-hidden">
-                        <%--직무 카테고리--%>
-                        <ul class="jobCat_list w-1/2 flex flex-col overflow-y-scroll">
-                            <li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>
-                            <c:forEach var="jobCat" items="${jobCats }">
-                                <li class="p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
-                            </c:forEach>
-                        </ul>
-
-                        <%--직무 코드--%>
-                        <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
-<%--                            <c:if test="${jobCodes != null}">--%>
-<%--                                <c:forEach var="jobCode" items="${jobCodes }">--%>
-<%--                                    <li class="w-1/2 p-2 cursor-pointer text-sm"--%>
-<%--                                        data-id="${jobCode.id}">${jobCode.name}</li>--%>
-<%--                                </c:forEach>--%>
-<%--                            </c:if>--%>
-                        </ul>
-                    </div>
-
+        <div class="analysis_2 p-5 flex h-80">
+            <div class="select_box flex flex-col w-1/3 p-5 mr-2 analysis-element rounded-3xl">
+                <div class="select_box_title flex">
+                    <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
+                    <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
                 </div>
-                <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
-                    <div class="job_code_name p-2 font-bold">
-                        전체 직무 자격증 언급 TOP 10
-                    </div>
-                    <div class="chart_container"><canvas id="certChart" height="270" style="margin:20px;"></canvas></div>
-                    <script th:inline="javascript">
-                        /*<![CDATA[*/
-                        const labels = ${labels};
-                        const values = ${values};
-                        /*]]>*/
-                        const backgroundColors = values.map((_, idx) => idx === 0 ? '#2f73d9' : '#afafaf');
+                <hr class="my-1">
+                <div class="flex overflow-y-hidden">
+                    <%--직무 카테고리--%>
+                    <ul class="jobCat_list w-1/2 flex flex-col overflow-y-scroll">
+                        <li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>
+                        <c:forEach var="jobCat" items="${jobCats }">
+                            <li class="p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
+                        </c:forEach>
+                    </ul>
 
-                        console.log(labels);
-                        console.log(values);
-                        document.addEventListener('DOMContentLoaded', () => {
-                            const ctx = document.getElementById('certChart').getContext('2d');
+                    <%--직무 코드--%>
+                    <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
+                        <%--                            <c:if test="${jobCodes != null}">--%>
+                        <%--                                <c:forEach var="jobCode" items="${jobCodes }">--%>
+                        <%--                                    <li class="w-1/2 p-2 cursor-pointer text-sm"--%>
+                        <%--                                        data-id="${jobCode.id}">${jobCode.name}</li>--%>
+                        <%--                                </c:forEach>--%>
+                        <%--                            </c:if>--%>
+                    </ul>
+                </div>
 
-                            new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: labels,
-                                    datasets: [{
-                                        label: '언급 횟수',
-                                        data: values,
-                                        backgroundColor: backgroundColors,
-                                        barPercentage: 0.7
-                                    }]
+            </div>
+            <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
+                <div class="job_code_name p-2 font-bold">
+                    전체 직무 자격증 언급 TOP 10
+                </div>
+                <div class="chart_container">
+                    <canvas id="certChart" height="270" style="margin:20px;"></canvas>
+                </div>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    const topCertLabelsls = ${topCertLabels};
+                    const topCertValues = ${topCertValues};
+                    /*]]>*/
+                    const backgroundColors = topCertValues.map((_, idx) => idx === 0 ? '#2f73d9' : '#afafaf');
+
+                    console.log(topCertLabelsls);
+                    console.log(topCertValues);
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const ctx = document.getElementById('certChart').getContext('2d');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: topCertLabelsls,
+                                datasets: [{
+                                    label: '언급 횟수',
+                                    data: topCertValues,
+                                    backgroundColor: backgroundColors,
+                                    barPercentage: 0.7
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
                                 },
-                                options: {
-                                    indexAxis: 'y',
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: {
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            precision: 0
+                                        },
+                                        grid: {
                                             display: false
                                         }
                                     },
-                                    scales: {
-                                        x: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                precision: 0
-                                            },
-                                            grid: {
-                                                display: false
-                                            }
-                                        },
-                                        y: {
-                                            grid: {
-                                                display: false
-                                            }
+                                    y: {
+                                        grid: {
+                                            display: false
                                         }
                                     }
                                 }
-                            });
+                            }
                         });
-                    </script>
+                    });
+                </script>
 
-                </div>
             </div>
+        </div>
 
-            <div class="analysis_3 p-5 h-80">
-                <div class="totalCertCount">
+        <div class="analysis_3 p-5 h-80">
+            <div class="totalCertCount">
 
-                </div>
-                <div class="">
-
-                </div>
             </div>
+            <div class="">
 
-            <div class="p-5">
-                <div class=""></div>
             </div>
+        </div>
+
+        <div class="p-5">
+            <div class=""></div>
+        </div>
 
     </div>
 
-<%--    <div class="side hidden xl:block w-20 bg-grey-1"></div>--%>
+    <%--    <div class="side hidden xl:block w-20 bg-grey-1"></div>--%>
     <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 
 </div>
 <script>
     $(document).ready(function () {
 
-        const activeSideMenu =  $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a')
+        const activeSideMenu = $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a')
 
         $('.side_bar_left').addClass('active');
         $('.header').addClass('active');
@@ -335,7 +363,7 @@
 
                     if (!certs || certs.length === 0) {
                         $box.append('<div class="text-center p-4">' + jobCatName + " > " + jobCodeName +
-                                    '<br>' + '언급된 자격증이 없습니다.</div>');
+                            '<br>' + '언급된 자격증이 없습니다.</div>');
                         return;
                     }
 

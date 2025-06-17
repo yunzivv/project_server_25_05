@@ -17,4 +17,12 @@ public class JobCat {
 	private String name;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+
+	private int extra__jobCatMentionCount;
+
+	public JobCat(int id, String name, int extra__jobCatMentionCount) {
+		this.id = id;
+		this.name = name;
+		this.extra__jobCatMentionCount = extra__jobCatMentionCount;
+	}
 }
