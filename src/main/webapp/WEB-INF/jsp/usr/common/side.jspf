@@ -83,10 +83,31 @@
 	</div>
 </div>
 
-<div class="side_bar_right hidden">
-	<ul>
-		<li><a href="#">dd</a></li>
-		<li><a href="#">dd</a></li>
-		<li><a href="#">dd</a></li>
-	</ul>
+<div class="side_bar_right">
+	<div class="side_bar_right_menu_box bg-red-300">
+		<ul>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+			<li><a href="#">로그아웃</a></li>
+			<li><a href="#">문의사항</a></li>
+		</ul>
+
+	</div>
 </div>
+
+<script>
+	$(function () {
+		$(".hamburger_icon").click(function () {
+			$(".side_bar_right").toggleClass("active");
+			$(".side_bar_right_menu_box").toggleClass("active");
+		});
+		$(".side_bar_right").click(function () {
+			$(".hamburger_icon").removeClass("active");
+			$(".side_bar_right").removeClass("active");
+			$(".side_bar_right_menu_box").removeClass("active");
+		});
+		$(".side_bar_right_menu_box").click(function (e) {
+			return false;
+		});
+	});
+</script>
