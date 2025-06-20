@@ -35,9 +35,9 @@
 
     <!-- Choice 매핑 -->
     <resultMap id="extra__choices" type="com.example.project_server.vo.Choice">
-        <id property="id" column="id"/>
+        <id property="id" column="choiceId"/>
         <result property="label" column="label"/>
-        <result property="body" column="body"/>
+        <result property="body" column="choiceBody"/>
         <result property="isCorrect" column="isCorrect"/>
     </resultMap>
 
@@ -46,7 +46,7 @@
         <id property="id" column="id"/>
         <result property="subjectId" column="subjectId"/>
         <result property="questNum" column="questNum"/>
-        <result property="body" column="body"/>
+        <result property="body" column="questionBody"/>
         <result property="hasImage" column="hasImage"/>
         <result property="imgUrl" column="imgUrl"/>
 
@@ -58,13 +58,13 @@
             q.id,
             q.subjectId,
             q.questNum,
-            q.body,
+            q.body AS questionBody,
             q.hasImage,
             q.imgUrl,
-            c.id AS choice_id,
+            c.id AS choiceId,
             c.label,
-            c.body AS choice_body,
-            c.isCorrect AS is_correct
+            c.body AS choiceBody,
+            c.isCorrect AS isCorrect
         FROM questions q
                  JOIN (
             SELECT questId

@@ -59,22 +59,19 @@
                             <label for="modePast" class="toggle-btn">기출문제</label>
                         </div>
 
-                        <div class="questionCountSelectBox hidden">
+                        <div class="questionCountSelectBox invisible">
                             <label for="questionCount">문제 수 선택:</label>
                             <select id="questionCount" name="questionCount" required>
-                                <option value="" selected disabled>선택하세요</option>
+                                <option value="0" selected>선택하세요</option>
                                 <option value="20">20문제</option>
                                 <option value="50">50문제</option>
                                 <option value="100">100문제</option>
                             </select>
                         </div>
-                        <div class="examIdSelectBox hidden">
+                        <div class="examIdSelectBox invisible">
                             <label for="examId">기출 선택:</label>
                             <select id="examId" name="examId" required>
-                                <option value="" selected disabled>선택하세요</option>
-                                <c:forEach var="exam" items="exams">
-
-                                </c:forEach>
+<%--                                <option value="" selected disabled>선택하세요</option>--%>
                             </select>
                         </div>
                         <script>
@@ -82,11 +79,11 @@
                                 $('input[name="mode"]').change(function () {
                                     const selectedMode = $('input[name="mode"]:checked').val();
                                     if (selectedMode === 'random') {
-                                        $('.questionCountSelectBox').removeClass("hidden");
-                                        $('.examIdSelectBox').addClass("hidden");
+                                        $('.questionCountSelectBox').removeClass("invisible");
+                                        $('.examIdSelectBox').addClass("invisible");
                                     } else if (selectedMode === 'past') {
-                                        $('.examIdSelectBox').removeClass("hidden");
-                                        $('.questionCountSelectBox').addClass("hidden");
+                                        $('.examIdSelectBox').removeClass("invisible");
+                                        $('.questionCountSelectBox').addClass("invisible");
 
                                         const certId = $('#certSelect').val();
                                         if (!certId) {
@@ -106,7 +103,7 @@
                                                 if (exams.length === 0) {
                                                     $examSelect.append('<option value="">해당 자격증의 기출시험이 없습니다.</option>');
                                                 } else {
-                                                    $examSelect.append('<option value="selected disabled">기출시험 선택</option>');
+                                                    $examSelect.append('<option value="0" selected disabled>기출시험 선택</option>');
                                                     exams.forEach(function (exam) {
                                                         const $option = $('<option></option>');
                                                         $option.val(exam.id);
@@ -190,12 +187,12 @@
             const examId = document.getElementById("examId")?.value;
             if (mode === "random") {
 
-                if (!questionCount || questionCount <= 0) {
+                if (!questionCount || questionCount < 0) {
                     alert("문제 수를 입력해주세요.");
                     return;
                 }
             } else if (mode === "past") {
-                if (!examId || examId <= 0) {
+                if (!examId || examId < 0) {
                     alert("기출시험을 선택해주세요.");
                     return;
                 }

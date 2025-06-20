@@ -59,6 +59,7 @@ public class UsrExamController {
             System.out.println("UsrExamController showExam 실패");
         }
 
+        model.addAttribute("questions", questions);
         System.out.println(questions.size());
 
         return "/usr/cert/exam";

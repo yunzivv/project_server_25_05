@@ -6,15 +6,23 @@
 
 
 <script>
-	$(document).ready(function() {
+    $(document).ready(function () {
 
-		$('.header').addClass('active');
-		$('.nav_box > ul > li:nth-child(2) i').addClass('active');
+        $('.header').addClass('active');
+        $('.nav_box > ul > li:nth-child(2) i').addClass('active');
         $('.side_bar_left').addClass('active');
-		$('.side_bar_left > .community_sub_menu ').removeClass('hidden');
-	});
+        $('.side_bar_left > .community_sub_menu ').removeClass('hidden');
+    });
 </script>
 
-
+<div>
+${questions.size()} <br>
+    <c:forEach var="question" items="${questions}">
+        ${question.questNum}. ${question.body} (image? ${question.hasImage})
+        <c:forEach var="choice" items="${question.extra__choices}">
+            <div>${choice.label}) ${choice.body} ${choice.correct}</div>
+        </c:forEach>
+    </c:forEach>
+</div>
 
 <%@ include file="../common/foot.jspf" %>
