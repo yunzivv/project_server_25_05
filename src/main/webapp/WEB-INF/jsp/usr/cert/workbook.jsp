@@ -71,7 +71,7 @@
                         <div class="examIdSelectBox invisible">
                             <label for="examId">기출 선택:</label>
                             <select id="examId" name="examId" required>
-<%--                                <option value="" selected disabled>선택하세요</option>--%>
+                                <option value="0" selected></option>
                             </select>
                         </div>
                         <script>
