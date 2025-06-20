@@ -23,4 +23,72 @@
         ORDER BY C.name;
     </select>
 
+    <!-- Choice 매핑 -->
+    <resultMap id="extra__choices" type="com.example.project_server.vo.Choice">
+        <id property="id" column="id"/>
+        <result property="label" column="label"/>
+        <result property="body" column="body"/>
+        <result property="isCorrect" column="isCorrect"/>
+    </resultMap>
+
+    <!-- Question + Choice 1:N 매핑 -->
+    <resultMap id="QuestionWithChoicesMap" type="com.example.project_server.vo.Question">
+        <id property="id" column="id"/>
+        <result property="subjectId" column="subjectId"/>
+        <result property="questNum" column="questNum"/>
+        <result property="body" column="body"/>
+        <result property="hasImage" column="hasImage"/>
+        <result property="imgUrl" column="imgUrl"/>
+
+        <collection property="extra__choices" ofType="com.example.project_server.vo.Choice" resultMap="extra__choices"/>
+    </resultMap>
+
+    <select id="getQuestionsByExamId" resultMap="QuestionWithChoicesMap">
+        SELECT
+            q.id,
+            q.subjectId,
+            q.questNum,
+            q.body,
+            q.hasImage,
+            q.imgUrl,
+            c.id AS choice_id,
+            c.label,
+            c.body AS choice_body,
+            c.isCorrect AS is_correct
+        FROM questions q
+                 JOIN (
+            SELECT questId
+            FROM choices
+            GROUP BY questId
+            HAVING COUNT(*) = 4
+        ) valid_q ON q.id = valid_q.questId
+                 JOIN choices c ON q.id = c.questId
+        WHERE q.examId = #{examId}
+        ORDER BY q.questNum ASC, c.label ASC
+    </select>
+
+    <select id="getRandomQuestionsByCertId" resultMap="QuestionWithChoicesMap">
+        SELECT q.id,
+               q.subjectId,
+               q.questNum,
+               q.body,
+               q.hasImage,
+               q.imgUrl,
+               c.id        AS choice_id,
+               c.label,
+               c.body      AS choice_body,
+               c.isCorrect AS is_correct
+        FROM (SELECT q.*
+              FROM questions q
+                       JOIN (SELECT questId
+                             FROM choices
+                             GROUP BY questId
+                             HAVING COUNT(*) = 4) valid_q ON q.id = valid_q.questId
+              WHERE q.certId = #{certId}
+              ORDER BY RAND()
+              LIMIT #{questionCount}) q
+                 JOIN choices c ON q.id = c.questId
+        ORDER BY q.questNum ASC, c.label ASC;
+    </select>
+
 </mapper>

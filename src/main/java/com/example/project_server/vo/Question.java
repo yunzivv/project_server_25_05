@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +24,7 @@ public class Question {
 	private String imgUrl;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+
+	private List<Choice> extra__choices;
+
 }

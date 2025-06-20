@@ -4,11 +4,13 @@ import com.example.project_server.service.CertificateService;
 import com.example.project_server.service.ExamService;
 import com.example.project_server.vo.Certificate;
 import com.example.project_server.vo.Exam;
+import com.example.project_server.vo.Question;
 import com.example.project_server.vo.Rq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -34,13 +36,20 @@ public class UsrExamController {
     }
 
     @RequestMapping("/usr/workbook/showExam")
-    public String showExam (Model model, int certId, String mode, int questionCount) {
+    public String showExam (Model model, @RequestParam(defaultValue = "0")int examId, @RequestParam(defaultValue = "0")int certId,
+                            String mode, @RequestParam(defaultValue = "100")int questionCount) {
 
-        List<Certificate> examCertNames = examService.getExamCertNames();
-        List<Exam> exams = examService.getExams();
+        List<Question> questions;
+        if(mode.equals("random")) {
+            questions = examService.getRandomQuestionsByCertId(certId, questionCount);
+        }else if(mode.equals("past")) {
+            questions = examService.getQuestionsByExamId(examId);
+        }else {
+            questions = null;
+            System.out.println("UsrExamController showExam 실패");
+        }
 
-        model.addAttribute("examCertNames", examCertNames);
-        model.addAttribute("exams", exams);
+        System.out.println(questions.size());
 
         return "/usr/cert/exam";
     }

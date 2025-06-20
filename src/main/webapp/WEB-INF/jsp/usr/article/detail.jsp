@@ -134,9 +134,6 @@
 
 		<hr class="border-neutral-400"/>
 
-		<div class="content mt-2 p-4">
-			${article.body}
-		</div>
 		<div class="toast-ui-viewer content mt-2 p-4">
 			<script type="text/x-template">${article.body}</script>
 		</div>

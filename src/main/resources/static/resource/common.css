@@ -206,24 +206,25 @@ li i.active{
 	position: fixed;
 	height: 100%;
 	width: 100%;
-	z-index: 50;
+	z-index: -2;
 	top: 100px;
 	background-color: transparent;
-	transition: background-color .5s;
+	transition: background-color .5s, z-index 1s;
 }
 
 .side_bar_right.active{
 	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 10;
 }
 
 .side_bar_right_menu_box{
-	z-index: 50;
+	z-index: 11;
 	position: fixed;
 	height: 100%;
 	width: 400px;
 	left: auto;
 	right: -100%;
-	transition: right .5s;
+	transition: right .3s;
 }
 
 .side_bar_right_menu_box.active  {
@@ -247,7 +248,7 @@ li i.active{
 /*workbook*/
 .step {
 	position: absolute;
-	left: -100%;
+	right: -100%;
 	transition: all .3s;
 }
 
@@ -256,7 +257,7 @@ li i.active{
 }
 
 .step.end {
-	right: -100%;
+	left: -100%;
 }
 
 

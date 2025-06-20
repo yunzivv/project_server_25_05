@@ -48,7 +48,7 @@
 						<li><a href="../cert/library" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
 					</ul>
 				</li>
-				<li class="relative"><a class="block px-6 flex items-center h-full" href="../cert/workbook">WORK BOOK
+				<li class="relative"><a class="block px-6 flex items-center h-full" href="../workbook/showWorkbook">WORK BOOK
 					<i class="highlight fa-solid fa-circle"></i></a></li>
 				<li class="top_bar_first_menu relative">
 					<a class="block px-6 flex items-center h-full" href="../article/list?boardId=0">COMMUNITY

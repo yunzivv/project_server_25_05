@@ -12,6 +12,35 @@
 	});
 </script>
 
+<script type="text/javascript">
+	function articleWrite__submit(form) {
+
+		form.title.value = form.title.value.trim();
+		const board = $(form).find('#boardId').val();
+		console.log(board);
+		const body = $(form).find('.toast-ui-editor').data('data-toast-editor').getMarkdown().trim();
+
+		if(!board || board == 0){
+			alert('게시판을 선택해주세요.');
+			return false;
+		}
+
+		if (form.title.value.length == 0) {
+			alert('제목을 작성해주세요.');
+			return false;
+		}
+
+		if (body.length == 0) {
+			alert('내용을 작성해주세요.');
+			return false;
+		}
+
+		form.body.value = body;
+		form.submit();
+	}
+</script>
+
+
 <%
     String currentUrl = request.getRequestURI();
     String query = request.getQueryString();
@@ -23,7 +52,7 @@
 
 		<div class="font-semibold text-4xl text-neutral-800 px-1 py-6">Article Write</div>
 
-		<form action="doWrite" method="POST" class="w-full">
+		<form onsubmit="articleWrite__submit(this); return false;" action="doWrite" method="POST" class="w-full">
 			<div class="flex justify-center flex-col">
 				<div class="flex px-3">
 					<label for="boardId" class="flex mr-4">
@@ -42,9 +71,11 @@
 					</div>
 				</div>
 				<br>
-				<section>
-					<textarea class="resize-none w-full h-96 p-4 border border-neutral-500 border-solid rounded-lg" name="body"
-						placeholder="내용을 입력하세요"></textarea>
+				<section class="w-full p-4 rounded-lg">
+					<textarea class="resize-none hidden" name="body"></textarea>
+					<div class="toast-ui-editor h-96">
+						<script type="text/x-template"></script>
+					</div>
 				</section>
 				<br>
 			</div>
