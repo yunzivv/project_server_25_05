@@ -5,25 +5,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Certificate {
+public class Exam {
 
 	private int id;
-	private String name;
-	private int parentId;
-	private int isNational;
+	private int certId;
+	private String category;
+	private LocalDate examDate;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 
-	private int extra__certCount;
+	private String extra__certName;
 
-	public Certificate(int id, String name){
+	public Exam(int id, int certId, String extra__certName){
 		this.id = id;
-		this.name = name;
+		this.certId = certId;
+		this.extra__certName = extra__certName;
 	}
 }

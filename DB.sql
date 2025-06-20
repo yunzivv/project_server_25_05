@@ -118,13 +118,17 @@ CREATE TABLE exam (
 # 자격증 문제 테이블
 CREATE TABLE questions (
                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                           certId INT UNSIGNED NOT NULL,
-                           examId INT UNSIGNED NOT NULL,
+                           certId INT UNSIGNED,
+                           examId INT UNSIGNED,
+                           subjectId INT UNSIGNED,
                            questNum SMALLINT UNSIGNED NOT NULL,
-                           `body` TEXT NOT NULL,
-                           img TEXT,
+                           `body` TEXT,
+                           hasImage BOOLEAN DEFAULT FALSE,
+                           imgUrl VARCHAR(255),
                            regDate DATETIME NOT NULL,
-                           updateDate DATETIME NOT NULL
+                           updateDate DATETIME NOT NULL,
+
+                           INDEX idx_exam_subject (examId, subjectId)
 );
 
 # 자격증 시험 보기 테이블
@@ -132,17 +136,18 @@ CREATE TABLE choices (
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          questId INT UNSIGNED NOT NULL,
                          label TINYINT UNSIGNED NOT NULL,
-                         isText BOOLEAN NOT NULL,
                          `body` TEXT NOT NULL,
                          isCorrect BOOLEAN NOT NULL,
                          regDate DATETIME NOT NULL,
                          updateDate DATETIME NOT NULL
 );
 
+
 # 자격증 과목 테이블
 CREATE TABLE certSubject (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              certId INT UNSIGNED NOT NULL,
+                             subjectNum SMALLINT UNSIGNED,
                              `name` VARCHAR(50),
                              regDate DATETIME NOT NULL,
                              updateDate DATETIME NOT NULL

@@ -11,19 +11,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Certificate {
-
+public class Question {
+	
 	private int id;
-	private String name;
-	private int parentId;
-	private int isNational;
+	private int certId;
+	private int examId;
+	private int subjectId;
+	private int questNum;
+	private String body;
+	private boolean hasImage;
+	private String imgUrl;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
-
-	private int extra__certCount;
-
-	public Certificate(int id, String name){
-		this.id = id;
-		this.name = name;
-	}
 }

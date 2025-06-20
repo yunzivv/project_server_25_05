@@ -94,10 +94,7 @@ public class UsrCertificateController {
 		return "/usr/cert/library";
 	}
 
-	@RequestMapping("/usr/cert/workbook")
-	public String showWorkbook() {
-		return "/usr/cert/workbook";
-	}
+
 
 	@RequestMapping("/usr/cert/doAdd")
 	@ResponseBody

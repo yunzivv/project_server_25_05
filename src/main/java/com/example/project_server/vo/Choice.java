@@ -11,19 +11,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Certificate {
+public class Choice {
 
 	private int id;
-	private String name;
-	private int parentId;
-	private int isNational;
+	private int questId;
+	private int label; // 선택지 번호
+	private String body;
+	private boolean isCorrect;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
-
-	private int extra__certCount;
-
-	public Certificate(int id, String name){
-		this.id = id;
-		this.name = name;
-	}
 }

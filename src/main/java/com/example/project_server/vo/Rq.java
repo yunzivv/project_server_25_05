@@ -52,6 +52,11 @@ public class Rq {
 		resp.getWriter().close();
 	}
 
+	public void printReplace(String resultCode, String msg, String replaceUri) throws IOException {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(resultCode, msg, replaceUri));
+	}
+
 	public void printConfirmAndRedirect(String msg, String redirectUrl) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
 		println("<script>");
@@ -108,6 +113,7 @@ public class Rq {
 
 		return currentUri;
 	}
+
 	public String getEncodedCurrentUri() {
 		return Ut.getEncodedCurrentUri(getCurrentUri());
 	}

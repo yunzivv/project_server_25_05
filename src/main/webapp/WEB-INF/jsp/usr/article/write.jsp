@@ -12,6 +12,13 @@
 	});
 </script>
 
+<%
+    String currentUrl = request.getRequestURI();
+    String query = request.getQueryString();
+    String fullUrl = currentUrl + (query != null ? "?" + query : "");
+    String encodedUrl = java.net.URLEncoder.encode(fullUrl, "UTF-8");
+%>
+
 	<div class="container mx-auto mt-8 p-6 w-4/5 border border-solid border-neutral-300 rounded-xl overflow-hidden">
 
 		<div class="font-semibold text-4xl text-neutral-800 px-1 py-6">Article Write</div>

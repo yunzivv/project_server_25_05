@@ -71,7 +71,8 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
+	public String doLogin(HttpServletRequest req, String loginId, String loginPw,
+						  @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
@@ -81,7 +82,6 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if(member == null) return Ut.jsHistoryBack("F-3", "존재하지 않는 아이디입니다.");
-		System.out.println(Ut.sha256(loginPw));
 
 		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다."));
@@ -89,7 +89,7 @@ public class UsrMemberController {
 
 		rq.login(member);
 
-		return Ut.jsHistoryBack("S-1", Ut.f("%s님 환영합니다", member.getNickName()));
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), afterLoginUri);
 	}
 
 	@RequestMapping("/usr/member/doLogout")

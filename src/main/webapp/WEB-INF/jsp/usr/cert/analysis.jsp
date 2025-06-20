@@ -10,7 +10,7 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 4rem;">
+    <div class="flex flex-col flex-grow px-12 bg-red-300">
 
         <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
@@ -163,9 +163,10 @@
 
             </div>
             <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
-                <div class="job_code_name p-2 font-bold">
+                <div class="job_code_name font-bold">
                     전체 직무 자격증 언급 TOP 10
                 </div>
+                <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
                 <div class="chart_container">
                     <canvas id="certChart" height="270" style="margin:20px;"></canvas>
                 </div>

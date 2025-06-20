@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project_server.repository.ExamRepository">
+
+    <select id="getExams"
+            resultType="com.example.project_server.vo.Exam">
+        SELECT C.name AS extra__certName, E.*
+        FROM exam E
+        INNER JOIN certificate C
+        ON E.certId = C.id
+        ORDER BY C.name;
+    </select>
+
+    <select id="getExamCertNames"
+            resultType="com.example.project_server.vo.Certificate">
+        SELECT DISTINCT C.name AS `name`, C.id AS id
+        FROM certificate C
+                 JOIN exam E
+                      ON C.id = E.certId
+        ORDER BY C.name;
+    </select>
+
+</mapper>

@@ -16,7 +16,7 @@
 
 
             <div id="memberInfo" class="bg-red-300">
-
+<%--                사진 업로드--%>
                 <div class="updateProfile">
 
                     <a href="modify" class="block p-3 text-base flex items-center
