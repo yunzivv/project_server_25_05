@@ -99,10 +99,18 @@
         </where>
     </select>
 
-    <select id="getCertByName" parameterType="String">
+    <select id="getCertByName" parameterType="String"
+            resultType="com.example.project_server.vo.Certificate">
         SELECT *
         FROM certificate
         WHERE `name` = #{certName}
+    </select>
+
+    <select id="getCertById" parameterType="int"
+            resultType="com.example.project_server.vo.Certificate">
+        SELECT *
+        FROM certificate
+        WHERE id = #{certId}
     </select>
 
     <insert id="doAdd" parameterType="map">

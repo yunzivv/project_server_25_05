@@ -39,4 +39,6 @@ public interface CertificateRepository {
     public List<Certificate> getAutoCompleteCerts(String keyword);
 
     public List<JobCat> getJobCatMentionRank();
+
+    public Certificate getCertById(int certId);
 }

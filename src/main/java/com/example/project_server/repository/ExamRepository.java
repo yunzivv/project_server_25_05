@@ -18,4 +18,6 @@ public interface ExamRepository {
     public List<Question> getQuestionsByExamId(int examId);
 
     public List<Question> getRandomQuestionsByCertId(int certId, int questionCount);
+
+    public List<Exam> getExamByCertId(int certId);
 }

@@ -23,6 +23,16 @@
         ORDER BY C.name;
     </select>
 
+    <select id="getExamByCertId"
+            resultType="com.example.project_server.vo.Exam">
+        SELECT E.*, C.name AS extra__certName
+        FROM exam E
+                 JOIN certificate C
+                      ON C.id = E.certId
+        WHERE E.certId = #{certId}
+        ORDER BY E.examDate DESC;
+    </select>
+
     <!-- Choice 매핑 -->
     <resultMap id="extra__choices" type="com.example.project_server.vo.Choice">
         <id property="id" column="id"/>

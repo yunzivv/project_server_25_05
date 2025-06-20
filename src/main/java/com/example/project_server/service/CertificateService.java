@@ -85,4 +85,8 @@ public class CertificateService {
 	public List<JobCat> getJobCatMentionRank() {
 		return certificateRepository.getJobCatMentionRank();
 	}
+
+	public Certificate getCertById(int certId) {
+		return certificateRepository.getCertById(certId);
+	}
 }

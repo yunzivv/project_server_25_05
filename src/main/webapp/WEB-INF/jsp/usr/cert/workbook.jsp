@@ -38,9 +38,9 @@
                     <div id="step2" class="step">
                         자격증과 과목을 선택하세요
                         <div>
-<%--                            <input type="hidden" name="certId" id="certIdHidden">--%>
-<%--                            <div id="autocompleteBox"--%>
-<%--                                 style="border: 1px solid #ccc; display: none; position: absolute; background: white;"></div>--%>
+                            <%--                            <input type="hidden" name="certId" id="certIdHidden">--%>
+                            <%--                            <div id="autocompleteBox"--%>
+                            <%--                                 style="border: 1px solid #ccc; display: none; position: absolute; background: white;"></div>--%>
                             <select id="certSelect" name="certId" required>
                                 <c:forEach var="cert" items="${examCertNames}">
                                     <option value="${cert.id}">${cert.name}</option>
@@ -50,7 +50,7 @@
                         <button type="button" onclick="nextStep()">다음</button>
                     </div>
                     <div id="step3" class="step">
-                        문제풀이 방식과 풀 문제 개수를 선택하세요
+                        문제풀이 방식을 선택하세요
                         <div class="mode-toggle">
                             <input type="radio" name="mode" id="modeRandom" value="random" hidden>
                             <label for="modeRandom" class="toggle-btn">랜덤</label>
@@ -59,13 +59,71 @@
                             <label for="modePast" class="toggle-btn">기출문제</label>
                         </div>
 
-                        <label for="questionCount">문제 수 선택:</label>
-                        <select id="questionCount" name="questionCount" required>
-                            <option value="" selected disabled>선택하세요</option>
-                            <option value="20">20문제</option>
-                            <option value="50">50문제</option>
-                            <option value="100">100문제</option>
-                        </select>
+                        <div class="questionCountSelectBox hidden">
+                            <label for="questionCount">문제 수 선택:</label>
+                            <select id="questionCount" name="questionCount" required>
+                                <option value="" selected disabled>선택하세요</option>
+                                <option value="20">20문제</option>
+                                <option value="50">50문제</option>
+                                <option value="100">100문제</option>
+                            </select>
+                        </div>
+                        <div class="examIdSelectBox hidden">
+                            <label for="examId">기출 선택:</label>
+                            <select id="examId" name="examId" required>
+                                <option value="" selected disabled>선택하세요</option>
+                                <c:forEach var="exam" items="exams">
+
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <script>
+                            $(function () {
+                                $('input[name="mode"]').change(function () {
+                                    const selectedMode = $('input[name="mode"]:checked').val();
+                                    if (selectedMode === 'random') {
+                                        $('.questionCountSelectBox').removeClass("hidden");
+                                        $('.examIdSelectBox').addClass("hidden");
+                                    } else if (selectedMode === 'past') {
+                                        $('.examIdSelectBox').removeClass("hidden");
+                                        $('.questionCountSelectBox').addClass("hidden");
+
+                                        const certId = $('#certSelect').val();
+                                        if (!certId) {
+                                            alert("먼저 자격증을 선택해주세요.");
+                                            return;
+                                        }
+
+                                        // AJAX 요청으로 기출시험 목록 불러오기
+                                        $.ajax({
+                                            url: '/usr/api/examByCertId',
+                                            method: 'GET',
+                                            data: {certId: certId},
+                                            success: function (data) {
+                                                const exams = data.data1;
+                                                const $examSelect = $('#examId');
+                                                $examSelect.empty();
+                                                if (exams.length === 0) {
+                                                    $examSelect.append('<option value="">해당 자격증의 기출시험이 없습니다.</option>');
+                                                } else {
+                                                    $examSelect.append('<option value="selected disabled">기출시험 선택</option>');
+                                                    exams.forEach(function (exam) {
+                                                        const $option = $('<option></option>');
+                                                        $option.val(exam.id);
+                                                        $option.text(exam.extra__certName + ' ' + exam.examDate);
+                                                        $examSelect.append($option);
+                                                    });
+                                                }
+                                            },
+                                            error: function () {
+                                                alert("기출시험 목록을 불러오는 데 실패했습니다.");
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        </script>
+
 
                         <button type="button" onclick="nextStep()">다음</button>
                     </div>
@@ -114,7 +172,6 @@
 
         if (currentStep === 1) {
             const cert = document.getElementById("certSelect").value;
-            console.log(cert)
             if (!cert) {
                 alert("자격증과 과목을 선택해주세요.");
                 return;
@@ -122,18 +179,26 @@
         }
 
         if (currentStep === 2) {
-            const mode = document.querySelector("input[name='mode']:checked");
-            console.log(mode.value);
-            if (!mode) {
+            const modeElement = document.querySelector("input[name='mode']:checked");
+            const mode = modeElement.value;
+            if (!modeElement) {
                 alert("풀이 방식을 선택해주세요.");
                 return;
             }
 
-            const count = document.getElementById("questionCount")?.value;
-            console.log(count);
-            if (!count || count <= 0) {
-                alert("문제 수를 입력해주세요.");
-                return;
+            const questionCount = document.getElementById("questionCount")?.value;
+            const examId = document.getElementById("examId")?.value;
+            if (mode === "random") {
+
+                if (!questionCount || questionCount <= 0) {
+                    alert("문제 수를 입력해주세요.");
+                    return;
+                }
+            } else if (mode === "past") {
+                if (!examId || examId <= 0) {
+                    alert("기출시험을 선택해주세요.");
+                    return;
+                }
             }
         }
 
@@ -143,7 +208,6 @@
     }
 
 </script>
-
 
 
 <%@ include file="../common/foot.jspf" %>

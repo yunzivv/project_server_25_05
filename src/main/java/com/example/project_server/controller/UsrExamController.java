@@ -2,15 +2,14 @@ package com.example.project_server.controller;
 
 import com.example.project_server.service.CertificateService;
 import com.example.project_server.service.ExamService;
-import com.example.project_server.vo.Certificate;
-import com.example.project_server.vo.Exam;
-import com.example.project_server.vo.Question;
-import com.example.project_server.vo.Rq;
+import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -23,6 +22,9 @@ public class UsrExamController {
     @Autowired
     private ExamService examService;
 
+    @Autowired
+    private CertificateService certificateService;
+
     @RequestMapping("/usr/workbook/showWorkbook")
     public String showWorkbook(Model model) {
 
@@ -33,6 +35,14 @@ public class UsrExamController {
         model.addAttribute("exams", exams);
 
         return "/usr/cert/workbook";
+    }
+
+    @GetMapping("/usr/api/examByCertId")
+    @ResponseBody
+    public ResultData getExamByCertId(int certId) {
+
+        Certificate certificate = certificateService.getCertById(certId);
+        return examService.getExamByCertId(certificate);
     }
 
     @RequestMapping("/usr/workbook/showExam")
@@ -53,4 +63,6 @@ public class UsrExamController {
 
         return "/usr/cert/exam";
     }
+
+
 }
