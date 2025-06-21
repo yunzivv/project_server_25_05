@@ -251,8 +251,8 @@ li i.active{
 /*workbook*/
 .step {
 	position: absolute;
-	left: 100%;
-	transition: all .5s;
+	left: 120%;
+	transition: all .3s;
 }
 
 .step.active {

@@ -81,29 +81,36 @@
 
     <select id="getRandomQuestionsByCertId" resultMap="QuestionWithChoicesMap">
         SELECT Q.id,
-               Q.questNum,
-               Q.body      AS questionBody,
-               Q.hasImage,
-               Q.imgUrl,
-               CS.subjectNum     AS extra__subjectNum,
-               CS.name     AS extra__subjectName,
-               C.id        AS choiceId,
-               C.label,
-               C.body      AS choiceBody,
-               C.isCorrect AS isCorrect
-        FROM (SELECT Q.*
-              FROM questions Q
-                       JOIN (SELECT questId
-                             FROM choices
-                             GROUP BY questId
-                             HAVING COUNT(*) = 4) valid_Q ON Q.ID = valid_Q.questId
-              WHERE Q.certId = #{certId}
-              ORDER BY RAND()
-              LIMIT #{questionCount}) Q
-                 JOIN choices C ON Q.ID = C.questId
-                 JOIN certSubject CS ON Q.subjectId = CS.ID
+        Q.questNum,
+        Q.body      AS questionBody,
+        Q.hasImage,
+        Q.imgUrl,
+        CS.subjectNum     AS extra__subjectNum,
+        CS.name     AS extra__subjectName,
+        C.id        AS choiceId,
+        C.label,
+        C.body      AS choiceBody,
+        C.isCorrect AS isCorrect
+        FROM (
+        SELECT Q.*
+        FROM questions Q
+        JOIN (
+        SELECT questId
+        FROM choices
+        GROUP BY questId
+        HAVING COUNT(*) = 4
+        ) valid_Q ON Q.ID = valid_Q.questId
+        WHERE Q.certId = #{certId}
+        ORDER BY RAND()
+        <if test="questionCount != 0">
+            LIMIT #{questionCount}
+        </if>
+        ) Q
+        JOIN choices C ON Q.ID = C.questId
+        JOIN certSubject CS ON Q.subjectId = CS.ID
         ORDER BY Q.questNum, C.label
     </select>
+
 
 
 </mapper>

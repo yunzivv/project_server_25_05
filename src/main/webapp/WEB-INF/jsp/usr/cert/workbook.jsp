@@ -27,15 +27,17 @@
     <div class="flex-grow bg-red-300" style="height: calc(100vh - 100px);">
 
         <div class="bg-red-200 mx-auto my-10 w-9/12" style="height: 680px;">
-            <div id="examInputForm" class="overflow-hidden h-full">
-                <form action="showExam" class="relative bg-blue-300">
+            <div id="examInputForm" class="overflow-hidden h-full p-6 rounded-xl bg-red-100">
+                <form action="showExam" class="relative">
 
-                    <div id="step1" class="step active">
-                        자격증 선택하고 문제를 풀 수 있습니다.
+                    <div id="step1" class="step active font-bold text-xl">
+                        <div class="m-2">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
+                        <div class="m-2">준비된 문제 유형(랜덤 or 기출) 중 하나를 선택하고 학습을 시작해보세요.</div>
+                        <div class="m-2">문제를 풀면 즉시 정답 여부를 확인할 수 있습니다!</div>
                         <button type="button" onclick="nextStep()">다음</button>
                     </div>
                     <div id="step2" class="step">
-                        자격증과 과목을 선택하세요
+                        자격증을 선택하고 문제 풀이를 시작하세요.
                         <div>
                             <%--                            <input type="hidden" name="certId" id="certIdHidden">--%>
                             <%--                            <div id="autocompleteBox"--%>
@@ -49,7 +51,7 @@
                         <button type="button" onclick="nextStep()">다음</button>
                     </div>
                     <div id="step3" class="step">
-                        문제풀이 방식을 선택하세요
+                        랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.
                         <div class="mode-toggle">
                             <input type="radio" name="mode" id="modeRandom" value="random" hidden>
                             <label for="modeRandom" class="toggle-btn">랜덤</label>
@@ -61,10 +63,11 @@
                         <div class="questionCountSelectBox invisible">
                             <label for="questionCount">문제 수 선택:</label>
                             <select id="questionCount" name="questionCount" required>
-                                <option value="0" selected>선택하세요</option>
+                                <option value="0" selected disabled>선택하세요</option>
                                 <option value="20">20문제</option>
                                 <option value="50">50문제</option>
                                 <option value="100">100문제</option>
+                                <option value="0">모든 문제 풀기</option>
                             </select>
                         </div>
                         <div class="examIdSelectBox invisible">

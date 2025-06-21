@@ -45,8 +45,8 @@
                             <div class="flex-grow bg-white rounded-xl px-4 py-2">${question.extra__subjectNum}과목: ${question.extra__subjectName}</div>
                             <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
                         </div>
-<div class="text-right text-sm px-4 pt-2 text-gray-500">
-                                ${status.index + 1} / ${questions.size()}
+                        <div class="text-right text-sm px-4 pt-2 text-gray-500">
+                                정답률: <span class="answerCorrectRate">0</span>% &nbsp;&nbsp;&nbsp; ${status.index + 1} / ${questions.size()}
                         </div>
                         <!-- 문제 내용 -->
                         <div class="px-10">
@@ -149,11 +149,16 @@
 </script>
 
 <script>
+    let totalAnswered = 0;
+    let correctCount = 0;
+
+    // 정답 출력
     function checkAnswer(el) {
         const isCorrect = el.getAttribute("data-correct") === "true";
 
         if (isCorrect) {
             el.classList.add("bg-green-200");
+            correctCount++;
         } else {
             el.classList.add("bg-red-200");
         }
@@ -164,6 +169,14 @@
             option.onclick = null;
             option.classList.add("pointer-events-none");
         });
+        totalAnswered++;
+        updateAccuracy(correctCount, totalAnswered);
+    }
+
+    // 정답률
+    function updateAccuracy(correctCount, totalAnswered) {
+        const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
+        $(".answerCorrectRate").text(accuracy);
     }
 </script>
 
