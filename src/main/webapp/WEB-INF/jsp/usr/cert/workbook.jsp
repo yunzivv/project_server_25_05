@@ -24,9 +24,9 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex-grow px-12 bg-red-300">
+    <div class="flex-grow bg-red-300" style="height: calc(100vh - 100px);">
 
-        <div class="bg-red-200 w-9/12" style="height: 680px;">
+        <div class="bg-red-200 mx-auto my-20 w-9/12" style="height: 680px;">
             <div>a</div>
             <div id="examInputForm" class="overflow-hidden h-full">
                 <form action="showExam" class="relative bg-blue-300">

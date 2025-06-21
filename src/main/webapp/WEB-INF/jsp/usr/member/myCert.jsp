@@ -16,6 +16,7 @@
         <%--        <span><a href="../member/login" class="text-blue-1">로그인</a>--%>
         <%--        하여 자격증을 쉽게 관리할 수 있습니다!</span>--%>
         <%--    </div>--%>
+
     </c:if>
     <c:if test="${not empty member}">
         <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 3rem;">

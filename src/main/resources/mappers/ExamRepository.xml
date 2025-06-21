@@ -49,6 +49,7 @@
         <result property="body" column="questionBody"/>
         <result property="hasImage" column="hasImage"/>
         <result property="imgUrl" column="imgUrl"/>
+        <result property="extra__subjectNum" column="extra__subjectNum"/>
         <result property="extra__subjectName" column="extra__subjectName"/>
 
         <collection property="extra__choices" ofType="com.example.project_server.vo.Choice" resultMap="extra__choices"/>
@@ -60,6 +61,7 @@
                Q.body      AS questionBody,
                Q.hasImage,
                Q.imgUrl,
+               CS.subjectNum     AS extra__subjectNum,
                CS.name     AS extra__subjectName,
                C.id        AS choiceId,
                C.label,
@@ -83,6 +85,7 @@
                Q.body      AS questionBody,
                Q.hasImage,
                Q.imgUrl,
+               CS.subjectNum     AS extra__subjectNum,
                CS.name     AS extra__subjectName,
                C.id        AS choiceId,
                C.label,

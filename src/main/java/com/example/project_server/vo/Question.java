@@ -25,6 +25,7 @@ public class Question {
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 
+	private int extra__subjectNum;
 	private String extra__subjectName;
 	private List<Choice> extra__choices;
 

@@ -59,8 +59,10 @@ public class UsrExamController {
             System.out.println("UsrExamController showExam 실패");
         }
 
+        Certificate certificate = certificateService.getCertById(certId);
+
         model.addAttribute("questions", questions);
-        System.out.println(questions.size());
+        model.addAttribute("certificate", certificate);
 
         return "/usr/cert/exam";
     }
