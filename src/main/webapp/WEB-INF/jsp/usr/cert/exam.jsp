@@ -9,10 +9,10 @@
         <div class="question-container flex flex-col w-4/5 h-5/6 bg-grey-2 pt-2 rounded-xl overflow-hidden">
 
             <!-- examHead: 고정 -->
-            <div class="examHead flex">
-                <i class="fa-solid fa-circle text-red-500 ml-4 mt-3 "></i>
-                <i class="fa-solid fa-circle text-yellow-400 mx-4 mt-3 "></i>
-                <i class="fa-solid fa-circle text-green-500 mt-3 "></i>
+            <div class="examHead flex items-center">
+                <button onclick="confirmExit()"><i class="fa-solid fa-circle text-red-500 ml-4"></i></button>
+                <i class="fa-solid fa-circle text-yellow-400 mx-4"></i>
+                <i class="fa-solid fa-circle text-green-500"></i>
 
                 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <g transform="translate(40,0) scale(-1,1)">
@@ -34,34 +34,41 @@
             <div class="bg-grey-1 flex-grow">
                 <c:forEach var="question" items="${questions}" varStatus="status">
                     <div class="examBody h-5/6 question-box ${!status.first ? 'hidden' : ''}">
-                        <div class="text-right text-sm px-4 pt-2 text-gray-500">
-                                ${status.index + 1} / ${questions.size()}
-                        </div>
+
                         <!-- 상단 바 -->
                         <div class="bg-grey-1 p-2 flex items-center">
-                            <button onclick="showPrevQuestion()"><i class="fa-solid fa-arrow-left ml-4 font-bold text-lg"></i></button>
-                            <button onclick="showNextQuestion()"><i class="fa-solid fa-arrow-right mx-4 font-bold text-lg"></i></button>
+                            <button onclick="showPrevQuestion()"><i
+                                    class="fa-solid fa-arrow-left ml-4 font-bold text-lg"></i></button>
+                            <button onclick="showNextQuestion()"><i
+                                    class="fa-solid fa-arrow-right mx-4 font-bold text-lg"></i></button>
                             <i class="fa-solid fa-rotate-right mr-4 font-bold text-lg"></i>
                             <div class="flex-grow bg-white rounded-xl px-4 py-2">${question.extra__subjectNum}과목: ${question.extra__subjectName}</div>
                             <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
                         </div>
-
+<div class="text-right text-sm px-4 pt-2 text-gray-500">
+                                ${status.index + 1} / ${questions.size()}
+                        </div>
                         <!-- 문제 내용 -->
-                        <div class="px-10 py-3">
-                            <div class="questionBody mb-4">
+                        <div class="px-10">
+                            <div class="questionBody m-5">
                                 <div class="text-lg font-bold">${status.index + 1}. ${question.body}</div>
 
                                 <c:if test="${question.hasImage}">
-                                    <img src="${question.imgUrl}" alt="문제 이미지" class="mt-2"
-                                         style="height: 200px; object-fit: contain;"/>
+                                    <div class="ml-3"><img src="${question.imgUrl}" alt="문제 이미지" class="mt-2"
+                                                           style="height: 200px; object-fit: contain;"/></div>
                                 </c:if>
                             </div>
-                            <div class="choiceBody">
+                            <div class="choiceBody ml-6">
                                 <c:forEach var="choice" items="${question.extra__choices}">
-                                    <div class="mt-1 choice-option cursor-pointer p-2 rounded hover:bg-gray-100"
+                                    <div class="mt-1 choice-option cursor-pointer px-3 py-1 rounded hover:bg-gray-100"
                                          data-correct="${choice.correct}" data-label="${choice.label}"
                                          onclick="checkAnswer(this)">
-                                            ${choice.label}) ${choice.body}
+                                        <c:choose>
+                                            <c:when test="${choice.label == 1}">①</c:when>
+                                            <c:when test="${choice.label == 2}">②</c:when>
+                                            <c:when test="${choice.label == 3}">③</c:when>
+                                            <c:when test="${choice.label == 4}">④</c:when>
+                                        </c:choose> ${choice.body}
                                     </div>
                                 </c:forEach>
                             </div>
@@ -75,12 +82,24 @@
                     <button id="nextButton" onclick="showNextQuestion()"
                             class="px-4 py-2 bg-gray-400 text-white rounded">다음
                     </button>
+                    <button onclick="confirmExit()"
+                            class="px-4 py-2 bg-red-400 text-white rounded">종료
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
+
+<%--시험 종료--%>
+<script>
+    function confirmExit() {
+        if (confirm("시험을 종료하시겠습니까?")) {
+            window.location.href = "/usr/workbook/showWorkbook";
+        }
+    }
+</script>
 
 <!-- 문제 넘기기 -->
 <script>
@@ -94,13 +113,11 @@
             currentIndex++;
             boxes[currentIndex].classList.remove("hidden");
 
-            // 마지막 문제에 도달했는지 확인
             if (currentIndex === boxes.length - 1) {
                 nextBtn.textContent = "제출";
                 nextBtn.onclick = submitExam;
             }
         } else {
-            // 혹시 누군가가 버튼을 조작했을 경우 안전망
             submitExam();
         }
     }

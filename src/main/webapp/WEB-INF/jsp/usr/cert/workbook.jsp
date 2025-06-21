@@ -10,10 +10,10 @@
         $('.header').addClass('active');
         $('.nav_box > ul > li:nth-child(2) i').addClass('active');
 
-        $('.side_bar_left').addClass('active');
-        $('.side_bar_left > .workbook_sub_menu ').removeClass('hidden');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a').addClass('active');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a > i').addClass('active');
+        // $('.side_bar_left').addClass('active');
+        // $('.side_bar_left > .workbook_sub_menu ').removeClass('hidden');
+        // $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a').addClass('active');
+        // $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a > i').addClass('active');
     });
 
 </script>
@@ -26,8 +26,7 @@
 
     <div class="flex-grow bg-red-300" style="height: calc(100vh - 100px);">
 
-        <div class="bg-red-200 mx-auto my-20 w-9/12" style="height: 680px;">
-            <div>a</div>
+        <div class="bg-red-200 mx-auto my-10 w-9/12" style="height: 680px;">
             <div id="examInputForm" class="overflow-hidden h-full">
                 <form action="showExam" class="relative bg-blue-300">
 
