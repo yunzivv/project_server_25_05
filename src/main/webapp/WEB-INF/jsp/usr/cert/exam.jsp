@@ -33,7 +33,9 @@
             <!-- 문제 영역 -->
             <div class="bg-grey-1 flex-grow">
                 <c:forEach var="question" items="${questions}" varStatus="status">
-                    <div class="examBody h-5/6 question-box ${!status.first ? 'hidden' : ''}">
+                    <div class="examBody h-5/6 question-box ${!status.first ? 'hidden' : ''}"
+                         data-subject-num="${question.extra__subjectNum}"
+                         data-subject-name="${question.extra__subjectName}">
 
                         <!-- 상단 바 -->
                         <div class="bg-grey-1 p-2 flex items-center">
@@ -46,7 +48,8 @@
                             <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
                         </div>
                         <div class="text-right text-sm px-4 pt-2 text-gray-500">
-                                정답률: <span class="answerCorrectRate">0</span>% &nbsp;&nbsp;&nbsp; ${status.index + 1} / ${questions.size()}
+                            정답률: <span class="answerCorrectRate">0</span>% &nbsp;&nbsp;&nbsp; ${status.index + 1}
+                            / ${questions.size()}
                         </div>
                         <!-- 문제 내용 -->
                         <div class="px-10">
@@ -77,14 +80,57 @@
                     </div>
                 </c:forEach>
 
-                <div class="h-1/6 py-4 px-12 text-right">
-                    <button onclick="showPrevQuestion()" class="px-4 py-2 bg-gray-400 text-white rounded">이전</button>
+                <div class="h-1/6 py-8 px-12 flex items-end">
+                    <button onclick="confirmExit()" class="px-4 py-2 bg-red-400 text-white rounded">종료</button>
+                    <div class="flex-grow"></div>
+                    <button onclick="showPrevQuestion()" class="px-4 py-2 bg-gray-400 mx-4 text-white rounded">이전
+                    </button>
                     <button id="nextButton" onclick="showNextQuestion()"
                             class="px-4 py-2 bg-gray-400 text-white rounded">다음
                     </button>
-                    <button onclick="confirmExit()"
-                            class="px-4 py-2 bg-red-400 text-white rounded">종료
-                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="result-container hidden flex flex-col w-4/5 h-5/6 bg-grey-2 pt-2 rounded-xl overflow-hidden">
+            <!-- examHead: 고정 -->
+            <div class="examHead flex items-center">
+                <button><i class="fa-solid fa-circle text-red-500 ml-4"></i></button>
+                <i class="fa-solid fa-circle text-yellow-400 mx-4"></i>
+                <i class="fa-solid fa-circle text-green-500"></i>
+
+                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(40,0) scale(-1,1)">
+                        <path d="M0,0 H40 V40 H0 V0 ZM0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
+                              fill="#d9d9d9" fill-rule="evenodd"/>
+                    </g>
+                </svg>
+
+                <div class=" bg-grey-1 py-2 pl-2 pr-12 font-bold">${certificate.name}</div>
+
+                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,0 H40 V40 H0 V0 Z M0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
+                          fill="#d9d9d9" fill-rule="evenodd"/>
+                </svg>
+                <div class="flex-grow"></div>
+            </div>
+            <div class="bg-grey-1 flex-grow">
+
+                <div class="examBody h-5/6 question-box">
+
+                    <!-- 상단 바 -->
+                    <div class="bg-grey-1 p-2 flex items-center">
+                        <button><i
+                                class="fa-solid fa-arrow-left ml-4 font-bold text-lg"></i></button>
+                        <button><i
+                                class="fa-solid fa-arrow-right mx-4 font-bold text-lg"></i></button>
+                        <i class="fa-solid fa-rotate-right mr-4 font-bold text-lg"></i>
+                        <div class="flex-grow bg-white rounded-xl px-4 py-2">시험 결과</div>
+                        <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
+                    </div>
+                    <div class="px-4 pt-2 text-gray-500" id="result-summary">
+                        <%--                            시험 결과 출력--%>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -92,20 +138,21 @@
 </div>
 </div>
 
-<%--시험 종료--%>
+
 <script>
+    <%--시험 종료--%>
+
     function confirmExit() {
         if (confirm("시험을 종료하시겠습니까?")) {
-            window.location.href = "/usr/workbook/showWorkbook";
+            // 결과화면 출력
+            submitExam();
         }
     }
-</script>
 
-<!-- 문제 넘기기 -->
-<script>
+    <!-- 문제 넘기기 -->
     let currentIndex = 0;
-    const boxes = document.querySelectorAll(".question-box");
-    const nextBtn = document.getElementById("nextButton");
+    const boxes = $(".question-container .question-box");
+    const nextBtn = $("#nextButton");
 
     function showNextQuestion() {
         if (currentIndex < boxes.length - 1) {
@@ -114,8 +161,8 @@
             boxes[currentIndex].classList.remove("hidden");
 
             if (currentIndex === boxes.length - 1) {
-                nextBtn.textContent = "제출";
-                nextBtn.onclick = submitExam;
+                nextBtn.text("제출");
+                nextBtn.off("click").on("click", submitExam);
             }
         } else {
             submitExam();
@@ -138,10 +185,30 @@
         }
     }
 
+    // 시험 결과
     function submitExam() {
-        alert("제출되었습니다!");
-        // 여기에 실제 제출 로직 추가 가능 (예: form.submit(), location.href, fetch 등)
+        $(".question-container").addClass("hidden");
+        $(".result-container").removeClass("hidden");
+
+        const total = totalAnswered;
+        const accuracy = total === 0 ? 0 : Math.round((correctCount / total) * 100);
+
+        let resultHtml = "<div>총 문제 수: <strong>" + total + "</strong></div>" +
+            "<div>맞춘 개수: <strong>" + correctCount + "</strong></div>" +
+            "<div>정답률: <strong>" + accuracy + "%</strong></div>";
+
+        resultHtml += "<br/><div class='mt-4 font-bold'>[과목별 성적]</div>";
+
+        for (const key in subjectStats) {
+            const sub = subjectStats[key];
+            const rate = sub.total === 0 ? 0 : Math.round((sub.correct / sub.total) * 100);
+            resultHtml += "<div>" + sub.subjectNum + "과목 " + sub.name + " - " +
+                sub.total + "문제 중 " + sub.correct + "개 맞춤 (정답률 " + rate + "%)</div>";
+        }
+
+        $("#result-summary").html(resultHtml);
     }
+
 
     $(document).ready(function () {
         $('.back').addClass("hidden");
@@ -152,32 +219,54 @@
     let totalAnswered = 0;
     let correctCount = 0;
 
-    // 정답 출력
+    // 과목별 통계
+    const subjectStats = {};
+
     function checkAnswer(el) {
         const isCorrect = el.getAttribute("data-correct") === "true";
 
+        // 가장 가까운 question-box에서 과목정보 추출
+        const box = el.closest(".question-box");
+        const subjectNum = parseInt(box.getAttribute("data-subject-num"));
+        const subjectName = box.getAttribute("data-subject-name");
+
+        // 과목별 통계 초기화
+        if (!subjectStats[subjectNum]) {
+            subjectStats[subjectNum] = {
+                subjectNum: subjectNum,
+                name: subjectName,
+                total: 0,
+                correct: 0
+            };
+        }
+
+        // 집계
+        subjectStats[subjectNum].total++;
         if (isCorrect) {
             el.classList.add("bg-green-200");
             correctCount++;
+            subjectStats[subjectNum].correct++;
         } else {
             el.classList.add("bg-red-200");
         }
 
-        // 선택 후 다른 선택지 클릭 못 하게 비활성화
+        // 선택지 비활성화
         const siblings = el.parentElement.querySelectorAll('.choice-option');
         siblings.forEach(option => {
             option.onclick = null;
             option.classList.add("pointer-events-none");
         });
+
         totalAnswered++;
         updateAccuracy(correctCount, totalAnswered);
     }
-
+    
     // 정답률
     function updateAccuracy(correctCount, totalAnswered) {
         const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
         $(".answerCorrectRate").text(accuracy);
     }
+
 </script>
 
 

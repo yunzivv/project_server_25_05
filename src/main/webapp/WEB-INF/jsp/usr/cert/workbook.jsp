@@ -39,10 +39,7 @@
                     <div id="step2" class="step">
                         자격증을 선택하고 문제 풀이를 시작하세요.
                         <div>
-                            <%--                            <input type="hidden" name="certId" id="certIdHidden">--%>
-                            <%--                            <div id="autocompleteBox"--%>
-                            <%--                                 style="border: 1px solid #ccc; display: none; position: absolute; background: white;"></div>--%>
-                            <select id="certSelect" name="certId" required>
+                           <select id="certSelect" name="certId" required>
                                 <c:forEach var="cert" items="${examCertNames}">
                                     <option value="${cert.id}">${cert.name}</option>
                                 </c:forEach>
