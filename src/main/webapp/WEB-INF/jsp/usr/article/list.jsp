@@ -49,7 +49,7 @@
 					  <input type="text" name="keyword" placeholder="Search"  value="${not empty keyword ? keyword : ''}"/>
 					</label>
 
-					<button type="submit" class="btn block flex items-center justify-center p-4 bg-neutral-800 text-neutral-200 text-base font-large rounded-md hover:bg-neutral-700">
+					<button type="submit" class="btn block flex items-center justify-center p-4 bg-blue-1 text-neutral-200 text-base font-large rounded-md hover:bg-neutral-700">
 						<svg class="h-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
 							  <circle cx="11" cy="11" r="8"></circle>
@@ -71,7 +71,7 @@
 	<!-- 		article table -->
 			<div class="mx-auto my-4 border-solid border rounded-xl overflow-hidden">
 				<table class="w-full text-sm text-center rtl:text-right text-neutral-800">
-					<thead class="h-5 text-base text-neutral-200 bg-neutral-800">
+					<thead class="h-5 text-base text-neutral-200 bg-blue-1">
 						<tr>
 							<th scope="col" class="px-6 py-4">NO</th>
 							<th scope="col" class="px-6 py-4">BOARD</th>
@@ -84,7 +84,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="article" items="${articles }">
-							<tr class="border-b bg-neutral-200 border-neutral-300 hover:bg-neutral-300">
+							<tr class="border-b bg-grey-1 border-neutral-300 hover:bg-neutral-300">
 								<td class="px-5 py-3" onclick="location.href='detail?id=${article.id}'">${article.id }</td>
 								<td class="px-5 py-3" onclick="location.href='detail?id=${article.id}'">${article.extra__boardCode }</td>
 								<td onclick="location.href='detail?id=${article.id}'"><a class="block text-left pl-6" href="detail?id=${article.id }">${article.title }</a></td>

@@ -39,7 +39,7 @@
                     <div id="step2" class="step">
                         자격증을 선택하고 문제 풀이를 시작하세요.
                         <div>
-                           <select id="certSelect" name="certId" required>
+                            <select id="certSelect" name="certId" required>
                                 <c:forEach var="cert" items="${examCertNames}">
                                     <option value="${cert.id}">${cert.name}</option>
                                 </c:forEach>
@@ -165,6 +165,19 @@
 
     function nextStep() {
         const currentStep = getCurrentStepIndex();
+
+        const loginedMemberId = ${loginedMemberId != null ? loginedMemberId : 0};
+        const loginUri = '${loginUri}';
+
+        console.log(loginedMemberId);
+        console.log(loginUri);
+
+        if (loginedMemberId === 0) {
+            alert("로그인 후 이용 가능합니다.");
+            window.location.href = loginUri;
+            console.log(loginUri);
+            return;
+        }
 
         if (currentStep === 1) {
             const cert = document.getElementById("certSelect").value;

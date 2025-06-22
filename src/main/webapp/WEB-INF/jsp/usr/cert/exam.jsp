@@ -130,6 +130,7 @@
                     <div class="px-4 pt-2 text-gray-500" id="result-summary">
                         <%--                            시험 결과 출력--%>
                     </div>
+                    <button><a href=../workbook/showWorkbook>시험 모드 종료</button>
 
                 </div>
             </div>
@@ -260,7 +261,7 @@
         totalAnswered++;
         updateAccuracy(correctCount, totalAnswered);
     }
-    
+
     // 정답률
     function updateAccuracy(correctCount, totalAnswered) {
         const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);

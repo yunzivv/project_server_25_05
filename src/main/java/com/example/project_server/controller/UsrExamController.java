@@ -3,6 +3,7 @@ package com.example.project_server.controller;
 import com.example.project_server.service.CertificateService;
 import com.example.project_server.service.ExamService;
 import com.example.project_server.vo.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +27,16 @@ public class UsrExamController {
     private CertificateService certificateService;
 
     @RequestMapping("/usr/workbook/showWorkbook")
-    public String showWorkbook(Model model) {
+    public String showWorkbook(Model model, HttpServletRequest req) {
 
+        Rq rq = (Rq) req.getAttribute("rq");
         List<Certificate> examCertNames = examService.getExamCertNames(); // 기출문제 있는 자격증명
         List<Exam> exams = examService.getExams();
 
+        model.addAttribute("loginedMemberId", rq.getLoginedMemberId());
         model.addAttribute("examCertNames", examCertNames);
         model.addAttribute("exams", exams);
+        model.addAttribute("loginUri", rq.getLoginUri());
 
         return "/usr/cert/workbook";
     }
