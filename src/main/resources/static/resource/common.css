@@ -234,6 +234,21 @@ li i.active{
 	right: 0;
 }
 
+/*main*/
+.helpMenu:hover {
+	color: #2f73d9;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+	0 -4px 8px rgba(0, 0, 0, 0.1),
+	4px 0 8px rgba(0, 0, 0, 0.1),
+	-4px 0 8px rgba(0, 0, 0, 0.1);
+	transition: all .3s;
+}
+
+.helpMenu:hover .iconBox {
+	background-color: #2f73d9;
+}
+
+
 
 /*analysis*/
 .analysis-element {

@@ -10,15 +10,13 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex flex-col flex-grow px-12 bg-red-300">
+    <div class="flex flex-col flex-grow px-12">
 
         <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
         <div class="analysis_1 flex p-5">
             <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element border-blue-2">
-                <%--                    <strong class="text-lg"> 조사된 공고 <fmt:formatNumber value="${totalPosts}" type="number" groupingUsed="true" />개 중</strong>--%>
-                <%--                    <br>자격증이 언급된 공고<br>--%>
-                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br><br>
+                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급 수<br><br>
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
                                                          groupingUsed="true"/>개</span>
             </div>
@@ -141,7 +139,7 @@
         </div>
 
         <div class="analysis_2 p-5 flex h-80">
-            <div class="select_box flex flex-col w-1/3 p-5 mr-2 analysis-element rounded-3xl">
+            <div class="select_box flex flex-col w-1/3 h-96 p-5 mr-2 analysis-element rounded-3xl">
                 <div class="select_box_title flex">
                     <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
                     <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
@@ -158,12 +156,6 @@
 
                     <%--직무 코드--%>
                     <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
-                        <%--                            <c:if test="${jobCodes != null}">--%>
-                        <%--                                <c:forEach var="jobCode" items="${jobCodes }">--%>
-                        <%--                                    <li class="w-1/2 p-2 cursor-pointer text-sm"--%>
-                        <%--                                        data-id="${jobCode.id}">${jobCode.name}</li>--%>
-                        <%--                                </c:forEach>--%>
-                        <%--                            </c:if>--%>
                     </ul>
                 </div>
 
