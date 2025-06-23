@@ -43,4 +43,8 @@ public class ExamService {
 	public List<Question> getRandomQuestionsByCertId(int certId, int questionCount) {
 		return examRepository.getRandomQuestionsByCertId(certId, questionCount);
 	}
+
+	public List<Exam> getAutoCompleteExams(String keyword) {
+		return examRepository.getAutoCompleteExams(keyword);
+	}
 }

@@ -44,11 +44,83 @@
                         <div id="step2" class="step w-full px-20 py-4 text-lg">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
                             <div>
-                                <select id="certSelect" name="certId" required>
-                                    <c:forEach var="cert" items="${examCertNames}">
-                                        <option value="${cert.id}">${cert.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <form action="a" class="relative">
+                                    <input type="hidden" name="certId" id="certIdHidden_workbook">
+                                    <input type="text" name="certName" id="certNameInput_workbook" placeholder="자격증명"
+                                           autocomplete="off">
+
+                                    <%--                                <select id="certSelect" name="certId" required>--%>
+                                    <%--                                    <c:forEach var="cert" items="${examCertNames}">--%>
+                                    <%--                                        <option value="${cert.id}">${cert.name}</option>--%>
+                                    <%--                                    </c:forEach>--%>
+                                    <%--                                </select>--%>
+                                    <div id="autocompleteBox_workbook"
+                                         style="border: 1px solid #ccc; display: none; position: absolute;"></div>
+                                </form>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#certNameInput_workbook").on("input", function () {
+                                            const keyword = $.trim($(this).val());
+                                            if (keyword.length < 2) return;
+
+                                            const box = $("#autocompleteBox_workbook");
+                                            const input = $("#certNameInput_workbook");
+                                            const form = input.closest("form");
+
+                                            $.getJSON("/usr/workbook/autoComplete", {keyword: keyword}, function (data) {
+                                                console.log(data);
+                                                box.empty();
+
+                                                if (data.length === 0) {
+                                                    box.hide();
+                                                    return;
+                                                }
+
+                                                $.each(data, function (i, cert) {
+                                                    const item = $("<div>")
+                                                        .text(cert.extra__certName)
+                                                        .css({
+                                                            padding: "5px",
+                                                            cursor: "pointer"
+                                                        })
+                                                        .on("click", function () {
+                                                            input.val(cert.extra__certName);
+                                                            $("#certIdHidden_workbook").val(cert.certId);
+                                                            box.hide();
+                                                        });
+
+                                                    box.append(item);
+                                                });
+
+                                                const inputOffset = input.offset();
+                                                const formOffset = form.offset();
+
+                                                const inputPosition = input.position();
+
+                                                box.css({
+                                                    left: inputPosition.left + input.outerWidth() / 2,
+                                                    top: inputPosition.top + input.outerHeight(),
+                                                    width: input.outerWidth(),
+                                                    position: "absolute",
+                                                    background: "#fff",
+                                                    zIndex: 1000,
+                                                    transform: "translateX(-50%)"
+                                                }).show();
+                                            });
+                                        });
+
+                                        // 바깥 클릭 시 자동완성 박스 숨기기
+                                        $(document).on("click", function (e) {
+                                            const box = $("#autocompleteBox_workbook");
+                                            const input = $("#certNameInput_workbook");
+
+                                            if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
+                                                box.hide();
+                                            }
+                                        });
+                                    });
+                                </script>
+
                             </div>
                         </div>
 

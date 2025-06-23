@@ -9,9 +9,27 @@
             resultType="com.example.project_server.vo.Exam">
         SELECT C.name AS extra__certName, E.*
         FROM exam E
-                 INNER JOIN certificate C
-                            ON E.certId = C.id
+        JOIN certificate C
+        ON E.certId = C.id
         ORDER BY C.name;
+    </select>
+
+    <select id="getAutoCompleteExams" parameterType="String"
+            resultType="com.example.project_server.vo.Exam">
+        SELECT
+            MIN(E.id) AS id,
+            E.certId,
+            E.category,
+            MIN(E.examDate) AS examDate,
+            MIN(E.regDate) AS regDate,
+            MIN(E.updateDate) AS updateDate,
+            C.name AS extra__certName
+        FROM exam E
+                 JOIN certificate C ON E.certId = C.id
+        WHERE C.name LIKE CONCAT('%', #{keyword}, '%')
+        GROUP BY E.certId, C.name
+        ORDER BY C.name
+        LIMIT 5;
     </select>
 
     <select id="getExamCertNames"

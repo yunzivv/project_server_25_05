@@ -16,7 +16,7 @@
         <%--        <span><a href="../member/login" class="text-blue-1">로그인</a>--%>
         <%--        하여 자격증을 쉽게 관리할 수 있습니다!</span>--%>
         <%--    </div>--%>
-\
+        \
     </c:if>
     <c:if test="${not empty member}">
         <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 3rem;">
@@ -33,70 +33,74 @@
 
                 <div>
                     <form action="/usr/cert/doAdd" method="post" class="relative">
-                        <input type="hidden" name="certId" id="certIdHidden">
-                        <input type="text" name="certName" id="certNameInput" placeholder="자격증명" autocomplete="off">
+                        <input type="hidden" name="certId" id="certIdHidden_myCert">
+                        <input type="text" name="certName" id="certNameInput_myCert" placeholder="자격증명"
+                               autocomplete="off">
+
                         <script>
-                            document.getElementById("certNameInput").addEventListener("input", function () {
-                                const keyword = this.value.trim();
-                                if (keyword.length < 2) return;
+                            $(document).ready(function () {
+                                $("#certNameInput_myCert").on("input", function () {
+                                    const keyword = $.trim($(this).val());
+                                    if (keyword.length < 2) return;
 
-                                const encodedKeyword = encodeURIComponent(keyword); // ✅ 여기서 JS 함수 사용
-                                const box = document.getElementById("autocompleteBox");
-                                const input = document.getElementById("certNameInput");
-                                const form = input.closest("form");
+                                    const box = $("#autocompleteBox_myCert");
+                                    const input = $("#certNameInput_myCert");
+                                    const form = input.closest("form");
 
-                                fetch("/usr/cert/autoComplete?keyword=" + encodedKeyword)
-                                    .then(res => res.json())
-                                    .then(data => {
+                                    $.getJSON("/usr/cert/autoComplete", {keyword: keyword}, function (data) {
                                         console.log(data);
-
-                                        box.innerHTML = "";
+                                        box.empty();
 
                                         if (data.length === 0) {
-                                            box.style.display = "none";
+                                            box.hide();
                                             return;
                                         }
 
-                                        data.forEach(cert => {
-                                            const item = document.createElement("div");
-                                            item.textContent = cert.name; // 필드명 맞으면 OK
-                                            item.style.padding = "5px";
-                                            item.style.cursor = "pointer";
-                                            document.querySelectorAll("#certNameInput")
+                                        $.each(data, function (i, cert) {
+                                            const item = $("<div>")
+                                                .text(cert.name) // ✅ certificate.name 출력
+                                                .css({
+                                                    padding: "5px",
+                                                    cursor: "pointer"
+                                                })
+                                                .on("click", function () {
+                                                    input.val(cert.name); // ✅ 입력창에 name
+                                                    $("#certIdHidden_myCert").val(cert.id); // ✅ 숨겨진 input에 id
+                                                    box.hide();
+                                                });
 
-                                            item.addEventListener("click", () => {
-                                                document.getElementById("certNameInput").value = cert.name;
-                                                document.getElementById("certIdHidden").value = cert.id;
-                                                box.style.display = "none";
-                                            });
-
-                                            box.appendChild(item);
+                                            box.append(item);
                                         });
 
-                                        // 위치 및 스타일 세팅
-                                        const inputRect = input.getBoundingClientRect();
-                                        const formRect = form.getBoundingClientRect();
+                                        const inputOffset = input.offset();
+                                        const formOffset = form.offset();
 
-                                        const left = inputRect.left - formRect.left;
-                                        const top = inputRect.bottom - formRect.top;
+                                        const left = inputOffset.left - formOffset.left;
+                                        const top = inputOffset.top + input.outerHeight() - formOffset.top;
 
-                                        box.style.left = `${left}px`;
-                                        box.style.top = `${top}px`;
-                                        box.style.width = "191px";
-                                        box.style.position = "absolute";
-                                        box.style.background = "#fff";
-                                        box.style.zIndex = "1000";
-                                        box.style.display = "block";
+                                        box.css({
+                                            left: left + "px",
+                                            top: top + "px",
+                                            width: input.outerWidth(),
+                                            position: "absolute",
+                                            background: "#fff",
+                                            zIndex: 1000
+                                        }).show();
                                     });
-                                // 바깥 클릭 시 자동완성 박스 숨기기
-                                document.addEventListener("click", function (e) {
-                                    if (!box.contains(e.target) && e.target !== input) {
-                                        box.style.display = "none";
+                                });
+
+                                $(document).on("click", function (e) {
+                                    const box = $("#autocompleteBox_myCert");
+                                    const input = $("#certNameInput_myCert");
+
+                                    if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
+                                        box.hide();
                                     }
                                 });
                             });
                         </script>
-                        <div id="autocompleteBox"
+
+                        <div id="autocompleteBox_myCert"
                              style="border: 1px solid #ccc; display: none; position: absolute;"></div>
 
                         <input type="text" name="certificateNumber" placeholder="자격번호">
@@ -104,6 +108,7 @@
                         <input type="date" name="endDate" placeholder="만료일">
                         <button type="submit">확인</button>
                     </form>
+
                 </div>
                 <table>
                     <thead class="h-5 text-base text-neutral-200 bg-neutral-800">

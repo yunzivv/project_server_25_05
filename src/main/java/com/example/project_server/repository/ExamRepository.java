@@ -20,4 +20,6 @@ public interface ExamRepository {
     public List<Question> getRandomQuestionsByCertId(int certId, int questionCount);
 
     public List<Exam> getExamByCertId(int certId);
+
+    public List<Exam> getAutoCompleteExams(String keyword);
 }
