@@ -244,6 +244,10 @@ li i.active{
 	transition: all .3s;
 }
 
+.iconBox {
+	transition: all .3s;
+}
+
 .helpMenu:hover .iconBox {
 	background-color: #2f73d9;
 }

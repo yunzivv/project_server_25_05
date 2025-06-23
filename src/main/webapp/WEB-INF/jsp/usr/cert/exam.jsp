@@ -91,8 +91,8 @@
                 </div>
             </div>
         </div>
-        <div class="result-container hidden flex flex-col w-4/5 h-5/6 bg-grey-2 pt-2 rounded-xl overflow-hidden">
-            <!-- examHead: 고정 -->
+        <div class="result-container hidden flex flex-col pt-2 w-4/5 h-5/6 bg-grey-2 rounded-xl overflow-hidden">
+
             <div class="examHead flex items-center">
                 <button><i class="fa-solid fa-circle text-red-500 ml-4"></i></button>
                 <i class="fa-solid fa-circle text-yellow-400 mx-4"></i>
@@ -115,7 +115,7 @@
             </div>
             <div class="bg-grey-1 flex-grow">
 
-                <div class="examBody h-5/6 question-box">
+                <div class="examBody h-5/6 question-box relative">
 
                     <!-- 상단 바 -->
                     <div class="bg-grey-1 p-2 flex items-center">
@@ -127,11 +127,11 @@
                         <div class="flex-grow bg-white rounded-xl px-4 py-2">시험 결과</div>
                         <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
                     </div>
-                    <div class="px-4 pt-2 text-gray-500" id="result-summary">
-                        <%--                            시험 결과 출력--%>
-                    </div>
-                    <button><a href=../workbook/showWorkbook>시험 모드 종료</button>
+                    <div class="text-gray-500 py-8 px-12" id="result-summary">
 
+                    </div>
+                    <button type="button" class="absolute bottom-4 right-4 px-4 py-2 bg-red-400 text-white rounded">
+                        <a href="../workbook/showWorkbook">시험 모드 종료</a></button>
                 </div>
             </div>
         </div>
