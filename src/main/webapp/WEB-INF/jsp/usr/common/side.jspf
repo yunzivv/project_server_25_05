@@ -85,19 +85,19 @@
 					</g>
 				</mask>
 			</defs>
-			<rect width="100" height="100" fill="#2459a8" mask="url(#cutout)" />
+			<rect width="100" height="100" fill="#2f73d9" mask="url(#cutout)" />
 		</svg>
 	</div>
 </div>
 
 <div class="side_bar_right">
-	<div class="side_bar_right_menu_box bg-red-300">
+	<div class="side_bar_right_menu_box bg-blue-2 text-white p-8">
 		<ul>
-			<li><a href="../member/login" class="block p-4 text-xl">도움말</a></li>
-			<li><a href="../member/join" class="block p-4 text-xl">회원가입</a></li>
-			<li><a href="../member/login" class="block p-4 text-xl">로그인</a></li>
-			<li><a href="../member/doLogout" class="block p-4 text-xl">로그아웃</a></li>
-			<li><a href="../member/login" class="block p-4 text-xl">문의사항</a></li>
+			<li><a href="../member/login" class="block p-6 text-xl">도움말</a></li>
+			<li><a href="../member/join" class="block p-6 text-xl">회원가입</a></li>
+			<li><a href="../member/login" class="block p-6 text-xl">로그인</a></li>
+			<li><a href="../member/doLogout" class="block p-6 text-xl">로그아웃</a></li>
+			<li><a href="../member/login" class="block p-6 text-xl">문의사항</a></li>
 		</ul>
 
 	</div>
@@ -105,12 +105,12 @@
 
 <script>
 	$(function () {
-		$(".hamburger_icon").click(function () {
+		$(".hamburgerIcon").click(function () {
 			$(".side_bar_right").toggleClass("active");
 			$(".side_bar_right_menu_box").toggleClass("active");
 		});
 		$(".side_bar_right").click(function () {
-			$(".hamburger_icon").removeClass("active");
+			$(".hamburgerIcon").removeClass("active");
 			$(".side_bar_right").removeClass("active");
 			$(".side_bar_right_menu_box").removeClass("active");
 		});

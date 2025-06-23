@@ -30,112 +30,116 @@
             <div id="examInputForm" class="overflow-hidden h-full p-12 rounded-2xl bg-grey-1 relative">
                 <form action="showExam" class="h-full">
 
-                    <div id="step1" class="step w-full p-12 font-semibold text-xl px-20 py-4 active">
-                        <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
-                        <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
-                        <div class="m-2">문제를 풀면 즉시 정답 여부를 확인할 수 있습니다!</div>
-                        <%--                        <button type="button" onclick="nextStep()"--%>
-                        <%--                                class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base absolute bottom-2 right-12">--%>
-                        <%--                            다음--%>
-                        <%--                        </button>--%>
-                    </div>
-
-                    <div id="step2" class="step w-full px-20 py-4 text-xl p-8">
-                        <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
-                        <div>
-                            <select id="certSelect" name="certId" required>
-                                <c:forEach var="cert" items="${examCertNames}">
-                                    <option value="${cert.id}">${cert.name}</option>
-                                </c:forEach>
-                            </select>
+                    <div>
+                        <div id="step1" class="step w-full font-semibold text-xl px-20 py-4 active">
+                            <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
+                            <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
+                            <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
+                            <%--                        <button type="button" onclick="nextStep()"--%>
+                            <%--                                class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base absolute bottom-2 right-12">--%>
+                            <%--                            다음--%>
+                            <%--                        </button>--%>
                         </div>
-                    </div>
 
-                    <div id="step3" class="step w-full px-20 py-4 text-lg p-8">
-                        <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
-                        <div class="mode-toggle flex justify-around mt-36">
-                            <div class="relative">
-                                <input type="radio" name="mode" id="modeRandom" value="random" hidden>
-                                <label for="modeRandom" class="toggle-btn">랜덤</label>
-                                <div class="questionCountSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-                                     style="top: 200%;">
-                                    <label for="questionCount"></label>
-                                    <select id="questionCount" name="questionCount" required>
-                                        <option value="-1" selected disabled>풀 문제 개수 선택</option>
-                                        <option value="20">20문제</option>
-                                        <option value="50">50문제</option>
-                                        <option value="100">100문제</option>
-                                        <option value="0">모든 문제 풀기</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <input type="radio" name="mode" id="modePast" value="past" hidden>
-                                <label for="modePast" class="toggle-btn">기출문제 선택</label>
-                                <div class="examIdSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-                                     style="top: 200%;">
-                                    <label for="examId"></label>
-                                    <select id="examId" name="examId" required>
-                                        <option value="-1" selected></option>
-                                    </select>
-                                </div>
+                        <div id="step2" class="step w-full px-20 py-4 text-lg">
+                            <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
+                            <div>
+                                <select id="certSelect" name="certId" required>
+                                    <c:forEach var="cert" items="${examCertNames}">
+                                        <option value="${cert.id}">${cert.name}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
-                        <script>
-                            $(function () {
-                                $('input[name="mode"]').change(function () {
-                                    const selectedMode = $('input[name="mode"]:checked').val();
-                                    if (selectedMode === 'random') {
-                                        $('.questionCountSelectBox').removeClass("invisible");
-                                        $('.examIdSelectBox').addClass("invisible");
-                                    } else if (selectedMode === 'past') {
-                                        $('.examIdSelectBox').removeClass("invisible");
-                                        $('.questionCountSelectBox').addClass("invisible");
 
-                                        const certId = $('#certSelect').val();
-                                        if (!certId) {
-                                            alert("먼저 자격증을 선택해주세요.");
-                                            return;
-                                        }
+                        <div id="step3" class="step w-full px-20 py-4 text-lg">
+                            <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
+                            <div class="mode-toggle flex justify-around mt-36">
+                                <div class="relative">
+                                    <input type="radio" name="mode" id="modeRandom" value="random" hidden>
+                                    <label for="modeRandom" class="toggle-btn">랜덤</label>
+                                    <div class="questionCountSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+                                         style="top: 200%;">
+                                        <label for="questionCount"></label>
+                                        <select id="questionCount" name="questionCount" required>
+                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>
+                                            <option value="20">20문제</option>
+                                            <option value="50">50문제</option>
+                                            <option value="100">100문제</option>
+                                            <option value="0">모든 문제 풀기</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <input type="radio" name="mode" id="modePast" value="past" hidden>
+                                    <label for="modePast" class="toggle-btn">기출문제 선택</label>
+                                    <div class="examIdSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+                                         style="top: 200%;">
+                                        <label for="examId"></label>
+                                        <select id="examId" name="examId" required>
+                                            <option value="-1" selected></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $(function () {
+                                    $('input[name="mode"]').change(function () {
+                                        const selectedMode = $('input[name="mode"]:checked').val();
+                                        if (selectedMode === 'random') {
+                                            $('.questionCountSelectBox').removeClass("invisible");
+                                            $('.examIdSelectBox').addClass("invisible");
+                                        } else if (selectedMode === 'past') {
+                                            $('.examIdSelectBox').removeClass("invisible");
+                                            $('.questionCountSelectBox').addClass("invisible");
 
-                                        // AJAX 요청으로 기출시험 목록 불러오기
-                                        $.ajax({
-                                            url: '/usr/api/examByCertId',
-                                            method: 'GET',
-                                            data: {certId: certId},
-                                            success: function (data) {
-                                                const exams = data.data1;
-                                                const $examSelect = $('#examId');
-                                                $examSelect.empty();
-                                                if (exams.length === 0) {
-                                                    $examSelect.append('<option value="">해당 자격증의 기출시험이 없습니다.</option>');
-                                                } else {
-                                                    $examSelect.append('<option value="-1" selected disabled>기출시험 선택</option>');
-                                                    exams.forEach(function (exam) {
-                                                        const $option = $('<option></option>');
-                                                        $option.val(exam.id);
-                                                        $option.text(exam.extra__certName + ' ' + exam.examDate);
-                                                        $examSelect.append($option);
-                                                    });
-                                                }
-                                            },
-                                            error: function () {
-                                                alert("기출시험 목록을 불러오는 데 실패했습니다.");
+                                            const certId = $('#certSelect').val();
+                                            if (!certId) {
+                                                alert("먼저 자격증을 선택해주세요.");
+                                                return;
                                             }
-                                        });
-                                    }
+
+                                            // AJAX 요청으로 기출시험 목록 불러오기
+                                            $.ajax({
+                                                url: '/usr/api/examByCertId',
+                                                method: 'GET',
+                                                data: {certId: certId},
+                                                success: function (data) {
+                                                    const exams = data.data1;
+                                                    const $examSelect = $('#examId');
+                                                    $examSelect.empty();
+                                                    if (exams.length === 0) {
+                                                        $examSelect.append('<option value="">해당 자격증의 기출시험이 없습니다.</option>');
+                                                    } else {
+                                                        $examSelect.append('<option value="-1" selected disabled>기출시험 선택</option>');
+                                                        exams.forEach(function (exam) {
+                                                            const $option = $('<option></option>');
+                                                            $option.val(exam.id);
+                                                            $option.text(exam.extra__certName + ' ' + exam.examDate);
+                                                            $examSelect.append($option);
+                                                        });
+                                                    }
+                                                },
+                                                error: function () {
+                                                    alert("기출시험 목록을 불러오는 데 실패했습니다.");
+                                                }
+                                            });
+                                        }
+                                    });
                                 });
-                            });
-                        </script>
-                    </div>
-                    <div id="step4" class="step h-5/6 w-full px-20 py-4 text-xl p-8">
-                        <div class="my-6 text-4xl font-black">문제 풀이를 시작합니다.</div>
-                    </div>
-                    <div class="absolute bottom-12 left-12">
-                        <button type="button" onclick="prevStep()" id="prevBtn"
-                                class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base hidden">
-                            이전
-                        </button>
+                            </script>
+                        </div>
+
+                        <div id="step4" class="step h-5/6 w-full px-20 py-4 text-xl">
+                            <div class="my-6 text-4xl font-black">문제 풀이를 시작합니다.</div>
+                        </div>
+
+                        <div class="absolute bottom-12 left-12">
+                            <button type="button" onclick="prevStep()" id="prevBtn"
+                                    class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base hidden">
+                                이전
+                            </button>
+                        </div>
                     </div>
                     <div class="absolute bottom-12 right-12">
                         <button type="button" onclick="nextStep()" id="nextBtn"

@@ -1,99 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>${pageTitle }</title>
+    <meta charset="UTF-8">
+    <title>${pageTitle }</title>
 
-<link rel="stylesheet" href="/resource/common.css" />
-<script src="/resource/common.js" defer="defer"></script>
+    <link rel="stylesheet" href="/resource/common.css"/>
+    <script src="/resource/common.js" defer="defer"></script>
 
-<!-- 테일윈드 -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- 폰트어썸 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<!-- 제이쿼리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- 데이지 UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<%--tailwind--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>--%>
-<%--chart.js	--%>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<%--formating--%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <!-- 테일윈드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 데이지 UI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <%--tailwind--%>
+    <%--<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>--%>
+    <%--chart.js	--%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <%--formating--%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 </head>
 
 <body class="text-neutral-600">
 
-	<div class="header fixed bg-blue-2" style="height: 100px; width: 2000px;">
-		<div class="h-full w-screen flex items-center pl-14 text-grey-1">
-		<div class="logo">
-		<a href="/" class="font-black text-4xl">
-			CERTIFY
-		</a>
-		</div>
+<div class="header fixed bg-blue-2 duration-300 z-50" style="height: 100px; width: 2000px;">
+    <div class="topBar h-full w-screen flex items-center pl-14 text-white">
+        <div class="logo">
+            <a href="/" class="font-black text-4xl">
+                CERTIFY
+            </a>
+        </div>
 
-		<div class="flex-grow"></div>
+        <div class="flex-grow"></div>
 
-		<div class="nav_box flex h-full text-2xl font-black whitespace-nowrap">
-			<ul class="flex mx-10">
-				<li class="top_bar_first_menu relative">
-					<a class="block px-6 flex items-center h-full" href="../cert/analysis">HUB
-						<i class="highlight fa-solid fa-circle"></i></a>
-					<ul class="absolute hidden w-40 t-full py-5 text-center text-lg bg-blue-300">
-						<li><a href="../cert/analysis" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>
-						<li><a href="../cert/library" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
-					</ul>
-				</li>
-				<li class="relative"><a class="block px-6 flex items-center h-full" href="../workbook/showWorkbook">WORK BOOK
-					<i class="highlight fa-solid fa-circle"></i></a></li>
-				<li class="top_bar_first_menu relative">
-					<a class="block px-6 flex items-center h-full" href="../article/list?boardId=0">COMMUNITY
-						<i class="highlight fa-solid fa-circle"></i></a>
-					<ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-red-300">
-						<li><a href="../article/list?boardId=1" class="block h-full p-3 hover:text-neutral-">공지사항</a></li>
-						<li><a href="../article/list?boardId=2" class="block h-full p-3 hover:text-neutral-">시험후기</a></li>
-						<li><a href="../article/list?boardId=3" class="block h-full p-3 hover:text-neutral-">자료실</a></li>
-						<li><a href="../article/list?boardId=4" class="block h-full p-3 hover:text-neutral-">QNA</a></li>
-						<li><a href="../article/list?boardId=5" class="block h-full p-3 hover:text-neutral-">자유게시판</a></li>
-					</ul>
-				</li>
-				<li class="top_bar_first_menu relative"><a class="block px-6 flex items-center h-full" href="../member/myInfo">WALLET
-					<i class="highlight fa-solid fa-circle"></i></a>
-					<ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-red-300">
-						<li><a href="../member/myCert" class="block h-full p-3 hover:text-neutral-">내 자격증</a></li>
-						<li><a href="../member/myInfo" class="block h-full p-3 hover:text-neutral-">내 정보</a></li>
-						<li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>
-					</ul>
-				</li>
-				<li class="w-20"></li>
-				<li>
-					<div class="hamburger px-6 flex items-center h-full">
-						<div class="hamburger_icon">
-							<span class="hamberger_border1"></span>
-							<span class="hamberger_border2"></span>
-							<span class="hamberger_border3"></span>
-						</div>
-						<span class="text"></span>
-					</div>
-				</li>
-			</ul>
-			<div class="">
+        <div class="nav_box flex h-full text-2xl font-black whitespace-nowrap">
+            <ul class="flex mx-10">
+                <li class="top_bar_first_menu relative">
+                    <a class="block px-6 flex items-center h-full" href="../cert/analysis">HUB
+                        <i class="highlight fa-solid fa-circle"></i></a>
+<%--                    <ul class="absolute hidden w-40 t-full py-5 text-center text-lg bg-grey-1">--%>
+<%--                        <li><a href="../cert/analysis" class="block h-full p-3 hover:text-neutral-">채용우대분석</a></li>--%>
+<%--                        <li><a href="../cert/library" class="block h-full p-3 hover:text-neutral-">자료실</a></li>--%>
+<%--                    </ul>--%>
+                </li>
+                <li class="relative"><a class="block px-6 flex items-center h-full" href="../workbook/showWorkbook">WORK
+                    BOOK
+                    <i class="highlight fa-solid fa-circle"></i></a></li>
+                <li class="top_bar_first_menu relative">
+                    <a class="block px-6 flex items-center h-full" href="../article/list?boardId=0">COMMUNITY
+                        <i class="highlight fa-solid fa-circle"></i></a>
+                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">
+                        <li><a href="../article/list?boardId=1" class="block h-full p-3 hover:text-neutral-">공지사항</a>
+                        </li>
+                        <li><a href="../article/list?boardId=2" class="block h-full p-3 hover:text-neutral-">시험후기</a>
+                        </li>
+                        <li><a href="../article/list?boardId=3" class="block h-full p-3 hover:text-neutral-">자료실</a>
+                        </li>
+                        <li><a href="../article/list?boardId=4" class="block h-full p-3 hover:text-neutral-">QNA</a>
+                        </li>
+                        <li><a href="../article/list?boardId=5" class="block h-full p-3 hover:text-neutral-">자유게시판</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="top_bar_first_menu relative"><a class="block px-6 flex items-center h-full"
+                                                           href="../member/myInfo">WALLET
+                    <i class="highlight fa-solid fa-circle"></i></a>
+                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">
+                        <li><a href="../member/myCert" class="block h-full p-3 hover:text-neutral-">내 자격증</a></li>
+                        <li><a href="../member/myInfo" class="block h-full p-3 hover:text-neutral-">내 정보</a></li>
+                        <li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>
+                    </ul>
+                </li>
+                <li class="w-20"></li>
+                <li>
+                    <div class="hamburger px-6 flex items-center h-full">
+                        <div class="hamburgerIcon">
+                            <span class="hamburger_border1"></span>
+                            <span class="hamburger_border2"></span>
+                            <span class="hamburger_border3"></span>
+                        </div>
+                        <span class="text"></span>
+                    </div>
+                </li>
+            </ul>
+            <div class="">
 
-			</div>
-		</div>
-		</div>
-	</div>
-	<div class="back" style="height: 100px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="back" style="height: 100px;"></div>
 
-	<script>
-		$(function () {
-			$(".hamburger_icon").click(function () {
-				$(this).toggleClass("active");
-			});
-		});
-	</script>
+<script>
+    $(function () {
+        $(".hamburgerIcon").click(function () {
+            $(this).toggleClass("active");
+        });
+    });
+</script>
+
+
 

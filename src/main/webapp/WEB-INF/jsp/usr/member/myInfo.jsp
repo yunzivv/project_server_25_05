@@ -22,11 +22,11 @@
                     <a href="modify" class="block p-3 text-base flex items-center
 		 	        justify-center font-large rounded-md hover:bg-neutral-300 border border-neutral-300">수정</a>
 
-                    <div id="infoCard" class="w-96 h-60 p-3 rounded-xl overflow-hidden border border-solid bg-grey-1">
-                        <div class="cardHead h-1/5 text-center text-xl font-bold tracking-widest border border-solid">회원정보자격</div>
+                    <div id="infoCard" class="p-3 rounded-xl overflow-hidden border border-solid bg-grey-1" style="width: 500px; height: 313px;">
+                        <div class="cardHead h-1/5 text-center text-3xl font-bold tracking-widest border border-solid">회원정보자격</div>
                         <div class="flex h-3/5">
                             <div class="img w-1/3 h-full mr-2 border border-solid">사진</div>
-                            <div class="info flex flex-col justify-between w-2/3 h-full border border-solid">
+                            <div class="info flex flex-col justify-between w-2/3 h-full border border-solid text-lg">
                                 <span>성    명: ${member.name}</span>
                                 <span>생년월일: ${member.birthday}</span>
                                 <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
@@ -34,8 +34,10 @@
                                 <span>이 메 일: ${member.email}</span>
                             </div>
                         </div>
-                        <div class="cardBottom h-1/5 border border-solid text-right">
-                            <a href="modify" class="rounded-md hover:bg-neutral-300 border border-neutral-300">수정</a>
+                        <div class="cardBottom h-1/5 flex justify-between items-end p-2 border border-solid text-right">
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <div class="font-black ">CERTIFY</div>
+                            <a href="modify" class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-2">수정</a>
                         </div>
                     </div>
 

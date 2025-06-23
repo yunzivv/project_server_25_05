@@ -45,15 +45,15 @@ input {
 }
 
 .bg-blue-2 {
-	background-color: #2459a8;
+	background-color: #2f73d9;
 }
 
 .bg-grey-1 {
-	background-color: #d9d9d9;
+	background-color: #dcdcdc;
 }
 
 .bg-grey-2 {
-	background-color: #c0c0c0;
+	background-color: #d9d9d9;
 }
 
 .text-blue-1 {
@@ -64,12 +64,8 @@ input {
 	color: #2f73d9;
 }
 
-.text-blue-2t {
-	color: #2f73d9;
-}
-
 .text-grey-1 {
-	color: #d9d9d9;
+	color: #dcdcdc;
 }
 
 .border-blue-2 {
@@ -81,12 +77,11 @@ input {
 	border: #d9d9d9 solid 1px;
 }
 
-
 /*top-bar*/
 .header {
 	top: -250px;
 	left: -250px;
-	transition: all .5s;
+	transition: top .5s, left .5s, transform 0.3s ease;
 	z-index: 100;
 }
 
@@ -102,14 +97,14 @@ input {
 	transform: translateX(-50%);
 }
 
-.hamburger_icon {
+.hamburgerIcon {
 	position: relative;
 	width: 35px;
 	height: 25px;
 	cursor: pointer;
 }
 
-.hamburger_icon span {
+.hamburgerIcon span {
 	position: absolute;
 	left: 0;
 	display: inline-block;
@@ -120,27 +115,31 @@ input {
 	transition: all 0.3s;
 }
 
-.hamburger_icon .hamberger_border1 {
+.hamburgerIcon.main span {
+	background: #2f73d9;
+}
+
+.hamburgerIcon .hamburger_border1 {
 	top: 0;
 }
 
-.hamburger_icon .hamberger_border2 {
+.hamburgerIcon .hamburger_border2 {
 	top: 40%;
 }
 
-.hamburger_icon .hamberger_border3 {
+.hamburgerIcon .hamburger_border3 {
 	bottom: 0;
 }
 
-.hamburger_icon.active .hamberger_border1 {
+.hamburgerIcon.active .hamburger_border1 {
 	transform: translateY(11px) rotate(45deg);
 }
 
-.hamburger_icon.active .hamberger_border2 {
+.hamburgerIcon.active .hamburger_border2 {
 	opacity: 0;
 }
 
-.hamburger_icon.active .hamberger_border3 {
+.hamburgerIcon.active .hamburger_border3 {
 	transform: translateY(-11px) rotate(-45deg);
 }
 
@@ -188,7 +187,7 @@ li i.active{
 	z-index: 100;
 	top: -250px;
 	left: -100%;
-	transition: all .5s;
+	transition: all .3s;
 }
 
 .side_bar_left.active{
@@ -235,12 +234,19 @@ li i.active{
 }
 
 /*main*/
+.helpMenu {
+	background-color: rgba(220, 220, 220, 0.3);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05),
+	0 -4px 8px rgba(0, 0, 0, 0.05),
+	4px 0 8px rgba(0, 0, 0, 0.05),
+	-4px 0 8px rgba(0, 0, 0, 0.05);
+	transition: all .3s;
+}
+
 .helpMenu:hover {
 	color: #2f73d9;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
-	0 -4px 8px rgba(0, 0, 0, 0.1),
-	4px 0 8px rgba(0, 0, 0, 0.1),
-	-4px 0 8px rgba(0, 0, 0, 0.1);
+	4px 0 8px rgba(0, 0, 0, 0.1);
 	transition: all .3s;
 }
 
@@ -256,7 +262,7 @@ li i.active{
 
 /*analysis*/
 .analysis-element {
-	background-color: rgba(224,224,224, 0.7);
+	background-color: rgba(220, 220, 220, 0.3);
 	border-radius: 2rem;
 }
 

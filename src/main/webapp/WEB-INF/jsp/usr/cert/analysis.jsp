@@ -15,12 +15,12 @@
         <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
         <div class="analysis_1 flex p-5">
-            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element border-blue-2">
+            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
                 <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급 수<br><br>
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
                                                          groupingUsed="true"/>개</span>
             </div>
-            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element border-blue-2">
+            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
                 <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br>
                 <canvas id="postsWithCert" width="200" height="250"></canvas>
 
@@ -36,7 +36,7 @@
                         labels: ['조회됨', '남은부분'],
                         datasets: [{
                             data: [percent, 100 - percent],
-                            backgroundColor: ['#2f73d9', '#e0e0e0'],
+                            backgroundColor: ['#2f73d9', '#d9d9d9'],
                             borderWidth: 0
                         }]
                     };
@@ -77,10 +77,10 @@
                     });
                 </script>
             </div>
-            <div class="flex flex-col w-1/3 p-5 analysis-element h-full border-blue-2">
+            <div class="flex flex-col w-1/3 p-5 analysis-element h-full">
                 <div>자격증이 가장 많이 언급된 직무</div>
                 <div class="mt-2">
-                    <canvas id="topJobCat" style="height: 250px; width: 400px;"></canvas>
+                    <canvas id="topJobCat" style="height: 200px; width: 350px;"></canvas>
                 </div>
                 <script th:inline="javascript">
                     // 컨트롤러에서 전달한 데이터 (Thymeleaf 문법)
@@ -101,7 +101,7 @@
                             datasets: [{
                                 data: percentages,
                                 backgroundColor: [
-                                    '#2f73d9', '#64c086', '#f2cd5c', '#b1b8c0', '#d9d9d9'
+                                    '#2f73d9', '#64c086', '#f2cd5c', '#afafaf', '#d9d9d9'
                                 ],
                                 borderWidth: 0
                             }]
@@ -110,15 +110,18 @@
                             responsive: false,
                             maintainAspectRatio: false,
                             layout: {
-                                padding: {
-                                }
+                                padding: {}
                             },
                             plugins: {
                                 legend: {
                                     position: 'right', // chartArea 내부에 범례 표시
                                     align: 'end',          // 오른쪽 아래 정렬
                                     labels: {
-                                        padding: 10        // 도넛 차트와 범례 사이 간격 조절
+                                        padding: 10,
+                                        boxWidth: 10,
+                                        boxHeight: 10,
+                                        usePointStyle: true,
+                                        pointStyle: 'circle'
                                     }
                                 },
                                 tooltip: {
@@ -173,7 +176,6 @@
                     const topCertLabelsls = ${topCertLabels};
                     const topCertValues = ${topCertValues};
                     /*]]>*/
-                    const backgroundColors = topCertValues.map((_, idx) => idx === 0 ? '#2f73d9' : '#afafaf');
 
                     console.log(topCertLabelsls);
                     console.log(topCertValues);
@@ -187,7 +189,9 @@
                                 datasets: [{
                                     label: '언급 횟수',
                                     data: topCertValues,
-                                    backgroundColor: backgroundColors,
+                                    backgroundColor: [
+                                    '#2f73d9', '#64c086', '#f2cd5c', '#afafaf', '#bdbdbd', '#cbcbcb', '#d9d9d9'
+                                ],
                                     barPercentage: 0.7
                                 }]
                             },
