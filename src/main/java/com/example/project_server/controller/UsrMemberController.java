@@ -52,6 +52,8 @@ public class UsrMemberController {
 		if(Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-7", "이메일을 작성해주세요.");
 		if(!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-8", "비밀번호가 일치하지 않습니다.");
 
+		loginPw = Ut.sha256(loginPw);
+
 		int id = memberService.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
 
 		if(id == -1) return Ut.jsHistoryBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
