@@ -27,11 +27,11 @@
                         <div class="flex h-3/5">
                             <div class="img w-1/3 h-full mr-2 border border-solid">사진</div>
                             <div class="info flex flex-col justify-between w-2/3 h-full border border-solid text-lg">
-                                <span>성    명: ${member.name}</span>
-                                <span>생년월일: ${member.birthday}</span>
-                                <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
-                                <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
-                                <span>이 메 일: ${member.email}</span>
+                                <span>성    명: <strong>${member.name}</strong></span>
+                                <span>생년월일: <strong>${member.birthday}</strong></span>
+                                <span>가입일자: <strong>${member.regDate.toString().substring(0, 10)}</strong></span>
+                                <span>전화번호: <strong>${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</strong></span>
+                                <span>이 메 일: <strong>${member.email}</strong></span>
                             </div>
                         </div>
                         <div class="cardBottom h-1/5 flex justify-between items-end p-2 border border-solid text-right">

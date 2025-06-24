@@ -36,7 +36,7 @@ public class MemberService {
 
 	public int doJoin(String loginId, String loginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) {
 
-		if(memberRepository.getMemberByLogInId(loginId) == 1) return -1; // 중복 아이디
+		if(memberRepository.getMemberByLoginId(loginId) != null) return -1; // 중복 아이디
 		if(memberRepository.isExistsNameNEmail(name, email) == 1) return -2; // 중복 이름, 이메일
 
 		memberRepository.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
@@ -52,7 +52,7 @@ public class MemberService {
 		return memberRepository.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 	}
 	public boolean isJoinableLogInId(String loginId) {
-		return memberRepository.getMemberByLogInId(loginId) != 1;
+		return memberRepository.getMemberByLoginId(loginId) == null;
 	}
 
 	public ResultData notifyTempLoginPwByEmail(Member actor) {

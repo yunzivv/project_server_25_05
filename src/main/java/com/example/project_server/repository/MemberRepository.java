@@ -17,8 +17,6 @@ public interface MemberRepository {
 
     public Member getMemberById(int id);
 
-    public int getMemberByLogInId(String loginId);
-
     public int isExistsNameNEmail(String name, String email);
 
     public Member getMemberByLoginId(String loginId);
