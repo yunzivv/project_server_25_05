@@ -2,14 +2,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="MY INFO MODIFY"></c:set>
-<%@ include file="../common/head.jspf"%>
+<%@ include file="../common/head.jspf" %>
+
+<script type="text/javascript">
+
+    $('.back').addClass('hidden');
+
+</script>
+
 
 <script>
 // 	비밀번호 확인 함수
  	function memberInfo_modify() {
  		const value = $(".checkPw-inputArea").val();
  		$.get('../member/checkPw',{
- 			pw : value,
+ 			loginPw : value,
 			ajaxMode : 'Y'
 		}, function(data){
 			console.log(data);
@@ -26,14 +33,16 @@
 	}
 </script>
 
+<div class="mt-20">
 <button onclick="history.back()" class="block text-4xl pl-10 cursor-pointer">
 	<i class="fa-solid fa-angle-left"></i>
 </button>
+</div>
 
-<div class="container">
+<div class="flex justify-center items-center">
 
 	<div class="checkPw">
-		<div class="mx-auto mt-10 max-w-min p-4 bg-neutral-200 border border-solid border-neutral-300 rounded-lg">
+		<div class="max-w-min p-4 bg-neutral-200 border border-solid border-neutral-300 rounded-lg">
 			<div class="title mt-4 mb-8 text-center text-2xl font-semibold">
 				Check Your Password
 			</div>
@@ -60,8 +69,8 @@
 					아이디 <span class="text-red-400 text-sm">*수정이 불가합니다.*</span>
 					<input type="text" name="loginId" id="loginId" placeholder="ID" value="${member.loginId }" disabled
 					class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5">
-					비밀번호 <input type="text" name="loginPw" id="loginPw" placeholder="Password"  value="${member.loginPw }"
-					class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-neutral-50">
+					<input type="text" name="loginPw" id="loginPw" placeholder="Password"  value="${member.loginPw }"
+					class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-neutral-50 hidden">
 					이름 <input type="text" name="name" id="name" placeholder="Name"  value="${member.name }"
 					class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96  p-2.5 bg-neutral-50">
 					닉네임 <input type="text" name="nickName" id="nickName" placeholder="NickName"  value="${member.nickName }"

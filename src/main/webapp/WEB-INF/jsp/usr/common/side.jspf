@@ -23,37 +23,38 @@
 
 	<ul class="community_sub_menu hidden flex flex-col w-full">
 		<li class="relative">
-			<div class="absolute" style="top: -30px; right: 0;">
-				<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+			<div class="absolute" style="top: -14px; right: 0;">
+				<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
 					<defs>
 						<mask id="cutout-xy">
-							<g transform="scale(-1, -1) translate(-30, -30)">
-								<g transform="rotate(90 15 15)">
-									<rect width="30" height="30" fill="white" />
-									<circle cx="30" cy="0" r="30" fill="black" />
+							<g transform="scale(-1, -1) translate(-15, -15)">
+								<g transform="rotate(90 7.5 7.5)">
+									<rect width="15" height="15" fill="white" />
+									<circle cx="15" cy="0" r="15" fill="black" />
 								</g>
 							</g>
 						</mask>
 					</defs>
-					<rect width="30" height="30" fill="#ffffff" mask="url(#cutout-xy)" />
+					<rect width="15" height="15" fill="#ffffff" mask="url(#cutout-xy)" />
 				</svg>
 			</div>
 			<a class="block py-4 px-8" href="../article/list?boardId=0">전체 게시판
 			<i class="highlight fa-solid fa-circle"></i></a>
 			<div class="absolute" style="top: 60px; left: auto; right: 0%;">
-				<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+				<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
 					<defs>
 						<mask id="cutout-x">
-							<g transform="scale(-1, 1) translate(-60, 0)">
-								<g transform="rotate(90 30 30)">
-									<rect width="30" height="30" fill="white" />
-									<circle cx="30" cy="0" r="30" fill="black" />
+							<g transform="scale(-1, 1) translate(-30, 0)">
+								<g transform="rotate(90 15 15)">
+									<rect width="15" height="15" fill="white" />
+									<circle cx="15" cy="0" r="15" fill="black" />
 								</g>
 							</g>
 						</mask>
 					</defs>
-					<rect width="30" height="30" fill="#ffffff" mask="url(#cutout-x)" />
+					<rect width="15" height="15" fill="#ffffff" mask="url(#cutout-x)" />
 				</svg>
+
 			</div></li>
 		<li><a class="block py-4 px-8" href="../article/list?boardId=1">공지사항
 			<i class="highlight fa-solid fa-circle"></i></a></li>

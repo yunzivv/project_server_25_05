@@ -251,10 +251,10 @@ CREATE TABLE memberCert (
                             certName VARCHAR(100) NOT NULL,
                             startDate DATE COMMENT '취득일',
                             endDate DATE COMMENT '만료일',
-                            alertDate DATE COMMENT '알림일',
                             regDate DATETIME NOT NULL,
                             updateDate DATETIME NOT NULL,
-                            certificateNumber VARCHAR(100) COMMENT '자격번호'
+                            certificateNumber VARCHAR(100) COMMENT '자격번호',
+                            alert BOOLEAN NOT NULL DEFAULT ture COMMENT '알림 설정'
 );
 
 ALTER TABLE memberCert ADD COLUMN alertDate DATE COMMENT '알림일' AFTER endDate

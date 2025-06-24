@@ -138,7 +138,7 @@
                                     <div class="examIdSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
                                          style="top: 200%;">
                                         <label for="examId"></label>
-                                        <select id="examId" name="examId" required>
+                                        <select id="examId" name="examId" required size="5" style="overflow-y: auto;">
                                             <option value="-1" selected></option>
                                         </select>
                                     </div>
@@ -155,7 +155,7 @@
                                             $('.examIdSelectBox').removeClass("invisible");
                                             $('.questionCountSelectBox').addClass("invisible");
 
-                                            const certId = $('#certSelect').val();
+                                            const certId = $('#certIdHidden_workbook').val();
                                             if (!certId) {
                                                 alert("먼저 자격증을 선택해주세요.");
                                                 return;
@@ -171,7 +171,7 @@
                                                     const $examSelect = $('#examId');
                                                     $examSelect.empty();
                                                     if (exams.length === 0) {
-                                                        $examSelect.append('<option value="">해당 자격증의 기출시험이 없습니다.</option>');
+                                                        $examSelect.append('<option value="">기출시험이 없습니다.</option>');
                                                     } else {
                                                         $examSelect.append('<option value="-1" selected disabled>기출시험 선택</option>');
                                                         exams.forEach(function (exam) {

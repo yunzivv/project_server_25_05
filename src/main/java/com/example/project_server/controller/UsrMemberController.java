@@ -119,12 +119,13 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/checkPw")
 	@ResponseBody
-	public ResultData checkPw(HttpServletRequest req, String pw) {
+	public ResultData checkPw(HttpServletRequest req, String loginPw) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		loginPw = Ut.sha256(loginPw);
 
-		if(!member.getLoginPw().equals(pw)) {
+		if(!member.getLoginPw().equals(loginPw)) {
 			return ResultData.from("F-1", "비밀번호가 일치하지 않습니다.");
 		}
 
@@ -151,7 +152,7 @@ public class UsrMemberController {
 		int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
 		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정이 완료되었습니다.", nickName),
-				"../member/myPage");
+				"../member/myInfo");
 	}
 	@RequestMapping("/usr/member/findLoginId")
 	public String showFindLoginId() {

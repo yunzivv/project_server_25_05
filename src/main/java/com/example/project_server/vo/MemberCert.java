@@ -22,6 +22,7 @@ public class MemberCert {
 	private LocalDate endDate;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+	private boolean alert;
 
 	private int extra__rankNum;
 	private String extra__memberName;
