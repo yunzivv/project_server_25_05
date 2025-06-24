@@ -257,7 +257,6 @@ CREATE TABLE memberCert (
                             alert BOOLEAN NOT NULL DEFAULT ture COMMENT '알림 설정'
 );
 
-ALTER TABLE memberCert ADD COLUMN alertDate DATE COMMENT '알림일' AFTER endDate
 
 INSERT INTO memberCert SET
                            memberid = 3,
