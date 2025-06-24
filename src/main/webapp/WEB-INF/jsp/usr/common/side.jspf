@@ -13,10 +13,10 @@
 	</ul>
 
 	<ul class="workbook_sub_menu hidden flex flex-col w-full">
-		<li><a class="block w-52 py-4 px-8" href="../cert/analysis">우대 자격증 분석
+		<li><a class="block w-52 py-4 px-8" href="../cert/analysis">자격증 공부하기
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보
-			<i class="highlight fa-solid fa-circle"></i></a></li>
+<%--		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보--%>
+<%--			<i class="highlight fa-solid fa-circle"></i></a></li>--%>
 		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>
@@ -108,14 +108,17 @@
 		$(".hamburgerIcon").click(function () {
 			$(".side_bar_right").toggleClass("active");
 			$(".side_bar_right_menu_box").toggleClass("active");
+			$('.top_bar_first_menu').toggleClass('disable-hover');
 		});
 		$(".side_bar_right").click(function () {
 			$(".hamburgerIcon").removeClass("active");
 			$(".side_bar_right").removeClass("active");
 			$(".side_bar_right_menu_box").removeClass("active");
+			$('.top_bar_first_menu').toggleClass('disable-hover');
 		});
 		$(".side_bar_right_menu_box").click(function (e) {
 			e.stopPropagation();
 		});
+
 	});
 </script>

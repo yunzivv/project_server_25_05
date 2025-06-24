@@ -12,8 +12,8 @@
 
         $('.side_bar_left').addClass('active');
         $('.side_bar_left > .workbook_sub_menu ').removeClass('hidden');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a').addClass('active');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(2) > a > i').addClass('active');
+        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a').addClass('active');
+        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a > i').addClass('active');
     });
 
 </script>
@@ -35,20 +35,82 @@
                             <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
                             <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
                             <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
-                            <%--                        <button type="button" onclick="nextStep()"--%>
-                            <%--                                class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base absolute bottom-2 right-12">--%>
-                            <%--                            다음--%>
-                            <%--                        </button>--%>
                         </div>
 
                         <div id="step2" class="step w-full px-20 py-4 text-lg">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
-                            <div>
-                                <select id="certSelect" name="certId" required>
-                                    <c:forEach var="cert" items="${examCertNames}">
-                                        <option value="${cert.id}">${cert.name}</option>
-                                    </c:forEach>
-                                </select>
+                            <div class="relative">
+
+                                <input type="hidden" name="certId" id="certIdHidden_workbook">
+                                <input type="text" name="certName" id="certNameInput_workbook" placeholder="자격증 검색"
+                                       autocomplete="on">
+                                <div id="autocompleteBox_workbook"
+                                     style="border: 1px solid #ccc; display: none; position: absolute;"></div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#certNameInput_workbook").on("input", function () {
+                                            const keyword = $.trim($(this).val());
+                                            if (keyword.length < 2) return;
+
+                                            const box = $("#autocompleteBox_workbook");
+                                            const input = $("#certNameInput_workbook");
+                                            const form = input.closest("form");
+
+                                            $.getJSON("/usr/workbook/autoComplete", {keyword: keyword}, function (data) {
+                                                console.log(data);
+                                                box.empty();
+
+                                                if (data.length === 0) {
+                                                    box.hide();
+                                                    return;
+                                                }
+
+                                                $.each(data, function (i, cert) {
+                                                    const item = $("<div>")
+                                                        .text(cert.extra__certName)
+                                                        .css({
+                                                            padding: "5px",
+                                                            cursor: "pointer"
+                                                        })
+                                                        .on("click", function () {
+                                                            input.val(cert.extra__certName);
+                                                            $("#certIdHidden_workbook").val(cert.certId);
+                                                            box.hide();
+                                                        });
+
+                                                    box.append(item);
+                                                });
+
+                                                const inputOffset = input.offset();
+                                                const formOffset = form.offset();
+
+                                                const inputPosition = input.position();
+
+                                                box.css({
+                                                    left: inputPosition.left + input.outerWidth() / 2,
+                                                    top: inputPosition.top + input.outerHeight(),
+                                                    width: input.outerWidth(),
+                                                    position: "absolute",
+                                                    background: "#fff",
+                                                    zIndex: 1000,
+                                                    transform: "translateX(-50%)"
+                                                }).show();
+                                            });
+                                        });
+
+                                        // 바깥 클릭 시 자동완성 박스 숨기기
+                                        $(document).on("click", function (e) {
+                                            const box = $("#autocompleteBox_workbook");
+                                            const input = $("#certNameInput_workbook");
+
+                                            if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
+                                                box.hide();
+                                            }
+                                        });
+                                    });
+                                </script>
+
                             </div>
                         </div>
 
@@ -151,7 +213,6 @@
                             시작하기
                         </button>
                     </div>
-
                 </form>
             </div>
             <div></div>
@@ -164,113 +225,146 @@
 </div>
 
 <script>
-    const steps = document.querySelectorAll(".step");
+    $(document).ready(function () {
+        const $steps = $(".step");
 
-    function getCurrentStepIndex() {
-        for (let i = 0; i < steps.length; i++) {
-            if (steps[i].classList.contains("active")) {
-                return i;
-            }
-        }
-        return 0;
-    }
+        $("#startBtn").on("click", function (e) {
+            e.preventDefault(); // 기본 submit 막고 수동 제출
 
-    function showStep(index) {
-        steps.forEach((step, i) => {
-            // 단계
-            step.classList.remove("active");
-            step.classList.remove("end");
-            if (i === index) {
-                step.classList.add("active");
-            } else if (i < index) {
-                step.classList.add("end");
-            }
-        });
-
-        const prevBtn = $("#prevBtn");
-        const nextBtn = $("#nextBtn");
-        const startBtn = $("#startBtn");
-
-        // 이전 버튼
-        if (index === 0) {
-            prevBtn.addClass("hidden");
-        } else {
-            prevBtn.removeClass("hidden");
-        }
-
-        // 다음 버튼
-        if (index === steps.length - 1) {
-            nextBtn.addClass("hidden");
-            startBtn.removeClass("hidden")
-        } else {
-            nextBtn.removeClass("hidden");
-            startBtn.addClass("hidden")
-        }
-    }
-
-    function prevStep() {
-        const currentStep = getCurrentStepIndex();
-
-        if (currentStep > 0) {
-            showStep(currentStep - 1);
-        }
-    }
-
-    function nextStep() {
-        const currentStep = getCurrentStepIndex();
-
-        const loginedMemberId = ${loginedMemberId != null ? loginedMemberId : 0};
-        const loginUri = '${loginUri}';
-
-        console.log(loginedMemberId);
-        console.log(loginUri);
-
-        if (loginedMemberId === 0) {
-            alert("로그인 후 이용 가능합니다.");
-            window.location.href = loginUri;
-            console.log(loginUri);
-            return;
-        }
-
-        if (currentStep === 1) {
-            const cert = document.getElementById("certSelect").value;
-            if (!cert) {
-                alert("자격증과 과목을 선택해주세요.");
+            const certId = $("#certIdHidden_workbook").val();
+            if (!certId) {
+                alert("자격증을 선택해주세요.");
                 return;
             }
-        }
 
-        if (currentStep === 2) {
-            const modeElement = document.querySelector("input[name='mode']:checked");
-
-            if (!modeElement) {
+            const $mode = $("input[name='mode']:checked");
+            if ($mode.length === 0) {
                 alert("풀이 방식을 선택해주세요.");
                 return;
             }
-            const mode = modeElement.value;
-            const questionCount = document.getElementById("questionCount")?.value;
-            const examId = document.getElementById("examId")?.value;
+
+            const mode = $mode.val();
 
             if (mode === "random") {
-
-                if (!questionCount || questionCount < 0) {
-                    alert("문제 수를 입력해주세요.");
+                const count = $("#questionCount").val();
+                if (!count || count < 0) {
+                    alert("문제 수를 선택해주세요.");
                     return;
                 }
             } else if (mode === "past") {
+                const examId = $("#examId").val();
                 if (!examId || examId < 0) {
                     alert("기출시험을 선택해주세요.");
                     return;
                 }
             }
+
+            // 모든 조건 통과 시 form 제출
+            $(this).closest("form").submit();
+        });
+
+        function getCurrentStepIndex() {
+            let index = 0;
+            $steps.each(function (i) {
+                if ($(this).hasClass("active")) {
+                    index = i;
+                    return false; // break
+                }
+            });
+            return index;
         }
 
-        if (currentStep < steps.length - 1) {
-            showStep(currentStep + 1);
-        }
-    }
+        function showStep(index) {
+            $steps.each(function (i) {
+                const $step = $(this);
+                $step.removeClass("active end");
+                if (i === index) {
+                    $step.addClass("active");
+                } else if (i < index) {
+                    $step.addClass("end");
+                }
+            });
 
+            const $prevBtn = $("#prevBtn");
+            const $nextBtn = $("#nextBtn");
+            const $startBtn = $("#startBtn");
+
+            // 이전 버튼
+            if (index === 0) {
+                $prevBtn.addClass("hidden");
+            } else {
+                $prevBtn.removeClass("hidden");
+            }
+
+            // 다음 버튼
+            if (index === $steps.length - 1) {
+                $nextBtn.addClass("hidden");
+                $startBtn.removeClass("hidden");
+            } else {
+                $nextBtn.removeClass("hidden");
+                $startBtn.addClass("hidden");
+            }
+        }
+
+        window.prevStep = function () {
+            const currentStep = getCurrentStepIndex();
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
+        };
+
+        window.nextStep = function () {
+            const currentStep = getCurrentStepIndex();
+
+            const loginedMemberId = ${loginedMemberId != null ? loginedMemberId : 0};
+            const loginUri = '${loginUri}';
+
+            console.log(loginedMemberId);
+            console.log(loginUri);
+
+            if (loginedMemberId === 0) {
+                alert("로그인 후 이용 가능합니다.");
+                window.location.href = loginUri;
+                return;
+            }
+
+            if (currentStep === 1) {
+                const cert = $("#certIdHidden_workbook").val();
+                if (!cert) {
+                    alert("자격증과 과목을 선택해주세요.");
+                    return;
+                }
+            }
+
+            if (currentStep === 2) {
+                const $mode = $("input[name='mode']:checked");
+                if ($mode.length === 0) {
+                    alert("풀이 방식을 선택해주세요.");
+                    return;
+                }
+
+                const mode = $mode.val();
+                const questionCount = $("#questionCount").val();
+                const examId = $("#examId").val();
+
+                if (mode === "random") {
+                    if (!questionCount || questionCount < 0) {
+                        alert("문제 수를 입력해주세요.");
+                        return;
+                    }
+                } else if (mode === "past") {
+                    if (!examId || examId < 0) {
+                        alert("기출시험을 선택해주세요.");
+                        return;
+                    }
+                }
+            }
+
+            if (currentStep < $steps.length - 1) {
+                showStep(currentStep + 1);
+            }
+        };
+    });
 </script>
-
 
 <%@ include file="../common/foot.jspf" %>

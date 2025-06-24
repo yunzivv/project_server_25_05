@@ -41,6 +41,15 @@ public class UsrExamController {
         return "/usr/cert/workbook";
     }
 
+    @RequestMapping("/usr/workbook/autoComplete")
+    @ResponseBody
+    public List<Exam> autoComplete(HttpServletRequest req, String keyword) {
+
+        List<Exam> autoCompleteExams = examService.getAutoCompleteExams(keyword);
+
+        return autoCompleteExams;
+    }
+
     @GetMapping("/usr/api/examByCertId")
     @ResponseBody
     public ResultData getExamByCertId(int certId) {

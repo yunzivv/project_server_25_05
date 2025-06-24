@@ -148,6 +148,13 @@ input {
 	transform: translateY(-11px) rotate(-45deg);
 }
 
+.top_bar_first_menu.disable-hover:hover > ul {
+	display: none !important;
+}
+
+
+
+
 /*sub-menu highlight*/
 i.highlight {
 	position: relative;
