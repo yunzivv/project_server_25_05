@@ -257,6 +257,8 @@ CREATE TABLE memberCert (
                             certificateNumber VARCHAR(100) COMMENT '자격번호'
 );
 
+ALTER TABLE memberCert ADD COLUMN alertDate DATE COMMENT '알림일' AFTER endDate
+
 INSERT INTO memberCert SET
                            memberid = 3,
                            certId = 3,

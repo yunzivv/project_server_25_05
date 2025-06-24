@@ -17,7 +17,7 @@
                 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <g transform="translate(40,0) scale(-1,1)">
                         <path d="M0,0 H40 V40 H0 V0 ZM0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
-                              fill="#d9d9d9" fill-rule="evenodd"/>
+                              fill="#f3f3f3" fill-rule="evenodd"/>
                     </g>
                 </svg>
 
@@ -25,7 +25,7 @@
 
                 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0,0 H40 V40 H0 V0 Z M0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
-                          fill="#d9d9d9" fill-rule="evenodd"/>
+                          fill="#f3f3f3" fill-rule="evenodd"/>
                 </svg>
                 <div class="flex-grow"></div>
             </div>
@@ -101,7 +101,7 @@
                 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <g transform="translate(40,0) scale(-1,1)">
                         <path d="M0,0 H40 V40 H0 V0 ZM0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
-                              fill="#d9d9d9" fill-rule="evenodd"/>
+                              fill="#f3f3f3" fill-rule="evenodd"/>
                     </g>
                 </svg>
 
@@ -109,7 +109,7 @@
 
                 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0,0 H40 V40 H0 V0 Z M0,0 C5,0 10,0 13,5 C15,10 17,20 17,30 C17,35 19,38 24,40 H40 V0 H0 Z"
-                          fill="#d9d9d9" fill-rule="evenodd"/>
+                          fill="#f3f3f3" fill-rule="evenodd"/>
                 </svg>
                 <div class="flex-grow"></div>
             </div>

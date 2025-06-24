@@ -71,4 +71,14 @@
         WHERE id = #{loginedMemberId}
     </update>
 
+    <select id="getCertsEndingOn" parameterType="com.example.project_server.vo.MemberCert">
+        SELECT MC.*,
+               M.name AS extra__memberName,
+               M.email AS extra__memberEmail
+        FROM memberCert MC
+                 JOIN `member` M
+                      ON MC.memberId = M.id
+        WHERE endDate = #{targetDate};
+    </select>
+
 </mapper>

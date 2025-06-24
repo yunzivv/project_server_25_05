@@ -48,11 +48,23 @@ input {
 }
 
 .bg-grey-1 {
-	background-color: #dcdcdc;
+	background-color: #f3f3f3;
 }
 
 .bg-grey-2 {
-	background-color: #d9d9d9;
+	background-color: #EBEBEB;
+}
+
+.bg-grey-3 {
+	background-color: #dedede;
+}
+
+.bg-grey-4 {
+	background-color: #d1d1d1;
+}
+
+.bg-grey-5 {
+	background-color: #c3c3c3;
 }
 
 .text-blue-1 {
@@ -178,12 +190,12 @@ li i.active{
 .side_bar_left > ul > li > a {
 	background-color: transparent;
 	transition: background-color 5s;
-	color: #d9d9d9;
+	color: #f3f3f3;
 }
 
 .side_bar_left > ul > li > a.active {
 	border-radius: 32px;
-	background-color: #d9d9d9;
+	background-color: #f3f3f3;
 	color: #2f73d9;
 }
 
@@ -191,7 +203,7 @@ li i.active{
 	position: relative;
 	border-top-left-radius: 32px;
 	border-bottom-left-radius: 32px;
-	background-color: #d9d9d9;
+	background-color: #f3f3f3;
 	color: #2f73d9;
 }
 

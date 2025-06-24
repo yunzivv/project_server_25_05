@@ -1,10 +1,12 @@
 package com.example.project_server.repository;
 
+import com.example.project_server.vo.MemberCert;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.project_server.vo.Member;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Mapper
 public interface MemberRepository {
@@ -25,4 +27,5 @@ public interface MemberRepository {
 
     public Member getMemberByNameAndEmail(String name, String email);
 
+    public List<MemberCert> getCertsEndingOn(LocalDate targetDate);
 }

@@ -21,6 +21,7 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+
 	@Autowired
 	private MailService mailService;
 
