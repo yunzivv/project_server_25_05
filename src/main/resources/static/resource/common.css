@@ -27,7 +27,6 @@ hr {
 	border-top: 3px solid #afafaf;
 }
 
-
 input {
 	/*z-index: 1;*/
 }
@@ -76,6 +75,12 @@ input {
 .border-grey-1 {
 	border: #d9d9d9 solid 1px;
 }
+
+.h-body {
+	height: calc(100vh - 100px);
+}
+
+
 
 /*top-bar*/
 .header {

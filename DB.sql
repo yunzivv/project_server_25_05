@@ -248,9 +248,10 @@ CREATE TABLE memberCert (
                             id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                             memberId INT UNSIGNED NOT NULL,
                             certId INT UNSIGNED,
-                            certname VARCHAR(100) NOT NULL,
+                            certName VARCHAR(100) NOT NULL,
                             startDate DATE COMMENT '취득일',
                             endDate DATE COMMENT '만료일',
+                            alertDate DATE COMMENT '알림일',
                             regDate DATETIME NOT NULL,
                             updateDate DATETIME NOT NULL,
                             certificateNumber VARCHAR(100) COMMENT '자격번호'

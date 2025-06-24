@@ -157,26 +157,25 @@ public class UsrMemberController {
 		return "usr/member/findLoginId";
 	}
 
+	@RequestMapping("/usr/member/findLoginPw")
+	public String showFindLoginPw() {
+
+		return "usr/member/findLoginPw";
+	}
+
 	@RequestMapping("/usr/member/doFindLoginId")
 	@ResponseBody
-	public String doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
+	public ResultData doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
 								String email) {
 
 		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		if (member == null) {
-			return Ut.jsHistoryBack("F-1", "존재하지 않는 아이디입니다.");
+			return ResultData.from("F-1", "존재하지 않는 회원입니다.", "member", null);
 		}
 
 		// 화면에서 출력
-		return Ut.jsReplace("S-1", Ut.f("너의 아이디는 [ %s ] 야", member.getLoginId()), afterFindLoginIdUri);
-	}
-
-
-	@RequestMapping("/usr/member/findLoginPw")
-	public String showFindLoginPw() {
-
-		return "usr/member/findLoginPw";
+		return ResultData.from("S-1", "회원 아이디를 찾았습니다.", "member", member);
 	}
 
 	@RequestMapping("/usr/member/doFindLoginPw")
