@@ -28,8 +28,7 @@
                  JOIN certificate C ON E.certId = C.id
         WHERE C.name LIKE CONCAT('%', #{keyword}, '%')
         GROUP BY E.certId, C.name
-        ORDER BY C.name
-        LIMIT 5;
+        ORDER BY C.name;
     </select>
 
     <select id="getExamCertNames"

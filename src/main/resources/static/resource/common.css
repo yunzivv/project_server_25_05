@@ -296,7 +296,7 @@ li i.active{
 
 /*main*/
 .helpMenu {
-	border: #f3f3f3 solid 1px;
+	border: #EBEBEB solid 1px;
 	transition: all .3s;
 }
 
@@ -340,8 +340,8 @@ li i.active{
 /*workbook*/
 .step {
 	position: absolute;
-	left: 120%;
-	transition: all .3s;
+	left: 150%;
+	transition: all .5s;
 }
 
 .step.active {
@@ -349,7 +349,7 @@ li i.active{
 }
 
 .step.end {
-	left: -100%;
+	left: -200%;
 }
 
 

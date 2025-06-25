@@ -82,12 +82,13 @@
     </div>
 
     <div class="mainSection2 my-32">
+<%--    <div>CERTIFY에서 자격증의 모든 것을 함께하세요</div>--%>
         <div class="flex justify-center">
             <%--hub--%>
-            <a href="/usr/cert/analysis"
+            <a href="../cert/analysis"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
-                <div class="mb-4">
-                    <div class="menuTitle text-xl font-black mb-2">HUB</div>
+                <div class="mb-6">
+                    <div class="menuTitle text-3xl font-black mb-3">HUB</div>
                     취업공고에서 발췌한 우대 자격증을 직무별로 확인할 수 있습니다.
                 </div>
                 <div class="flex justify-between">
@@ -101,10 +102,10 @@
             </a>
 
             <%--workbook--%>
-            <a href="/usr/workbook/showWorkbook/"
+            <a href="../workbook/showWorkbook"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
-                <div class="mb-4">
-                    <div class="menuTitle text-xl font-black mb-2">WORK BOOK</div>
+                <div class="mb-6">
+                    <div class="menuTitle text-3xl font-black mb-3">WORK BOOK</div>
                     원하는 자격증과 문제 풀이 방식을 선택하여 자격증 공부를 쉽게 할 수 있습니다.
                 </div>
                 <div class="flex justify-between">
@@ -118,10 +119,10 @@
             </a>
 
             <%--wallet--%>
-            <a href="/usr/member/myCert"
+            <a href="../member/myCert"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
-                <div class="mb-4">
-                    <div class="menuTitle text-xl font-black mb-2">WALLET</div>
+                <div class="mb-6">
+                    <div class="menuTitle text-3xl font-black mb-3">WALLET</div>
                     내 자격증을 등록하고 만료일 전 알람을 받아보세요.
                 </div>
                 <div class="flex justify-between">

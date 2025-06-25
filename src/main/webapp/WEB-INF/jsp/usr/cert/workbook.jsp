@@ -26,9 +26,9 @@
 
     <div class="flex-grow"><%--style="height: calc(100vh - 100px);"--%>
 
-        <div class="mx-auto my-10 w-9/12" style="height: 600px;">
+        <div class="mx-auto my-16 w-9/12" style="height: 600px;">
 
-            <ol class="flex items-center w-full px-20 mb-10">
+            <ol class="flex items-center w-full px-20 mb-6">
                 <!-- Step 1 -->
                 <li class="flex items-center w-full">
                     <span class="flex items-center justify-center w-10 h-10 bg-blue-2 rounded-full lg:w-12 lg:h-12 shrink-0">
@@ -46,9 +46,9 @@
                             <i class="fa-solid fa-address-card text-grey-5 text-xl"></i>
                             <i class="fa-solid fa-check text-xl text-grey-1 hidden"></i>
                         </span>
-                        <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
-                            <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
-                        </div>
+                    <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
+                        <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
+                    </div>
                 </li>
 
                 <!-- Step 3 -->
@@ -57,9 +57,9 @@
                             <i class="fa-solid fa-gears text-grey-5 text-xl"></i>
                             <i class="fa-solid fa-check text-xl text-grey-1 hidden"></i>
                         </span>
-                        <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
-                            <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
-                        </div>
+                    <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
+                        <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
+                    </div>
                 </li>
 
                 <!-- Step 4 -->
@@ -72,73 +72,64 @@
             <div id="examInputForm" class="overflow-hidden h-full px-16 py-10 rounded-2xl bg-grey-1">
                 <form action="showExam" class="h-full relative">
                     <div>
-                        <div id="step1" class="step w-full font-semibold text-xl active">
+                        <div id="step1" class="step w-full font-semibold text-xl active" style="height: 460px;">
                             <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
                             <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
                             <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
                         </div>
 
-                        <div id="step2" class="step w-full text-lg">
+                        <div id="step2" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
-                            <div class="relative">
-
-                                <input type="hidden" name="certId" id="certIdHidden_workbook">
-                                <input type="text" name="certName" id="certNameInput_workbook" placeholder="자격증 검색"
-                                       autocomplete="on">
-                                <div id="autocompleteBox_workbook"
-                                     style="border: 1px solid #ccc; display: none; position: absolute;"></div>
+                            <div class="flex justify-end">
+                                <div class="flex items-center h-12 border-grey-3 rounded-md px-2 bg-white relative">
+                                    <input type="hidden" name="certId" id="certIdHidden_workbook">
+                                    <input type="text" name="certName" id="certNameInput_workbook" placeholder="자격증 검색"
+                                           autocomplete="off" class="focus:outline-none"/>
+                                    <div id="autocompleteBox_workbook"
+                                         class="absolute top-full left-1/2 w-full transform -translate-x-1/2 border border-grey-2 bg-white shadow-md rounded-b-md max-h-48 overflow-y-auto hidden">
+                                    </div>
+                                    <button type="button" class="text-grey-5 mr-2">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
 
                                 <script>
-                                    $(document).ready(function () {
-                                        $("#certNameInput_workbook").on("input", function () {
-                                            const keyword = $.trim($(this).val());
-                                            if (keyword.length < 2) return;
+                                    function searchCertName() {
+                                        const keyword = $.trim($("#certNameInput_workbook").val());
+                                        if (keyword.length < 2) return;
 
-                                            const box = $("#autocompleteBox_workbook");
-                                            const input = $("#certNameInput_workbook");
-                                            const form = input.closest("form");
+                                        const box = $("#autocompleteBox_workbook");
+                                        const input = $("#certNameInput_workbook");
 
-                                            $.getJSON("/usr/workbook/autoComplete", {keyword: keyword}, function (data) {
-                                                console.log(data);
-                                                box.empty();
+                                        $.getJSON("/usr/workbook/autoComplete", {keyword: keyword}, function (data) {
+                                            box.empty();
 
-                                                if (data.length === 0) {
-                                                    box.hide();
-                                                    return;
-                                                }
+                                            if (data.length === 0) {
+                                                box.hide();
+                                                return;
+                                            }
 
-                                                $.each(data, function (i, cert) {
-                                                    const item = $("<div>")
-                                                        .text(cert.extra__certName)
-                                                        .css({
-                                                            padding: "5px",
-                                                            cursor: "pointer"
-                                                        })
-                                                        .on("click", function () {
-                                                            input.val(cert.extra__certName);
-                                                            $("#certIdHidden_workbook").val(cert.certId);
-                                                            box.hide();
-                                                        });
-
-                                                    box.append(item);
-                                                });
-
-                                                const inputOffset = input.offset();
-                                                const formOffset = form.offset();
-
-                                                const inputPosition = input.position();
-
-                                                box.css({
-                                                    left: inputPosition.left + input.outerWidth() / 2,
-                                                    top: inputPosition.top + input.outerHeight(),
-                                                    width: input.outerWidth(),
-                                                    position: "absolute",
-                                                    background: "#fff",
-                                                    zIndex: 1000,
-                                                    transform: "translateX(-50%)"
-                                                }).show();
+                                            $.each(data, function (i, cert) {
+                                                $("<div>")
+                                                    .text(cert.extra__certName)
+                                                    .css({
+                                                        padding: "5px",
+                                                        cursor: "pointer"
+                                                    })
+                                                    .on("click", function () {
+                                                        input.val(cert.extra__certName);
+                                                        $("#certIdHidden_workbook").val(cert.certId);
+                                                        box.hide();
+                                                    }).appendTo(box);
                                             });
+
+                                            box.show();
                                         });
+                                    }
+
+                                    $(document).ready(function () {
+                                        $("#certNameInput_workbook").on("input", searchCertName);
+                                        $("#searchBtn_workbook").on("click", searchCertName);
 
                                         // 바깥 클릭 시 자동완성 박스 숨기기
                                         $(document).on("click", function (e) {
@@ -150,12 +141,16 @@
                                             }
                                         });
                                     });
-                                </script>
 
+                                </script>
+                            </div>
+                            <div class="">
+                                ㄱ
+                                가스기사
                             </div>
                         </div>
 
-                        <div id="step3" class="step w-full text-lg">
+                        <div id="step3" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
                             <div class="mode-toggle flex justify-around mt-36">
                                 <div class="relative">
@@ -233,7 +228,7 @@
                             </script>
                         </div>
 
-                        <div id="step4" class="step h-5/6 w-full text-xl">
+                        <div id="step4" class="step h-5/6 w-full text-xl" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">문제 풀이를 시작합니다.</div>
                         </div>
 

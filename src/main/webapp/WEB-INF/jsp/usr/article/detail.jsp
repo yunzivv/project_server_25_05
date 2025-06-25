@@ -3,6 +3,7 @@
 
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head.jspf" %>
+<%@ include file="../common/side.jspf" %>
 <%@ include file="../common/toastUiEditorLib.jspf" %>
 
 <script>
@@ -79,17 +80,17 @@
 
 <div class="article container m-auto">
 
-    <div class="border bg-neutral-100 border-neutral-400 rounded-xl px-8 py-5">
+    <div class="rounded-xl p-10 mt-12">
 
         <div class="header p-3">
 
-            <div class="title text-3xl font-medium">${article.title }</div>
+            <div class="title text-3xl font-bold">${article.title }</div>
 
             <div class="articleInfo flex my-2">
                 <!-- 				article info -->
                 <div class="writeInfo text-neutral-800 m-1">
-                    <span> 작성 일자 : ${article.regDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>
-                    <span> 수정 일자 : ${article.updateDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>
+                    <span> 작성일 : ${article.regDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>
+<%--                    <span> 수정 일자 : ${article.updateDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>--%>
                     <span> 작성자 : ${article.extra__writer } &nbsp;&nbsp;&nbsp;</span>
                     <span> 게시판 : ${article.extra__boardCode } &nbsp;&nbsp;&nbsp;</span>
                     <span class="article_detail_hit_count"> 조회수 : ${article.hits } </span>
@@ -103,12 +104,12 @@
                         <c:when test="${article.userReaction}">
                             <button class="good_btn btn btn-circle btn-xl btn-outline bg-neutral-300 px-3 text-base whitespace-nowrap"
                                     onClick="articleDetail_doReaction_toArticle()" value="${article.userReaction}">
-                                👍 ${article.extra__sumReaction }</button>
+                                <i class="fa-solid fa-heart"></i> ${article.extra__sumReaction }</button>
                         </c:when>
                         <c:otherwise>
                             <button class="good_btn btn btn-circle btn-xl btn-outline px-3 text-base whitespace-nowrap"
                                     onClick="articleDetail_goodReaction_toArticle()" value="${article.userReaction}">
-                                👍 ${article.extra__sumReaction }</button>
+                                <i class="fa-regular fa-heart"></i> ${article.extra__sumReaction }</button>
                         </c:otherwise>
                     </c:choose>
 

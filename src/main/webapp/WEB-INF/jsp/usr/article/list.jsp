@@ -10,8 +10,8 @@
 <%--</button>--%>
 
 <a href="../article/write" style="top: auto; left: auto; bottom: 50px; right: 50px;"
-   class="write-btn block fixed w-12 h-12 rounded-full border-grey-3 flex items-center justify-center cursor-pointer">
-    <i class="fa-solid fa-pen text-grey-5"></i>
+   class="write-btn block fixed w-16 h-16 rounded-full border-grey-3 flex items-center justify-center cursor-pointer">
+    <i class="fa-solid fa-pen text-grey-5 text-xl"></i>
 </a>
 
 <div class="flex w-full">
@@ -71,7 +71,7 @@
 
             <div class="container text-center">
                 <!-- 		article table -->
-                <div class="mx-auto my-4 border-solid border rounded-xl overflow-hidden">
+                <div class="mx-auto my-4 rounded-xl overflow-hidden">
                     <table class="w-full text-sm text-center rtl:text-right">
                         <thead class="h-5 text-base text-grey-1 bg-blue-2">
                         <tr>
@@ -86,7 +86,7 @@
                         </thead>
                         <tbody>
                         <c:forEach var="article" items="${articles }">
-                            <tr class="border-b bg-grey-1 border-neutral-300 hover:bg-neutral-300">
+                            <tr class="bg-grey-1 hover:bg-neutral-200">
                                 <td class="px-5 py-3"
                                     onclick="location.href='detail?id=${article.id}'">${article.id }</td>
                                 <td class="px-5 py-3"
