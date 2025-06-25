@@ -26,18 +26,59 @@
 
     <div class="flex-grow"><%--style="height: calc(100vh - 100px);"--%>
 
-        <div class="mx-auto my-12 w-9/12" style="height: 600px;">
-            <div id="examInputForm" class="overflow-hidden h-full p-12 rounded-2xl bg-grey-1 relative">
-                <form action="showExam" class="h-full">
+        <div class="mx-auto my-10 w-9/12" style="height: 600px;">
 
+            <ol class="flex items-center w-full px-20 mb-10">
+                <!-- Step 1 -->
+                <li class="flex items-center w-full">
+                    <span class="flex items-center justify-center w-10 h-10 bg-blue-2 rounded-full lg:w-12 lg:h-12 shrink-0">
+                        <i class="fa-solid fa-crosshairs text-grey-1 text-xl"></i>
+                        <i class="fa-solid fa-check text-xl text-grey-1 hidden"></i>
+                    </span>
+                    <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
+                        <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
+                    </div>
+                </li>
+
+                <!-- Step 2 -->
+                <li class="flex items-center w-full">
+                        <span class="flex items-center justify-center w-10 h-10 bg-grey-1 rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <i class="fa-solid fa-address-card text-grey-5 text-xl"></i>
+                            <i class="fa-solid fa-check text-xl text-grey-1 hidden"></i>
+                        </span>
+                        <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
+                            <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
+                        </div>
+                </li>
+
+                <!-- Step 3 -->
+                <li class="flex items-center w-full">
+                        <span class="flex items-center justify-center w-10 h-10 bg-grey-1 rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <i class="fa-solid fa-gears text-grey-5 text-xl"></i>
+                            <i class="fa-solid fa-check text-xl text-grey-1 hidden"></i>
+                        </span>
+                        <div class="flex-1 h-1 bg-grey-3 mx-2 rounded overflow-hidden">
+                            <div class="progress-bar h-full bg-blue-2 transition-all duration-700 ease-in-out w-0"></div>
+                        </div>
+                </li>
+
+                <!-- Step 4 -->
+                <li class="flex items-center">
+                        <span class="flex items-center justify-center w-10 h-10 bg-grey-1 rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <i class="fa-solid fa-play text-grey-5 text-xl"></i>
+                        </span>
+                </li>
+            </ol>
+            <div id="examInputForm" class="overflow-hidden h-full px-16 py-10 rounded-2xl bg-grey-1">
+                <form action="showExam" class="h-full relative">
                     <div>
-                        <div id="step1" class="step w-full font-semibold text-xl px-20 py-4 active">
+                        <div id="step1" class="step w-full font-semibold text-xl active">
                             <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
                             <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
                             <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
                         </div>
 
-                        <div id="step2" class="step w-full px-20 py-4 text-lg">
+                        <div id="step2" class="step w-full text-lg">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
                             <div class="relative">
 
@@ -114,7 +155,7 @@
                             </div>
                         </div>
 
-                        <div id="step3" class="step w-full px-20 py-4 text-lg">
+                        <div id="step3" class="step w-full text-lg">
                             <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
                             <div class="mode-toggle flex justify-around mt-36">
                                 <div class="relative">
@@ -192,18 +233,18 @@
                             </script>
                         </div>
 
-                        <div id="step4" class="step h-5/6 w-full px-20 py-4 text-xl">
+                        <div id="step4" class="step h-5/6 w-full text-xl">
                             <div class="my-6 text-4xl font-black">문제 풀이를 시작합니다.</div>
                         </div>
 
-                        <div class="absolute bottom-12 left-12">
+                        <div class="absolute bottom-0 left-0">
                             <button type="button" onclick="prevStep()" id="prevBtn"
                                     class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base hidden">
                                 이전
                             </button>
                         </div>
                     </div>
-                    <div class="absolute bottom-12 right-12">
+                    <div class="absolute bottom-0 right-0">
                         <button type="button" onclick="nextStep()" id="nextBtn"
                                 class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base">
                             다음
@@ -227,6 +268,40 @@
 <script>
     $(document).ready(function () {
         const $steps = $(".step");
+
+        function updateStepperUI(index) {
+            const $stepperItems = $("ol > li"); // stepper 상단 li들
+
+            $stepperItems.each(function (i) {
+                const li = $(this);
+                const circle = li.find("span");
+                const progressBar = li.find(".progress-bar");
+                const icons = circle.find("i");
+
+                const mainIcon = icons.not(".fa-check");
+                const checkIcon = icons.filter(".fa-check");
+
+                // 초기화
+                circle.removeClass("bg-blue-2").addClass("bg-grey-1");
+                mainIcon.removeClass("text-grey-1").addClass("text-grey-5").removeClass("hidden");
+                checkIcon.addClass("hidden");
+                progressBar.removeClass("w-full").addClass("w-0");
+
+                if (i === index) {
+                    // 현재 단계
+                    circle.removeClass("bg-grey-1").addClass("bg-blue-2");
+                    mainIcon.removeClass("text-grey-5").addClass("text-grey-1").removeClass("hidden");
+                    checkIcon.addClass("hidden");
+                } else if (i < index) {
+                    // 지난 단계
+                    circle.removeClass("bg-grey-1").addClass("bg-blue-2");
+                    mainIcon.addClass("hidden");
+                    checkIcon.removeClass("hidden");
+                    progressBar.removeClass("w-0").addClass("w-full");
+                }
+            });
+        }
+
 
         $("#startBtn").on("click", function (e) {
             e.preventDefault(); // 기본 submit 막고 수동 제출
@@ -284,6 +359,8 @@
                     $step.addClass("end");
                 }
             });
+
+            updateStepperUI(index);
 
             const $prevBtn = $("#prevBtn");
             const $nextBtn = $("#nextBtn");

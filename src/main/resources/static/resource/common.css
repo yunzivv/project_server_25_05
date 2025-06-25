@@ -76,7 +76,27 @@ input {
 }
 
 .text-grey-1 {
-	color: #dcdcdc;
+	color: #f3f3f3;
+}
+
+.text-grey-2 {
+	color: #EBEBEB;
+}
+
+.text-grey-3 {
+	color: #dedede;
+}
+
+.text-grey-4 {
+	color: #d1d1d1;
+}
+
+.text-grey-5 {
+	color: #c3c3c3;
+}
+
+.text-grey-6 {
+	color: #b6b6b6;
 }
 
 .border-blue-2 {
@@ -85,8 +105,25 @@ input {
 }
 
 .border-grey-1 {
-	border: #d9d9d9 solid 1px;
+	border: #f3f3f3 solid 1px;
 }
+
+.border-grey-2 {
+	border: #EBEBEB solid 1px;
+}
+
+.border-grey-3 {
+	border: #dedede solid 1px;
+}
+
+.border-grey-4 {
+	border: #d1d1d1 solid 1px;
+}
+
+.border-grey-5 {
+	border: #c3c3c3 solid 1px;
+}
+
 
 .h-body {
 	height: calc(100vh - 100px);
@@ -259,22 +296,19 @@ li i.active{
 
 /*main*/
 .helpMenu {
-	background-color: rgba(220, 220, 220, 0.3);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05),
-	0 -4px 8px rgba(0, 0, 0, 0.05),
-	4px 0 8px rgba(0, 0, 0, 0.05),
-	-4px 0 8px rgba(0, 0, 0, 0.05);
+	border: #f3f3f3 solid 1px;
 	transition: all .3s;
 }
 
 .helpMenu:hover {
-	color: #2f73d9;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
-	4px 0 8px rgba(0, 0, 0, 0.1);
-	transition: all .3s;
+	border: #2f73d9 solid 1px;
 }
 
-.iconBox {
+.helpMenu:hover .menuTitle {
+	color: #2f73d9;
+}
+
+.iconBox, .menuTitle {
 	transition: all .3s;
 }
 
@@ -286,8 +320,14 @@ li i.active{
 
 /*analysis*/
 .analysis-element {
-	background-color: rgba(220, 220, 220, 0.3);
+	background-color: rgba(220, 220, 220, 0.23);
 	border-radius: 2rem;
+}
+
+.analysis-element .title {
+	font-weight: 600;
+	font-size: 1.125rem;
+	line-height: 1.75rem;
 }
 
 .topCertsByField .chart_container {
@@ -334,3 +374,16 @@ input[type="radio"]:checked + .toggle-btn {
 	font-weight: bold;
 }
 
+
+/*article*/
+.write-btn, .write-btn > i {
+	transition: all .2s;
+}
+
+.write-btn:hover {
+	background-color: #dedede;
+}
+
+.write-btn:hover > i{
+	color: #8e8e8e;
+}

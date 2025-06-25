@@ -54,27 +54,27 @@
                 <li class="top_bar_first_menu relative">
                     <a class="block px-6 flex items-center h-full" href="../article/list?boardId=0">COMMUNITY
                         <i class="highlight fa-solid fa-circle"></i></a>
-                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">
-                        <li><a href="../article/list?boardId=1" class="block h-full p-3 hover:text-neutral-">공지사항</a>
-                        </li>
-                        <li><a href="../article/list?boardId=2" class="block h-full p-3 hover:text-neutral-">시험후기</a>
-                        </li>
-                        <li><a href="../article/list?boardId=3" class="block h-full p-3 hover:text-neutral-">자료실</a>
-                        </li>
-                        <li><a href="../article/list?boardId=4" class="block h-full p-3 hover:text-neutral-">QNA</a>
-                        </li>
-                        <li><a href="../article/list?boardId=5" class="block h-full p-3 hover:text-neutral-">자유게시판</a>
-                        </li>
-                    </ul>
+<%--                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">--%>
+<%--                        <li><a href="../article/list?boardId=1" class="block h-full p-3 hover:text-neutral-">공지사항</a>--%>
+<%--                        </li>--%>
+<%--                        <li><a href="../article/list?boardId=2" class="block h-full p-3 hover:text-neutral-">시험후기</a>--%>
+<%--                        </li>--%>
+<%--                        <li><a href="../article/list?boardId=3" class="block h-full p-3 hover:text-neutral-">자료실</a>--%>
+<%--                        </li>--%>
+<%--                        <li><a href="../article/list?boardId=4" class="block h-full p-3 hover:text-neutral-">QNA</a>--%>
+<%--                        </li>--%>
+<%--                        <li><a href="../article/list?boardId=5" class="block h-full p-3 hover:text-neutral-">자유게시판</a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
                 </li>
                 <li class="top_bar_first_menu relative"><a class="block px-6 flex items-center h-full"
                                                            href="../member/myInfo">WALLET
                     <i class="highlight fa-solid fa-circle"></i></a>
-                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">
-                        <li><a href="../member/myCert" class="block h-full p-3 hover:text-neutral-">내 자격증</a></li>
-                        <li><a href="../member/myInfo" class="block h-full p-3 hover:text-neutral-">내 정보</a></li>
-                        <li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>
-                    </ul>
+<%--                    <ul class="absolute hidden w-full t-full py-5 text-center text-lg bg-grey-1">--%>
+<%--                        <li><a href="../member/myCert" class="block h-full p-3 hover:text-neutral-">내 자격증</a></li>--%>
+<%--                        <li><a href="../member/myInfo" class="block h-full p-3 hover:text-neutral-">내 정보</a></li>--%>
+<%--                        <li><a href="../member/myPost" class="block h-full p-3 hover:text-neutral-">내 게시물</a></li>--%>
+<%--                    </ul>--%>
                 </li>
                 <li class="w-20"></li>
                 <li>

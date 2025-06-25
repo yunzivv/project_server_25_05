@@ -6,8 +6,8 @@
 	<ul class="hub_sub_menu hidden flex flex-col w-full">
 		<li><a class="block w-52 py-4 px-8" href="../cert/analysis">우대 자격증 분석
 			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보
-			<i class="highlight fa-solid fa-circle"></i></a></li>
+<%--		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보--%>
+<%--			<i class="highlight fa-solid fa-circle"></i></a></li>--%>
 		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
 			<i class="highlight fa-solid fa-circle"></i></a></li>
 	</ul>

@@ -87,11 +87,11 @@
             <a href="/usr/cert/analysis"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
                 <div class="mb-4">
-                    <div class="text-xl font-black mb-2">HUB</div>
+                    <div class="menuTitle text-xl font-black mb-2">HUB</div>
                     취업공고에서 발췌한 우대 자격증을 직무별로 확인할 수 있습니다.
                 </div>
                 <div class="flex justify-between">
-                    <div class="iconBox w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                    <div class="iconBox w-10 h-10 bg-grey-3 rounded-full flex items-center justify-center">
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">
@@ -104,11 +104,11 @@
             <a href="/usr/workbook/showWorkbook/"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
                 <div class="mb-4">
-                    <div class="text-xl font-black mb-2">WORK BOOK</div>
+                    <div class="menuTitle text-xl font-black mb-2">WORK BOOK</div>
                     원하는 자격증과 문제 풀이 방식을 선택하여 자격증 공부를 쉽게 할 수 있습니다.
                 </div>
                 <div class="flex justify-between">
-                    <div class="iconBox w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                    <div class="iconBox w-10 h-10 bg-grey-3 rounded-full flex items-center justify-center">
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">
@@ -121,11 +121,11 @@
             <a href="/usr/member/myCert"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">
                 <div class="mb-4">
-                    <div class="text-xl font-black mb-2">WALLET</div>
+                    <div class="menuTitle text-xl font-black mb-2">WALLET</div>
                     내 자격증을 등록하고 만료일 전 알람을 받아보세요.
                 </div>
                 <div class="flex justify-between">
-                    <div class="iconBox w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                    <div class="iconBox w-10 h-10 bg-grey-3 rounded-full flex items-center justify-center">
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">

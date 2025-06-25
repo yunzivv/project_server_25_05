@@ -16,12 +16,12 @@
 
         <div class="analysis_1 flex p-5">
             <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
-                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급 수<br><br>
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급 수<br></div>
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
                                                          groupingUsed="true"/>개</span>
             </div>
             <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
-                <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br>
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br></div>
                 <canvas id="postsWithCert" width="200" height="250"></canvas>
 
                 <script th:inline="javascript">
@@ -36,7 +36,7 @@
                         labels: ['조회됨', '남은부분'],
                         datasets: [{
                             data: [percent, 100 - percent],
-                            backgroundColor: ['#2f73d9', '#d9d9d9'],
+                            backgroundColor: ['#2f73d9', '#dedede'],
                             borderWidth: 0
                         }]
                     };
@@ -78,12 +78,11 @@
                 </script>
             </div>
             <div class="flex flex-col w-1/3 p-5 analysis-element h-full">
-                <div>자격증이 가장 많이 언급된 직무</div>
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 가장 많이 언급된 직무</div>
                 <div class="mt-2">
                     <canvas id="topJobCat" style="height: 200px; width: 350px;"></canvas>
                 </div>
                 <script th:inline="javascript">
-                    // 컨트롤러에서 전달한 데이터 (Thymeleaf 문법)
                     const topJobCatLabels = ${topJobCatLabels};
                     const topJobCatValues = ${topJobCatValues};
 
@@ -101,7 +100,7 @@
                             datasets: [{
                                 data: percentages,
                                 backgroundColor: [
-                                    '#2f73d9', '#64c086', '#f2cd5c', '#afafaf', '#d9d9d9'
+                                    '#2f73d9', '#64c086', '#f2cd5c', '#d1d1d1', '#dedede'
                                 ],
                                 borderWidth: 0
                             }]
@@ -121,7 +120,10 @@
                                         boxWidth: 10,
                                         boxHeight: 10,
                                         usePointStyle: true,
-                                        pointStyle: 'circle'
+                                        pointStyle: 'circle',
+                                        font: {
+                                            size: 12
+                                        }
                                     }
                                 },
                                 tooltip: {
@@ -143,9 +145,9 @@
 
         <div class="analysis_2 p-5 flex h-80">
             <div class="select_box flex flex-col w-1/3 h-96 p-5 mr-2 analysis-element rounded-3xl">
-                <div class="select_box_title flex">
-                    <div class="flex-grow font-bold p-2 ml-2">직무 선택</div>
-                    <div class="flex-grow font-bold p-2 ml-2">전문 분야 선택</div>
+                <div class="select_box_title flex title">
+                    <div class="flex-grow p-2 ml-2">직무 선택</div>
+                    <div class="flex-grow p-2 ml-2">전문 분야 선택</div>
                 </div>
                 <hr class="my-1">
                 <div class="flex overflow-y-hidden">
@@ -164,7 +166,7 @@
 
             </div>
             <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
-                <div class="job_code_name font-bold">
+                <div class="job_code_name title p-2">
                     전체 직무 자격증 언급 TOP 10
                 </div>
                 <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
@@ -190,8 +192,8 @@
                                     label: '언급 횟수',
                                     data: topCertValues,
                                     backgroundColor: [
-                                    '#2f73d9', '#64c086', '#f2cd5c', '#afafaf', '#bdbdbd', '#cbcbcb', '#d9d9d9'
-                                ],
+                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                    ],
                                     barPercentage: 0.7
                                 }]
                             },
@@ -206,14 +208,16 @@
                                 scales: {
                                     x: {
                                         beginAtZero: true,
-                                        ticks: {
-                                            precision: 0
-                                        },
                                         grid: {
                                             display: false
                                         }
                                     },
                                     y: {
+                                        ticks: {
+                                            font: {
+                                                size: 14
+                                            }
+                                        },
                                         grid: {
                                             display: false
                                         }
@@ -227,16 +231,14 @@
             </div>
         </div>
 
-        <div class="analysis_3 p-5 h-80">
-            <div class="totalCertCount">
+        <div class="analysis_3 h-screen">
 
-            </div>
             <div class="">
 
             </div>
         </div>
 
-        <div class="p-5">
+        <div class="analysis_4">
             <div class=""></div>
         </div>
 
@@ -256,50 +258,6 @@
         // $('.side_bar_left').addClass('active');
         $('.nav_box > ul > li:nth-child(1) i').addClass('active');
         $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
-        // activeSideMenu.addClass('active');
-        // activeSideMenu.children('i').addClass('active');
-
-        // const up = `
-        //     <div class="absolute" style="top: 100%; left: auto; right: 0%;">
-        //         <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-        //             <defs>
-        //                 <mask id="cutout-xy">
-        //                     <g transform="scale(-1, -1) translate(-60, -60)">
-        //                         <g transform="rotate(90 30 30)">
-        //                             <rect width="60" height="60" fill="white" />
-        //                             <circle cx="60" cy="0" r="60" fill="black" />
-        //                         </g>
-        //                     </g>
-        //                 </mask>
-        //             </defs>
-        //             <rect width="60" height="60" fill="#2f73d9" mask="url(#cutout-xy)" />
-        //         </svg>
-        //     </div>`;
-
-        // const down = `
-        //     <div class="absolute" style="top: 100%; left: auto; right: 0%;">
-        //         <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-        //             <defs>
-        //                 <mask id="cutout-x">
-        //                     <g transform="scale(-1, 1) translate(-60, 0)">
-        //                         <g transform="rotate(90 30 30)">
-        //                             <rect width="60" height="60" fill="white" />
-        //                             <circle cx="60" cy="0" r="60" fill="black" />
-        //                         </g>
-        //                     </g>
-        //                 </mask>
-        //             </defs>
-        //             <rect width="60" height="60" fill="#2f73d9" mask="url(#cutout-x)" />
-        //         </svg>
-        //     </div>`;
-        //
-        //   // DOM 요소로 변환
-        // const parser = new DOMParser();
-        // const first = parser.parseFromString(up, "image/svg+xml").documentElement;
-        // const last = parser.parseFromString(down, "image/svg+xml").documentElement;
-        //
-        // activeSideMenu.prepend(first);
-        // activeSideMenu.append(last);
 
         let selectedJobCatId = null;
         $('.jobCat_list').on('click', 'li', function () {
@@ -379,7 +337,6 @@
                     const values = certs.map(cert => cert.extra__certCount);
 
                     const ctx = document.getElementById('certChart').getContext('2d');
-                    const backgroundColors = values.map((_, idx) => idx === 0 ? '#2f73d9' : '#afafaf');
 
                     new Chart(ctx, {
                         type: 'bar',
@@ -388,7 +345,9 @@
                             datasets: [{
                                 label: '언급 횟수',
                                 data: values,
-                                backgroundColor: backgroundColors,
+                                backgroundColor: [
+                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                    ],
                                 barPercentage: 0.8
                             }]
                         },

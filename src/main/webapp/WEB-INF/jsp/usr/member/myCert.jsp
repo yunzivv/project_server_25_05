@@ -19,9 +19,9 @@
 
     </c:if>
     <c:if test="${not empty member}">
-        <div class="flex flex-col flex-grow px-12" style="border-top-left-radius: 3rem;">
+        <div class="flex flex-grow flex-col items-center pt-20" style="border-top-left-radius: 3rem;">
 
-            <div id="cert" class="mt-10 px-2 bg-green-300 h-screen">
+            <div id="cert" class="w-2/3 bg-green-300 h-screen">
                 <div class="flex">
                     총 자격증: ${certs.size()}개
                     <div class="flex-grow"></div>
@@ -145,7 +145,7 @@
 
             </div>
 
-            <div id="article" class="h-screen bg-blue-400"></div>
+<%--            <div id="article" class="h-screen bg-blue-400"></div>--%>
 
 
             <div class="side hidden xl:block w-52"></div>

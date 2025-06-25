@@ -23,25 +23,36 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div id="memberPosts" class="flex-grow bg-red-300 flex flex-col justify-center items-center">
-        <div class="text-3xl font-bold">내 글</div>
-        <c:forEach var="article" items="${articles }">
-            <div class="p-3 rounded-md bg-white m-2" style="width: 1000px;">
-                <div class="text-2xl font-semibold ">${article.title }</div>
-                <div class="whitespace-pre-line break-words">
-                    <c:choose>
-                        <c:when test="${fn:length(article.body) > 100}">
-                            <c:out value="${fn:substring(article.body, 0, 100)}"/>...
-                        </c:when>
-                        <c:otherwise>
-                            <c:out value="${article.body}"/>
-                        </c:otherwise>
-                    </c:choose>
+    <div id="memberPosts" class="flex-grow flex flex-col justify-center items-center pt-20">
+        <div class="text-3xl font-bold w-2/3">내 글</div>
+        <div class="w-2/3 flex justify-end">
+            <a href="../article/write" class="write-btn block w-12 h-12 rounded-full border-grey-2 flex items-center justify-center cursor-pointer">
+                <i class="fa-solid fa-pen text-grey-4"></i>
+            </a>
+        </div>
+        <c:forEach var="article" items="${articles}">
+            <a href="../article/detail?id=${article.id}" class="block w-2/3">
+                <div class="p-5 rounded-lg bg-white m-3 border-grey-2 hover:shadow cursor-pointer transition">
+                    <div class="text-2xl font-semibold ">${article.title}</div>
+                    <div class="max-h-32 overflow-hidden" style="overflow-wrap: anywhere;">
+                        <c:choose>
+                            <c:when test="${fn:length(article.body) > 100}">
+                                <c:out value="${fn:substring(article.body, 0, 100)}"/>...
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${article.body}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                    <div>${article.regDate}</div>
+                    <div>
+                        <i class="fa-solid fa-heart text-grey-4"></i>${article.extra__sumReaction}
+                        <i class="fa-solid fa-message text-grey-4"></i>${article.extra__sumComment}
+                    </div>
                 </div>
-                <div>${article.regDate}</div>
-                <div>${article.extra__sumReaction} ${article.extra__sumComment}</div>
-            </div>
+            </a>
         </c:forEach>
+
         <c:if test="${empty articles }">
             <div>작성된 게시물이 없습니다.</div>
         </c:if>
