@@ -92,13 +92,13 @@
 </div>
 
 <div class="side_bar_right">
-	<div class="side_bar_right_menu_box bg-blue-2 text-white p-8">
+	<div class="side_bar_right_menu_box bg-grey-1 font-semibold text-xl p-8">
 		<ul>
-			<li><a href="../member/login" class="block p-6 text-xl">도움말</a></li>
-			<li><a href="../member/join" class="block p-6 text-xl">회원가입</a></li>
-			<li><a href="../member/login" class="block p-6 text-xl">로그인</a></li>
-			<li><a href="../member/doLogout" class="block p-6 text-xl">로그아웃</a></li>
-			<li><a href="../member/login" class="block p-6 text-xl">문의사항</a></li>
+			<li><a href="../member/login" class="block p-6">도움말</a></li>
+			<li><a href="../member/join" class="block p-6">회원가입</a></li>
+			<li><a href="../member/login" class="block p-6">로그인</a></li>
+			<li><a href="../member/doLogout" class="block p-6">로그아웃</a></li>
+			<li><a href="../member/login" class="block p-6">문의사항</a></li>
 		</ul>
 
 	</div>

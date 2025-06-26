@@ -145,7 +145,7 @@
 
             </div>
 
-<%--            <div id="article" class="h-screen bg-blue-400"></div>--%>
+                <%--            <div id="article" class="h-screen bg-blue-400"></div>--%>
 
 
             <div class="side hidden xl:block w-52"></div>
@@ -168,57 +168,11 @@
             $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
             $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a').addClass('active');
             $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a > i').addClass('active');
+        } else {
+            document.location.href = "../member/login";
         }
 
     });
-    <%--const input = document.getElementById("certNameInput");--%>
-    <%--const hiddenInput = document.getElementById("certIdHidden");--%>
-    <%--const box = document.getElementById("autocompleteBox");--%>
-    <%--const encodedValue = encodeURIComponent(rawValue);--%>
-
-    <%--clearTimeout(timer);--%>
-    <%--timer = setTimeout(() => {--%>
-    <%--    fetch(`/usr/cert/autoComplete?keyword=${encodedKeyword}`)--%>
-    <%--        .then(res => res.json())--%>
-    <%--        .then(data => {--%>
-    <%--            console.log(data);--%>
-    <%--            box.innerHTML = "";--%>
-    <%--            if (data.length === 0) {--%>
-    <%--                box.style.display = "none";--%>
-    <%--                return;--%>
-    <%--            }--%>
-
-    <%--            data.forEach(cert => {--%>
-    <%--                const item = document.createElement("div");--%>
-    <%--                item.textContent = cert.name;--%>
-    <%--                item.style.padding = "5px";--%>
-    <%--                item.style.cursor = "pointer";--%>
-
-    <%--                item.addEventListener("click", () => {--%>
-    <%--                    input.value = cert.name;--%>
-    <%--                    hiddenInput.value = cert.id;--%>
-    <%--                    box.style.display = "none";--%>
-    <%--                });--%>
-
-    <%--                box.appendChild(item);--%>
-    <%--            });--%>
-
-    <%--            const rect = input.getBoundingClientRect();--%>
-    <%--            box.style.left = `${rect.left}px`;--%>
-    <%--            box.style.top = `${rect.bottom + window.scrollY}px`;--%>
-    <%--            box.style.width = `${input.offsetWidth}px`;--%>
-    <%--            box.style.position = "absolute";--%>
-    <%--            box.style.background = "#fff";--%>
-    <%--            box.style.zIndex = "1000";--%>
-    <%--            box.style.display = "block";--%>
-    <%--        });--%>
-    <%--}, 300);--%>
-
-    <%--document.addEventListener("click", function (e) {--%>
-    <%--    if (!box.contains(e.target) && e.target !== input) {--%>
-    <%--        box.style.display = "none";--%>
-    <%--    }--%>
-    <%--});--%>
 
 </script>
 
