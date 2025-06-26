@@ -400,7 +400,40 @@ li i.active{
 	background-color: #2f73d9;
 }
 
+/*join*/
+.join_cover {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: all 1s ease;
+	transform-origin: left;
+	z-index: 10;
+}
+.join_cover.slide {
+	width: 50% !important;
+}
 
+.join_form {
+	transition: all .2s;
+}
+
+.joinStep {
+	position: absolute;
+	top: 0;
+	left: 150%;
+	width: 100%;
+	height: 100%;
+	transition: all 0.5s ease-in-out;
+}
+
+.joinStep.active {
+	left: 0;
+}
+
+.joinStep.prev {
+	left: -150%;
+}
 
 /*analysis*/
 .analysis-element {

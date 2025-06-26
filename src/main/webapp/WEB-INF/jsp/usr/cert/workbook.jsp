@@ -391,9 +391,6 @@
             const loginedMemberId = ${loginedMemberId != null ? loginedMemberId : 0};
             const loginUri = '${loginUri}';
 
-            console.log(loginedMemberId);
-            console.log(loginUri);
-
             if (loginedMemberId === 0) {
                 alert("로그인 후 이용 가능합니다.");
                 window.location.href = loginUri;
