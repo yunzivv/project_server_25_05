@@ -37,7 +37,7 @@
                         </div>
                         <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">
                             <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                            <div class="font-black text-lg">CERTIFY</div>
+                            <div class="font-black text-lg text-Kakao3">CERTIFY</div>
                             <a href="modify"
                                class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>
                         </div>

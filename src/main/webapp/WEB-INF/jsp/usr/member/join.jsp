@@ -9,18 +9,25 @@
     $(document).ready(function () {
         $('.back').addClass('hidden');
 
-        // 애니메이션 처리
+        setTimeout(function () {
+            const coverLogo = $('.member_loading');
+            coverLogo.addClass('actived');
+            coverLogo.on('transitionend', function () {
+                coverLogo.addClass('hidden');
+            });
+        }, 1300);
+
         setTimeout(function () {
             const $cover = $('.join_cover');
             $cover.addClass('slide');
             $cover.on('transitionend', function () {
                 $cover.addClass('hidden');
             });
-        }, 3000);
+        }, 1500);
 
         setTimeout(function () {
             $('.join_form').removeClass('opacity-0');
-        }, 4000);
+        }, 1800);
 
         const $steps = $(".step");
 
@@ -53,14 +60,36 @@
         }
 
         $(".next-btn").on("click", function () {
+            $('.text-red-500').addClass('hidden');
+
             const currentIndex = getCurrentStepIndex();
             const nextIndex = currentIndex + 1;
 
+            if (currentIndex === 0) {
+                const name = $('input[name="name"]').val();
+                const birthday = $('input[name="birthday"]').val();
+
+
+                if (!name) {
+                    $('#name-error').removeClass('hidden');
+                    return;
+                }
+                if (!birthday) {
+                    $('#birthday-error').removeClass('hidden');
+                    return;
+                }
+            }
+
             if (currentIndex === 1) {
+                const id = $('input[name="loginId"]').val();
                 const pw = $('input[name="loginPw"]').val();
                 const pwCheck = $('input[name="checkLoginPw"]').val();
                 const pwValid = /^[A-Za-z0-9!@#$%^&*()_+\[\]{};':"\\|,.<>\/?`~\-]{6,}$/.test(pw);
 
+                if (!id) {
+                    $('#id-error').removeClass('hidden');
+                    return;
+                }
                 if (!pwValid) {
                     $('#pw-error').removeClass('hidden');
                     $('#pw-check-error').addClass('hidden');
@@ -69,9 +98,6 @@
                     $('#pw-check-error').removeClass('hidden');
                     $('#pw-error').addClass('hidden');
                     return;
-                } else {
-                    $('#pw-error').addClass('hidden');
-                    $('#pw-check-error').addClass('hidden');
                 }
             }
 
@@ -169,7 +195,11 @@
      style="background-color: rgba(0, 0, 0, 0.3);">
 
     <div class="flex w-3/5 h-2/3 bg-grey-1 rounded-3xl shadow-2xl overflow-hidden relative">
-        <div class="join_cover bg-grey-1 rounded-3xl"></div>
+        <div class="member_loading folding-text absolute w-full h-full z-50 text-10xl">
+            <span>C</span><span>E</span><span>R</span><span>T</span><span>I</span><span>F</span><span>Y</span>
+        </div>
+        <div class="join_cover bg-grey-1 rounded-3xl text-8xl">
+        </div>
         <div class="join_form w-1/2 h-full flex flex-col justify-center items-center opacity-0">
             <form name="login" action="doJoin" method="POST" class="w-5/6 h-full flex flex-col items-center">
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
@@ -177,31 +207,46 @@
                     <!-- Step 1 -->
                     <div class="step step-1 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center active">
                         <input type="text" name="name"
-                               class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"
-                               placeholder="이름">
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="이름"/>
+                        <div class="error text-red-500 text-sm hidden" id="name-error">이름을 입력하세요.</div>
                         생년월일
                         <input type="date" name="birthday"
-                               class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white">
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"/>
+                        <div class="error text-red-500 text-sm hidden" id="birthday-error">생년월일을 입력하세요.</div>
                         <%--                        <button type="button" class="next-btn">다음</button>--%>
                     </div>
 
                     <!-- Step 2 -->
                     <div class="step step-2 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
-                        <input type="text" name="loginId" placeholder="아이디"/>
-                        <input type="password" name="loginPw" autocomplete="new-password" placeholder="비밀번호"/>
-                        <div class="text-red-500 text-sm hidden" id="pw-error">비밀번호는 영어, 숫자, 특수기호 6글자 이상만 가능합니다..</div>
-                        <input type="password" name="checkLoginPw" autocomplete="new-password" placeholder="비밀번호 확인"/>
-                        <div class="text-red-500 text-sm hidden" id="pw-check-error">비밀번호가 일치하지 않습니다.</div>
+                        <input type="text" name="loginId"
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="아이디"/>
+                        <div class="error text-red-500 text-sm hidden" id="id-error">아이디를 입력하세요.
+                        </div>
+                        <input type="password" name="loginPw"
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="비밀번호"/>
+                        <div class="error text-red-500 text-sm hidden" id="pw-error">비밀번호는 영어, 숫자, 특수기호 6글자 이상만 가능합니다.
+                        </div>
+                        <input type="password" name="checkLoginPw"
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="비밀번호 확인"/>
+                        <div class="error text-red-500 text-sm hidden" id="pw-check-error">비밀번호가 일치하지 않습니다.</div>
                         <%--                        <button type="button" class="prev-btn">이전</button>--%>
                         <%--                        <button type="button" class="next-btn">다음</button>--%>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="step step-3 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
-                        <input type="tel" name="cellPhone" placeholder="전화번호 (숫자만)"/>
-                        <div class="text-red-500 text-sm hidden" id="phone-error">전화번호 형식이 올바르지 않습니다.</div>
-                        <input type="email" name="email" placeholder="이메일"/>
-                        <div class="text-red-500 text-sm hidden" id="email-error">이메일 형식이 올바르지 않습니다.</div>
+                        <input type="tel" name="cellPhone" pattern="[0-9]{11}" required
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="전화번호(숫자만)"/>
+                        <div class="error text-red-500 text-sm hidden" id="phone-error">전화번호 형식이 올바르지 않습니다.</div>
+                        <input type="email" name="email"
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="e-mail">
+                        <div class="error text-red-500 text-sm hidden" id="email-error">이메일 형식이 올바르지 않습니다.</div>
                         <%--                        <button type="button" class="prev-btn">이전</button>--%>
                         <button type="submit">회원가입</button>
                     </div>
@@ -209,16 +254,16 @@
 
                 <div class="mt-auto flex justify-between w-1/2 px-6 pb-8 absolute bottom-0 left-0">
                     <button type="button"
-                            class="prev-btn hidden bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">
+                            class="prev-btn hidden bg-grey-3 text-white font-bold py-2 px-4 rounded">
                         이전
                     </button>
                     <div class="flex-grow"></div>
                     <button type="button"
-                            class="next-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            class="next-btn bg-blue-2 text-white font-bold py-2 px-4 rounded">
                         다음
                     </button>
                     <button type="submit"
-                            class="submit-btn hidden bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            class="submit-btn hidden bg-blue-2 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                         회원가입
                     </button>
                 </div>
@@ -289,9 +334,10 @@
                     </defs>
                     <rect width="100" height="100" fill="#2f73d9" mask="url(#join_down)"/>
                 </svg>
-
-
             </div>
+            <a href="login" class="block max-w-max absolute text-grey-1 font-bold" style="left: 20px; bottom: 20px;">SIGN
+                IN <i class="ml-2 fa-solid fa-angle-right"></i>
+            </a>
         </div>
     </div>
 </div>

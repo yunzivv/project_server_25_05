@@ -16,12 +16,14 @@
 
         <div class="analysis_1 flex p-5">
             <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급 수<br></div>
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
+                    수<br></div>
                 <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
                                                          groupingUsed="true"/>개</span>
             </div>
-            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된 공고<br></div>
+            <div class="postsWithCert flex-grow p-5 mr-2 analysis-element">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
+                    공고<br></div>
                 <canvas id="postsWithCert" width="200" height="250"></canvas>
 
                 <script th:inline="javascript">
@@ -77,8 +79,10 @@
                     });
                 </script>
             </div>
-            <div class="flex flex-col w-1/3 p-5 analysis-element h-full">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 가장 많이 언급된 직무</div>
+            <div class="flex flex-col w-1/4 p-5 analysis-element h-full">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 가장 많이
+                    언급된 직무
+                </div>
                 <div class="mt-2">
                     <canvas id="topJobCat" style="height: 200px; width: 350px;"></canvas>
                 </div>
@@ -143,7 +147,7 @@
             </div>
         </div>
 
-        <div class="analysis_2 p-5 flex h-80">
+        <div class="analysis_2 p-5 flex">
             <div class="select_box flex flex-col w-1/3 h-96 p-5 mr-2 analysis-element rounded-3xl">
                 <div class="select_box_title flex title">
                     <div class="flex-grow p-2 ml-2">직무 선택</div>
@@ -231,14 +235,76 @@
             </div>
         </div>
 
-        <div class="analysis_3 h-screen">
+        <div class="analysis_3 p-5 flex h-80">
+            <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
+                <div class="job_code_name title p-2">
+                    전체 직무 자격증 언급 TOP 10
+                </div>
+                <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
+                <div class="chart_container">
+                    <canvas id="certChart2" height="270" style="margin:20px;"></canvas>
+                </div>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    const topCertLabels2 = ${topCertLabels};
+                    const topCertValues2 = ${topCertValues};
+                    /*]]>*/
 
-            <div class="">
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const ctx = document.getElementById('certChart2').getContext('2d');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: topCertLabels2,
+                                datasets: [{
+                                    label: '언급 횟수',
+                                    data: topCertValues2,
+                                    backgroundColor: [
+                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                    ],
+                                    barPercentage: 0.7
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            display: false
+                                        }
+                                    },
+                                    y: {
+                                        ticks: {
+                                            font: {
+                                                size: 14
+                                            }
+                                        },
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+
+            </div>
+            <div class="w-1/3">
 
             </div>
         </div>
 
         <div class="analysis_4">
+
             <div class=""></div>
         </div>
 
@@ -346,8 +412,8 @@
                                 label: '언급 횟수',
                                 data: values,
                                 backgroundColor: [
-                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
-                                    ],
+                                    '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                ],
                                 barPercentage: 0.8
                             }]
                         },

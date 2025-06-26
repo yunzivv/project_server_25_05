@@ -78,7 +78,7 @@
                             <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
                         </div>
 
-                        <div id="examStep2" class="step w-full text-lg" style="height: 460px;">
+                        <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
                             <div class="flex justify-end">
                                 <div class="flex items-center h-12 border-grey-3 rounded-md px-2 bg-white relative">
@@ -144,7 +144,7 @@
 
                                 </script>
                             </div>
-                            <div class="">
+                            <div class="flex-grow p-3">
                                 ㄱ
                                 가스기사
                             </div>

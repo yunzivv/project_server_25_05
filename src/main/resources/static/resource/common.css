@@ -87,7 +87,9 @@ input {
 
 
 /*lib*/
-
+.text-10xl {
+	font-size: 10rem;
+}
 
 .text-jamsil1 {
 	font-family: 'jamsil1', sans;
@@ -379,6 +381,8 @@ li i.active{
 }
 
 /*main*/
+
+
 .helpMenu {
 	border: #EBEBEB solid 1px;
 	transition: all .3s;
@@ -400,21 +404,86 @@ li i.active{
 	background-color: #2f73d9;
 }
 
-/*join*/
+
+/*member*/
+.member_loading {
+	font-family: 'Kakao3', sans;
+	color: #2f73d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	perspective: 1000px;
+	gap: 5px;
+	transition: all .4s;
+}
+
+.member_loading.actived {
+	color: rgba(0,0,0,0%);
+}
+
+.folding-text {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	perspective: 1000px;
+	gap: 5px;
+}
+
+.folding-text span {
+	display: inline-block;
+	transform-origin: bottom;
+	transform: rotateX(90deg);
+	opacity: 0;
+	animation: foldIn 0.6s ease forwards;
+}
+
+.folding-text span:nth-child(1) { animation-delay: 0s; }
+.folding-text span:nth-child(2) { animation-delay: 0.1s; }
+.folding-text span:nth-child(3) { animation-delay: 0.2s; }
+.folding-text span:nth-child(4) { animation-delay: 0.3s; }
+.folding-text span:nth-child(5) { animation-delay: 0.4s; }
+.folding-text span:nth-child(6) { animation-delay: 0.5s; }
+.folding-text span:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes foldIn {
+	from {
+		transform: rotateX(90deg);
+		opacity: 0;
+	}
+	to {
+		transform: rotateX(0deg);
+		opacity: 1;
+	}
+}
+
+
+.login_cover {
+	position: absolute;
+	left: auto;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	transition: all .3s ease;
+	transform-origin: right;
+	z-index: 10;
+}
+
 .join_cover {
 	position: absolute;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	transition: all 1s ease;
+	transition: all .3s ease;
 	transform-origin: left;
 	z-index: 10;
 }
-.join_cover.slide {
+.join_cover.slide, .login_cover.slide {
 	width: 50% !important;
 }
 
-.join_form {
+.join_form, .login_form {
 	transition: all .2s;
 }
 

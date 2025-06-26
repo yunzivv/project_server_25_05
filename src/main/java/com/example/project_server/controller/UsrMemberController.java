@@ -102,7 +102,7 @@ public class UsrMemberController {
 
 		rq.logout();
 
-		return Ut.jsHistoryBack("S-1", "로그아웃 되었습니다..");
+		return Ut.jsHistoryBack("S-1", "로그아웃 되었습니다.");
 
 	}
 

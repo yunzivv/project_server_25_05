@@ -31,7 +31,7 @@
                 <div class="search-bar flex justify-between items-center h-12 px-2 text-sm mt-auto mb-0">
                     <form class="search-box flex" action="list" method="POST">
 
-                        <label for="boardId" class="flex h-12">
+                        <label for="boardId" class="flex h-12 mr-4 justify-center">
                             <select name="boardId" id="boardId"
                                     class="block flex justify-center items-center px-4 border-grey-3 rounded-lg overflow-hidden h-12">
                                 <option value="0" disabled ${boardId eq 0 ? 'selected' : ''} hidden
