@@ -7,6 +7,55 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'jamsil1';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'jamsil2';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'jamsil3';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'TheJamsil5Bold';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KorailRoundGothicBold1';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KorailRoundGothicBold2';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KorailRoundGothicBold3';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+	font-weight: 1000;
+	font-style: normal;
+}
+
 /*normalizing*/
 html>body {
 	padding: 0;
@@ -38,6 +87,32 @@ input {
 
 
 /*lib*/
+
+
+.text-jamsil1 {
+	font-family: 'jamsil1', sans;
+}
+
+.text-jamsil2 {
+	font-family: 'jamsil2', sans;
+}
+
+.text-jamsil3 {
+	font-family: 'jamsil3', sans;
+}
+
+.text-korail {
+	font-family: 'KorailRoundGothicBold1', sans;
+}
+
+.text-korail2 {
+	font-family: 'KorailRoundGothicBold2', sans;
+}
+
+.text-korail3 {
+	font-family: 'KorailRoundGothicBold3', sans;
+}
+
 .bg-blue-1 {
 	background-color: #2459a8;
 	/*#2f73d9*/
@@ -74,6 +149,7 @@ input {
 .text-blue-2 {
 	color: #2f73d9;
 }
+
 
 .text-grey-1 {
 	color: #f3f3f3;
@@ -292,6 +368,14 @@ li i.active{
 
 .side_bar_right_menu_box.active  {
 	right: 0;
+}
+
+.side_bar_right_menu_box a {
+	transition: all .2s;
+}
+
+.side_bar_right_menu_box a:hover {
+	color: #2f73d9;
 }
 
 /*main*/

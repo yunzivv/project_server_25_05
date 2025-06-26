@@ -11,30 +11,64 @@
 </script>
 
 
-<div class="h-screen flex justify-center items-center">
-    <div class="container mx-auto max-w-min p-4 bg-grey-1 border-grey-2 rounded-lg">
-        <div class="title mt-4 mb-8 text-center text-2xl font-semibold">
-            Login
-        </div>
-        <form name="login" action="doLogin" method="POST">
-            <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
-            <div class="flex flex-col items-center">
-                <input type="text" name="loginId"
-                       class="mb-6 bg-neutral-50 border border-neutral-300 text-sm rounded-lg block w-96 p-2.5"
-                       placeholder="ID">
-                <input type="text" name="loginPw"
-                       class="mb-6 bg-neutral-50 border border-neutral-300 text-sm rounded-lg block w-96  p-2.5"
-                       placeholder="Password">
-                <button type="submit"
-                        class="py-2.5 px-5 mb-2 w-96 text-sm font-large bg-blue-2 text-grey-1 rounded-lg hover:bg-neutral-700">
-                    Login
-                </button>
+<div class="login_fullPage h-screen flex justify-center items-center" style="background-color: rgba(0, 0, 0, 0.3);">
+    <div class="flex w-3/5 h-2/3 bg-grey-1 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="w-1/2 relative bg-blue-2 flex items-center">
+            <img src="/image/login2.png" alt="LOGIN IMG">
+            <div class="absolute" style="top: 0; left: 100%;">
+                <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="login_up">
+                            <g transform="rotate(90 50 50)">
+                                <rect width="100" height="100" fill="white"/>
+                                <circle cx="100" cy="0" r="100" fill="black"/>
+                            </g>
+                        </mask>
+                    </defs>
+                    <rect width="100" height="100" fill="#2f73d9" mask="url(#login_up)"/>
+                </svg>
             </div>
-        </form>
-        <div class="login-menu text-center justify-around my-4 flex">
-            <a class="hover:underline" href="join">Join</a>
-            <a class="hover:underline" href="findLoginId">Find ID</a>
-            <a class="hover:underline" href="findLoginPw">Find Password</a>
+            <div class="absolute" style="top: calc(100% - 20px); left: 100%;">
+                <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="login_down">
+                            <g transform="scale(1, -1) translate(0, -100)">
+                                <g transform="rotate(90 50 50)">
+                                    <rect width="100" height="100" fill="white"/>
+                                    <circle cx="100" cy="0" r="100" fill="black"/>
+                                </g>
+                            </g>
+                        </mask>
+                    </defs>
+                    <rect width="100" height="100" fill="#2f73d9" mask="url(#login_down)"/>
+                </svg>
+
+            </div>
+        </div>
+        <div class="w-1/2 flex flex-col justify-center items-center">
+            <div class="title w-full p-4 text-4xl font-semibold">
+                Login
+            </div>
+            <form name="login" action="doLogin" method="POST" class="w-5/6 flex flex-col items-center">
+                <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
+                <div class="flex flex-col w-2/3 h-full mb-10">
+                    <input type="text" name="loginId"
+                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"
+                           placeholder="ID">
+                    <input type="text" name="loginPw"
+                           class="bg-white border-grey- text-sm rounded-lg block p-3 mb-4"
+                           placeholder="Password">
+                    <button type="submit"
+                            class="p-3 mb-2 font-semibold bg-blue-2 text-grey-1 rounded-lg">
+                        LOG IN
+                    </button>
+                </div>
+                <div class="login-menu flex justify-around my-4 px-20 w-full">
+                    <a class=" hover:underline" href="join">Join</a>
+                    <a class=" hover:underline" href="findLoginId">Find ID</a>
+                    <a class=" hover:underline" href="findLoginPw">Find PW</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
