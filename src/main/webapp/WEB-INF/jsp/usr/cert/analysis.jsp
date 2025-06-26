@@ -15,75 +15,11 @@
         <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
         <div class="analysis_1 flex p-5">
-            <div class="postsWithCert w-1/4 p-5 mr-2 analysis-element">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
-                    수<br></div>
-                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
-                                                         groupingUsed="true"/>개</span>
-            </div>
-            <div class="postsWithCert flex-grow p-5 mr-2 analysis-element">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
-                    공고<br></div>
-                <canvas id="postsWithCert" width="200" height="250"></canvas>
-
-                <script th:inline="javascript">
-                    const postsCtx = document.getElementById('postsWithCert').getContext('2d');
-
-                    const postCount = ${postCount};
-                    const totalPosts = ${totalPosts};
-
-                    const percent = totalPosts === 0 ? 0 : ((postCount / totalPosts) * 100).toFixed(1);
-
-                    const data = {
-                        labels: ['조회됨', '남은부분'],
-                        datasets: [{
-                            data: [percent, 100 - percent],
-                            backgroundColor: ['#2f73d9', '#dedede'],
-                            borderWidth: 0
-                        }]
-                    };
-
-                    const centerTextPlugin = {
-                        id: 'centerText',
-                        afterDraw(chart) {
-                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
-                            ctx.save();
-
-                            ctx.font = 'bold 30px "SUIT-Regular"';
-                            ctx.fillStyle = '#2f73d9';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-
-                            const centerX = left + width / 2 + 5;
-                            const centerY = top + height / 2 + 5;
-                            ctx.fillText(percent + '%', centerX, centerY);
-
-                            ctx.restore();
-                        }
-                    };
-
-                    const options = {
-                        cutout: '70%',
-                        responsive: false,
-                        plugins: {
-                            legend: {display: false},
-                            tooltip: {enabled: false}
-                        }
-                    };
-
-                    new Chart(postsCtx, {
-                        type: 'doughnut',
-                        data: data,
-                        options: options,
-                        plugins: [centerTextPlugin]
-                    });
-                </script>
-            </div>
-            <div class="flex flex-col w-1/4 p-5 analysis-element h-full">
+            <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
                 <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 가장 많이
                     언급된 직무
                 </div>
-                <div class="mt-2">
+                <div class="my-2 flex justify-center">
                     <canvas id="topJobCat" style="height: 200px; width: 350px;"></canvas>
                 </div>
                 <script th:inline="javascript">
@@ -145,6 +81,83 @@
                     });
                 </script>
             </div>
+            <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
+                    공고<br></div>
+                <div class="my-2 flex justify-center">
+                    <canvas id="postsWithCert" style="height: 200px; width: 200px;"></canvas>
+                </div>
+                <script th:inline="javascript">
+                    const postsCtx = document.getElementById('postsWithCert').getContext('2d');
+
+                    const postCount = ${postCount};
+                    const totalPosts = ${totalPosts};
+
+                    const percent = totalPosts === 0 ? 0 : ((postCount / totalPosts) * 100).toFixed(1);
+
+                    const data = {
+                        labels: ['자격증 언급 공고', '자격증 무관'],
+                        datasets: [{
+                            data: [percent, 100 - percent],
+                            backgroundColor: ['#2f73d9', '#dedede'],
+                            borderWidth: 0
+                        }]
+                    };
+
+                    const centerTextPlugin = {
+                        id: 'centerText',
+                        afterDraw(chart) {
+                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
+                            ctx.save();
+
+                            ctx.font = 'bold 30px "SUIT-Regular"';
+                            ctx.fillStyle = '#2f73d9';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+
+                            const centerX = left + width / 2 + 5;
+                            const centerY = top + height / 2 + 5;
+                            ctx.fillText(percent + '%', centerX, centerY);
+
+                            ctx.restore();
+                        }
+                    };
+
+                    const options = {
+                        cutout: '70%',
+                        responsive: false,
+                        plugins: {
+                            legend: {display: false},
+                            tooltip: {
+                                enabled: true, // ✅ 말풍선 활성화
+                                callbacks: {
+                                    label: function (context) {
+                                        if (context.dataIndex === 0) {
+                                            return `${postCount}개`;
+                                        } else {
+                                            return '${totalPosts - postCount}개'; // 남은부분엔 말풍선 안 뜨게
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    new Chart(postsCtx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: options,
+                        plugins: [centerTextPlugin]
+                    });
+                </script>
+
+            </div>
+            <div class="postsWithCert flex-grow p-5 mr-2 analysis-element">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
+                    수<br></div>
+                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
+                                                         groupingUsed="true"/>개</span>
+            </div>
         </div>
 
         <div class="analysis_2 p-5 flex">
@@ -169,13 +182,13 @@
                 </div>
 
             </div>
-            <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
+            <div class="topCertsByField p-5 analysis-element w-2/3">
                 <div class="job_code_name title p-2">
                     전체 직무 자격증 언급 TOP 10
                 </div>
                 <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
                 <div class="chart_container">
-                    <canvas id="certChart" height="270" style="margin:20px;"></canvas>
+                    <canvas id="certChart" height="500" style="margin:20px;"></canvas>
                 </div>
                 <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -196,7 +209,7 @@
                                     label: '언급 횟수',
                                     data: topCertValues,
                                     backgroundColor: [
-                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7', '#e7e7e7', '#e7e7e7', '#e7e7e7'
                                     ],
                                     barPercentage: 0.7
                                 }]
@@ -242,7 +255,7 @@
                 </div>
                 <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
                 <div class="chart_container">
-                    <canvas id="certChart2" height="270" style="margin:20px;"></canvas>
+                    <canvas id="certChart2" height="500" style="margin:20px;"></canvas>
                 </div>
                 <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -261,7 +274,7 @@
                                     label: '언급 횟수',
                                     data: topCertValues2,
                                     backgroundColor: [
-                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7', '#e7e7e7', '#e7e7e7', '#e7e7e7'
                                     ],
                                     barPercentage: 0.7
                                 }]
@@ -412,7 +425,7 @@
                                 label: '언급 횟수',
                                 data: values,
                                 backgroundColor: [
-                                    '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7'
+                                    '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7', '#e7e7e7', '#e7e7e7', '#e7e7e7'
                                 ],
                                 barPercentage: 0.8
                             }]

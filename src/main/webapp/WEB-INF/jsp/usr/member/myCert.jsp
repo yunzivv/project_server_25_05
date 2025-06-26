@@ -31,11 +31,11 @@
                     </button>
                 </div>
                 <div>
-                    <label class="inline-flex items-center cursor-pointer">
-                        <span class="mr-6">만료일 알림 설정</span>
-                        <input type="checkbox" value="" class="sr-only peer">
-                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-                    </label>
+                        <%--                    <label class="inline-flex items-center cursor-pointer">--%>
+                        <%--                        <span class="mr-6">만료일 알림 설정</span>--%>
+                        <%--                        <input type="checkbox" value="" class="sr-only peer">--%>
+                        <%--                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>--%>
+                        <%--                    </label>--%>
 
                 </div>
                     <%--알림설정 관리--%>
@@ -119,7 +119,7 @@
 
                 </div>
                 <table>
-                    <thead class="h-5 text-base text-neutral-200 bg-neutral-800">
+                    <thead class="h-5 text-grey-1 bg-neutral-800">
                     <tr>
                         <th scope="col" class="px-6 py-4">NO</th>
                         <th scope="col" class="px-6 py-4">자격증명</th>
@@ -127,6 +127,7 @@
                         <th scope="col" class="px-6 py-4">취득일</th>
                         <th scope="col" class="px-6 py-4">만료일</th>
                         <th scope="col" class="px-6 py-4"></th>
+                        <th scope="col" class="px-6 py-4">알림 설정</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -141,9 +142,25 @@
                                 <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
                                     수정
                                 </button>
-                                <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
+                                <button class="px-3 py-2 mr-2 rounded-md border-grey-2"
+                                        onclick="confirmDelete(${cert.id})">
                                     삭제
                                 </button>
+                            </td>
+                            <td>
+                                <label class="inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer">
+                                    <div class="relative w-11 h-6 bg-gray-200 rounded-full
+                                          peer-checked:after:translate-x-full
+                                          rtl:peer-checked:after:-translate-x-full
+                                          peer-checked:after:border-white
+                                          after:content-[''] after:absolute after:top-[2px] after:start-[2px]
+                                          after:bg-white after:border-gray-300 after:border
+                                          after:rounded-full after:h-5 after:w-5
+                                          after:transition-all
+                                          peer-checked:bg-blue-600">
+                                    </div>
+                                </label>
                             </td>
                         </tr>
                     </c:forEach>
@@ -151,10 +168,6 @@
                 </table>
 
             </div>
-
-                <%--            <div id="article" class="h-screen bg-blue-400"></div>--%>
-
-
             <div class="side hidden xl:block w-52"></div>
             <div class="block min-[1280px]:hidden w-1/12"></div>
         </div>
@@ -181,6 +194,14 @@
 
     });
 
+</script>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            location.href = "../cert/doDelete?id=" + id;
+        }
+    }
 </script>
 
 <%@ include file="../common/foot.jspf" %>

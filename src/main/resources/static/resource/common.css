@@ -518,7 +518,7 @@ li i.active{
 }
 
 .topCertsByField .chart_container {
-	max-height: 300px;
+	max-height: 400px;
 	position: relative;
 	overflow: hidden;
 }
