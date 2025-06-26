@@ -13,8 +13,8 @@
 
 <div class="login_fullPage h-screen flex justify-center items-center" style="background-color: rgba(0, 0, 0, 0.3);">
     <div class="flex w-3/5 h-2/3 bg-grey-1 rounded-3xl shadow-2xl overflow-hidden">
-        <div class="w-1/2 relative bg-blue-2 flex items-center">
-            <img src="/image/login2.png" alt="LOGIN IMG">
+        <div class="w-1/2 relative bg-blue-2 flex items-center pt-20">
+            <img src="/image/signin2.png" alt="LOGIN IMG">
             <div class="absolute" style="top: 0; left: 100%;">
                 <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -46,21 +46,26 @@
             </div>
         </div>
         <div class="w-1/2 flex flex-col justify-center items-center">
-            <div class="title w-full p-4 text-4xl font-semibold">
-                Login
-            </div>
-            <form name="login" action="doLogin" method="POST" class="w-5/6 flex flex-col items-center">
+<%--            <div class="title w-full p-4 text-4xl font-semibold">--%>
+<%--                Login--%>
+<%--            </div>--%>
+            <form name="login" action="doLogin" method="POST" class="mt-20 w-5/6 flex flex-col items-center">
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
-                <div class="flex flex-col w-2/3 h-full mb-10">
+                <div class="flex flex-col w-2/3 h-full mb-4">
                     <input type="text" name="loginId"
-                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"
+                           class="bg-white border-grey-2 text-sm rounded-lg block p-4 mb-4"
                            placeholder="ID">
                     <input type="text" name="loginPw"
-                           class="bg-white border-grey- text-sm rounded-lg block p-3 mb-4"
+                           class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
                            placeholder="Password">
                     <button type="submit"
-                            class="p-3 mb-2 font-semibold bg-blue-2 text-grey-1 rounded-lg">
+                            class="p-3 mb-4 font-semibold bg-blue-2 text-grey-1 rounded-lg">
                         LOG IN
+                    </button>
+                    <div class="text-center py-2">------------------&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;-------------------</div>
+                    <button type="submit"
+                            class="p-3 font-semibold bg-blue-2 text-grey-1 rounded-lg">
+                        GOOGLE
                     </button>
                 </div>
                 <div class="login-menu flex justify-around my-4 px-20 w-full">

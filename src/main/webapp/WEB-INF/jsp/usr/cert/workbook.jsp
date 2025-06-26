@@ -72,13 +72,13 @@
             <div id="examInputForm" class="overflow-hidden h-full px-16 py-10 rounded-2xl bg-grey-1">
                 <form action="showExam" class="h-full relative">
                     <div>
-                        <div id="step1" class="step w-full font-semibold text-xl active" style="height: 460px;">
+                        <div id="examStep1" class="step w-full font-semibold text-xl active" style="height: 460px;">
                             <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
                             <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
                             <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
                         </div>
 
-                        <div id="step2" class="step w-full text-lg" style="height: 460px;">
+                        <div id="examStep2" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">자격증을 선택하고 문제 풀이를 시작하세요.</div>
                             <div class="flex justify-end">
                                 <div class="flex items-center h-12 border-grey-3 rounded-md px-2 bg-white relative">
@@ -150,7 +150,7 @@
                             </div>
                         </div>
 
-                        <div id="step3" class="step w-full text-lg" style="height: 460px;">
+                        <div id="examStep3" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
                             <div class="mode-toggle flex justify-around mt-36">
                                 <div class="relative">
@@ -228,7 +228,7 @@
                             </script>
                         </div>
 
-                        <div id="step4" class="step h-5/6 w-full text-xl" style="height: 460px;">
+                        <div id="examStep4" class="step h-5/6 w-full text-xl" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">문제 풀이를 시작합니다.</div>
                         </div>
 

@@ -36,23 +36,23 @@
 }
 
 @font-face {
-	font-family: 'KorailRoundGothicBold1';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
-	font-weight: 500;
+	font-family: 'Kakao1';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-ExtraBold.woff2') format('woff2');
+	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'KorailRoundGothicBold2';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
-	font-weight: 600;
+	font-family: 'Kakao2';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-ExtraBold.woff2') format('woff2');
+	font-weight: 700;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'KorailRoundGothicBold3';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
-	font-weight: 1000;
+	font-family: 'Kakao3';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2503@1.0/KakaoBigSans-ExtraBold.woff2') format('woff2');
+	font-weight: 800;
 	font-style: normal;
 }
 
@@ -101,16 +101,16 @@ input {
 	font-family: 'jamsil3', sans;
 }
 
-.text-korail {
-	font-family: 'KorailRoundGothicBold1', sans;
+.text-Kakao1 {
+	font-family: 'Kakao1', sans;
 }
 
-.text-korail2 {
-	font-family: 'KorailRoundGothicBold2', sans;
+.text-Kakao2 {
+	font-family: 'Kakao2', sans;
 }
 
-.text-korail3 {
-	font-family: 'KorailRoundGothicBold3', sans;
+.text-Kakao3 {
+	font-family: 'Kakao3', sans;
 }
 
 .bg-blue-1 {
