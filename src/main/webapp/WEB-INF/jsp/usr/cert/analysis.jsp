@@ -81,7 +81,7 @@
                     });
                 </script>
             </div>
-            <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
+            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">
                 <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
                     공고<br></div>
                 <div class="my-2 flex justify-center">
@@ -152,35 +152,112 @@
                 </script>
 
             </div>
-            <div class="postsWithCert flex-grow p-5 mr-2 analysis-element">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
-                    수<br></div>
-                <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
-                                                         groupingUsed="true"/>개</span>
+            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
+                    공고<br></div>
+                <div class="my-2 flex justify-center">
+                    <canvas id="postsWithCert2" style="height: 200px; width: 200px;"></canvas>
+                </div>
+                <script th:inline="javascript">
+                    const postsCtx2 = document.getElementById('postsWithCert2').getContext('2d');
+
+                    const postCount2 = ${postCount};
+                    const totalPosts2 = ${totalPosts};
+
+                    const percent2 = totalPosts2 === 0 ? 0 : ((postCount2 / totalPosts2) * 100).toFixed(1);
+
+                    const data2 = {
+                        labels: ['자격증 언급 공고', '자격증 무관'],
+                        datasets: [{
+                            data: [percent2, 100 - percent2],
+                            backgroundColor: ['#2f73d9', '#dedede'],
+                            borderWidth: 0
+                        }]
+                    };
+
+                    const centerTextPlugin2 = {
+                        id: 'centerText',
+                        afterDraw(chart) {
+                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
+                            ctx.save();
+
+                            ctx.font = 'bold 30px "SUIT-Regular"';
+                            ctx.fillStyle = '#2f73d9';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+
+                            const centerX = left + width / 2 + 5;
+                            const centerY = top + height / 2 + 5;
+                            ctx.fillText(percent + '%', centerX, centerY);
+
+                            ctx.restore();
+                        }
+                    };
+
+                    const options2 = {
+                        cutout: '70%',
+                        responsive: false,
+                        plugins: {
+                            legend: {display: false},
+                            tooltip: {
+                                enabled: true, // ✅ 말풍선 활성화
+                                callbacks: {
+                                    label: function (context) {
+                                        if (context.dataIndex === 0) {
+                                            return `${postCount2}개`;
+                                        } else {
+                                            return '${totalPosts2 - postCount2}개'; // 남은부분엔 말풍선 안 뜨게
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    new Chart(postsCtx2, {
+                        type: 'doughnut',
+                        data: data2,
+                        options: options2,
+                        plugins: [centerTextPlugin2]
+                    });
+                </script>
+
+            </div>
+            <div class="postsWithCert flex-grow flex flex-col">
+                <div class="flex-1 mb-4 analysis-element p-5">
+                    <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
+                        수<br></div>
+                    <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
+                                                             groupingUsed="true"/>개</span></div>
+                <div class="flex-1 analysis-element p-5">
+                dd
+                </div>
             </div>
         </div>
 
         <div class="analysis_2 p-5 flex">
-            <div class="select_box flex flex-col w-1/3 h-96 p-5 mr-2 analysis-element rounded-3xl">
-                <div class="select_box_title flex title">
-                    <div class="flex-grow p-2 ml-2">직무 선택</div>
-                    <div class="flex-grow p-2 ml-2">전문 분야 선택</div>
-                </div>
-                <hr class="my-1">
-                <div class="flex overflow-y-hidden">
-                    <%--직무 카테고리--%>
-                    <ul class="jobCat_list w-1/2 flex flex-col overflow-y-scroll">
-                        <li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>
-                        <c:forEach var="jobCat" items="${jobCats }">
-                            <li class="p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
-                        </c:forEach>
-                    </ul>
+            <div class="w-1/3 h-full">
+                <div class="select_box flex flex-col h-80 p-5 mr-2 analysis-element rounded-3xl">
+                    <div class="select_box_title flex title">
+                        <div class="flex-grow p-2 ml-2">직무 선택</div>
+                        <div class="flex-grow p-2 ml-2">전문 분야 선택</div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="flex overflow-y-hidden">
+                        <%--직무 카테고리--%>
+                        <ul class="jobCat_list w-1/2 flex flex-col overflow-y-scroll">
+                            <li class="p-2 cursor-pointer text-sm" data-id="0">전체</li>
+                            <c:forEach var="jobCat" items="${jobCats }">
+                                <li class="p-2 cursor-pointer text-sm" data-id="${jobCat.id}">${jobCat.name}</li>
+                            </c:forEach>
+                        </ul>
 
-                    <%--직무 코드--%>
-                    <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
-                    </ul>
+                        <%--직무 코드--%>
+                        <ul class="jobCode_list w-1/2 flex flex-col overflow-y-scroll">
+                        </ul>
+                    </div>
                 </div>
-
+                <div class="h-44 mr-2 mt-2 analysis-element p-5">ddd</div>
             </div>
             <div class="topCertsByField p-5 analysis-element w-2/3">
                 <div class="job_code_name title p-2">
@@ -249,68 +326,7 @@
         </div>
 
         <div class="analysis_3 p-5 flex h-80">
-            <div class="topCertsByField p-5 analysis-element w-2/3 h-96">
-                <div class="job_code_name title p-2">
-                    전체 직무 자격증 언급 TOP 10
-                </div>
-                <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
-                <div class="chart_container">
-                    <canvas id="certChart2" height="500" style="margin:20px;"></canvas>
-                </div>
-                <script th:inline="javascript">
-                    /*<![CDATA[*/
-                    const topCertLabels2 = ${topCertLabels};
-                    const topCertValues2 = ${topCertValues};
-                    /*]]>*/
 
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const ctx = document.getElementById('certChart2').getContext('2d');
-
-                        new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: topCertLabels2,
-                                datasets: [{
-                                    label: '언급 횟수',
-                                    data: topCertValues2,
-                                    backgroundColor: [
-                                        '#2f73d9', '#64c086', '#f2cd5c', '#c1c1c1', '#d1d1d1', '#dedede', '#e7e7e7', '#e7e7e7', '#e7e7e7', '#e7e7e7'
-                                    ],
-                                    barPercentage: 0.7
-                                }]
-                            },
-                            options: {
-                                indexAxis: 'y',
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                },
-                                scales: {
-                                    x: {
-                                        beginAtZero: true,
-                                        grid: {
-                                            display: false
-                                        }
-                                    },
-                                    y: {
-                                        ticks: {
-                                            font: {
-                                                size: 14
-                                            }
-                                        },
-                                        grid: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    });
-                </script>
-
-            </div>
             <div class="w-1/3">
 
             </div>

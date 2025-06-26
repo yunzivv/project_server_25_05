@@ -99,6 +99,28 @@
         </where>
     </select>
 
+    <select id="getCertTypeRank" parameterType="int" resultType="map">
+        SELECT
+        c.isNational AS extra__certType,
+        COUNT(cm.id) AS extra__certCountByType
+        FROM
+        certMention cm
+        JOIN
+        certificate c ON cm.certId = c.id
+        <where>
+            <if test="jobCatId != 0">
+                cm.jobCatId = #{jobCatId}
+            </if>
+            <if test="jobCodeId != 0">
+                AND cm.jobCodeId = #{jobCodeId}
+            </if>
+        </where>
+        GROUP BY
+        c.isNational
+        ORDER BY
+        c.isNational DESC
+    </select>
+
     <select id="getCertByName" parameterType="String"
             resultType="com.example.project_server.vo.Certificate">
         SELECT *

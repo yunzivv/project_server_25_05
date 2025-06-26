@@ -22,6 +22,9 @@ public class Certificate {
 
 	private int extra__certCount;
 
+	private int extra__certType;
+	private int extra__certCountByType;
+
 	public Certificate(int id, String name){
 		this.id = id;
 		this.name = name;

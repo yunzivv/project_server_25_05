@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface CertificateRepository {
@@ -45,4 +46,6 @@ public interface CertificateRepository {
     public MemberCert getMemberCertById(int id);
 
     public void deleteMemberCert(int id);
+
+    public List<Map<String, Object>> getCertTypeRank(int jobCatId, int jobCodeId);
 }

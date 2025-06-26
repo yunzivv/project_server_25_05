@@ -4,6 +4,8 @@ import com.example.project_server.util.Ut;
 import com.example.project_server.vo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import com.example.project_server.service.CertificateService;
@@ -19,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -35,11 +38,20 @@ public class UsrCertificateController {
 							   @RequestParam(defaultValue = "0")int jobCodeId) throws JsonProcessingException {
 
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // optional
 
 		List<JobCat> jobCats = certificateService.getJobCats();
 
 		List<Certificate> certMentionRank = (List<Certificate>)certificateService.getCertRank(jobCatId, jobCodeId).getData3();
 		List<JobCat> jobCatMentionRank = certificateService.getJobCatMentionRank();
+		List<Map<String, Object>> certTypeRank = (List<Map<String, Object>>) certificateService.getCertTypeRank(0,0);
+
+		for (Map<String, Object> row : certTypeRank) {
+			int type = ((Number) row.get("extra__certType")).intValue();
+			int count = ((Number) row.get("extra__certCountByType")).intValue();
+			System.out.println("Type = " + type + ", Count = " + count);
+		}
 
 		List<Integer> topCertCounts = certMentionRank.stream()
 				.map(Certificate::getExtra__certCount)
@@ -66,6 +78,10 @@ public class UsrCertificateController {
 		model.addAttribute("topJobCatLabels", mapper.writeValueAsString(topJobCatNames));
 		model.addAttribute("topJobCatValues", mapper.writeValueAsString(topJobCatCounts));
 
+		// 자격증 분류 순위
+		model.addAttribute("certTypeRankLabels", mapper.writeValueAsString(certMentionRank));
+		model.addAttribute("certTypeRankValues", mapper.writeValueAsString(certMentionRank));
+
 		model.addAttribute("totalPosts", 31256);
 		model.addAttribute("postCount", certificateService.getPostCount(0, 0));
 		model.addAttribute("certCount", certificateService.getCertCount(0, 0));
@@ -89,11 +105,18 @@ public class UsrCertificateController {
 		return certificateService.getCertRank(jobCatId, jobCodeId);
 	}
 
+	// 직무별 자격증 분류
+//	@GetMapping("/usr/api/certTypeRank")
+//	@ResponseBody
+//	public ResultData getCertTypeRank(int jobCatId, int jobCodeId) {
+//
+//		return certificateService.getCertRank(jobCatId, jobCodeId);
+//	}
+
 	@RequestMapping("/usr/cert/library")
 	public String showLibrary() {
 		return "/usr/cert/library";
 	}
-
 
 
 	@RequestMapping("/usr/cert/doAdd")

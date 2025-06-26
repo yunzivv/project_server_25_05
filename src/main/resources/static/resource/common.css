@@ -511,6 +511,10 @@ li i.active{
 	border-radius: 2rem;
 }
 
+.analysis-element:hover {
+	background-color: rgba(220, 220, 220, 0.35);
+}
+
 .analysis-element .title {
 	font-weight: 600;
 	font-size: 1.125rem;

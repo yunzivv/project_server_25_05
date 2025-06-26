@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CertificateService {
@@ -96,5 +97,9 @@ public class CertificateService {
 
     public void deleteMemberCert(int id) {
         certificateRepository.deleteMemberCert(id);
+    }
+
+    public List<Map<String, Object>> getCertTypeRank(int jobCatId, int jobCodeId) {
+        return certificateRepository.getCertTypeRank(jobCatId, jobCodeId);
     }
 }
