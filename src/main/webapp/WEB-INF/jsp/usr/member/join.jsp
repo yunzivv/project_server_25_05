@@ -84,9 +84,10 @@
                 const id = $('input[name="loginId"]').val();
                 const pw = $('input[name="loginPw"]').val();
                 const pwCheck = $('input[name="checkLoginPw"]').val();
-                const pwValid = /^[A-Za-z0-9!@#$%^&*()_+\[\]{};':"\\|,.<>\/?`~\-]{6,}$/.test(pw);
+                const idValid = /^[A-Za-z0-9]{4,20}$/.test(id);
+                const pwValid = /^[A-Za-z0-9!@#$%^&*()_+\[\]{};':"\\|,.<>\/?`~\-]{6,20}$/.test(pw);
 
-                if (!id) {
+                if (!idValid) {
                     $('#id-error').removeClass('hidden');
                     return;
                 }
@@ -222,12 +223,12 @@
                         <input type="text" name="loginId"
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
                                placeholder="아이디"/>
-                        <div class="error text-red-500 text-sm hidden" id="id-error">아이디를 입력하세요.
+                        <div class="error text-red-500 text-sm hidden" id="id-error">영문 대소문자와 숫자 조합으로 4~20자 입력하세요.
                         </div>
                         <input type="password" name="loginPw"
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
                                placeholder="비밀번호"/>
-                        <div class="error text-red-500 text-sm hidden" id="pw-error">비밀번호는 영어, 숫자, 특수기호 6글자 이상만 가능합니다.
+                        <div class="error text-red-500 text-sm hidden" id="pw-error">영문 대소문자와 숫자, 특수기호 조합으로 6~20자 입력하세요.
                         </div>
                         <input type="password" name="checkLoginPw"
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"

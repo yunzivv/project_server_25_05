@@ -137,7 +137,14 @@
                             <td class="px-5 py-3">${cert.certificateNumber}</td>
                             <td class="px-5 py-3">${cert.startDate.toString().substring(0, 10)}</td>
                             <td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}</td>
-                            <td class="px-5 py-3">수정 삭제</td>
+                            <td class="px-5 py-3">
+                                <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
+                                    수정
+                                </button>
+                                <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
+                                    삭제
+                                </button>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

@@ -41,4 +41,8 @@ public interface CertificateRepository {
     public List<JobCat> getJobCatMentionRank();
 
     public Certificate getCertById(int certId);
+
+    public MemberCert getMemberCertById(int id);
+
+    public void deleteMemberCert(int id);
 }

@@ -113,6 +113,18 @@
         WHERE id = #{certId}
     </select>
 
+    <delete id="deleteMemberCert" parameterType="int">
+        DELETE FROM memberCert
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getMemberCertById" parameterType="int"
+            resultType="com.example.project_server.vo.MemberCert">
+        SELECT *
+        FROM memberCert
+        WHERE id = #{id}
+    </select>
+
     <insert id="doAdd" parameterType="map">
         INSERT INTO memberCert
         SET

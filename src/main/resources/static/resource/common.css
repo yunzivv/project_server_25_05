@@ -439,13 +439,14 @@ li i.active{
 	animation: foldIn 0.6s ease forwards;
 }
 
-.folding-text span:nth-child(1) { animation-delay: 0s; }
-.folding-text span:nth-child(2) { animation-delay: 0.1s; }
-.folding-text span:nth-child(3) { animation-delay: 0.2s; }
-.folding-text span:nth-child(4) { animation-delay: 0.3s; }
-.folding-text span:nth-child(5) { animation-delay: 0.4s; }
-.folding-text span:nth-child(6) { animation-delay: 0.5s; }
-.folding-text span:nth-child(7) { animation-delay: 0.6s; }
+.folding-text span:nth-child(1) { animation-delay: 0.2s; }
+.folding-text span:nth-child(2) { animation-delay: 0.27s; }
+.folding-text span:nth-child(3) { animation-delay: 0.34s; }
+.folding-text span:nth-child(4) { animation-delay: 0.41s; }
+.folding-text span:nth-child(5) { animation-delay: 0.48s; }
+.folding-text span:nth-child(6) { animation-delay: 0.55s; }
+.folding-text span:nth-child(7) { animation-delay: 0.62s; }
+
 
 @keyframes foldIn {
 	from {
@@ -465,7 +466,7 @@ li i.active{
 	right: 0;
 	width: 100%;
 	height: 100%;
-	transition: all .3s ease;
+	transition: all .4s ease;
 	transform-origin: right;
 	z-index: 10;
 }
@@ -475,7 +476,7 @@ li i.active{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	transition: all .3s ease;
+	transition: all .4s ease;
 	transform-origin: left;
 	z-index: 10;
 }

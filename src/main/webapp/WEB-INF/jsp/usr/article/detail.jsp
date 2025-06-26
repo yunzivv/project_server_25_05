@@ -177,12 +177,12 @@
                     <div class="comment_reaction_box">
                         <c:if test="${comment.userCanModify}">
                             <button class="btn rounded-xl px-3 hover:bg-neutral-300">
-                                Modify
+                                수정
                             </button>
                         </c:if>
                         <c:if test="${comment.userCanDelete}">
                             <button class="btn rounded-xl px-3 hover:bg-neutral-300" onClick="">
-                                Delete
+                                삭제
                             </button>
                         </c:if>
                         <c:choose>

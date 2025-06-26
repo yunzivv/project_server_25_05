@@ -233,6 +233,8 @@ public class UsrMemberController {
 		return "/usr/member/myCert";
 	}
 
+
+
 	@RequestMapping("/usr/member/myPost")
 	public String showMyPost(Model model, HttpServletRequest req) {
 

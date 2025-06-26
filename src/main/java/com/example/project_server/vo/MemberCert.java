@@ -16,6 +16,7 @@ public class MemberCert {
 
 	private int id;
 	private int certId;
+	private int memberId;
 	private String certname;
 	private String certificateNumber;
 	private LocalDate startDate;
