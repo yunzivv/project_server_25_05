@@ -200,4 +200,14 @@
                                            ORDER BY COUNT(*) DESC LIMIT 4) AS top_ids)) AS combined
         ORDER BY sort_order ASC, extra__jobCatMentionCount DESC;
     </select>
+
+    <select id="getExamCertById" parameterType="java.util.Set" resultType="com.example.project_server.vo.Certificate">
+        SELECT *
+        FROM certificate
+        WHERE id IN
+        <foreach collection="collection" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

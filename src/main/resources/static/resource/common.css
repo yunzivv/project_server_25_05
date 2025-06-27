@@ -210,6 +210,10 @@ input {
 	border: #c3c3c3 solid 1px;
 }
 
+.border-b-grey-1 {
+	border-bottom: #f3f3f3 solid 1px;
+}
+
 
 .h-body {
 	height: calc(100vh - 100px);

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class UsrExamController {
@@ -32,6 +35,15 @@ public class UsrExamController {
         Rq rq = (Rq) req.getAttribute("rq");
         List<Certificate> examCertNames = examService.getExamCertNames(); // 기출문제 있는 자격증명
         List<Exam> exams = examService.getExams();
+
+        Set<Integer> certIdsWithExam = exams.stream()
+                .map(Exam::getCertId)
+                .collect(Collectors.toSet());
+
+        List<Certificate> certs = certificateService.getExamCertById(certIdsWithExam);
+
+        Map<String, List<Certificate>> certIndexMap = examService.groupCertsByInitial(certs);
+        model.addAttribute("certIndexMap", certIndexMap);
 
         model.addAttribute("loginedMemberId", rq.getLoginedMemberId());
         model.addAttribute("examCertNames", examCertNames);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class CertificateService {
@@ -107,5 +108,9 @@ public class CertificateService {
 
     public void doChangAlertModeCert(int memberCertId) {
         certificateRepository.doChangAlertModeCert(memberCertId);
+    }
+
+    public List<Certificate> getExamCertById(Set<Integer> certIdsWithExam) {
+        return certificateRepository.getExamCertById(certIdsWithExam);
     }
 }

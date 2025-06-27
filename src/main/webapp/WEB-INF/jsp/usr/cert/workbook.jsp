@@ -72,10 +72,12 @@
             <div id="examInputForm" class="overflow-hidden h-full px-16 py-10 rounded-2xl bg-grey-1">
                 <form action="showExam" class="h-full relative">
                     <div>
-                        <div id="examStep1" class="step w-full font-semibold text-xl active" style="height: 460px;">
-                            <div class="my-6 text-4xl">어떤 <span class="font-black">자격증</span>을 준비 중이신가요?</div>
-                            <div class="m-2">준비된 문제 유형 중 하나를 선택하고 학습을 시작해보세요</div>
-                            <div class="m-2">문제를 풀고 즉시 정답 여부를 확인할 수 있습니다!</div>
+                        <div id="examStep1" class="step w-full text-xl active" style="height: 460px;">
+                            <div class="mt-6 mb-10 text-4xl font-semibold">어떤 <span class="text-blue-2">자격증</span>을 준비
+                                중이신가요?
+                            </div>
+                            <div class="m-2">준비된 문제 유형을 선택해 바로 학습을 시작해보세요!</div>
+                            <div class="m-2">문제를 풀자마자 정답 여부를 바로 확인할 수 있어요.</div>
                         </div>
 
                         <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
@@ -144,10 +146,38 @@
 
                                 </script>
                             </div>
-                            <div class="flex-grow p-3">
-                                ㄱ
-                                가스기사
+                            <div class="flex-grow m-3 flex flex-col relative overflow-hidden">
+
+                                <!-- 인덱스 탭 -->
+                                <div class="pb-2" id="cert-index-tabs">
+                                    <div class="flex flex-wrap gap-2">
+                                        <c:forEach var="key" items="${certIndexMap.keySet()}">
+                                            <button type="button"
+                                                    class="cert-index-btn px-3 py-1 rounded-md hover:bg-blue-200"
+                                                    data-key="${key}">
+                                                    ${key}
+                                            </button>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+
+                                <!-- 자격증 리스트 -->
+                                <div class="flex-grow overflow-y-auto h-60">
+                                    <c:forEach var="entry" items="${certIndexMap}">
+                                        <div class="cert-group absolute w-full hidden" data-key="${entry.key}">
+                                            <div class="flex flex-wrap">
+                                                <c:forEach var="cert" items="${entry.value}">
+                                                    <div class="px-2 py-1 rounded hover:bg-blue-100 cursor-pointer w-1/4">
+                                                            ${cert.name}
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+
                             </div>
+
                         </div>
 
                         <div id="examStep3" class="step w-full text-lg" style="height: 460px;">
@@ -234,19 +264,19 @@
 
                         <div class="absolute bottom-0 left-0">
                             <button type="button" onclick="prevStep()" id="prevBtn"
-                                    class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base hidden">
-                                이전
+                                    class="w-14 h-14 flex items-center justify-center bg-white text-grey-100 rounded-full hover:bg-gray-300 hidden">
+                                <i class="fa-solid fa-chevron-left"></i>
                             </button>
                         </div>
                     </div>
                     <div class="absolute bottom-0 right-0">
                         <button type="button" onclick="nextStep()" id="nextBtn"
-                                class="bg-grey-2 rounded-xl hover:bg-gray-300 px-6 py-4 text-base">
-                            다음
+                                class="w-14 h-14 flex items-center justify-center bg-white text-grey-100 rounded-full hover:bg-gray-300">
+                            <i class="fa-solid fa-chevron-right"></i>
                         </button>
                         <button type="submit" id="startBtn"
-                                class="bg-red-300 rounded-xl hover:bg-red-400 px-6 py-4 text-base bottom-2 right-12 hidden">
-                            시작하기
+                                class="w-14 h-14 flex items-center justify-center bg-blue-2 text-grey-1 rounded-full hover:bg-gray-300 hidden">
+                            <i class="fa-solid fa-play"></i>
                         </button>
                     </div>
                 </form>
@@ -435,5 +465,28 @@
         };
     });
 </script>
+
+<%--index tab--%>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll(".cert-index-btn");
+        const groups = document.querySelectorAll(".cert-group");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const key = btn.dataset.key;
+
+                groups.forEach(g => {
+                    g.style.display = g.dataset.key === key ? "block" : "none";
+                });
+
+                buttons.forEach(b => b.classList.remove("text-blue-2", "bg-grey-3"));
+
+                btn.classList.add("text-blue-2", "bg-blue-100");
+            });
+        });
+    });
+</script>
+
 
 <%@ include file="../common/foot.jspf" %>

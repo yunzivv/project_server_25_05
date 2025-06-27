@@ -132,12 +132,12 @@
                     </thead>
                     <tbody>
                     <c:forEach var="cert" items="${certs }">
-                        <tr class="border-b bg-neutral-200 border-neutral-300 hover:bg-neutral-300">
+                        <tr class="hover:bg-neutral-100 border-b-grey-1">
                             <td class="px-5 py-3">${cert.extra__rankNum }</td>
                             <td class="px-5 py-3">${cert.certname}</td>
                             <td class="px-5 py-3">${cert.certificateNumber}</td>
                             <td class="px-5 py-3">${cert.startDate.toString().substring(0, 10)}</td>
-                            <td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}${cert.id}</td>
+                            <td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}</td>
                             <td class="px-5 py-3">
                                 <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
                                     수정
@@ -166,7 +166,6 @@
                                     </div>
                                 </label>
                             </td>
-
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -184,7 +183,6 @@
 <%--알람설정 토글버튼--%>
 <script>
     function toggleAlertMode(certId) {
-        console.log(certId);
         fetch("/usr/member/alertModeCert?memberCertId=" + certId, {
             method: 'POST'
         })
@@ -193,7 +191,6 @@
                 return res.text();
             })
             .then(msg => {
-                console.log("알람 상태 변경 완료:", msg);
             })
             .catch(err => {
                 alert("알람 상태 변경 중 오류 발생");
