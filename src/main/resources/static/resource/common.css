@@ -606,7 +606,34 @@ input[type="radio"]:checked + .toggle-btn {
 	font-size: xx-large;
 }
 
-.owl-carousel {
-	width: 100% !important;
-	max-width: 100% !important;
-}
+/*.owl-carousel {*/
+/*	width: 100% !important;*/
+/*	max-width: 100% !important;*/
+/*}*/
+
+/*.card {*/
+/*	@apply w-[200px] h-[300px] bg-white text-center text-xl font-semibold flex items-center justify-center;*/
+/*	border-radius: 0.5rem;*/
+/*	box-shadow: 0 10px 20px rgba(0,0,0,0.15);*/
+/*	transition: all 0.3s ease;*/
+/*	opacity: 0.6;*/
+/*	transform: scale(0.85);*/
+/*	z-index: 1;*/
+/*}*/
+
+/*.owl-item.active.center .card {*/
+/*	opacity: 1;*/
+/*	transform: scale(1);*/
+/*	z-index: 10;*/
+/*	box-shadow: 0 20px 40px rgba(0,0,0,0.25);*/
+/*}*/
+
+/*.owl-carousel .owl-item {*/
+/*	transform: scale(0.8);*/
+/*	z-index: 0;*/
+/*	transition: all 0.3s ease;*/
+/*}*/
+
+/*.owl-carousel .owl-stage-outer {*/
+/*	overflow: visible;*/
+/*}*/

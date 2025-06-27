@@ -105,7 +105,7 @@
             <%--            <div class="carousel-wrapper mt-10 w-2/3">--%>
             <%--            <div class="bg-blue-300 owl-carousel">--%>
             <%--                <c:forEach var="cert" items="${certs }">--%>
-            <%--                    <div class="p-3 rounded-xl overflow-hidden bg-red-300 shadow-md"--%>
+            <%--                    <div class="slide-card p-3 rounded-xl overflow-hidden bg-red-300 shadow-md"--%>
             <%--                         style="width: 500px; height: 313px;">--%>
             <%--                        <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">--%>
             <%--                            회원정보자격--%>
@@ -129,33 +129,66 @@
             <%--                    </div>--%>
             <%--                </c:forEach>--%>
             <%--            </div></div>--%>
-            <div class="carousel-wrapper mt-10 mx-auto w-full max-w-[1500px]">
-                <div class="owl-carousel">
-                    <c:forEach var="cert" items="${certs }">
-                        <div class="rounded-xl overflow-hidden bg-red-300 shadow-md px-4 py-3"
-                             style="height: 313px; width: 500px;">
+            <div class="carousel-wrapper mt-10 mx-auto w-full max-w-[1500px] relative">
+                <button id="myCertPrevBtn"
+                        class="absolute left-0 top-1/2 -translate-y-1/2 z-20 px-4 py-2 bg-grey-1 rounded-full shadow hover:bg-gray-300">
+                    ◀
+                </button>
+                <div class="owl-carousel card-slider">
+                    <c:forEach var="cert" items="${certs}">
+                        <div class="slide-card p-3 rounded-xl overflow-hidden bg-grey-1 shadow-md relative"
+                             style="width: 500px; height: 313px;">
+                            <div class="cardCover w-full h-full absolute"
+                                 style="left: 0; top: 0; z-index: 100; background-color: rgba(255, 255, 255, 0.5);"></div>
                             <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">
                                 회원정보자격
                             </div>
                             <div class="flex h-2/3">
-                                <div class="img w-1/3 h-full p-4 border border-solid">사진</div>
+                                <div class="img w-1/3 h-full p-2"><img src="/image/user.png" alt="USER"></div>
                                 <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">
+                                    <span>자 격 명: ${cert.certname}</span>
                                     <span>성    명: ${member.name}</span>
-                                    <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
-                                    <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
-                                    <span>이 메 일: ${member.email}</span>
+                                    <span>자격번호: ${cert.certificateNumber}</span>
+                                    <span>취 득 일: ${cert.startDate}</span>
                                 </div>
                             </div>
-                            <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">
-                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div class="cardBottom h-1/6 flex justify-between items-center p-2 text-center">
+                                <div class="">
+                                    <button class="px-3 py-2 rounded-md hover:bg-gray-200"
+                                            onclick="confirmDelete(${cert.id})">
+                                        삭제
+                                    </button>
+                                </div>
                                 <div class="font-black text-lg text-Kakao3">CERTIFY</div>
-                                <a href="modify"
-                                   class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>
+                                <div class="flex items-center">
+                                    알림&nbsp;&nbsp;
+                                    <label class="inline-flex items-center cursor-pointer">
+                                        <input type="checkbox"
+                                               class="sr-only peer"
+                                            ${cert.alert ? "checked" : ""}
+                                               onchange="toggleAlertMode(${cert.id})">
+                                        <div class="relative w-11 h-6 bg-gray-200 rounded-full
+                                    peer-checked:after:translate-x-full
+                                    rtl:peer-checked:after:-translate-x-full
+                                    peer-checked:after:border-white
+                                    after:content-[''] after:absolute after:top-[2px] after:start-[2px]
+                                    after:bg-white after:border-gray-300 after:border
+                                    after:rounded-full after:h-5 after:w-5
+                                    after:transition-all
+                                    peer-checked:bg-blue-600">
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+                <button id="myCertNextBtn"
+                        class="absolute right-0 top-1/2 -translate-y-1/2 z-20 px-4 py-2 bg-grey-1 rounded-full shadow hover:bg-gray-300">
+                    ▶
+                </button>
             </div>
+
 
             <table class="hidden">
                 <thead class="h-5 text-grey-1 bg-neutral-800">
@@ -217,16 +250,75 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
     $(document).ready(function () {
-        $(".owl-carousel").owlCarousel({
+        const $carousel = $('.card-slider');
+
+        $carousel.owlCarousel({
             center: true,
-            items: 3,
             loop: true,
-            margin: 20,
-            nav: true,
-            autoplay: false
+            margin: -80,
+            smartSpeed: 600,
+            nav: false,
+            dots: false,
+            autoplay: false,
+            mouseDrag: false,
+            onInitialized: updateVisibleItems,
+            onTranslated: updateVisibleItems
+        });
+
+        function updateVisibleItems(event) {
+            const $items = $('.owl-item');
+            const centerIndex = event.item.index + Math.floor(event.page.size / 2);
+
+            $items.each(function (i) {
+                const $item = $(this);
+                const $cover = $item.find('.cardCover');
+
+                if (i === centerIndex - 1 || i === centerIndex + 1 || i === centerIndex) {
+                    // 가운데 및 양 옆만 보여지게
+                    $item.css({
+                        opacity: 1,
+                        pointerEvents: 'auto',
+                        zIndex: i === centerIndex ? 10 : 5,
+                        transform: i === centerIndex ? 'scale(1)' : 'scale(0.85)'
+                    });
+
+                    // 커버 처리: center만 안 보이게
+                    if (i === centerIndex) {
+                        $cover.addClass('opacity-0');
+                    } else {
+                        $cover.removeClass('opacity-0');
+                    }
+
+                } else {
+                    // 나머지는 숨김
+                    $item.css({
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        transform: 'scale(0.85)',
+                        zIndex: 1
+                    });
+                    $cover.removeClass('opacity-0');
+                }
+            });
+        }
+
+
+        $('#myCertPrevBtn').click(function () {
+            $carousel.trigger('prev.owl.carousel');
+        });
+        $('#myCertNextBtn').click(function () {
+            $carousel.trigger('next.owl.carousel');
         });
     });
 </script>
+
+
+<style>
+    .owl-carousel .owl-stage-outer {
+        overflow: visible !important;
+        position: relative;
+    }
+</style>
 
 <%--알람설정 토글버튼--%>
 <script>
