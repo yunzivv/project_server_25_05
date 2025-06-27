@@ -102,11 +102,20 @@
 
     <select id="getLikeArticlesByMemberId"
             resultType="com.example.project_server.vo.Article">
-        SELECT *
+        SELECT
+            A.*,
+            B.code AS extra__boardCode,
+            M.nickName AS extra__writer,
+            IFNULL(COUNT(DISTINCT R_ALL.id), 0) AS extra__sumReaction,
+            IFNULL(COUNT(DISTINCT C.id), 0) AS extra__sumComment
         FROM article A
-                 JOIN reaction R
-                      ON A.id = R.relId
-        WHERE R.memberId = #{loginedMemberId};
+                 JOIN reaction R ON A.id = R.relId AND R.relTypeCode = 'article' AND R.memberId = #{loginedMemberId}
+                 JOIN `member` M ON A.memberId = M.id
+                 JOIN board B ON A.boardId = B.id
+                 LEFT JOIN reaction R_ALL ON A.id = R_ALL.relId AND R_ALL.relTypeCode = 'article'
+                 LEFT JOIN COMMENT C ON A.id = C.relId AND C.relTypeCode = 'article' AND C.memberId = #{loginedMemberId}
+        GROUP BY A.id
+        ORDER BY A.id DESC;
     </select>
 
 

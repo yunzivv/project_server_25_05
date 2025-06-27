@@ -227,7 +227,6 @@ public class UsrMemberController {
 
         Member member = memberService.getMemberById(rq.getLoginedMemberId());
         List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
-        List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
 
         model.addAttribute("member", member);
         model.addAttribute("certs", certs);
@@ -246,7 +245,6 @@ public class UsrMemberController {
         MemberCert membercert = certificateService.getMemberCertById(memberCertId);
 
         if (membercert == null) {
-            System.out.println("못찾음");
             return Ut.jsHistoryBack("F-2", "등록되지 않은 회원 자격증입니다.");
         }
 
@@ -257,7 +255,7 @@ public class UsrMemberController {
 
         certificateService.doChangAlertModeCert(memberCertId);
 
-        return Ut.jsReplace("S-1", Ut.f("%d 번 회원 자격증 수정 완료", memberCertId), "../member/myCert?");
+        return Ut.jsReplace("S-1", Ut.f("%d 번 회원 자격증 수정 완료되었습니다.", memberCertId), "../member/myCert?");
     }
 
     @RequestMapping("/usr/member/myPost")

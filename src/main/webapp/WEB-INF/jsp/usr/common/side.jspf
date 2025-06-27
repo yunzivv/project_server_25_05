@@ -1,123 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <div class="side_bar_left fixed h-[calc(100vh-100px)] py-32 pl-8 text-xl font-black bg-grey-1" style="width: 250px;">
-	<ul class="hub_sub_menu hidden flex flex-col w-full">
-		<li><a class="block w-52 py-4 px-8" href="../cert/analysis#analysis_all">전체 직무 분석
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block w-52 py-4 px-8" href="../cert/analysis#analysis_section">특정 분야 분석
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-	</ul>
+    <ul class="hub_sub_menu hidden flex flex-col w-full">
+        <li><a class="block w-52 py-4 px-8" href="../cert/analysis#analysis_all">전체 직무 분석
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block w-52 py-4 px-8" href="../cert/analysis#analysis_section">특정 분야 분석
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+    </ul>
 
-	<ul class="workbook_sub_menu hidden flex flex-col w-full">
-		<li><a class="block w-52 py-4 px-8" href="../cert/analysis">자격증 공부하기
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-<%--		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보--%>
-<%--			<i class="highlight fa-solid fa-circle"></i></a></li>--%>
-		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-	</ul>
+    <ul class="workbook_sub_menu hidden flex flex-col w-full">
+        <li><a class="block w-52 py-4 px-8" href="../cert/analysis">자격증 공부하기
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <%--		<li><a class="block py-4 px-8" href="../cert/library">자격증 정보--%>
+        <%--			<i class="highlight fa-solid fa-circle"></i></a></li>--%>
+        <li><a class="block py-4 px-8" href="../member/myCert">내 자격증
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+    </ul>
 
-	<ul class="community_sub_menu hidden flex flex-col w-full">
-		<li class="relative">
-			<div class="absolute" style="top: -14px; right: 0;">
-				<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-					<defs>
-						<mask id="cutout-xy">
-							<g transform="scale(-1, -1) translate(-15, -15)">
-								<g transform="rotate(90 7.5 7.5)">
-									<rect width="15" height="15" fill="white" />
-									<circle cx="15" cy="0" r="15" fill="black" />
-								</g>
-							</g>
-						</mask>
-					</defs>
-					<rect width="15" height="15" fill="#ffffff" mask="url(#cutout-xy)" />
-				</svg>
-			</div>
-			<a class="block py-4 px-8" href="../article/list?boardId=0">전체 게시판
-			<i class="highlight fa-solid fa-circle"></i></a>
-			<div class="absolute" style="top: 60px; left: auto; right: 0%;">
-				<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-					<defs>
-						<mask id="cutout-x">
-							<g transform="scale(-1, 1) translate(-30, 0)">
-								<g transform="rotate(90 15 15)">
-									<rect width="15" height="15" fill="white" />
-									<circle cx="15" cy="0" r="15" fill="black" />
-								</g>
-							</g>
-						</mask>
-					</defs>
-					<rect width="15" height="15" fill="#ffffff" mask="url(#cutout-x)" />
-				</svg>
+    <ul class="community_sub_menu hidden flex flex-col w-full">
+        <li class="relative">
+            <%--			<div class="absolute" style="top: -14px; right: 0;">--%>
+            <%--				<svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">--%>
+            <%--					<defs>--%>
+            <%--						<mask id="cutout-xy">--%>
+            <%--							<g transform="scale(-1, -1) translate(-15, -15)">--%>
+            <%--								<g transform="rotate(90 7.5 7.5)">--%>
+            <%--									<rect width="15" height="15" fill="white" />--%>
+            <%--									<circle cx="15" cy="0" r="15" fill="black" />--%>
+            <%--								</g>--%>
+            <%--							</g>--%>
+            <%--						</mask>--%>
+            <%--					</defs>--%>
+            <%--					<rect width="15" height="15" fill="#ffffff" mask="url(#cutout-xy)" />--%>
+            <%--				</svg>--%>
+            <%--			</div>--%>
+            <a class="block py-4 px-8" href="../article/list?boardId=0">전체 게시판
+                <i class="highlight fa-solid fa-circle"></i></a>
+<%--            <div class="absolute" style="top: 60px; left: auto; right: 0%;">--%>
+<%--                <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                    <defs>--%>
+<%--                        <mask id="cutout-x">--%>
+<%--                            <g transform="scale(-1, 1) translate(-30, 0)">--%>
+<%--                                <g transform="rotate(90 15 15)">--%>
+<%--                                    <rect width="15" height="15" fill="white"/>--%>
+<%--                                    <circle cx="15" cy="0" r="15" fill="black"/>--%>
+<%--                                </g>--%>
+<%--                            </g>--%>
+<%--                        </mask>--%>
+<%--                    </defs>--%>
+<%--                    <rect width="15" height="15" fill="#ffffff" mask="url(#cutout-x)"/>--%>
+<%--                </svg>--%>
+<%--            </div>--%>
+        </li>
+        <li><a class="block py-4 px-8" href="../article/list?boardId=1">공지사항
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../article/list?boardId=2">시험 후기
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../article/list?boardId=3">자료실
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../article/list?boardId=4">QnA
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../article/list?boardId=5">자유게시판
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+    </ul>
 
-			</div></li>
-		<li><a class="block py-4 px-8" href="../article/list?boardId=1">공지사항
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../article/list?boardId=2">시험 후기
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../article/list?boardId=3">자료실
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../article/list?boardId=4">QnA
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../article/list?boardId=5">자유게시판
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-	</ul>
-
-	<ul class="myPage_sub_menu hidden flex flex-col w-full p-2">
-		<li><a class="block py-4 px-8" href="../member/myInfo">내 정보
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../member/myCert">내 자격증
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-		<li><a class="block py-4 px-8" href="../member/myPost">내 글
-			<i class="highlight fa-solid fa-circle"></i></a></li>
-	</ul>
-	<div class="absolute" style="top: 0; left: 100%;">
-		<svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-			<defs>
-				<mask id="cutout">
-					<g transform="rotate(90 50 50)">
-						<rect width="100" height="100" fill="white" />
-						<circle cx="100" cy="0" r="100" fill="black" />
-					</g>
-				</mask>
-			</defs>
-			<rect width="100" height="100" fill="#f3f3f3" mask="url(#cutout)" /> <%--색------------------------------------------------ --%>
-		</svg>
-	</div>
+    <ul class="myPage_sub_menu hidden flex flex-col w-full p-2">
+        <li><a class="block py-4 px-8" href="../member/myInfo">내 정보
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../member/myCert">내 자격증
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+        <li><a class="block py-4 px-8" href="../member/myPost">내 글
+            <i class="highlight fa-solid fa-circle"></i></a></li>
+    </ul>
+    <div class="absolute" style="top: 0; left: 100%;">
+        <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="cutout">
+                    <g transform="rotate(90 50 50)">
+                        <rect width="100" height="100" fill="white"/>
+                        <circle cx="100" cy="0" r="100" fill="black"/>
+                    </g>
+                </mask>
+            </defs>
+            <rect width="100" height="100" fill="#eff2f4" mask="url(#cutout)"/>
+            <%--색------------------------------------------------ --%>
+        </svg>
+    </div>
 </div>
 
 <div class="side_bar_right">
-	<div class="side_bar_right_menu_box bg-grey-1 font-semibold text-xl p-8">
-		<ul>
-			<li><a href="../member/login" class="block p-6">도움말</a></li>
-			<li><a href="../member/join" class="block p-6">회원가입</a></li>
-			<li><a href="../member/login" class="block p-6">로그인</a></li>
-			<li><a href="../member/doLogout" class="block p-6">로그아웃</a></li>
-			<li><a href="../member/login" class="block p-6">문의사항</a></li>
-		</ul>
+    <div class="side_bar_right_menu_box bg-grey-1 font-semibold text-xl p-8">
+        <ul>
+            <li><a href="../member/login" class="block p-6">도움말</a></li>
+            <li><a href="../member/join" class="block p-6">회원가입</a></li>
+            <li><a href="../member/login" class="block p-6">로그인</a></li>
+            <li><a href="../member/doLogout" class="block p-6">로그아웃</a></li>
+            <li><a href="../member/login" class="block p-6">문의사항</a></li>
+        </ul>
 
-	</div>
+    </div>
 </div>
 
 <script>
-	$(function () {
-		$(".hamburgerIcon").click(function () {
-			$(".side_bar_right").toggleClass("active");
-			$(".side_bar_right_menu_box").toggleClass("active");
-			$('.top_bar_first_menu').toggleClass('disable-hover');
-		});
-		$(".side_bar_right").click(function () {
-			$(".hamburgerIcon").removeClass("active");
-			$(".side_bar_right").removeClass("active");
-			$(".side_bar_right_menu_box").removeClass("active");
-			$('.top_bar_first_menu').toggleClass('disable-hover');
-		});
-		$(".side_bar_right_menu_box").click(function (e) {
-			e.stopPropagation();
-		});
+    $(function () {
+        $(".hamburgerIcon").click(function () {
+            $(".side_bar_right").toggleClass("active");
+            $(".side_bar_right_menu_box").toggleClass("active");
+            $('.top_bar_first_menu').toggleClass('disable-hover');
+        });
+        $(".side_bar_right").click(function () {
+            $(".hamburgerIcon").removeClass("active");
+            $(".side_bar_right").removeClass("active");
+            $(".side_bar_right_menu_box").removeClass("active");
+            $('.top_bar_first_menu').toggleClass('disable-hover');
+        });
+        $(".side_bar_right_menu_box").click(function (e) {
+            e.stopPropagation();
+        });
 
-	});
+    });
 </script>

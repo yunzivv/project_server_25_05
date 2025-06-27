@@ -21,8 +21,8 @@
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
     <div class="flex flex-col flex-grow items-center">
-        <div class="w-3/4 pr-3 mt-32">
-<%--            <div class="title px-8 pt-10 pb-12 text-4xl font-black">게시판</div>--%>
+        <div class="w-3/4 pr-3 mt-20">
+            <%--            <div class="title px-8 pt-10 pb-12 text-4xl font-black">게시판</div>--%>
             <div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
                 <div class="articleCnt text-lg mx-4">
                     총 게시 글 : ${totalCnt }
@@ -71,36 +71,33 @@
 
             <div class="container text-center">
                 <!-- 		article table -->
-                <div class="mx-auto my-4 rounded-xl overflow-hidden">
+                <div class="mx-auto my-4 rounded-lg overflow-hidden">
                     <table class="w-full text-sm text-center rtl:text-right">
-                        <thead class="h-5 text-base text-grey-1 bg-blue-2">
+                        <thead class="h-5 text-base bg-grey-1 text-blue-2 border-b">
                         <tr>
-                            <th scope="col" class="px-6 py-4">NO</th>
-                            <th scope="col" class="px-6 py-4">BOARD</th>
-                            <th scope="col" class="px-6 py-4 w-1/2">TITLE</th>
-                            <th scope="col" class="px-6 py-4">WRITER</th>
+                            <%--                            <th scope="col" class="px-6 py-4">NO</th>--%>
+                            <th scope="col" class="px-6 py-4">게시판</th>
+                            <th scope="col" class="px-6 py-4 w-1/2">제목</th>
+                            <th scope="col" class="px-6 py-4">작성자</th>
                             <%--							<th scope="col" class="px-6 py-4">sumReaction</th>--%>
-                            <th scope="col" class="px-6 py-4">HITS</th>
-                            <th scope="col" class="px-6 py-4 whitespace-nowrap">REGISTATION DATE</th>
+                            <th scope="col" class="px-6 py-4">조회수</th>
+                            <th scope="col" class="px-6 py-4 whitespace-nowrap">작성일</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="article" items="${articles }">
-                            <tr class="bg-grey-1 hover:bg-neutral-200">
-                                <td class="px-5 py-3"
-                                    onclick="location.href='detail?id=${article.id}'">${article.id }</td>
-                                <td class="px-5 py-3"
-                                    onclick="location.href='detail?id=${article.id}'">${article.extra__boardCode }</td>
-                                <td onclick="location.href='detail?id=${article.id}'"><a class="block text-left pl-6"
-                                                                                         href="detail?id=${article.id }">${article.title }</a>
+                            <tr class="bg-grey-1 hover:bg-neutral-200 cursor-pointer"
+                                onclick="location.href='detail?id=${article.id}'">
+                                    <%--                                <td class="px-5 py-3"--%>
+                                    <%--                                    onclick="location.href='detail?id=${article.id}'">${article.id }</td>--%>
+                                <td class="p-4">${article.extra__boardCode }</td>
+                                <td><a class="block text-left pl-6"
+                                       href="detail?id=${article.id }">${article.title }</a>
                                 </td>
-                                <td class="px-5 py-3"
-                                    onclick="location.href='detail?id=${article.id}'">${article.extra__writer }</td>
+                                <td class="p-4">${article.extra__writer }</td>
                                     <%--								<td class="px-5 py-3" onclick="location.href='detail?id=${article.id}'">${article.extra__sumReaction }</td>--%>
-                                <td class="px-5 py-3"
-                                    onclick="location.href='detail?id=${article.id}'">${article.hits }</td>
-                                <td class="px-5 py-3"
-                                    onclick="location.href='detail?id=${article.id}'">${article.regDate.toString().substring(0, 10) }</td>
+                                <td class="p-4">${article.hits }</td>
+                                <td class="p-4">${article.regDate.toString().substring(0, 10) }</td>
                             </tr>
                         </c:forEach>
                         <c:if test="${empty articles }">

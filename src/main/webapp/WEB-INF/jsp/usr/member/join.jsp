@@ -143,55 +143,6 @@
 
 </script>
 
-<%--<div class="hidden h-screen flex justify-center items-center" style="background-color: rgba(0, 0, 0, 0.3);">--%>
-<%--    <div class="container max-w-min p-4 bg-grey-1 rounded-3xl shadow-2xl overflow-hidden rounded-lg">--%>
-<%--        <div class="title my-3 text-center text-2xl font-semibold">--%>
-<%--            Join--%>
-<%--        </div>--%>
-<%--        <form onsubmit="return validate();" name="join" action="doJoin" method="POST">--%>
-
-<%--            <div class="flex flex-col justify-center">--%>
-
-<%--                <input type="text" name="loginId"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="아이디">--%>
-<%--                <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter at least 4 letters and numbers</div> -->--%>
-<%--                <input type="password" name="loginPw"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="비밀번호">--%>
-<%--                <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter at least 4 letters and numbers</div> -->--%>
-<%--                <input type="password" name="checkLoginPw"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="비밀번호 확인">--%>
-<%--                <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter your password again to confirm it</div> -->--%>
-<%--                <input type="text" name="name"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="이름">--%>
-<%--                생년월일--%>
-<%--                <input type="date" name="birthday"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white">--%>
-<%--                <input type="text" name="nickName"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="닉네임">--%>
-<%--                <input type="tel" name="cellPhone" pattern="[0-9]{11}" required--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="전화번호">--%>
-<%--                <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter your tel without highpen(-)</div> -->--%>
-<%--                <input type="email" name="email"--%>
-<%--                       class="mb-6 border border-neutral-300 text-neutral-800 text-sm rounded-lg block w-96 p-2.5 bg-white"--%>
-<%--                       placeholder="e-mail">--%>
-<%--            </div>--%>
-<%--            <button type="submit"--%>
-<%--                    class="py-2.5 px-5 me-2 mb-2 w-96 text-sm font-large bg-neutral-800 text-neutral-200 rounded-lg hover:bg-neutral-700">--%>
-<%--                Join--%>
-<%--            </button>--%>
-<%--        </form>--%>
-<%--        <div class="sub-menu text-center my-4 flex justify-center">--%>
-<%--            <a class="hover:text-underline" href="login">Login</a>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-
 <div class="join_fullPage h-screen flex justify-center items-center"
      style="background-color: rgba(0, 0, 0, 0.3);">
 
@@ -215,7 +166,6 @@
                         <input type="date" name="birthday"
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"/>
                         <div class="error text-red-500 text-sm hidden" id="birthday-error">생년월일을 입력하세요.</div>
-                        <%--                        <button type="button" class="next-btn">다음</button>--%>
                     </div>
 
                     <!-- Step 2 -->
@@ -234,8 +184,6 @@
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
                                placeholder="비밀번호 확인"/>
                         <div class="error text-red-500 text-sm hidden" id="pw-check-error">비밀번호가 일치하지 않습니다.</div>
-                        <%--                        <button type="button" class="prev-btn">이전</button>--%>
-                        <%--                        <button type="button" class="next-btn">다음</button>--%>
                     </div>
 
                     <!-- Step 3 -->
@@ -248,8 +196,10 @@
                                class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
                                placeholder="e-mail">
                         <div class="error text-red-500 text-sm hidden" id="email-error">이메일 형식이 올바르지 않습니다.</div>
-                        <%--                        <button type="button" class="prev-btn">이전</button>--%>
-                        <button type="submit">회원가입</button>
+                        <input type="text" name="nickName"
+                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               placeholder="닉네임">
+                        <div class="error text-red-500 text-sm hidden" id="nickName-error">닉네임 형식이 올바르지 않습니다.</div>
                     </div>
                 </div>
 
