@@ -88,7 +88,8 @@
                                     <input type="text" name="certName" id="certNameInput_workbook" placeholder="자격증 검색"
                                            autocomplete="off" class="focus:outline-none"/>
                                     <div id="autocompleteBox_workbook"
-                                         class="absolute top-full left-1/2 w-full transform -translate-x-1/2 border border-grey-2 bg-white shadow-md rounded-b-md max-h-48 overflow-y-auto hidden">
+                                         class="absolute top-full left-1/2 w-full transform -translate-x-1/2
+                                         border-grey-2 bg-white shadow-md rounded-b-md max-h-48 overflow-y-auto hidden z-20">
                                     </div>
                                     <button type="button" class="text-grey-5 mr-2">
                                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -122,6 +123,9 @@
                                                         input.val(cert.extra__certName);
                                                         $("#certIdHidden_workbook").val(cert.certId);
                                                         box.hide();
+                                                        if (typeof activateCertFromAutoComplete === "function") {
+                                                            activateCertFromAutoComplete(cert.certId, cert.extra__certName);
+                                                        }
                                                     }).appendTo(box);
                                             });
 
@@ -150,10 +154,10 @@
 
                                 <!-- 인덱스 탭 -->
                                 <div class="pb-2" id="cert-index-tabs">
-                                    <div class="flex flex-wrap gap-2">
+                                    <div class="flex justify-around">
                                         <c:forEach var="key" items="${certIndexMap.keySet()}">
                                             <button type="button"
-                                                    class="cert-index-btn px-3 py-1 rounded-md hover:bg-blue-200"
+                                                    class="cert-index-btn px-3 py-1 rounded-lg hover:bg-blue-200"
                                                     data-key="${key}">
                                                     ${key}
                                             </button>
@@ -164,13 +168,18 @@
                                 <!-- 자격증 리스트 -->
                                 <div class="flex-grow overflow-y-auto h-60">
                                     <c:forEach var="entry" items="${certIndexMap}">
-                                        <div class="cert-group absolute w-full hidden" data-key="${entry.key}">
-                                            <div class="flex flex-wrap">
-                                                <c:forEach var="cert" items="${entry.value}">
-                                                    <div class="px-2 py-1 rounded hover:bg-blue-100 cursor-pointer w-1/4">
-                                                            ${cert.name}
-                                                    </div>
-                                                </c:forEach>
+                                        <div class="cert-group w-full hidden p-3 border-grey-3 rounded-xl"
+                                             data-key="${entry.key}">
+                                            <div class="cert-list-wrapper overflow-y-auto max-h-52">
+                                                <div class="flex flex-wrap">
+                                                    <c:forEach var="cert" items="${entry.value}">
+                                                        <div class="cert-option p-2 my-2 rounded hover:bg-blue-100 cursor-pointer w-1/4"
+                                                             data-id="${cert.id}" data-name="${cert.name}"
+                                                             data-key="${entry.key}">
+                                                                ${cert.name}
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -477,6 +486,7 @@
                 const key = btn.dataset.key;
 
                 groups.forEach(g => {
+                    const isMatched = g.dataset.key === key;
                     g.style.display = g.dataset.key === key ? "block" : "none";
                 });
 
@@ -485,6 +495,64 @@
                 btn.classList.add("text-blue-2", "bg-blue-100");
             });
         });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const certIdInput = document.getElementById("certIdHidden_workbook");
+        const certNameInput = document.getElementById("certNameInput_workbook");
+
+        function clearCertActive() {
+            document.querySelectorAll(".cert-option").forEach(el => {
+                el.classList.remove("bg-blue-100", "text-blue-2");
+            });
+        }
+
+        function activateCert(certId, certName) {
+            certIdInput.value = certId;
+            certNameInput.value = certName;
+
+            clearCertActive();
+
+            const matched = [...document.querySelectorAll(".cert-option")]
+                .find(el => el.dataset.id === String(certId));
+
+            if (matched) {
+                matched.classList.add("bg-blue-100", "text-blue-2");
+
+                const key = matched.dataset.key;
+
+                // 보여줄 cert-group 설정
+                document.querySelectorAll(".cert-group").forEach(group => {
+                    group.style.display = group.dataset.key === key ? "block" : "none";
+                });
+
+                // 인덱스 탭 버튼 강조
+                document.querySelectorAll(".cert-index-btn").forEach(btn => {
+                    if (btn.dataset.key === key) {
+                        btn.classList.add("text-blue-2", "bg-blue-100");
+                    } else {
+                        btn.classList.remove("text-blue-2", "bg-blue-100");
+                    }
+                });
+
+            } else {
+                console.warn("❌ 자격증 목록에서 certId 못 찾음", certId);
+            }
+        }
+
+        // 리스트에서 자격증 클릭 시
+        document.querySelectorAll(".cert-option").forEach(el => {
+            el.addEventListener("click", () => {
+                const certId = el.dataset.id;
+                const certName = el.dataset.name;
+                activateCert(certId, certName);
+            });
+        });
+
+        // 자동완성에서 사용 가능하게 등록
+        window.activateCertFromAutoComplete = activateCert;
     });
 </script>
 
