@@ -4,29 +4,33 @@
 <c:set var="pageTitle" value="MY CERT"></c:set>
 <%@ include file="../common/head.jspf" %>
 
+<script>
+    $(document).ready(function () {
+
+        $('.header').addClass('active');
+        $('.nav_box > ul > li:nth-child(4) i').addClass('active');
+
+        $('.side_bar_left').addClass('active');
+        $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
+    });
+</script>
 
 <div class="flex w-full">
     <div class="side hidden xl:block shrink-0" style="width: 250px;">
         <%@ include file="../common/side.jspf" %>
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
-    <div class="flex flex-grow flex-col items-center pt-20" style="border-top-left-radius: 3rem;">
 
-        <div id="cert" class="w-2/3 h-screen">
-            <div class="flex">
+    <div class="flex flex-grow flex-col items-center pt-20" style="border-top-left-radius: 3rem;">
+        <div id="cert" class="w-2/3 h-screen flex flex-col">
+            <div class="">
                 총 자격증: ${certs.size()}개
-                <div class="flex-grow"></div>
-                <%--                <button onclick=""--%>
-                <%--                        class="block ml-6 px-5 whitespace-nowrap text-base flex items-center justify-center font-large rounded-md hover:bg-neutral-300">--%>
-                <%--                    자격증 등록--%>
-                <%--                </button>--%>
             </div>
             <div>
                 <form action="/usr/cert/doAdd" method="post" class="relative">
                     <input type="hidden" name="certId" id="certIdHidden_myCert">
                     <input type="text" name="certName" id="certNameInput_myCert" placeholder="자격증명"
                            autocomplete="off">
-
                     <script>
                         $(document).ready(function () {
                             $("#certNameInput_myCert").on("input", function () {
@@ -89,10 +93,8 @@
                             });
                         });
                     </script>
-
                     <div id="autocompleteBox_myCert"
                          style="border: 1px solid #ccc; display: none; position: absolute;"></div>
-
                     <input type="text" name="certificateNumber" placeholder="자격번호">
                     <input type="date" name="startDate" placeholder="취득일">
                     <input type="date" name="endDate" placeholder="만료일">
@@ -100,7 +102,34 @@
                 </form>
 
             </div>
-            <table>
+            <div class="carousel-wrapper mt-10 w-2/3">
+            <div class="bg-blue-300 owl-carousel">
+                <c:forEach var="cert" items="${certs }">
+                    <div class="p-3 rounded-xl overflow-hidden bg-red-300 shadow-md"
+                         style="width: 500px; height: 313px;">
+                        <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">
+                            회원정보자격
+                        </div>
+                        <div class="flex h-2/3">
+                            <div class="img w-1/3 h-full p-4 border border-solid">사진</div>
+                            <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">
+                                <span>성    명: ${member.name}</span>
+                                    <%--                                <span>생년월일: ${member.birthday}</span>--%>
+                                <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
+                                <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
+                                <span>이 메 일: ${member.email}</span>
+                            </div>
+                        </div>
+                        <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div class="font-black text-lg text-Kakao3">CERTIFY</div>
+                            <a href="modify"
+                               class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div></div>
+            <table class="hidden">
                 <thead class="h-5 text-grey-1 bg-neutral-800">
                 <tr>
                     <th scope="col" class="px-6 py-4">NO</th>
@@ -108,7 +137,7 @@
                     <th scope="col" class="px-6 py-4">자격번호</th>
                     <th scope="col" class="px-6 py-4">취득일</th>
                     <th scope="col" class="px-6 py-4">만료일</th>
-<%--                    <th scope="col" class="px-6 py-4"></th>--%>
+                    <%--                    <th scope="col" class="px-6 py-4"></th>--%>
                     <th scope="col" class="px-6 py-4">설정</th>
                 </tr>
                 </thead>
@@ -148,14 +177,24 @@
                 </c:forEach>
                 </tbody>
             </table>
-
+            <div class="side hidden xl:block w-52"></div>
+            <div class="block min-[1280px]:hidden w-1/12"></div>
         </div>
-        <div class="side hidden xl:block w-52"></div>
-        <div class="block min-[1280px]:hidden w-1/12"></div>
+        <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
+        <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
     </div>
-    <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
-    <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    $(".owl-carousel").owlCarousel({
+        items: 1,
+        loop: true,
+        nav: true,
+        autoplay: false
+    });
+</script>
 
 <%--알람설정 토글버튼--%>
 <script>
@@ -174,27 +213,6 @@
                 console.error(err);
             });
     }
-</script>
-
-
-<script>
-    $(document).ready(function () {
-
-        const memberExists = ${member != null ? 'true' : 'false'};
-        $('.header').addClass('active');
-        $('.nav_box > ul > li:nth-child(4) i').addClass('active');
-
-        if (memberExists) {
-            $('.side_bar_left').addClass('active');
-            $('.side_bar_left > .myPage_sub_menu ').removeClass('hidden');
-            $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a').addClass('active');
-            $('.side_bar_left > .myPage_sub_menu > li:nth-child(2) > a > i').addClass('active');
-        } else {
-            document.location.href = "../member/login";
-        }
-
-    });
-
 </script>
 
 <script>

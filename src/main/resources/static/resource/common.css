@@ -605,3 +605,8 @@ input[type="radio"]:checked + .toggle-btn {
 	font-weight: 800;
 	font-size: xx-large;
 }
+
+.owl-carousel {
+	width: 100% !important;
+	max-width: 100% !important;
+}
