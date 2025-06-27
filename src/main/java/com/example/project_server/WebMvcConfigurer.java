@@ -42,7 +42,9 @@ public class WebMvcConfigurer implements org.springframework.web.servlet.config.
 		ir.addPathPatterns("/usr/article/doModify");
 		ir.addPathPatterns("/usr/article/doDelete");
 		ir.addPathPatterns("/usr/member/doLogout");
-		ir.addPathPatterns("/usr/member/myPage");
+		ir.addPathPatterns("/usr/member/myInfo");
+		ir.addPathPatterns("/usr/member/myCert");
+		ir.addPathPatterns("/usr/member/myPost");
 		ir.addPathPatterns("/usr/comment/doWrite");
 		ir.addPathPatterns("/usr/reactionPoint/doGoodReaction");
 		ir.addPathPatterns("/usr/workbook/showExam");

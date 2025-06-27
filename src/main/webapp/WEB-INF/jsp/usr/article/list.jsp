@@ -21,10 +21,10 @@
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
     <div class="flex flex-col flex-grow items-center">
-        <div class="w-3/4 pr-3">
-            <div class="title px-8 pt-10 pb-12 text-4xl font-black">게시판</div>
+        <div class="w-3/4 pr-3 mt-32">
+<%--            <div class="title px-8 pt-10 pb-12 text-4xl font-black">게시판</div>--%>
             <div class="flex justify-between items-end text-neutral-800 mx-2 my-3">
-                <div class="articleCnt font-normal mx-4">
+                <div class="articleCnt text-lg mx-4">
                     총 게시 글 : ${totalCnt }
                 </div>
 
