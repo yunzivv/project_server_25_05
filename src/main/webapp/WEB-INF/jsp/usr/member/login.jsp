@@ -89,7 +89,7 @@
                             class="p-3 mb-4 font-semibold bg-blue-2 text-grey-1 rounded-lg">
                         LOG IN
                     </button>
-                    <div class="text-center py-2">------------------&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;-------------------</div>
+                    <div class="flex justify-between items-center py-2"><hr class="w-2/5">OR<hr class="w-2/5"></div>
                     <button type="submit"
                             class="p-3 font-semibold bg-blue-2 text-grey-1 rounded-lg">
                         GOOGLE

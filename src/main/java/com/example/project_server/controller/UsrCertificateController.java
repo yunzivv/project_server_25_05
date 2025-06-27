@@ -27,85 +27,98 @@ import java.util.stream.Collectors;
 @Controller
 public class UsrCertificateController {
 
-	@Autowired
-	private Rq rq;
+    @Autowired
+    private Rq rq;
 
-	@Autowired
-	private CertificateService certificateService;
+    @Autowired
+    private CertificateService certificateService;
 
-	@RequestMapping("/usr/cert/analysis")
-	public String showAnalysis(Model model, @RequestParam(defaultValue = "0")int jobCatId,
-							   @RequestParam(defaultValue = "0")int jobCodeId) throws JsonProcessingException {
+    @RequestMapping("/usr/cert/analysis")
+    public String showAnalysis(Model model, @RequestParam(defaultValue = "0") int jobCatId,
+                               @RequestParam(defaultValue = "0") int jobCodeId) throws JsonProcessingException {
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JavaTimeModule());
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // optional
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // optional
 
-		List<JobCat> jobCats = certificateService.getJobCats();
+        List<JobCat> jobCats = certificateService.getJobCats();
 
-		List<Certificate> certMentionRank = (List<Certificate>)certificateService.getCertRank(jobCatId, jobCodeId).getData3();
-		List<JobCat> jobCatMentionRank = certificateService.getJobCatMentionRank();
-		List<Map<String, Object>> certTypeRank = (List<Map<String, Object>>) certificateService.getCertTypeRank(0,0);
+        List<Certificate> certMentionRank = (List<Certificate>) certificateService.getCertRank(jobCatId, jobCodeId).getData3();
+        List<JobCat> jobCatMentionRank = certificateService.getJobCatMentionRank();
+        List<Map<String, Object>> certTypeRank = (List<Map<String, Object>>) certificateService.getCertTypeRank(0, 0);
 
-		for (Map<String, Object> row : certTypeRank) {
-			int type = ((Number) row.get("extra__certType")).intValue();
-			int count = ((Number) row.get("extra__certCountByType")).intValue();
-			System.out.println("Type = " + type + ", Count = " + count);
-		}
+        List<Integer> topCertCounts = certMentionRank.stream()
+                .map(Certificate::getExtra__certCount)
+                .collect(Collectors.toList());
+        List<String> topCertNames = certMentionRank.stream()
+                .map(Certificate::getName)
+                .collect(Collectors.toList());
 
-		List<Integer> topCertCounts = certMentionRank.stream()
-				.map(Certificate::getExtra__certCount)
-				.collect(Collectors.toList());
-		List<String> topCertNames = certMentionRank.stream()
-				.map(Certificate::getName)
-				.collect(Collectors.toList());
+        List<Integer> topJobCatCounts = jobCatMentionRank.stream()
+                .map(JobCat::getExtra__jobCatMentionCount)
+                .collect(Collectors.toList());
+        List<String> topJobCatNames = jobCatMentionRank.stream()
+                .map(JobCat::getName)
+                .collect(Collectors.toList());
 
-		List<Integer> topJobCatCounts = jobCatMentionRank.stream()
-				.map(JobCat::getExtra__jobCatMentionCount)
-				.collect(Collectors.toList());
-		List<String> topJobCatNames = jobCatMentionRank.stream()
-				.map(JobCat::getName)
-				.collect(Collectors.toList());
+        // 자격증 분류 랭킹
+        Map<Integer, String> certTypeLabelMap = Map.of(
+                1, "국가자격",
+                0, "국가공인 민간자격",
+                -1, "민간자격"
+        );
+        List<String> certTypeRankLabels = certTypeRank.stream()
+                .map(row -> {
+                    Integer type = row.get("extra__certType") != null
+                            ? ((Number) row.get("extra__certType")).intValue()
+                            : null;
+                    return certTypeLabelMap.getOrDefault(type, "기타");
+                })
+                .collect(Collectors.toList());
+        List<Integer> certTypeRankValues = certTypeRank.stream()
+                .map(row -> ((Number) row.get("extra__certCountByType")).intValue())
+                .collect(Collectors.toList());
 
-		// 직무 카테고리
-		model.addAttribute("jobCats", jobCats);
 
-		// 자격증 언급 랭킹 labels: 자격증명 values: 언급 수
-		model.addAttribute("topCertLabels", mapper.writeValueAsString(topCertNames));
-		model.addAttribute("topCertValues", mapper.writeValueAsString(topCertCounts));
+        // 직무 카테고리
+        model.addAttribute("jobCats", jobCats);
 
-		// 직무 카테고리 언급 랭킹 labels: 카테고리명 values: 언급 수
-		model.addAttribute("topJobCatLabels", mapper.writeValueAsString(topJobCatNames));
-		model.addAttribute("topJobCatValues", mapper.writeValueAsString(topJobCatCounts));
+        // 자격증 언급 랭킹 labels: 자격증명 values: 언급 수
+        model.addAttribute("topCertLabels", mapper.writeValueAsString(topCertNames));
+        model.addAttribute("topCertValues", mapper.writeValueAsString(topCertCounts));
 
-		// 자격증 분류 순위
-		model.addAttribute("certTypeRankLabels", mapper.writeValueAsString(certMentionRank));
-		model.addAttribute("certTypeRankValues", mapper.writeValueAsString(certMentionRank));
+        // 직무 카테고리 언급 랭킹 labels: 카테고리명 values: 언급 수
+        model.addAttribute("topJobCatLabels", mapper.writeValueAsString(topJobCatNames));
+        model.addAttribute("topJobCatValues", mapper.writeValueAsString(topJobCatCounts));
 
-		model.addAttribute("totalPosts", 31256);
-		model.addAttribute("postCount", certificateService.getPostCount(0, 0));
-		model.addAttribute("certCount", certificateService.getCertCount(0, 0));
-		model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));
+        // 자격증 분류 순위
+        model.addAttribute("certTypeRankLabels", mapper.writeValueAsString(certTypeRankLabels));
+        model.addAttribute("certTypeRankValues", mapper.writeValueAsString(certTypeRankValues));
 
-		return "/usr/cert/analysis";
-	}
+        model.addAttribute("totalPosts", 31256);
+        model.addAttribute("postCount", certificateService.getPostCount(0, 0));
+        model.addAttribute("certCount", certificateService.getCertCount(0, 0));
+        model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));
 
-	@GetMapping("/usr/api/jobCodes")
-	@ResponseBody
-	public ResultData getJobCodesByCat(int jobCatId) {
+        return "/usr/cert/analysis";
+    }
 
-		if(jobCatId == 0) return null;
-		return certificateService.getJobCodes(jobCatId);
-	}
+    @GetMapping("/usr/api/jobCodes")
+    @ResponseBody
+    public ResultData getJobCodesByCat(int jobCatId) {
 
-	@GetMapping("/usr/api/certRankByJobCode")
-	@ResponseBody
-	public ResultData getCertRankByCode(int jobCatId ,int jobCodeId) {
+        if (jobCatId == 0) return null;
+        return certificateService.getJobCodes(jobCatId);
+    }
 
-		return certificateService.getCertRank(jobCatId, jobCodeId);
-	}
+    @GetMapping("/usr/api/certRankByJobCode")
+    @ResponseBody
+    public ResultData getCertRankByCode(int jobCatId, int jobCodeId) {
 
-	// 직무별 자격증 분류
+        return certificateService.getCertRank(jobCatId, jobCodeId);
+    }
+
+    // 직무별 자격증 분류
 //	@GetMapping("/usr/api/certTypeRank")
 //	@ResponseBody
 //	public ResultData getCertTypeRank(int jobCatId, int jobCodeId) {
@@ -113,24 +126,24 @@ public class UsrCertificateController {
 //		return certificateService.getCertRank(jobCatId, jobCodeId);
 //	}
 
-	@RequestMapping("/usr/cert/library")
-	public String showLibrary() {
-		return "/usr/cert/library";
-	}
+    @RequestMapping("/usr/cert/library")
+    public String showLibrary() {
+        return "/usr/cert/library";
+    }
 
 
-	@RequestMapping("/usr/cert/doAdd")
-	@ResponseBody
-	public String doAdd(HttpServletRequest req, @RequestParam(defaultValue = "0")int certId, String certName, LocalDate startDate, LocalDate endDate, String certificateNumber) {
+    @RequestMapping("/usr/cert/doAdd")
+    @ResponseBody
+    public String doAdd(HttpServletRequest req, @RequestParam(defaultValue = "0") int certId, String certName, LocalDate startDate, LocalDate endDate, String certificateNumber) {
 
-		Rq rq = (Rq) req.getAttribute("rq");
+        Rq rq = (Rq) req.getAttribute("rq");
 
-		if (Ut.isEmpty(certName))
-			return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
+        if (Ut.isEmpty(certName))
+            return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
 
-		certificateService.doAdd(rq.getLoginedMemberId(), certName, certId, startDate, endDate, certificateNumber);
-		return Ut.jsReplace("S-1", "자격증 등록이 완료되었습니다.", "../member/myCert");
-	}
+        certificateService.doAdd(rq.getLoginedMemberId(), certName, certId, startDate, endDate, certificateNumber);
+        return Ut.jsReplace("S-1", "자격증 등록이 완료되었습니다.", "../member/myCert");
+    }
 
 //	@RequestMapping("/usr/cert/doModify")
 //	@ResponseBody
@@ -151,36 +164,36 @@ public class UsrCertificateController {
 //		return null;
 //	}
 
-	@RequestMapping("/usr/cert/doDelete")
-	@ResponseBody
-	public String doDelete(HttpServletRequest req, int id) {
+    @RequestMapping("/usr/cert/doDelete")
+    @ResponseBody
+    public String doDelete(HttpServletRequest req, int id) {
 
-		Rq rq = (Rq) req.getAttribute("rq");
+        Rq rq = (Rq) req.getAttribute("rq");
 
-		MemberCert memberCert = certificateService.getMemberCertById(id);
+        MemberCert memberCert = certificateService.getMemberCertById(id);
 
-		if (memberCert == null) {
-			return Ut.jsHistoryBack("F-1", Ut.f("%d번 회원 자격증은 등록되지 않았습니다.", id));
-		}
+        if (memberCert == null) {
+            return Ut.jsHistoryBack("F-1", Ut.f("%d번 회원 자격증은 등록되지 않았습니다.", id));
+        }
 
-		if (memberCert.getMemberId() != rq.getLoginedMemberId()) {
-			System.out.println(memberCert.getMemberId());
-			System.out.println(rq.getLoginedMemberId());
-			return Ut.jsHistoryBack("F-A", Ut.f("%d번 회원 자격증 대한 권한이 없습니다.", id));
-		}
+        if (memberCert.getMemberId() != rq.getLoginedMemberId()) {
+            System.out.println(memberCert.getMemberId());
+            System.out.println(rq.getLoginedMemberId());
+            return Ut.jsHistoryBack("F-A", Ut.f("%d번 회원 자격증 대한 권한이 없습니다.", id));
+        }
 
-		certificateService.deleteMemberCert(id);
+        certificateService.deleteMemberCert(id);
 
-		return Ut.jsReplace("S-1", Ut.f("%d번 회원 자격증 삭제 성공", id), "../member/myCert");
-	}
+        return Ut.jsReplace("S-1", Ut.f("%d번 회원 자격증 삭제 성공", id), "../member/myCert");
+    }
 
 
-	@RequestMapping("/usr/cert/autoComplete")
-	@ResponseBody
-	public List<Certificate> autoComplete(HttpServletRequest req, String keyword) {
-		
-		List<Certificate> autoCompleteCerts = certificateService.getAutoCompleteCerts(keyword);
+    @RequestMapping("/usr/cert/autoComplete")
+    @ResponseBody
+    public List<Certificate> autoComplete(HttpServletRequest req, String keyword) {
 
-		return autoCompleteCerts;
-	}
+        List<Certificate> autoCompleteCerts = certificateService.getAutoCompleteCerts(keyword);
+
+        return autoCompleteCerts;
+    }
 }

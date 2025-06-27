@@ -21,232 +21,257 @@ import java.util.List;
 @Controller
 public class UsrMemberController {
 
-	@Autowired
-	private Rq rq;
+    @Autowired
+    private Rq rq;
 
-	@Autowired
-	private MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-	@Autowired
-	private CertificateService certificateService;
+    @Autowired
+    private CertificateService certificateService;
     @Autowired
     private ArticleService articleService;
 
-	@RequestMapping("/usr/member/join")
-	public String join() {
+    @RequestMapping("/usr/member/join")
+    public String join() {
 
-		return "/usr/member/join";
-	}
+        return "/usr/member/join";
+    }
 
-	// 액션메서드
-	@RequestMapping("/usr/member/doJoin")
-	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) throws IOException {
+    // 액션메서드
+    @RequestMapping("/usr/member/doJoin")
+    @ResponseBody
+    public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) throws IOException {
 
-		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성해주세요.");
-		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성해주세요.");
-		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성해주세요.");
-		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-4", "생일을 작성해주세요.");
-		if(Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-5", "닉네임를 작성해주세요.");
-		if(Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-6", "전화번호를 작성해주세요.");
-		if(Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-7", "이메일을 작성해주세요.");
-		if(!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-8", "비밀번호가 일치하지 않습니다.");
+        if (Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성해주세요.");
+        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성해주세요.");
+        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성해주세요.");
+        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-4", "생일을 작성해주세요.");
+        if (Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-5", "닉네임를 작성해주세요.");
+        if (Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-6", "전화번호를 작성해주세요.");
+        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-7", "이메일을 작성해주세요.");
+        if (!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-8", "비밀번호가 일치하지 않습니다.");
 
-		loginPw = Ut.sha256(loginPw);
+        loginPw = Ut.sha256(loginPw);
 
-		int id = memberService.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
+        int id = memberService.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
 
-		if(id == -1) return Ut.jsHistoryBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
-		if(id == -2) return Ut.jsHistoryBack("F-9", Ut.f("이름 %s과 이메일 %s은(는) 이미 사용 중입니다.", loginId, email));
+        if (id == -1) return Ut.jsHistoryBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
+        if (id == -2) return Ut.jsHistoryBack("F-9", Ut.f("이름 %s과 이메일 %s은(는) 이미 사용 중입니다.", loginId, email));
 
-		Member member = memberService.getMemberById(id);
+        Member member = memberService.getMemberById(id);
 
-		rq.printConfirmAndRedirect(Ut.f("%s님 가입을 축하합니다.", name), "/");
+        rq.printConfirmAndRedirect(Ut.f("%s님 가입을 축하합니다.", name), "/");
 
-		return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
-	}
-	@RequestMapping("/usr/member/login")
-	public String login() {
+        return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
+    }
 
-		return "/usr/member/login";
-	}
+    @RequestMapping("/usr/member/login")
+    public String login() {
 
-	@RequestMapping("/usr/member/doLogin")
-	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginId, String loginPw,
-						  @RequestParam(defaultValue = "/") String afterLoginUri) {
+        return "/usr/member/login";
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
+    @RequestMapping("/usr/member/doLogin")
+    @ResponseBody
+    public String doLogin(HttpServletRequest req, String loginId, String loginPw,
+                          @RequestParam(defaultValue = "/") String afterLoginUri) {
 
-		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
-		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
+        Rq rq = (Rq) req.getAttribute("rq");
 
-		Member member = memberService.getMemberByLoginId(loginId);
+        if (Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
+        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
 
-		if(member == null) return Ut.jsHistoryBack("F-3", "존재하지 않는 아이디입니다.");
+        Member member = memberService.getMemberByLoginId(loginId);
 
-		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
-			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다."));
-		}
+        if (member == null) return Ut.jsHistoryBack("F-3", "존재하지 않는 아이디입니다.");
 
-		rq.login(member);
+        if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+            return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다."));
+        }
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), afterLoginUri);
-	}
+        rq.login(member);
 
-	@RequestMapping("/usr/member/doLogout")
-	@ResponseBody
-	public String doLogout(HttpServletRequest req) {
+        return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), afterLoginUri);
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
+    @RequestMapping("/usr/member/doLogout")
+    @ResponseBody
+    public String doLogout(HttpServletRequest req) {
 
-		rq.logout();
+        Rq rq = (Rq) req.getAttribute("rq");
 
-		return Ut.jsHistoryBack("S-1", "로그아웃 되었습니다.");
+        rq.logout();
 
-	}
+        return Ut.jsHistoryBack("S-1", "로그아웃 되었습니다.");
 
-	@RequestMapping("/usr/member/modify")
-	public String modify(Model model, HttpServletRequest req) {
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+    @RequestMapping("/usr/member/modify")
+    public String modify(Model model, HttpServletRequest req) {
 
-		model.addAttribute("member", member);
+        Rq rq = (Rq) req.getAttribute("rq");
+        Member member = memberService.getMemberById(rq.getLoginedMemberId());
 
-		return "/usr/member/modify";
-	}
+        model.addAttribute("member", member);
 
-	@RequestMapping("/usr/member/checkPw")
-	@ResponseBody
-	public ResultData checkPw(HttpServletRequest req, String loginPw) {
+        return "/usr/member/modify";
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-		loginPw = Ut.sha256(loginPw);
+    @RequestMapping("/usr/member/checkPw")
+    @ResponseBody
+    public ResultData checkPw(HttpServletRequest req, String loginPw) {
 
-		if(!member.getLoginPw().equals(loginPw)) {
-			return ResultData.from("F-1", "비밀번호가 일치하지 않습니다.");
-		}
+        Rq rq = (Rq) req.getAttribute("rq");
+        Member member = memberService.getMemberById(rq.getLoginedMemberId());
+        loginPw = Ut.sha256(loginPw);
 
-		return ResultData.from("S-1", "비밀번호 확인이 완료되었습니다.");
-	}
+        if (!member.getLoginPw().equals(loginPw)) {
+            return ResultData.from("F-1", "비밀번호가 일치하지 않습니다.");
+        }
 
-	// 로그인 체크 -> 유무 체크 -> 권한 체크
+        return ResultData.from("S-1", "비밀번호 확인이 완료되었습니다.");
+    }
 
-	@RequestMapping("/usr/member/doModify")
-	@ResponseBody
-	public String doModify(HttpServletRequest req, String loginId, String loginPw, String name, String nickName, String cellPhone, String email) {
+    // 로그인 체크 -> 유무 체크 -> 권한 체크
 
-		Rq rq = (Rq) req.getAttribute("rq");
-		int loginedMemberId = rq.getLoginedMemberId();
+    @RequestMapping("/usr/member/doModify")
+    @ResponseBody
+    public String doModify(HttpServletRequest req, String loginId, String loginPw, String name, String nickName, String cellPhone, String email) {
+
+        Rq rq = (Rq) req.getAttribute("rq");
+        int loginedMemberId = rq.getLoginedMemberId();
 
 //		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성하세요.");
 //		if(memberService.isUsableLoginId(loginId)) return Ut.jsHistoryBack("F-7", "사용 중인 아이디입니다.");
-		if(Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성하세요.");
-		if(Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성하세요.");
-		if(Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-4", "닉네임을 작성하세요.");
-		if(Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-5", "전화번호를 작성하세요.");
-		if(Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-6", "이메일을 정확히 작성하세요.");
+        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성하세요.");
+        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성하세요.");
+        if (Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-4", "닉네임을 작성하세요.");
+        if (Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-5", "전화번호를 작성하세요.");
+        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-6", "이메일을 정확히 작성하세요.");
 
-		int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
+        int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
-		return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정이 완료되었습니다.", nickName),
-				"../member/myInfo");
-	}
-	@RequestMapping("/usr/member/findLoginId")
-	public String showFindLoginId() {
+        return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정이 완료되었습니다.", nickName),
+                "../member/myInfo");
+    }
 
-		return "usr/member/findLoginId";
-	}
+    @RequestMapping("/usr/member/findLoginId")
+    public String showFindLoginId() {
 
-	@RequestMapping("/usr/member/findLoginPw")
-	public String showFindLoginPw() {
+        return "usr/member/findLoginId";
+    }
 
-		return "usr/member/findLoginPw";
-	}
+    @RequestMapping("/usr/member/findLoginPw")
+    public String showFindLoginPw() {
 
-	@RequestMapping("/usr/member/doFindLoginId")
-	@ResponseBody
-	public ResultData doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
-								String email) {
+        return "usr/member/findLoginPw";
+    }
 
-		Member member = memberService.getMemberByNameAndEmail(name, email);
+    @RequestMapping("/usr/member/doFindLoginId")
+    @ResponseBody
+    public ResultData doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
+                                    String email) {
 
-		if (member == null) {
-			return ResultData.from("F-1", "존재하지 않는 회원입니다.", "member", null);
-		}
+        Member member = memberService.getMemberByNameAndEmail(name, email);
 
-		// 화면에서 출력
-		return ResultData.from("S-1", "회원 아이디를 찾았습니다.", "member", member);
-	}
+        if (member == null) {
+            return ResultData.from("F-1", "존재하지 않는 회원입니다.", "member", null);
+        }
 
-	@RequestMapping("/usr/member/doFindLoginPw")
-	@ResponseBody
-	public String doFindLoginPw(@RequestParam(defaultValue = "/") String afterFindLoginPwUri, String loginId,
-								String email) {
+        // 화면에서 출력
+        return ResultData.from("S-1", "회원 아이디를 찾았습니다.", "member", member);
+    }
 
-		Member member = memberService.getMemberByLoginId(loginId);
+    @RequestMapping("/usr/member/doFindLoginPw")
+    @ResponseBody
+    public String doFindLoginPw(@RequestParam(defaultValue = "/") String afterFindLoginPwUri, String loginId,
+                                String email) {
 
-		if (member == null) {
-			return Ut.jsHistoryBack("F-1", "존재하지 않는 아이디입니다.");
-		}
+        Member member = memberService.getMemberByLoginId(loginId);
 
-		if (member.getEmail().equals(email) == false) {
-			return Ut.jsHistoryBack("F-2", "이메일 주소가 잘못되었습니다.");
-		}
+        if (member == null) {
+            return Ut.jsHistoryBack("F-1", "존재하지 않는 아이디입니다.");
+        }
 
-		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
+        if (member.getEmail().equals(email) == false) {
+            return Ut.jsHistoryBack("F-2", "이메일 주소가 잘못되었습니다.");
+        }
 
-		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
-				afterFindLoginPwUri);
-	}
+        ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
 
-	@RequestMapping("/usr/member/myInfo")
-	public String showMyInfo(Model model, HttpServletRequest req) {
+        return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
+                afterFindLoginPwUri);
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+    @RequestMapping("/usr/member/myInfo")
+    public String showMyInfo(Model model, HttpServletRequest req) {
 
-		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
-		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+        Rq rq = (Rq) req.getAttribute("rq");
+        Member member = memberService.getMemberById(rq.getLoginedMemberId());
 
-		model.addAttribute("member", member);
-		model.addAttribute("certs", certs);
-		model.addAttribute("articles", articles);
+        List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+        List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
 
-		return "/usr/member/myInfo";
-	}
+        model.addAttribute("member", member);
+        model.addAttribute("certs", certs);
+        model.addAttribute("articles", articles);
 
-	@RequestMapping("/usr/member/myCert")
-	public String showMyPage(Model model, HttpServletRequest req) {
+        return "/usr/member/myInfo";
+    }
 
-		Rq rq = (Rq) req.getAttribute("rq");
+    @RequestMapping("/usr/member/myCert")
+    public String showMyPage(Model model, HttpServletRequest req) {
 
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
-		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+        Rq rq = (Rq) req.getAttribute("rq");
 
-		model.addAttribute("member", member);
-		model.addAttribute("certs", certs);
+        Member member = memberService.getMemberById(rq.getLoginedMemberId());
+        List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+        List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
 
-		return "/usr/member/myCert";
-	}
+        model.addAttribute("member", member);
+        model.addAttribute("certs", certs);
 
+        return "/usr/member/myCert";
+    }
 
+    @RequestMapping("/usr/member/alertModeCert")
+    @ResponseBody
+    public String doChangAlertModeCert(HttpServletRequest req, int memberCertId) {
 
-	@RequestMapping("/usr/member/myPost")
-	public String showMyPost(Model model, HttpServletRequest req) {
+        System.out.println(memberCertId);
+        System.out.println(rq.getLoginedMemberId());
 
-		Rq rq = (Rq) req.getAttribute("rq");
+        Rq rq = (Rq) req.getAttribute("rq");
+        MemberCert membercert = certificateService.getMemberCertById(memberCertId);
 
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-		List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
-		List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+        if (membercert == null) {
+            System.out.println("못찾음");
+            return Ut.jsHistoryBack("F-2", "등록되지 않은 회원 자격증입니다.");
+        }
 
-		model.addAttribute("member", member);
-		model.addAttribute("articles", articles);
+        if (rq.getLoginedMemberId() != membercert.getMemberId()) {
+            System.out.println(membercert.getMemberId());
+            return Ut.jsHistoryBack("F-1", "권한이 없는 사용자입니다.");
+        }
 
-		return "/usr/member/myPost";
-	}
+        certificateService.doChangAlertModeCert(memberCertId);
+
+        return Ut.jsReplace("S-1", Ut.f("%d 번 회원 자격증 수정 완료", memberCertId), "../member/myCert?");
+    }
+
+    @RequestMapping("/usr/member/myPost")
+    public String showMyPost(Model model, HttpServletRequest req) {
+
+        Rq rq = (Rq) req.getAttribute("rq");
+
+        Member member = memberService.getMemberById(rq.getLoginedMemberId());
+        List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
+        List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+
+        model.addAttribute("member", member);
+        model.addAttribute("articles", articles);
+
+        return "/usr/member/myPost";
+    }
 }

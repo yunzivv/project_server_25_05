@@ -54,14 +54,14 @@
                         <!-- 문제 내용 -->
                         <div class="px-20">
                             <div class="questionBody m-5">
-                                <div class="text-lg font-bold">${status.index + 1}. ${question.body}</div>
+                                <div class="text-xl font-bold">${status.index + 1}. ${question.body}</div>
 
                                 <c:if test="${question.hasImage}">
                                     <div class="ml-3"><img src="${question.imgUrl}" alt="문제 이미지" class="mt-2"
                                                            style="height: 200px; object-fit: contain;"/></div>
                                 </c:if>
                             </div>
-                            <div class="choiceBody ml-6">
+                            <div class="choiceBody ml-6 text-lg">
                                 <c:forEach var="choice" items="${question.extra__choices}">
                                     <div class="mt-1 choice-option cursor-pointer px-3 py-1 rounded hover:bg-gray-100"
                                          data-correct="${choice.correct}" data-label="${choice.label}"

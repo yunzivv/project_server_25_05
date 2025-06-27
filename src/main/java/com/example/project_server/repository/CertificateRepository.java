@@ -48,4 +48,6 @@ public interface CertificateRepository {
     public void deleteMemberCert(int id);
 
     public List<Map<String, Object>> getCertTypeRank(int jobCatId, int jobCodeId);
+
+    public void doChangAlertModeCert(int memberCertId);
 }

@@ -147,6 +147,12 @@
         WHERE id = #{id}
     </select>
 
+    <update id="doChangAlertModeCert" parameterType="int">
+        UPDATE memberCert
+        SET alert = NOT alert
+        WHERE id = #{memberCertId}
+    </update>
+
     <insert id="doAdd" parameterType="map">
         INSERT INTO memberCert
         SET

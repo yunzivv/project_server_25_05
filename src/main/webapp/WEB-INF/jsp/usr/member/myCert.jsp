@@ -66,14 +66,14 @@
 
                                         $.each(data, function (i, cert) {
                                             const item = $("<div>")
-                                                .text(cert.name) // ✅ certificate.name 출력
+                                                .text(cert.name)
                                                 .css({
                                                     padding: "5px",
                                                     cursor: "pointer"
                                                 })
                                                 .on("click", function () {
-                                                    input.val(cert.name); // ✅ 입력창에 name
-                                                    $("#certIdHidden_myCert").val(cert.id); // ✅ 숨겨진 input에 id
+                                                    input.val(cert.name);
+                                                    $("#certIdHidden_myCert").val(cert.id);
                                                     box.hide();
                                                 });
 
@@ -137,7 +137,7 @@
                             <td class="px-5 py-3">${cert.certname}</td>
                             <td class="px-5 py-3">${cert.certificateNumber}</td>
                             <td class="px-5 py-3">${cert.startDate.toString().substring(0, 10)}</td>
-                            <td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}</td>
+                            <td class="px-5 py-3">${cert.endDate.toString().substring(0, 10)}${cert.id}</td>
                             <td class="px-5 py-3">
                                 <button class="px-3 py-2 mr-2 rounded-md border-grey-2" onClick="">
                                     수정
@@ -147,21 +147,26 @@
                                     삭제
                                 </button>
                             </td>
+                                <%--                            /usr/member/settings/alertModeCert--%>
                             <td>
                                 <label class="inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" value="" class="sr-only peer">
+                                    <input type="checkbox"
+                                           class="sr-only peer"
+                                        ${cert.alert ? "checked" : ""}
+                                           onchange="toggleAlertMode(${cert.id})">
                                     <div class="relative w-11 h-6 bg-gray-200 rounded-full
-                                          peer-checked:after:translate-x-full
-                                          rtl:peer-checked:after:-translate-x-full
-                                          peer-checked:after:border-white
-                                          after:content-[''] after:absolute after:top-[2px] after:start-[2px]
-                                          after:bg-white after:border-gray-300 after:border
-                                          after:rounded-full after:h-5 after:w-5
-                                          after:transition-all
-                                          peer-checked:bg-blue-600">
+            peer-checked:after:translate-x-full
+            rtl:peer-checked:after:-translate-x-full
+            peer-checked:after:border-white
+            after:content-[''] after:absolute after:top-[2px] after:start-[2px]
+            after:bg-white after:border-gray-300 after:border
+            after:rounded-full after:h-5 after:w-5
+            after:transition-all
+            peer-checked:bg-blue-600">
                                     </div>
                                 </label>
                             </td>
+
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -175,6 +180,28 @@
     <%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
     <%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
 </div>
+
+<%--알람설정 토글버튼--%>
+<script>
+    function toggleAlertMode(certId) {
+        console.log(certId);
+        fetch("/usr/member/alertModeCert?memberCertId=" + certId, {
+            method: 'POST'
+        })
+            .then(res => {
+                if (!res.ok) throw new Error("요청 실패");
+                return res.text();
+            })
+            .then(msg => {
+                console.log("알람 상태 변경 완료:", msg);
+            })
+            .catch(err => {
+                alert("알람 상태 변경 중 오류 발생");
+                console.error(err);
+            });
+    }
+</script>
+
 
 <script>
     $(document).ready(function () {

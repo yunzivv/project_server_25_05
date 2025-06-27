@@ -14,7 +14,7 @@
 
         <div class="title px-8 pt-24 pb-12 text-4xl font-black">채용공고 우대 자격증 분석</div>
 
-        <div class="analysis_1 flex p-5">
+        <div class="analysis_1 flex p-5" id="analysis_all">
             <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
                 <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 가장 많이
                     언급된 직무
@@ -81,11 +81,69 @@
                     });
                 </script>
             </div>
-            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
+            <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 분류별 언급<br>
+                </div>
+                <div class="my-2 flex justify-center">
+                    <canvas id="certTypeChart" style="height: 200px; width: 350px;"></canvas>
+                </div>
+                <script th:inline="javascript">
+                    (() => {
+                        const certTypeLabels = /*[[${certTypeRankLabels}]]*/ ["국가자격", "국가공인 민간자격", "민간자격"];
+                        const certTypeValues = /*[[${certTypeRankValues}]]*/ [120, 90, 60];
+                        const certTypeTotal = certTypeValues.reduce((sum, val) => sum + val, 0);
+
+                        const certTypeChartCtx = document.getElementById('certTypeChart').getContext('2d');
+
+                        new Chart(certTypeChartCtx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: certTypeLabels,
+                                datasets: [{
+                                    data: certTypeValues,
+                                    backgroundColor: ['#2f73d9', '#d1d1d1', '#dedede'],
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                responsive: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'right',
+                                        align: 'end',
+                                        labels: {
+                                            padding: 10,
+                                            boxWidth: 10,
+                                            boxHeight: 10,
+                                            usePointStyle: true,
+                                            pointStyle: 'circle',
+                                            font: {
+                                                size: 12
+                                            }
+                                        }
+                                    },
+                                    tooltip: {
+                                        enabled: true,
+                                        callbacks: {
+                                            label: function (context) {
+                                                const label = context.label || '';
+                                                const value = context.raw;
+                                                const percent = ((value / certTypeTotal) * 100).toFixed(1);
+                                                return label + ": " + percent + "% (" + value + "회)";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    })();
+                </script>
+            </div>
+            <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
+                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;
                     공고<br></div>
                 <div class="my-2 flex justify-center">
-                    <canvas id="postsWithCert" style="height: 200px; width: 200px;"></canvas>
+                    <canvas id="postsWithCert" style="height: 200px; width: 350px;"></canvas>
                 </div>
                 <script th:inline="javascript">
                     const postsCtx = document.getElementById('postsWithCert').getContext('2d');
@@ -124,7 +182,6 @@
                     };
 
                     const options = {
-                        cutout: '70%',
                         responsive: false,
                         plugins: {
                             legend: {display: false},
@@ -152,90 +209,94 @@
                 </script>
 
             </div>
-            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">
-                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된
-                    공고<br></div>
-                <div class="my-2 flex justify-center">
-                    <canvas id="postsWithCert2" style="height: 200px; width: 200px;"></canvas>
-                </div>
-                <script th:inline="javascript">
-                    const postsCtx2 = document.getElementById('postsWithCert2').getContext('2d');
+            <%--            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">--%>
+            <%--                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된--%>
+            <%--                    공고<br></div>--%>
+            <%--                <div class="my-2 flex justify-center">--%>
+            <%--                    <canvas id="postsWithCert2" style="height: 200px; width: 200px;"></canvas>--%>
+            <%--                </div>--%>
+            <%--                <script th:inline="javascript">--%>
+            <%--                    const postsCtx2 = document.getElementById('postsWithCert2').getContext('2d');--%>
 
-                    const postCount2 = ${postCount};
-                    const totalPosts2 = ${totalPosts};
+            <%--                    const postCount2 = ${postCount};--%>
+            <%--                    const totalPosts2 = ${totalPosts};--%>
 
-                    const percent2 = totalPosts2 === 0 ? 0 : ((postCount2 / totalPosts2) * 100).toFixed(1);
+            <%--                    const percent2 = totalPosts2 === 0 ? 0 : ((postCount2 / totalPosts2) * 100).toFixed(1);--%>
 
-                    const data2 = {
-                        labels: ['자격증 언급 공고', '자격증 무관'],
-                        datasets: [{
-                            data: [percent2, 100 - percent2],
-                            backgroundColor: ['#2f73d9', '#dedede'],
-                            borderWidth: 0
-                        }]
-                    };
+            <%--                    const data2 = {--%>
+            <%--                        labels: ['자격증 언급 공고', '자격증 무관'],--%>
+            <%--                        datasets: [{--%>
+            <%--                            data: [percent2, 100 - percent2],--%>
+            <%--                            backgroundColor: ['#2f73d9', '#dedede'],--%>
+            <%--                            borderWidth: 0--%>
+            <%--                        }]--%>
+            <%--                    };--%>
 
-                    const centerTextPlugin2 = {
-                        id: 'centerText',
-                        afterDraw(chart) {
-                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
-                            ctx.save();
+            <%--                    const centerTextPlugin2 = {--%>
+            <%--                        id: 'centerText',--%>
+            <%--                        afterDraw(chart) {--%>
+            <%--                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;--%>
+            <%--                            ctx.save();--%>
 
-                            ctx.font = 'bold 30px "SUIT-Regular"';
-                            ctx.fillStyle = '#2f73d9';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
+            <%--                            ctx.font = 'bold 30px "SUIT-Regular"';--%>
+            <%--                            ctx.fillStyle = '#2f73d9';--%>
+            <%--                            ctx.textAlign = 'center';--%>
+            <%--                            ctx.textBaseline = 'middle';--%>
 
-                            const centerX = left + width / 2 + 5;
-                            const centerY = top + height / 2 + 5;
-                            ctx.fillText(percent + '%', centerX, centerY);
+            <%--                            const centerX = left + width / 2 + 5;--%>
+            <%--                            const centerY = top + height / 2 + 5;--%>
+            <%--                            ctx.fillText(percent + '%', centerX, centerY);--%>
 
-                            ctx.restore();
-                        }
-                    };
+            <%--                            ctx.restore();--%>
+            <%--                        }--%>
+            <%--                    };--%>
 
-                    const options2 = {
-                        cutout: '70%',
-                        responsive: false,
-                        plugins: {
-                            legend: {display: false},
-                            tooltip: {
-                                enabled: true, // ✅ 말풍선 활성화
-                                callbacks: {
-                                    label: function (context) {
-                                        if (context.dataIndex === 0) {
-                                            return `${postCount2}개`;
-                                        } else {
-                                            return '${totalPosts2 - postCount2}개'; // 남은부분엔 말풍선 안 뜨게
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    };
+            <%--                    const options2 = {--%>
+            <%--                        cutout: '70%',--%>
+            <%--                        responsive: false,--%>
+            <%--                        plugins: {--%>
+            <%--                            legend: {display: false},--%>
+            <%--                            tooltip: {--%>
+            <%--                                enabled: true, // ✅ 말풍선 활성화--%>
+            <%--                                callbacks: {--%>
+            <%--                                    label: function (context) {--%>
+            <%--                                        if (context.dataIndex === 0) {--%>
+            <%--                                            return `${postCount2}개`;--%>
+            <%--                                        } else {--%>
+            <%--                                            return '${totalPosts2 - postCount2}개'; // 남은부분엔 말풍선 안 뜨게--%>
+            <%--                                        }--%>
+            <%--                                    }--%>
+            <%--                                }--%>
+            <%--                            }--%>
+            <%--                        }--%>
+            <%--                    };--%>
 
-                    new Chart(postsCtx2, {
-                        type: 'doughnut',
-                        data: data2,
-                        options: options2,
-                        plugins: [centerTextPlugin2]
-                    });
-                </script>
+            <%--                    new Chart(postsCtx2, {--%>
+            <%--                        type: 'doughnut',--%>
+            <%--                        data: data2,--%>
+            <%--                        options: options2,--%>
+            <%--                        plugins: [centerTextPlugin2]--%>
+            <%--                    });--%>
+            <%--                </script>--%>
 
-            </div>
+            <%--            </div>--%>
             <div class="postsWithCert flex-grow flex flex-col">
                 <div class="flex-1 mb-4 analysis-element p-5">
-                    <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증 언급
-                        수<br></div>
+                    <div class="title p-2 flex items-center"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;언급된
+                        자격증 종류<br></div>
                     <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
-                                                             groupingUsed="true"/>개</span></div>
+                                                             groupingUsed="true"/>개</span>
+                </div>
                 <div class="flex-1 analysis-element p-5">
-                dd
+                    <div class="title p-2"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;채울 곳<br>
+                    </div>
+                    <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
+                                                             groupingUsed="true"/>개</span>
                 </div>
             </div>
         </div>
 
-        <div class="analysis_2 p-5 flex">
+        <div class="analysis_2 p-5 flex" id="analysis_section">
             <div class="w-1/3 h-full">
                 <div class="select_box flex flex-col h-80 p-5 mr-2 analysis-element rounded-3xl">
                     <div class="select_box_title flex title">

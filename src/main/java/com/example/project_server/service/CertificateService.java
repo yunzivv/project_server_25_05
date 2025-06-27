@@ -53,9 +53,11 @@ public class CertificateService {
         }
 
         List<Certificate> certRank = certificateRepository.getCertRank(jobCatId, jobCodeId);
+        List<Map<String, Object>> certTypeRank= getCertTypeRank(jobCatId, jobCodeId);
 
-        return ResultData.from("S-2", "직무 카테고리 > 코드 자격증 언급 랭킹 가져오기 성공",
-                "직무 카테고리", jobCat.getName(), "직무 코드", jobCode.getName(), "언급 랭킹", certRank);
+        return ResultData.from("S-2", "직무 카테고리 > 코드 자격증 언급, 분류 랭킹 가져오기 성공",
+                "직무 카테고리", jobCat.getName(), "직무 코드", jobCode.getName(), 
+                "자격증 언급 랭킹", certRank, "자격증 분류 랭킹", certTypeRank);
 
     }
 
@@ -101,5 +103,9 @@ public class CertificateService {
 
     public List<Map<String, Object>> getCertTypeRank(int jobCatId, int jobCodeId) {
         return certificateRepository.getCertTypeRank(jobCatId, jobCodeId);
+    }
+
+    public void doChangAlertModeCert(int memberCertId) {
+        certificateRepository.doChangAlertModeCert(memberCertId);
     }
 }

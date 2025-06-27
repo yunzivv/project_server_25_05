@@ -177,6 +177,14 @@ input {
 	color: #b6b6b6;
 }
 
+.text-grey-80 {
+	color: #6a6a6a;
+}
+
+.text-grey-100 {
+	color: #626262;
+}
+
 .border-blue-2 {
 	border: #2f73d9 solid 1px;
 	border-radius: 1.5rem;
@@ -305,7 +313,7 @@ li i.active{
 .side_bar_left > ul > li > a {
 	background-color: transparent;
 	transition: background-color 5s;
-	color: #f3f3f3;
+	color: #515151; //////////////////////////////////////////////////
 }
 
 .side_bar_left > ul > li > a.active {
@@ -512,7 +520,7 @@ li i.active{
 }
 
 .analysis-element:hover {
-	background-color: rgba(220, 220, 220, 0.35);
+	background-color: rgba(220, 220, 220, 0.4);
 }
 
 .analysis-element .title {

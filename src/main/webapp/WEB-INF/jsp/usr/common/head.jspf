@@ -28,9 +28,9 @@
 
 <body class="text-neutral-600">
 
-<div class="header fixed bg-blue-2 duration-300 z-50" style="height: 100px; width: 2000px;">
-    <div class="topBar h-full w-screen flex items-center pl-14 text-white">
-        <div class="logo text-Kakao3">
+<div class="header fixed bg-grey-1 duration-300 z-50" style="height: 100px; width: 2000px;">
+    <div class="topBar h-full w-screen flex items-center pl-14 text-grey-100">
+        <div class="logo text-Kakao3 text-blue-2">
             <a href="/" class="font-black" style="font-size: 2.5rem;">
                 CERTIFY
             </a>
