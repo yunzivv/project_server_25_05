@@ -102,33 +102,61 @@
                 </form>
 
             </div>
-            <div class="carousel-wrapper mt-10 w-2/3">
-            <div class="bg-blue-300 owl-carousel">
-                <c:forEach var="cert" items="${certs }">
-                    <div class="p-3 rounded-xl overflow-hidden bg-red-300 shadow-md"
-                         style="width: 500px; height: 313px;">
-                        <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">
-                            회원정보자격
-                        </div>
-                        <div class="flex h-2/3">
-                            <div class="img w-1/3 h-full p-4 border border-solid">사진</div>
-                            <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">
-                                <span>성    명: ${member.name}</span>
-                                    <%--                                <span>생년월일: ${member.birthday}</span>--%>
-                                <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
-                                <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
-                                <span>이 메 일: ${member.email}</span>
+            <%--            <div class="carousel-wrapper mt-10 w-2/3">--%>
+            <%--            <div class="bg-blue-300 owl-carousel">--%>
+            <%--                <c:forEach var="cert" items="${certs }">--%>
+            <%--                    <div class="p-3 rounded-xl overflow-hidden bg-red-300 shadow-md"--%>
+            <%--                         style="width: 500px; height: 313px;">--%>
+            <%--                        <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">--%>
+            <%--                            회원정보자격--%>
+            <%--                        </div>--%>
+            <%--                        <div class="flex h-2/3">--%>
+            <%--                            <div class="img w-1/3 h-full p-4 border border-solid">사진</div>--%>
+            <%--                            <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">--%>
+            <%--                                <span>성    명: ${member.name}</span>--%>
+            <%--                                    &lt;%&ndash;                                <span>생년월일: ${member.birthday}</span>&ndash;%&gt;--%>
+            <%--                                <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>--%>
+            <%--                                <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>--%>
+            <%--                                <span>이 메 일: ${member.email}</span>--%>
+            <%--                            </div>--%>
+            <%--                        </div>--%>
+            <%--                        <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">--%>
+            <%--                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>--%>
+            <%--                            <div class="font-black text-lg text-Kakao3">CERTIFY</div>--%>
+            <%--                            <a href="modify"--%>
+            <%--                               class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </c:forEach>--%>
+            <%--            </div></div>--%>
+            <div class="carousel-wrapper mt-10 mx-auto w-full max-w-[1500px]">
+                <div class="owl-carousel">
+                    <c:forEach var="cert" items="${certs }">
+                        <div class="rounded-xl overflow-hidden bg-red-300 shadow-md px-4 py-3"
+                             style="height: 313px; width: 500px;">
+                            <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">
+                                회원정보자격
+                            </div>
+                            <div class="flex h-2/3">
+                                <div class="img w-1/3 h-full p-4 border border-solid">사진</div>
+                                <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">
+                                    <span>성    명: ${member.name}</span>
+                                    <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
+                                    <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
+                                    <span>이 메 일: ${member.email}</span>
+                                </div>
+                            </div>
+                            <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">
+                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="font-black text-lg text-Kakao3">CERTIFY</div>
+                                <a href="modify"
+                                   class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>
                             </div>
                         </div>
-                        <div class="cardBottom h-1/6 flex justify-between items-end p-2 text-right">
-                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                            <div class="font-black text-lg text-Kakao3">CERTIFY</div>
-                            <a href="modify"
-                               class="rounded-md hover:bg-neutral-300 border border-neutral-300 px-3 py-1">수정</a>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div></div>
+                    </c:forEach>
+                </div>
+            </div>
+
             <table class="hidden">
                 <thead class="h-5 text-grey-1 bg-neutral-800">
                 <tr>
@@ -188,11 +216,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
-    $(".owl-carousel").owlCarousel({
-        items: 1,
-        loop: true,
-        nav: true,
-        autoplay: false
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            center: true,
+            items: 3,
+            loop: true,
+            margin: 20,
+            nav: true,
+            autoplay: false
+        });
     });
 </script>
 
