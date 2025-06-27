@@ -29,5 +29,7 @@ public interface ArticleRepository {
 
     public List<Article> getArticlesByMemberId(int loginedMemberId);
 
+    public List<Article> getLikeArticlesByMemberId(int loginedMemberId);
+
 //    public int getHits(int id);
 }

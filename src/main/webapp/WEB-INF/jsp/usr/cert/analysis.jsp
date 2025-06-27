@@ -154,7 +154,7 @@
                     const percent = totalPosts === 0 ? 0 : ((postCount / totalPosts) * 100).toFixed(1);
 
                     const data = {
-                        labels: ['자격증 언급 공고', '자격증 무관'],
+                        labels: ['자격증 언급 공고', '자격증 무관 공고'],
                         datasets: [{
                             data: [percent, 100 - percent],
                             backgroundColor: ['#2f73d9', '#dedede'],

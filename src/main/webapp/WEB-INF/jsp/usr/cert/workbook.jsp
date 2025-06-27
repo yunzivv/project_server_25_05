@@ -439,7 +439,7 @@
             if (currentStep === 1) {
                 const cert = $("#certIdHidden_workbook").val();
                 if (!cert) {
-                    alert("자격증과 과목을 선택해주세요.");
+                    alert("자격증을 선택해주세요.");
                     return;
                 }
             }

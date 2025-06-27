@@ -9,7 +9,7 @@ CREATE TABLE article(
                         regDate DATETIME NOT NULL,
                         updateDate DATETIME NOT NULL,
                         title VARCHAR(100) NOT NULL,
-                        `body` TEXT NOT NULL,
+                        `body` LONGTEXT NOT NULL,
                         memberId INT UNSIGNED NOT NULL,
                         boardId INT UNSIGNED NOT NULL,
                         certId INT UNSIGNED,
@@ -272,3 +272,5 @@ SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS ra
 FROM memberCert
 WHERE memberId = 4
 ORDER BY rank_num DESC;
+
+ALTER TABLE article MODIFY COLUMN BODY LONGTEXT;

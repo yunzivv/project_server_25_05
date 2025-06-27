@@ -100,6 +100,16 @@
         ORDER BY A.id DESC;
     </select>
 
+    <select id="getLikeArticlesByMemberId"
+            resultType="com.example.project_server.vo.Article">
+        SELECT *
+        FROM article A
+                 JOIN reaction R
+                      ON A.id = R.relId
+        WHERE R.memberId = #{loginedMemberId};
+    </select>
+
+
     <select id="getArticlesCnt">
         SELECT COUNT(*)
         FROM article A

@@ -5,12 +5,29 @@
 <%@ include file="../common/head.jspf" %>
 <%@ include file="../common/toastUiEditorLib.jspf" %>
 
-<script>
+<%--<script>--%>
 
+<%--    $(document).ready(function () {--%>
+<%--        // $('.back').addClass("hidden");--%>
+<%--        $('.header').addClass('active');--%>
+<%--        $('.nav_box > ul > li:nth-child(3) i').addClass('active');--%>
+<%--    });--%>
+<%--</script>--%>
+<script>
     $(document).ready(function () {
-        // $('.back').addClass("hidden");
-        $('.header').addClass('active');
+
+        const header = $('.header');
+        const topBar = $('.topBar');
+
+        header.addClass('active');
+        header.removeClass('bg-grey-1');
+        // header.addClass('bg-white');
+        topBar.removeClass('text-grey-100');
+        topBar.addClass('text-blue-2');
         $('.nav_box > ul > li:nth-child(3) i').addClass('active');
+
+        $('.hamburgerIcon').addClass("main");
+
     });
 </script>
 

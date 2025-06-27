@@ -268,9 +268,11 @@ public class UsrMemberController {
         Member member = memberService.getMemberById(rq.getLoginedMemberId());
         List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
         List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+        List<Article> likeArticles = articleService.getLikeArticlesByMemberId(rq.getLoginedMemberId());
 
         model.addAttribute("member", member);
         model.addAttribute("articles", articles);
+        model.addAttribute("likeArticles", likeArticles);
 
         return "/usr/member/myPost";
     }

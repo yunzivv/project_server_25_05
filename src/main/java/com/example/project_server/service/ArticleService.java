@@ -100,4 +100,8 @@ public class ArticleService {
     public List<Article> getArticlesByMemberId(int loginedMemberId) {
 		return articleRepository.getArticlesByMemberId(loginedMemberId);
     }
+
+    public List<Article> getLikeArticlesByMemberId(int loginedMemberId) {
+		return articleRepository.getLikeArticlesByMemberId(loginedMemberId);
+    }
 }

@@ -14,8 +14,19 @@
 
 <script>
     $(document).ready(function () {
-        $('.header').addClass('active');
+
+        const header = $('.header');
+        const topBar = $('.topBar');
+
+        header.addClass('active');
+        header.removeClass('bg-grey-1');
+        // header.addClass('bg-white');
+        topBar.removeClass('text-grey-100');
+        topBar.addClass('text-blue-2');
         $('.nav_box > ul > li:nth-child(3) i').addClass('active');
+
+        $('.hamburgerIcon').addClass("main");
+
     });
 </script>
 

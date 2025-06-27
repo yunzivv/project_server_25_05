@@ -12,9 +12,9 @@
         const topBar = $('.topBar');
 
         header.addClass('active');
-        header.removeClass('bg-blue-2');
+        header.removeClass('bg-grey-1');
         // header.addClass('bg-white');
-        topBar.removeClass('text-white');
+        topBar.removeClass('text-grey-100');
         topBar.addClass('text-blue-2');
 
         $('.hamburgerIcon').addClass("main");
