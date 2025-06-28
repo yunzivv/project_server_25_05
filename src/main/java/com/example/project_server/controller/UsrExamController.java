@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -86,6 +87,7 @@ public class UsrExamController {
 
         Certificate certificate = certificateService.getCertById(certId);
 
+        model.addAttribute("examId", examId);
         model.addAttribute("questions", questions);
         model.addAttribute("certificate", certificate);
 
@@ -94,9 +96,12 @@ public class UsrExamController {
 
     @RequestMapping("/usr/workbook/doRecord")
     @ResponseBody
-    public void doRecord(HttpServletRequest req) {
+    public void doRecord(HttpServletRequest req, int certId, @RequestParam(defaultValue = "0")int examId, LocalTime elapsedTime,
+                         int totalQuest, int correctQuest) {
 
-        return;
+        Rq rq = (Rq) req.getAttribute("rq");
+        int loginedMemberId = rq.getLoginedMemberId();
+
+        examService.doRecord(loginedMemberId, certId, examId, elapsedTime, totalQuest, correctQuest);
     }
-
 }

@@ -128,6 +128,19 @@
         ORDER BY Q.questNum, C.label
     </select>
 
+    <insert id="insertMemberExam" parameterType="com.example.project_server.vo.MemberExam">
+        INSERT INTO memberExam
+        (memberId, certId, examId, elapsedTime, totalQuest, correctQuest, regDate, updateDate)
+        VALUES
+            (#{memberId}, #{certId}, #{examId}, #{elapsedTime}, #{totalQuest}, #{correctQuest}, NOW(), NOW())
+    </insert>
 
+    <select id="getMemberExamByMemberId"
+            resultType="com.example.project_server.vo.MemberExam">
+        SELECT *
+        FROM memberExam
+        WHERE memberId = #{loginedMemberId}
+        ORDER BY regDate DESC;
+    </select>
 
 </mapper>

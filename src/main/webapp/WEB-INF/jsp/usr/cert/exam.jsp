@@ -142,16 +142,88 @@
 </div>
 <script>
 
-    <%--시험 종료--%>
+    let totalAnswered = 0;
+    let correctCount = 0;
+    let examStartTime;
+    let examElapsedMinutes = 0;
+    let examElapsedSeconds = 0;
+
+    // 과목별 통계
+    const subjectStats = {};
+
+    $(document).ready(function () {
+        $('.back').addClass("hidden");
+
+        examStartTime = new Date();
+
+        setInterval(function () {
+            const now = new Date();
+            const elapsedMs = now - examStartTime;
+
+            examElapsedMinutes = Math.floor(elapsedMs / 60000);
+            examElapsedSeconds = Math.floor((elapsedMs % 60000) / 1000);
+
+            const minutesStr = String(examElapsedMinutes).padStart(2, '0');
+            const secondsStr = String(examElapsedSeconds).padStart(2, '0');
+
+            $('.elapsedTime').text(minutesStr + " : " + secondsStr);
+        }, 1000);
+    });
+
+    function checkAnswer(el) {
+        const isCorrect = el.getAttribute("data-correct") === "true";
+        const box = el.closest(".question-box");
+        const subjectNum = parseInt(box.getAttribute("data-subject-num"));
+        const subjectName = box.getAttribute("data-subject-name");
+
+        if (!subjectStats[subjectNum]) {
+            subjectStats[subjectNum] = {
+                subjectNum: subjectNum,
+                name: subjectName,
+                total: 0,
+                correct: 0
+            };
+        }
+
+        subjectStats[subjectNum].total++;
+
+        const siblings = el.parentElement.querySelectorAll('.choice-option');
+
+        siblings.forEach(option => {
+            const correct = option.getAttribute("data-correct") === "true";
+
+            if (correct) {
+                option.classList.add("bg-green-200");
+            }
+
+            if (option === el && !isCorrect) {
+                option.classList.add("bg-red-200");
+            }
+
+            option.onclick = null;
+            option.classList.add("pointer-events-none");
+        });
+
+        if (isCorrect) {
+            correctCount++;
+            subjectStats[subjectNum].correct++;
+        }
+
+        totalAnswered++;
+        updateAccuracy(correctCount, totalAnswered);
+    }
+
+    function updateAccuracy(correctCount, totalAnswered) {
+        const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
+        $(".answerCorrectRate").text(accuracy);
+    }
 
     function confirmExit() {
         if (confirm("시험을 종료하시겠습니까?")) {
-            // 결과화면 출력
             submitExam();
         }
     }
 
-    <!-- 문제 넘기기 -->
     let currentIndex = 0;
     const boxes = $(".question-container .question-box");
     const nextBtn = $("#nextButton");
@@ -177,7 +249,6 @@
             currentIndex--;
             boxes[currentIndex].classList.remove("hidden");
 
-            // 마지막 문제에서 이전으로 돌아가면 다시 "다음"으로 복귀
             if (nextBtn.textContent === "제출") {
                 nextBtn.textContent = "다음";
                 nextBtn.onclick = showNextQuestion;
@@ -187,19 +258,14 @@
         }
     }
 
-    // 시험 결과
+    // ✅ 시험 제출 시 호출
     function submitExam() {
         $(".question-container").addClass("hidden");
         $(".result-container").removeClass("hidden");
 
         const total = totalAnswered;
         const accuracy = total === 0 ? 0 : Math.round((correctCount / total) * 100);
-
-        const endTime = new Date();
-        const durationMs = endTime - examStartTime;
-        const minutes = Math.floor(durationMs / 60000);
-        const seconds = Math.floor((durationMs % 60000) / 1000);
-        const timeStr = minutes + "분 " + seconds + "초";
+        const timeStr = examElapsedMinutes + "분 " + examElapsedSeconds + "초";
 
         let resultHtml = "<div>총 문제 수: <strong>" + total + "</strong></div>" +
             "<div>맞춘 개수: <strong>" + correctCount + "</strong></div>" +
@@ -216,6 +282,32 @@
         }
 
         $("#result-summary").html(resultHtml);
+
+        saveExamResult();
+    }
+
+    // ✅ 시험 결과 저장
+    function saveExamResult() {
+        const certId = ${certificate.id};
+        const examId = ${examId != null ? examId : 0};
+
+        const timeStr = (examElapsedMinutes < 10 ? "0" : "") + examElapsedMinutes + ":" +
+            (examElapsedSeconds < 10 ? "0" : "") + examElapsedSeconds + ":00";
+
+        $.ajax({
+            url: "/usr/workbook/doRecord",
+            type: "POST",
+            data: {
+                certId: certId,
+                examId: examId,
+                elapsedTime: timeStr,
+                totalQuest: totalAnswered,
+                correctQuest: correctCount
+            },
+            error: function (err) {
+                console.error("시험 결과 저장 실패", err);
+            }
+        });
     }
 
 
@@ -232,49 +324,49 @@
     const subjectStats = {};
 
     function checkAnswer(el) {
-    const isCorrect = el.getAttribute("data-correct") === "true";
+        const isCorrect = el.getAttribute("data-correct") === "true";
 
-    const box = el.closest(".question-box");
-    const subjectNum = parseInt(box.getAttribute("data-subject-num"));
-    const subjectName = box.getAttribute("data-subject-name");
+        const box = el.closest(".question-box");
+        const subjectNum = parseInt(box.getAttribute("data-subject-num"));
+        const subjectName = box.getAttribute("data-subject-name");
 
-    if (!subjectStats[subjectNum]) {
-        subjectStats[subjectNum] = {
-            subjectNum: subjectNum,
-            name: subjectName,
-            total: 0,
-            correct: 0
-        };
-    }
-
-    subjectStats[subjectNum].total++;
-
-    const siblings = el.parentElement.querySelectorAll('.choice-option');
-
-    siblings.forEach(option => {
-        const correct = option.getAttribute("data-correct") === "true";
-
-        if (correct) {
-            option.classList.add("bg-green-200");
+        if (!subjectStats[subjectNum]) {
+            subjectStats[subjectNum] = {
+                subjectNum: subjectNum,
+                name: subjectName,
+                total: 0,
+                correct: 0
+            };
         }
 
-        if (option === el && !isCorrect) {
-            option.classList.add("bg-red-200");
+        subjectStats[subjectNum].total++;
+
+        const siblings = el.parentElement.querySelectorAll('.choice-option');
+
+        siblings.forEach(option => {
+            const correct = option.getAttribute("data-correct") === "true";
+
+            if (correct) {
+                option.classList.add("bg-green-200");
+            }
+
+            if (option === el && !isCorrect) {
+                option.classList.add("bg-red-200");
+            }
+
+            // 선택지 비활성화
+            option.onclick = null;
+            option.classList.add("pointer-events-none");
+        });
+
+        if (isCorrect) {
+            correctCount++;
+            subjectStats[subjectNum].correct++;
         }
 
-        // 선택지 비활성화
-        option.onclick = null;
-        option.classList.add("pointer-events-none");
-    });
-
-    if (isCorrect) {
-        correctCount++;
-        subjectStats[subjectNum].correct++;
+        totalAnswered++;
+        updateAccuracy(correctCount, totalAnswered);
     }
-
-    totalAnswered++;
-    updateAccuracy(correctCount, totalAnswered);
-}
 
 
     // 정답률

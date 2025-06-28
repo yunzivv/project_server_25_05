@@ -2,6 +2,7 @@ package com.example.project_server.controller;
 
 import com.example.project_server.service.ArticleService;
 import com.example.project_server.service.CertificateService;
+import com.example.project_server.service.ExamService;
 import com.example.project_server.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,8 @@ public class UsrMemberController {
     private CertificateService certificateService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ExamService examService;
 
     @RequestMapping("/usr/member/join")
     public String join() {
@@ -212,10 +215,12 @@ public class UsrMemberController {
 
         List<MemberCert> certs = certificateService.getMemberCerts(rq.getLoginedMemberId());
         List<Article> articles = articleService.getArticlesByMemberId(rq.getLoginedMemberId());
+        List<MemberExam> exams = examService.getMemberExamByMemberId(rq.getLoginedMemberId());
 
         model.addAttribute("member", member);
         model.addAttribute("certs", certs);
         model.addAttribute("articles", articles);
+        model.addAttribute("exams", exams);
 
         return "/usr/member/myInfo";
     }
