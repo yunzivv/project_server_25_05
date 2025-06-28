@@ -49,7 +49,9 @@
                         </div>
                         <div class="text-right text-sm px-4 pt-2 text-gray-500">
                             정답률: <span class="answerCorrectRate">0</span>% &nbsp;&nbsp;&nbsp; ${status.index + 1}
-                            / ${questions.size()}
+                            / ${questions.size()} &nbsp;&nbsp;&nbsp;
+                            <span class="elapsedTime">
+                            </span>
                         </div>
                         <!-- 문제 내용 -->
                         <div class="px-20">
@@ -127,8 +129,8 @@
                         <div class="flex-grow bg-white rounded-xl px-4 py-2">시험 결과</div>
                         <i class="fa-solid fa-ellipsis-vertical mx-4 text-2xl"></i>
                     </div>
-                    <div class="text-gray-500 py-8 px-12" id="result-summary">
-<%--                    결과출력--%>
+                    <div class="text-gray-500 p-20 text-xl" id="result-summary">
+                        <%--                    결과출력--%>
                     </div>
                     <button type="button" class="absolute bottom-8 right-12 px-4 py-2 bg-red-400 text-white rounded">
                         <a href="../workbook/showWorkbook">시험 모드 종료</a></button>
@@ -138,9 +140,8 @@
     </div>
 </div>
 </div>
-
-
 <script>
+
     <%--시험 종료--%>
 
     function confirmExit() {
@@ -194,9 +195,16 @@
         const total = totalAnswered;
         const accuracy = total === 0 ? 0 : Math.round((correctCount / total) * 100);
 
+        const endTime = new Date();
+        const durationMs = endTime - examStartTime;
+        const minutes = Math.floor(durationMs / 60000);
+        const seconds = Math.floor((durationMs % 60000) / 1000);
+        const timeStr = minutes + "분 " + seconds + "초";
+
         let resultHtml = "<div>총 문제 수: <strong>" + total + "</strong></div>" +
             "<div>맞춘 개수: <strong>" + correctCount + "</strong></div>" +
-            "<div>정답률: <strong>" + accuracy + "%</strong></div>";
+            "<div>정답률: <strong>" + accuracy + "%</strong></div>" +
+            "<div>소요 시간: <strong>" + timeStr + "</strong></div>";
 
         resultHtml += "<br/><div class='mt-4 font-bold'>[과목별 성적]</div>";
 
@@ -224,43 +232,50 @@
     const subjectStats = {};
 
     function checkAnswer(el) {
-        const isCorrect = el.getAttribute("data-correct") === "true";
+    const isCorrect = el.getAttribute("data-correct") === "true";
 
-        // 가장 가까운 question-box에서 과목정보 추출
-        const box = el.closest(".question-box");
-        const subjectNum = parseInt(box.getAttribute("data-subject-num"));
-        const subjectName = box.getAttribute("data-subject-name");
+    const box = el.closest(".question-box");
+    const subjectNum = parseInt(box.getAttribute("data-subject-num"));
+    const subjectName = box.getAttribute("data-subject-name");
 
-        // 과목별 통계 초기화
-        if (!subjectStats[subjectNum]) {
-            subjectStats[subjectNum] = {
-                subjectNum: subjectNum,
-                name: subjectName,
-                total: 0,
-                correct: 0
-            };
+    if (!subjectStats[subjectNum]) {
+        subjectStats[subjectNum] = {
+            subjectNum: subjectNum,
+            name: subjectName,
+            total: 0,
+            correct: 0
+        };
+    }
+
+    subjectStats[subjectNum].total++;
+
+    const siblings = el.parentElement.querySelectorAll('.choice-option');
+
+    siblings.forEach(option => {
+        const correct = option.getAttribute("data-correct") === "true";
+
+        if (correct) {
+            option.classList.add("bg-green-200");
         }
 
-        // 집계
-        subjectStats[subjectNum].total++;
-        if (isCorrect) {
-            el.classList.add("bg-green-200");
-            correctCount++;
-            subjectStats[subjectNum].correct++;
-        } else {
-            el.classList.add("bg-red-200");
+        if (option === el && !isCorrect) {
+            option.classList.add("bg-red-200");
         }
 
         // 선택지 비활성화
-        const siblings = el.parentElement.querySelectorAll('.choice-option');
-        siblings.forEach(option => {
-            option.onclick = null;
-            option.classList.add("pointer-events-none");
-        });
+        option.onclick = null;
+        option.classList.add("pointer-events-none");
+    });
 
-        totalAnswered++;
-        updateAccuracy(correctCount, totalAnswered);
+    if (isCorrect) {
+        correctCount++;
+        subjectStats[subjectNum].correct++;
     }
+
+    totalAnswered++;
+    updateAccuracy(correctCount, totalAnswered);
+}
+
 
     // 정답률
     function updateAccuracy(correctCount, totalAnswered) {
@@ -268,6 +283,25 @@
         $(".answerCorrectRate").text(accuracy);
     }
 
+</script>
+
+<%--시험 시간 기록--%>
+<script>
+    let examStartTime;
+
+    $(document).ready(function () {
+        examStartTime = new Date();
+
+        setInterval(function () {
+            const now = new Date();
+            const elapsedMs = now - examStartTime;
+
+            const minutes = String(Math.floor(elapsedMs / 60000)).padStart(2, '0');
+            const seconds = String(Math.floor((elapsedMs % 60000) / 1000)).padStart(2, '0');
+
+            $('.elapsedTime').text(minutes + " : " + seconds);
+        }, 1000);
+    });
 </script>
 
 

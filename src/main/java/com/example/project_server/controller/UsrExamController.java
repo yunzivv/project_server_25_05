@@ -92,5 +92,11 @@ public class UsrExamController {
         return "/usr/cert/exam";
     }
 
+    @RequestMapping("/usr/workbook/doRecord")
+    @ResponseBody
+    public void doRecord(HttpServletRequest req) {
+
+        return;
+    }
 
 }

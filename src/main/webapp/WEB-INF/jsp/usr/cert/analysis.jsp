@@ -209,77 +209,7 @@
                 </script>
 
             </div>
-            <%--            <div class="flex flex-col w-1/5 p-5 mr-2 analysis-element h-full">--%>
-            <%--                <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증이 언급된--%>
-            <%--                    공고<br></div>--%>
-            <%--                <div class="my-2 flex justify-center">--%>
-            <%--                    <canvas id="postsWithCert2" style="height: 200px; width: 200px;"></canvas>--%>
-            <%--                </div>--%>
-            <%--                <script th:inline="javascript">--%>
-            <%--                    const postsCtx2 = document.getElementById('postsWithCert2').getContext('2d');--%>
 
-            <%--                    const postCount2 = ${postCount};--%>
-            <%--                    const totalPosts2 = ${totalPosts};--%>
-
-            <%--                    const percent2 = totalPosts2 === 0 ? 0 : ((postCount2 / totalPosts2) * 100).toFixed(1);--%>
-
-            <%--                    const data2 = {--%>
-            <%--                        labels: ['자격증 언급 공고', '자격증 무관'],--%>
-            <%--                        datasets: [{--%>
-            <%--                            data: [percent2, 100 - percent2],--%>
-            <%--                            backgroundColor: ['#2f73d9', '#dedede'],--%>
-            <%--                            borderWidth: 0--%>
-            <%--                        }]--%>
-            <%--                    };--%>
-
-            <%--                    const centerTextPlugin2 = {--%>
-            <%--                        id: 'centerText',--%>
-            <%--                        afterDraw(chart) {--%>
-            <%--                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;--%>
-            <%--                            ctx.save();--%>
-
-            <%--                            ctx.font = 'bold 30px "SUIT-Regular"';--%>
-            <%--                            ctx.fillStyle = '#2f73d9';--%>
-            <%--                            ctx.textAlign = 'center';--%>
-            <%--                            ctx.textBaseline = 'middle';--%>
-
-            <%--                            const centerX = left + width / 2 + 5;--%>
-            <%--                            const centerY = top + height / 2 + 5;--%>
-            <%--                            ctx.fillText(percent + '%', centerX, centerY);--%>
-
-            <%--                            ctx.restore();--%>
-            <%--                        }--%>
-            <%--                    };--%>
-
-            <%--                    const options2 = {--%>
-            <%--                        cutout: '70%',--%>
-            <%--                        responsive: false,--%>
-            <%--                        plugins: {--%>
-            <%--                            legend: {display: false},--%>
-            <%--                            tooltip: {--%>
-            <%--                                enabled: true, // ✅ 말풍선 활성화--%>
-            <%--                                callbacks: {--%>
-            <%--                                    label: function (context) {--%>
-            <%--                                        if (context.dataIndex === 0) {--%>
-            <%--                                            return `${postCount2}개`;--%>
-            <%--                                        } else {--%>
-            <%--                                            return '${totalPosts2 - postCount2}개'; // 남은부분엔 말풍선 안 뜨게--%>
-            <%--                                        }--%>
-            <%--                                    }--%>
-            <%--                                }--%>
-            <%--                            }--%>
-            <%--                        }--%>
-            <%--                    };--%>
-
-            <%--                    new Chart(postsCtx2, {--%>
-            <%--                        type: 'doughnut',--%>
-            <%--                        data: data2,--%>
-            <%--                        options: options2,--%>
-            <%--                        plugins: [centerTextPlugin2]--%>
-            <%--                    });--%>
-            <%--                </script>--%>
-
-            <%--            </div>--%>
             <div class="postsWithCert flex-grow flex flex-col">
                 <div class="flex-1 mb-4 analysis-element p-5">
                     <div class="title p-2 flex items-center"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;언급된
@@ -407,13 +337,17 @@
 <script>
     $(document).ready(function () {
 
-        const activeSideMenu = $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a')
+        $('.header').addClass('active');
+        $('.nav_box > ul > li:nth-child(1) i').addClass('active');
 
         $('.side_bar_left').addClass('active');
-        $('.header').addClass('active');
-        // $('.side_bar_left').addClass('active');
-        $('.nav_box > ul > li:nth-child(1) i').addClass('active');
         $('.side_bar_left > .hub_sub_menu ').removeClass('hidden');
+        $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a').addClass('active');
+        $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
+    });
+</script>
+<script>
+    $(document).ready(function () {
 
         let selectedJobCatId = null;
         $('.jobCat_list').on('click', 'li', function () {
