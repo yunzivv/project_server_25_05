@@ -11,8 +11,6 @@
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <%--시험 히스토리--%>
-
     <div class="flex flex-col flex-grow px-24 pt-12">
         <div id="memberInfo" class="">
 
@@ -23,12 +21,12 @@
             <span>이 메 일: ${member.email}</span>
         </div>
         <div class="examHistory">
+            <c:forEach var="exam" items="${exams}">
+            ${exam.extra__certName} ${exam.regDate.toString().substring(0,10)} ${exam.totalQuest} ${exam.correctQuest}
+            ${exam.elapsedTime}
 
-            <span>성    명: ${member.name}</span>
-            <%--                                <span>생년월일: ${member.birthday}</span>--%>
-            <span>가입일자: ${member.regDate.toString().substring(0, 10)}</span>
-            <span>전화번호: ${member.cellPhone.toString().substring(0, 3)}-${member.cellPhone.toString().substring(3, 7)}-${member.cellPhone.toString().substring(7)}</span>
-            <span>이 메 일: ${member.email}</span>
+</c:forEach>
+
         </div>
         <div class="side hidden xl:block w-52"></div>
         <div class="block min-[1280px]:hidden w-1/12"></div>

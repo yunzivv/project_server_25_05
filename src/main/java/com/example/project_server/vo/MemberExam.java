@@ -27,4 +27,6 @@ public class MemberExam {
 
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
+
+	private String extra__certName;
 }

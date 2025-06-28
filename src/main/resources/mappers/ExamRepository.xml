@@ -137,10 +137,12 @@
 
     <select id="getMemberExamByMemberId"
             resultType="com.example.project_server.vo.MemberExam">
-        SELECT *
-        FROM memberExam
-        WHERE memberId = #{loginedMemberId}
-        ORDER BY regDate DESC;
+        SELECT M.*, C.name AS extra__certName
+        FROM memberExam M
+                 JOIN certificate C
+                      ON M.certId = C.id
+        WHERE M.memberId = #{loginedMemberId}
+        ORDER BY M.regDate DESC;
     </select>
 
 </mapper>
