@@ -32,19 +32,83 @@
             <div>
                 <div class="ml-12 mb-8 text-4xl font-bold">자격증 등록</div>
                 <form action="/usr/cert/doAdd" method="post" class="relative border-grey-2 p-3 rounded-lg">
-    <input type="hidden" name="certId" id="certIdHidden_myCert">
+                    <input type="hidden" name="certId" id="certIdHidden_myCert">
 
-    <div class="flex gap-2">
-        <input type="text" name="certName" id="certNameInput_myCert" placeholder="자격증명" autocomplete="off" class="flex-[1]"/>
-        <input type="text" name="certificateNumber" placeholder="자격번호" class="flex-[1]"/>
-        <input type="date" name="startDate" placeholder="취득일" class="flex-[0.5]"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="date" name="endDate" placeholder="만료일" class="flex-[0.5]"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="submit" class="flex-[0.3] bg-gray-100 hover:bg-gray-200 rounded-md py-2 mx-2">등록</button>
-    </div>
+                    <div class="flex gap-2">
+                        <input type="text" name="certName" id="certNameInput_myCert" placeholder="자격증명"
+                               autocomplete="off" class="flex-[1]"/>
+                        <input type="text" name="certificateNumber" placeholder="자격번호" class="flex-[1]"/>
+                        <input type="date" name="startDate" placeholder="취득일" class="flex-[0.5]"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="date" name="endDate" placeholder="만료일" class="flex-[0.5]"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="flex-[0.3] bg-gray-100 hover:bg-gray-200 rounded-md py-2 mx-2">등록
+                        </button>
+                    </div>
 
-    <div id="autocompleteBox_myCert"
-         style="border: 1px solid #ccc; display: none; position: absolute;"></div>
-</form>
+                    <div id="autocompleteBox_myCert"
+                         style="border: 1px solid #ccc; display: none; position: absolute;"></div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#certNameInput_myCert").on("input", function () {
+                                const keyword = $.trim($(this).val());
+                                if (keyword.length < 2) return;
+
+                                const box = $("#autocompleteBox_myCert");
+                                const input = $("#certNameInput_myCert");
+                                const form = input.closest("form");
+
+                                $.getJSON("/usr/cert/autoComplete", {keyword: keyword}, function (data) {
+                                    console.log(data);
+                                    box.empty();
+
+                                    if (data.length === 0) {
+                                        box.hide();
+                                        return;
+                                    }
+
+                                    $.each(data, function (i, cert) {
+                                        const item = $("<div>")
+                                            .text(cert.name)
+                                            .css({
+                                                padding: "5px",
+                                                cursor: "pointer"
+                                            })
+                                            .on("click", function () {
+                                                input.val(cert.name);
+                                                $("#certIdHidden_myCert").val(cert.id);
+                                                box.hide();
+                                            });
+
+                                        box.append(item);
+                                    });
+
+                                    const inputOffset = input.offset();
+                                    const formOffset = form.offset();
+
+                                    const left = inputOffset.left - formOffset.left;
+                                    const top = inputOffset.top + input.outerHeight() - formOffset.top;
+
+                                    box.css({
+                                        left: left + "px",
+                                        top: top + "px",
+                                        width: input.outerWidth(),
+                                        position: "absolute",
+                                        background: "#fff",
+                                        zIndex: 1000
+                                    }).show();
+                                });
+                            });
+
+                            $(document).on("click", function (e) {
+                                const box = $("#autocompleteBox_myCert");
+                                const input = $("#certNameInput_myCert");
+
+                                if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
+                                    box.hide();
+                                }
+                            });
+                        });
+                    </script>
+                </form>
 
             </div>
             <div class="mt-20 ml-12 text-4xl font-bold">내 자격증</div>

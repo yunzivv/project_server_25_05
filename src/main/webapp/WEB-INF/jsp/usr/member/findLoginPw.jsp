@@ -91,7 +91,7 @@
                         않았습니다.
                     </div>
                     <input class="bg-white border-grey-2 text-sm rounded-lg block p-4 mt-4 mb-2"
-                           autocomplete="off" type="text" placeholder="이메일을 입력해주세요" name="email"/>
+                           autocomplete="off" type="text" placeholder="이메일" name="email"/>
                     <div class="self-start m-1 msg-area msgFromEmail opacity-0 text-right text-red-400 mb-4">* 이메일이 입력되지
                         않았습니다.
                     </div>

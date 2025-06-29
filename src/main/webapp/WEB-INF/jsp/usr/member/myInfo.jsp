@@ -35,16 +35,16 @@
                 <table class="m-10">
                     <thead class="h-5 text-base bg-grey-1 text-blue-2 border-b">
                     <tr>
-                        <th scope="col" class="px-6 py-4">자격증</th>
-                        <th scope="col" class="px-6 py-4 w-1/2">푼 날</th>
-                        <th scope="col" class="px-6 py-4">총 푼 문제</th>
-                        <th scope="col" class="px-6 py-4">맞춘 문제</th>
-                        <th scope="col" class="px-6 py-4 whitespace-nowrap">경과 시간</th>
+                        <th scope="col" class="px-10 py-4 w-2/5">자격증</th>
+                        <th scope="col" class="px-10 py-4">푼 날</th>
+                        <th scope="col" class="px-10 py-4">총 푼 문제</th>
+                        <th scope="col" class="px-10 py-4">맞춘 문제</th>
+                        <th scope="col" class="px-10 py-4 whitespace-nowrap">경과 시간</th>
                     </tr>
                     </thead>
                     <c:forEach var="exam" items="${exams}">
-                        <tr class="bg-grey-1 hover:bg-neutral-200 cursor-pointer">
-                            <td class="p-4"> ${exam.extra__certName}</td>
+                        <tr class="bg-grey-1 cursor-pointer text-center">
+                            <td class="p-4 text-left"> ${exam.extra__certName}</td>
                             <td><a class="block text-left pl-6"> ${exam.regDate.toString().substring(0,10)}</a>
                             </td>
                             <td class="p-4">${exam.totalQuest}</td>

@@ -198,7 +198,7 @@
                                     <div class="questionCountSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
                                          style="top: 200%;">
                                         <label for="questionCount"></label>
-                                        <select id="questionCount" name="questionCount" required>
+                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">
                                             <option value="-1" selected disabled>풀 문제 개수 선택</option>
                                             <option value="20">20문제</option>
                                             <option value="50">50문제</option>
@@ -213,7 +213,7 @@
                                     <div class="examIdSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
                                          style="top: 200%;">
                                         <label for="examId"></label>
-                                        <select id="examId" name="examId" required size="5" style="overflow-y: auto;">
+                                        <select id="examId" name="examId" required style="overflow-y: auto;" class="p-2 border-grey-4 rounded-lg">
                                             <option value="-1" selected></option>
                                         </select>
                                     </div>
