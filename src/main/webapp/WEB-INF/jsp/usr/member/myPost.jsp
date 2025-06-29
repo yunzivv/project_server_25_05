@@ -82,7 +82,7 @@
                 <c:if test="${empty likeArticles }">
                     <div class="text-3xl font-bold m-8">좋아요 한 게시물이 없습니다.</div>
                     <div><a href="../article/list" class="text-blue-2 hover:underline">COMMUNITY</a>탭에서 다른 사용자들이 작성한 글을
-                        확인하세요!.
+                        확인하세요!
                     </div>
                 </c:if>
             </div>
