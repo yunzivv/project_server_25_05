@@ -53,4 +53,6 @@ public interface CertificateRepository {
     public void doChangAlertModeCert(int memberCertId);
 
     public List<Certificate> getExamCertById(Set<Integer> certIdsWithExam);
+
+    public int getCertTypesAtMention();
 }

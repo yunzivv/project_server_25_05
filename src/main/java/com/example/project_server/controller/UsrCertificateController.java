@@ -48,6 +48,8 @@ public class UsrCertificateController {
         List<JobCat> jobCatMentionRank = certificateService.getJobCatMentionRank();
         List<Map<String, Object>> certTypeRank = (List<Map<String, Object>>) certificateService.getCertTypeRank(0, 0);
 
+        int certTypes = certificateService.getCertTypesAtMention();
+
         List<Integer> topCertCounts = certMentionRank.stream()
                 .map(Certificate::getExtra__certCount)
                 .collect(Collectors.toList());
@@ -97,10 +99,12 @@ public class UsrCertificateController {
         model.addAttribute("certTypeRankLabels", mapper.writeValueAsString(certTypeRankLabels));
         model.addAttribute("certTypeRankValues", mapper.writeValueAsString(certTypeRankValues));
 
-        model.addAttribute("totalPosts", 31256);
+        model.addAttribute("totalPosts", 248780);
         model.addAttribute("postCount", certificateService.getPostCount(0, 0));
         model.addAttribute("certCount", certificateService.getCertCount(0, 0));
         model.addAttribute("mentionCount", certificateService.getMentionCount(0, 0));
+
+        model.addAttribute("certTypes", certTypes);
 
         return "/usr/cert/analysis";
     }
@@ -119,14 +123,6 @@ public class UsrCertificateController {
 
         return certificateService.getCertRank(jobCatId, jobCodeId);
     }
-
-    // 직무별 자격증 분류
-//	@GetMapping("/usr/api/certTypeRank")
-//	@ResponseBody
-//	public ResultData getCertTypeRank(int jobCatId, int jobCodeId) {
-//
-//		return certificateService.getCertRank(jobCatId, jobCodeId);
-//	}
 
     @RequestMapping("/usr/cert/library")
     public String showLibrary() {

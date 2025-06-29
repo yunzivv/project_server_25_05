@@ -141,7 +141,7 @@
             </div>
             <div class="flex flex-col w-1/4 p-5 mr-2 analysis-element h-full">
                 <div class="title p-2 mb-4"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;
-                    공고<br></div>
+                    자격증 언급 공고 비율<br></div>
                 <div class="my-2 flex justify-center">
                     <canvas id="postsWithCert" style="height: 200px; width: 350px;"></canvas>
                 </div>
@@ -162,37 +162,49 @@
                         }]
                     };
 
-                    const centerTextPlugin = {
-                        id: 'centerText',
-                        afterDraw(chart) {
-                            const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
-                            ctx.save();
-
-                            ctx.font = 'bold 30px "SUIT-Regular"';
-                            ctx.fillStyle = '#2f73d9';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-
-                            const centerX = left + width / 2 + 5;
-                            const centerY = top + height / 2 + 5;
-                            ctx.fillText(percent + '%', centerX, centerY);
-
-                            ctx.restore();
-                        }
-                    };
+                    // const centerTextPlugin = {
+                    //     id: 'centerText',
+                    //     afterDraw(chart) {
+                    //         const {ctx, chartArea: {left, right, top, bottom, width, height}} = chart;
+                    //         ctx.save();
+                    //
+                    //         ctx.font = 'bold 30px "SUIT-Regular"';
+                    //         ctx.fillStyle = '#2f73d9';
+                    //         ctx.textAlign = 'center';
+                    //         ctx.textBaseline = 'middle';
+                    //
+                    //         const centerX = left + width / 2 + 5;
+                    //         const centerY = top + height / 2 + 5;
+                    //         ctx.fillText(percent + '%', centerX, centerY);
+                    //
+                    //         ctx.restore();
+                    //     }
+                    // };
 
                     const options = {
                         responsive: false,
                         plugins: {
-                            legend: {display: false},
-                            tooltip: {
-                                enabled: true, // ✅ 말풍선 활성화
+                            legend: {
+                                position: 'right',
+                                align: 'end',
+                                labels: {
+                                    padding: 10,
+                                    boxWidth: 10,
+                                    boxHeight: 10,
+                                    usePointStyle: true,
+                                    pointStyle: 'circle',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }, tooltip: {
+                                enabled: true,
                                 callbacks: {
                                     label: function (context) {
                                         if (context.dataIndex === 0) {
                                             return `${postCount}개`;
                                         } else {
-                                            return '${totalPosts - postCount}개'; // 남은부분엔 말풍선 안 뜨게
+                                            return '${totalPosts - postCount}개';
                                         }
                                     }
                                 }
@@ -204,7 +216,7 @@
                         type: 'doughnut',
                         data: data,
                         options: options,
-                        plugins: [centerTextPlugin]
+                        // plugins: [centerTextPlugin]
                     });
                 </script>
 
@@ -212,16 +224,16 @@
 
             <div class="postsWithCert flex-grow flex flex-col">
                 <div class="flex-1 mb-4 analysis-element p-5">
-                    <div class="title p-2 flex items-center"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;언급된
+                    <div class="title p-2 flex items-center mb-2"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;언급된
                         자격증 종류<br></div>
-                    <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
-                                                             groupingUsed="true"/>개</span>
+                    <span class="text-5xl">&nbsp;&nbsp;${certTypes }개</span>
                 </div>
                 <div class="flex-1 analysis-element p-5">
-                    <div class="title p-2"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;채울 곳<br>
+                    <div class="title p-2 mb-2"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;자격증
+                        언급량<br>
                     </div>
-                    <span class="text-5xl"><fmt:formatNumber value="${postCount}" type="number"
-                                                             groupingUsed="true"/>개</span>
+                    <span class="text-5xl">&nbsp;&nbsp;<fmt:formatNumber value="${postCount}" type="number"
+                                                                         groupingUsed="true"/>개</span>
                 </div>
             </div>
         </div>
@@ -248,11 +260,25 @@
                         </ul>
                     </div>
                 </div>
-                <div class="h-44 mr-2 mt-2 analysis-element p-5">ddd</div>
+                <div class="h-44 mr-2 mt-2 analysis-element p-5 flex flex-col">
+                    <div class="title p-2 flex items-center mb-2"><i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;
+                        전체 직무 자격증 분류 비율
+                    </div>
+                    <div class="flex flex-grow items-center pt-3">
+                        <div class="h-8 bg-blue-2 relative" id="bar-national" style="flex-grow: 16611;">
+                        <span class="absolute" style="top: -30px; left: 10px;">국가자격증</span></div>
+                        <div class="h-8 bg-grey-5 relative" id="bar-semi-national"
+                             style="background-color: #d1d1d1; flex-grow: 2594;">
+                             <span class="absolute whitespace-nowrap" style="top: -30px; right: 0;">국가공인 민간</span></div>
+                        <div class="h-8 relative" id="bar-private"
+                             style="background-color: #dedede; flex-grow: 2030;">
+                             <span class="absolute" style="top: -30px; left: 10px;">국가</span></div>
+                    </div>
+                </div>
             </div>
             <div class="topCertsByField p-5 analysis-element w-2/3">
                 <div class="job_code_name title p-2">
-                    전체 직무 자격증 언급 TOP 10
+                    <i class="fa-solid fa-circle text-sm text-blue-2"></i>&nbsp;&nbsp;전체 직무 자격증 언급 TOP 10
                 </div>
                 <div class="text-gray-400 text-sm text-right">※ 2025년 6월 기준</div>
                 <div class="chart_container">
@@ -346,6 +372,8 @@
         $('.side_bar_left > .hub_sub_menu > li:nth-child(1) > a > i').addClass('active');
     });
 </script>
+
+
 <script>
     $(document).ready(function () {
 
@@ -363,7 +391,6 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     const $list = $('.jobCode_list');
                     $list.empty(); // 이전 목록 비우기
 
@@ -403,10 +430,75 @@
                     console.log(jobCodeId);
                     const certs = data.data3;           // 자격증 배열
 
+                    <%--                    const certTypeRaw = data.data4;--%>
+                    <%--const typeMap = {1: '국가자격', 2: '국가공인 민간자격', 0: '민간자격'};--%>
+                    <%--const backgroundColors = ['#2f73d9', '#d1d1d1', '#dedede'];--%>
+
+                    <%--const stackedDatasets = Object.keys(typeMap).map((type, i) => {--%>
+                    <%--    const found = certTypeRaw.find(e => e.extra__certType == type);--%>
+                    <%--    const value = found ? found.extra__certCountByType : 0;--%>
+                    <%--    return {--%>
+                    <%--        label: typeMap[type],--%>
+                    <%--        data: [value], // 수평 1줄--%>
+                    <%--        backgroundColor: backgroundColors[i]--%>
+                    <%--    };--%>
+                    <%--});--%>
+
+                    <%--// 기존 차트 제거--%>
+                    <%--if (window.certCatChart) {--%>
+                    <%--    window.certCatChart.destroy();--%>
+                    <%--}--%>
+
+                    <%--// 재그리기--%>
+                    <%--const stackedCtx = document.getElementById('certCatRate').getContext('2d');--%>
+                    <%--window.certCatChart = new Chart(stackedCtx, {--%>
+                    <%--    type: 'bar',--%>
+                    <%--    data: {--%>
+                    <%--        labels: ['선택 직무'],--%>
+                    <%--        datasets: stackedDatasets--%>
+                    <%--    },--%>
+                    <%--    options: {--%>
+                    <%--        indexAxis: 'y',--%>
+                    <%--        responsive: false,--%>
+                    <%--        maintainAspectRatio: false,--%>
+                    <%--        plugins: {--%>
+                    <%--            legend: {--%>
+                    <%--                position: 'right',--%>
+                    <%--                labels: {--%>
+                    <%--                    usePointStyle: true,--%>
+                    <%--                    pointStyle: 'rect',--%>
+                    <%--                    font: { size: 12 }--%>
+                    <%--                }--%>
+                    <%--            },--%>
+                    <%--            tooltip: {--%>
+                    <%--                callbacks: {--%>
+                    <%--                    label: function (context) {--%>
+                    <%--                        return `${context.dataset.label}: ${context.raw}회`;--%>
+                    <%--                    }--%>
+                    <%--                }--%>
+                    <%--            }--%>
+                    <%--        },--%>
+                    <%--        scales: {--%>
+                    <%--            x: {--%>
+                    <%--                stacked: true,--%>
+                    <%--                beginAtZero: true,--%>
+                    <%--                ticks: {--%>
+                    <%--                    precision: 0--%>
+                    <%--                }--%>
+                    <%--            },--%>
+                    <%--            y: {--%>
+                    <%--                stacked: true--%>
+                    <%--            }--%>
+                    <%--        }--%>
+                    <%--    }--%>
+                    <%--});--%>
+
+
                     jobCodeName_box.empty();
                     $box.empty();
 
-                    jobCodeName_box.append(jobCatName + " > " + jobCodeName + " 자격증 언급 TOP 10");
+                    jobCodeName_box.append("<i class=\'fa-solid fa-circle text-sm text-blue-2'></i>&nbsp;&nbsp;" +
+                        jobCatName + " > " + jobCodeName + " 자격증 언급 TOP 10");
 
                     const barHeight = 40; // 막대 1개의 높이
                     const minHeight = 100; // 최소 높이 보장

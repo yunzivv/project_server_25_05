@@ -52,7 +52,7 @@
     </select>
 
     <select id="getPostCount" parameterType="map" resultType="int">
-        SELECT COUNT(DISTINCT gno)
+        SELECT COUNT(*) # DISTINCT gno
         FROM certmention
         <where>
             <if test="jobCatId != 0">
@@ -208,6 +208,11 @@
         <foreach collection="collection" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
+    </select>
+
+    <select id="getCertTypesAtMention" resultType="int">
+        SELECT COUNT(DISTINCT certId)
+        FROM certMention;
     </select>
 
 </mapper>

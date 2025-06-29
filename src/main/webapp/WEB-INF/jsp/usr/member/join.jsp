@@ -29,10 +29,10 @@
             $('.join_form').removeClass('opacity-0');
         }, 1800);
 
-        const $steps = $(".step");
+        const $steps = $(".joinStep");
 
         function getCurrentStepIndex() {
-            return $steps.index($(".step.active"));
+            return $steps.index($(".joinStep.active"));
         }
 
         function showStep(index) {
@@ -157,47 +157,47 @@
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
                 <div class="join_steps w-full h-full relative overflow-hidden">
                     <!-- Step 1 -->
-                    <div class="step step-1 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center active">
-                        <input type="text" name="name"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                    <div class="joinStep step-1 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center active">
+                        <div class="ml-20 my-3 self-start font-semibold">이름</div><input type="text" name="name"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="이름"/>
                         <div class="error text-red-500 text-sm hidden" id="name-error">이름을 입력하세요.</div>
-                        생년월일
+                        <div class="ml-20 my-3  self-start font-semibold">생년월일</div>
                         <input type="date" name="birthday"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"/>
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"/>
                         <div class="error text-red-500 text-sm hidden" id="birthday-error">생년월일을 입력하세요.</div>
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="step step-2 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
-                        <input type="text" name="loginId"
-                               class="bg-white border-grey-2 text-sm rounded-lg block p-4 mb-4"
+                    <div class="joinStep step-2 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
+                        <div class="ml-20 my-3  self-start font-semibold">아이디</div><input type="text" name="loginId"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="아이디"/>
                         <div class="error text-red-500 text-sm hidden" id="id-error">영문 대소문자와 숫자 조합으로 4~20자 입력하세요.
                         </div>
-                        <input type="password" name="loginPw"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                        <div class="ml-20 my-3  self-start font-semibold">비밀번호</div><input type="password" name="loginPw"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="비밀번호"/>
                         <div class="error text-red-500 text-sm hidden" id="pw-error">영문 대소문자와 숫자, 특수기호 조합으로 6~20자 입력하세요.
                         </div>
-                        <input type="password" name="checkLoginPw"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                        <div class="ml-20 my-3  self-start font-semibold">비밀번호 확인</div><input type="password" name="checkLoginPw"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="비밀번호 확인"/>
                         <div class="error text-red-500 text-sm hidden" id="pw-check-error">비밀번호가 일치하지 않습니다.</div>
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="step step-3 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
-                        <input type="tel" name="cellPhone" pattern="[0-9]{11}" required
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                    <div class="joinStep step-3 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
+                        <div class="ml-20 my-3  self-start font-semibold">전화번호</div><input type="tel" name="cellPhone" pattern="[0-9]{11}" required
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="전화번호(숫자만)"/>
                         <div class="error text-red-500 text-sm hidden" id="phone-error">전화번호 형식이 올바르지 않습니다.</div>
-                        <input type="email" name="email"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                        <div class="ml-20 my-3  self-start font-semibold">이메일</div><input type="email" name="email"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="e-mail">
                         <div class="error text-red-500 text-sm hidden" id="email-error">이메일 형식이 올바르지 않습니다.</div>
-                        <input type="text" name="nickName"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                        <div class="ml-20 my-3  self-start font-semibold">닉네임</div><input type="text" name="nickName"
+                               class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="닉네임">
                         <div class="error text-red-500 text-sm hidden" id="nickName-error">닉네임 형식이 올바르지 않습니다.</div>
                     </div>

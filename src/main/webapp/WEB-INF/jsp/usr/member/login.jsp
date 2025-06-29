@@ -91,7 +91,8 @@
                     </button>
                     <div class="flex justify-between items-center py-2"><hr class="w-2/5">OR<hr class="w-2/5"></div>
                     <button type="submit"
-                            class="p-3 font-semibold bg-blue-2 text-grey-1 rounded-lg">
+                            class="py-3 px-5 font-semibold bg-white text-grey-100 rounded-lg flex items-center justify-center">
+                            <img style="width: 30px; height: 30px; margin-right: 15px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" alt="a">
                         GOOGLE
                     </button>
                 </div>
