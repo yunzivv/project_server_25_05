@@ -199,7 +199,7 @@
                         <div class="ml-20 my-3  self-start font-semibold">닉네임</div><input type="text" name="nickName"
                                class="bg-white w-3/4 text-sm rounded-lg block p-4 mb-4"
                                placeholder="닉네임">
-                        <div class="error text-red-500 text-sm hidden" id="nickName-error">닉네임 형식이 올바르지 않습니다.</div>
+                        <div class="error text-red-500 text-sm hidden" id="nickName-error">닉네임을 입력하세요.</div>
                     </div>
                 </div>
 
