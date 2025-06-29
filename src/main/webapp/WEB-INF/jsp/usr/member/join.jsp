@@ -171,7 +171,7 @@
                     <!-- Step 2 -->
                     <div class="step step-2 absolute w-full h-full transition-all duration-500 flex flex-col items-center justify-center">
                         <input type="text" name="loginId"
-                               class="bg-white border-grey- text-sm rounded-lg block p-4 mb-4"
+                               class="bg-white border-grey-2 text-sm rounded-lg block p-4 mb-4"
                                placeholder="아이디"/>
                         <div class="error text-red-500 text-sm hidden" id="id-error">영문 대소문자와 숫자 조합으로 4~20자 입력하세요.
                         </div>

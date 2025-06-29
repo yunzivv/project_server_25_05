@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,11 +63,12 @@ public class UsrCertificateController {
                 .collect(Collectors.toList());
 
         // 자격증 분류 랭킹
-        Map<Integer, String> certTypeLabelMap = Map.of(
-                1, "국가자격",
-                0, "국가공인 민간자격",
-                -1, "민간자격"
-        );
+        Map<Integer, String> certTypeLabelMap = new HashMap<>();
+        certTypeLabelMap.put(1, "국가자격");
+        certTypeLabelMap.put(0, "국가공인 민간자격");
+        certTypeLabelMap.put(-1, "민간자격");
+        certTypeLabelMap.put(null, "기타");
+
         List<String> certTypeRankLabels = certTypeRank.stream()
                 .map(row -> {
                     Integer type = row.get("extra__certType") != null
