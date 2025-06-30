@@ -142,7 +142,7 @@
 </div>
 <script>
 
-    let totalAnswered = 0;
+    totalAnswered = 0;
     let correctCount = 0;
     let examStartTime;
     let examElapsedMinutes = 0;
@@ -219,9 +219,19 @@
     }
 
     function confirmExit() {
-        if (confirm("시험을 종료하시겠습니까?")) {
-            submitExam();
-        }
+        Swal.fire({
+            title: '시험을 종료하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '종료',
+            cancelButtonText: '취소',
+            confirmButtonColor: '#d54b4b',
+            cancelButtonColor: '#dedede'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                submitExam();
+            }
+        });
     }
 
     let currentIndex = 0;
@@ -254,7 +264,11 @@
                 nextBtn.onclick = showNextQuestion;
             }
         } else {
-            alert("첫 번째 문제입니다.");
+            Swal.fire({
+                icon: 'warning',
+                title: '첫 번째 문제입니다.',
+                confirmButtonText: '확인'
+            });
         }
     }
 

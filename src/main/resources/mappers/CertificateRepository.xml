@@ -45,7 +45,7 @@
     </select>
 
     <select id="getMemberCerts" parameterType="int">
-        SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS extra__rankNum
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY regDate ASC) AS extra__rankNum
         FROM memberCert
         WHERE memberId = #{loginedMemberId}
         ORDER BY extra__rankNum DESC;

@@ -46,21 +46,21 @@ public class UsrMemberController {
     @ResponseBody
     public String doJoin(String loginId, String loginPw, String checkLoginPw, String name, LocalDate birthday, String nickName, String cellPhone, String email) throws IOException {
 
-        if (Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성해주세요.");
-        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성해주세요.");
-        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성해주세요.");
-        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-4", "생일을 작성해주세요.");
-        if (Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-5", "닉네임를 작성해주세요.");
-        if (Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-6", "전화번호를 작성해주세요.");
-        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-7", "이메일을 작성해주세요.");
-        if (!loginPw.equals(checkLoginPw)) return Ut.jsHistoryBack("F-8", "비밀번호가 일치하지 않습니다.");
+        if (Ut.isEmpty(loginId)) return Ut.jsWarningBack("F-1", "아이디를 작성해주세요.");
+        if (Ut.isEmpty(loginPw)) return Ut.jsWarningBack("F-2", "비밀번호를 작성해주세요.");
+        if (Ut.isEmpty(name)) return Ut.jsWarningBack("F-3", "이름을 작성해주세요.");
+        if (Ut.isEmpty(name)) return Ut.jsWarningBack("F-4", "생일을 작성해주세요.");
+        if (Ut.isEmpty(nickName)) return Ut.jsWarningBack("F-5", "닉네임를 작성해주세요.");
+        if (Ut.isEmpty(cellPhone)) return Ut.jsWarningBack("F-6", "전화번호를 작성해주세요.");
+        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsWarningBack("F-7", "이메일을 작성해주세요.");
+        if (!loginPw.equals(checkLoginPw)) return Ut.jsFailBack("F-8", "비밀번호가 일치하지 않습니다.");
 
         loginPw = Ut.sha256(loginPw);
 
         int id = memberService.doJoin(loginId, loginPw, name, birthday, nickName, cellPhone, email);
 
-        if (id == -1) return Ut.jsHistoryBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
-        if (id == -2) return Ut.jsHistoryBack("F-9", Ut.f("이름 %s과 이메일 %s은(는) 이미 사용 중입니다.", loginId, email));
+        if (id == -1) return Ut.jsWarningBack("F-8", Ut.f("%s는 이미 사용 중인 아이디입니다.", loginId));
+        if (id == -2) return Ut.jsWarningBack("F-9", Ut.f("이름 %s과 이메일 %s은(는) 이미 사용 중입니다.", loginId, email));
 
         Member member = memberService.getMemberById(id);
 
@@ -82,15 +82,15 @@ public class UsrMemberController {
 
         Rq rq = (Rq) req.getAttribute("rq");
 
-        if (Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
-        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
+        if (Ut.isEmpty(loginId)) return Ut.jsWarningBack("F-1", "아이디를 입력해주세요");
+        if (Ut.isEmpty(loginPw)) return Ut.jsWarningBack("F-2", "비밀번호를 입력해주세요");
 
         Member member = memberService.getMemberByLoginId(loginId);
 
-        if (member == null) return Ut.jsHistoryBack("F-3", "존재하지 않는 아이디입니다.");
+        if (member == null) return Ut.jsFailBack("F-3", "존재하지 않는 아이디입니다.");
 
         if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
-            return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다."));
+            return Ut.jsFailBack("F-4", Ut.f("비밀번호가 일치하지 않습니다."));
         }
 
         rq.login(member);
@@ -106,7 +106,7 @@ public class UsrMemberController {
 
         rq.logout();
 
-        return Ut.jsHistoryBack("S-1", "로그아웃 되었습니다.");
+        return Ut.jsSuccessBack("S-1", "로그아웃 되었습니다.");
 
     }
 
@@ -145,13 +145,13 @@ public class UsrMemberController {
         Rq rq = (Rq) req.getAttribute("rq");
         int loginedMemberId = rq.getLoginedMemberId();
 
-//		if(Ut.isEmpty(loginId)) return Ut.jsHistoryBack("F-1", "아이디를 작성하세요.");
-//		if(memberService.isUsableLoginId(loginId)) return Ut.jsHistoryBack("F-7", "사용 중인 아이디입니다.");
-        if (Ut.isEmpty(loginPw)) return Ut.jsHistoryBack("F-2", "비밀번호를 작성하세요.");
-        if (Ut.isEmpty(name)) return Ut.jsHistoryBack("F-3", "이름을 작성하세요.");
-        if (Ut.isEmpty(nickName)) return Ut.jsHistoryBack("F-4", "닉네임을 작성하세요.");
-        if (Ut.isEmpty(cellPhone)) return Ut.jsHistoryBack("F-5", "전화번호를 작성하세요.");
-        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsHistoryBack("F-6", "이메일을 정확히 작성하세요.");
+//		if(Ut.isEmpty(loginId)) return Ut.jsWarningBack("F-1", "아이디를 작성하세요.");
+//		if(memberService.isUsableLoginId(loginId)) return Ut.jsWarningBack("F-7", "사용 중인 아이디입니다.");
+        if (Ut.isEmpty(loginPw)) return Ut.jsWarningBack("F-2", "비밀번호를 작성하세요.");
+        if (Ut.isEmpty(name)) return Ut.jsWarningBack("F-3", "이름을 작성하세요.");
+        if (Ut.isEmpty(nickName)) return Ut.jsWarningBack("F-4", "닉네임을 작성하세요.");
+        if (Ut.isEmpty(cellPhone)) return Ut.jsWarningBack("F-5", "전화번호를 작성하세요.");
+        if (Ut.isEmpty(email) || !email.contains("@")) return Ut.jsWarningBack("F-6", "이메일을 정확히 작성하세요.");
 
         int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
@@ -194,11 +194,11 @@ public class UsrMemberController {
         Member member = memberService.getMemberByLoginId(loginId);
 
         if (member == null) {
-            return Ut.jsHistoryBack("F-1", "존재하지 않는 아이디입니다.");
+            return Ut.jsFailBack("F-1", "존재하지 않는 아이디입니다.");
         }
 
         if (member.getEmail().equals(email) == false) {
-            return Ut.jsHistoryBack("F-2", "이메일 주소가 잘못되었습니다.");
+            return Ut.jsFailBack("F-2", "이메일 주소가 잘못되었습니다.");
         }
 
         ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
@@ -250,12 +250,12 @@ public class UsrMemberController {
         MemberCert membercert = certificateService.getMemberCertById(memberCertId);
 
         if (membercert == null) {
-            return Ut.jsHistoryBack("F-2", "등록되지 않은 회원 자격증입니다.");
+            return Ut.jsFailBack("F-2", "등록되지 않은 회원 자격증입니다.");
         }
 
         if (rq.getLoginedMemberId() != membercert.getMemberId()) {
             System.out.println(membercert.getMemberId());
-            return Ut.jsHistoryBack("F-1", "권한이 없는 사용자입니다.");
+            return Ut.jsFailBack("F-1", "권한이 없는 사용자입니다.");
         }
 
         certificateService.doChangAlertModeCert(memberCertId);

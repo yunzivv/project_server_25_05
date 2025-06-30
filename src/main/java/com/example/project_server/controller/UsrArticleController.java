@@ -159,12 +159,12 @@ public class UsrArticleController {
 
 		if (article == null) {
 			ResultData.from("F-1", Ut.f("%d번 게시글은 없거던", id));
-			return Ut.jsHistoryBack("F-1", Ut.f("%d 번 게시물은 없으시오", id));
+			return Ut.jsFailBack("F-1", Ut.f("%d 번 게시물은 존재하지 않습니다.", id));
 		}
 
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
 			ResultData.from("F-A", "권한 없음");
-			return Ut.jsHistoryBack("F-A", Ut.f("%d번 게시물에 대한 권한이 업습", id));
+			return Ut.jsFailBack("F-A", Ut.f("%d번 게시물에 대한 권한이 없습니다.", id));
 		}
 
 		articleService.deleteArticle(id);

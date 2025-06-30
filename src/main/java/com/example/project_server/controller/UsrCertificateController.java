@@ -152,13 +152,13 @@ public class UsrCertificateController {
         MemberCert memberCert = certificateService.getMemberCertById(id);
 
         if (memberCert == null) {
-            return Ut.jsHistoryBack("F-1", Ut.f("%d번 회원 자격증은 등록되지 않았습니다.", id));
+            return Ut.jsFailBack("F-1", Ut.f("%d번 회원 자격증은 등록되지 않았습니다.", id));
         }
 
         if (memberCert.getMemberId() != rq.getLoginedMemberId()) {
             System.out.println(memberCert.getMemberId());
             System.out.println(rq.getLoginedMemberId());
-            return Ut.jsHistoryBack("F-A", Ut.f("%d번 회원 자격증 대한 권한이 없습니다.", id));
+            return Ut.jsFailBack("F-A", Ut.f("%d번 회원 자격증 대한 권한이 없습니다.", id));
         }
 
         certificateService.deleteMemberCert(id);

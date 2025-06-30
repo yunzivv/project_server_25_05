@@ -266,13 +266,13 @@
                     </div>
                     <div class="flex flex-grow items-center pt-3">
                         <div class="h-8 bg-blue-2 relative" id="bar-national" style="flex-grow: 16611;">
-                        <span class="absolute" style="top: -30px; left: 10px;">국가자격증</span></div>
+                            <span class="absolute" style="top: -30px; left: 10px;">국가자격증</span></div>
                         <div class="h-8 bg-grey-5 relative" id="bar-semi-national"
                              style="background-color: #d1d1d1; flex-grow: 2594;">
-                             <span class="absolute whitespace-nowrap" style="top: -30px; right: 0;">국가공인 민간</span></div>
+                            <span class="absolute whitespace-nowrap" style="top: -30px; right: 0;">국가공인 민간</span></div>
                         <div class="h-8 relative" id="bar-private"
                              style="background-color: #dedede; flex-grow: 2030;">
-                             <span class="absolute" style="top: -30px; left: 10px;">국가</span></div>
+                            <span class="absolute" style="top: -30px; left: 10px;">국가</span></div>
                     </div>
                 </div>
             </div>
@@ -562,7 +562,11 @@
                     });
                 },
                 error: function () {
-                    alert('자격증 정보를 불러오는 데 실패했습니다.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '자격증 정보를 불러오는 데 실패했습니다.',
+                        confirmButtonText: '확인'
+                    });
                 }
             });
 

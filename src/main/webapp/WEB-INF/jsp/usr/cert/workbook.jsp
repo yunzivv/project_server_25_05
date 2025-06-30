@@ -78,7 +78,9 @@
                             </div>
                             <div class="m-2">준비된 문제 유형을 선택해 바로 학습을 시작해보세요!</div>
                             <div class="m-2">문제를 풀자마자 정답 여부를 바로 확인할 수 있어요.</div>
-                            <div class="flex justify-end relative" style="right: -500px; top: -150px; width: 500px; height: 500px;"><img src="/image/exam2.png" alt="EXAM icon"></div>
+                            <div class="flex justify-end relative"
+                                 style="right: -500px; top: -150px; width: 500px; height: 500px;"><img
+                                    src="/image/exam2.png" alt="EXAM icon"></div>
                         </div>
 
                         <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
@@ -260,7 +262,11 @@
 
                                             const certId = $('#certIdHidden_workbook').val();
                                             if (!certId) {
-                                                alert("자격증을 먼저 선택해주세요.");
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    title: '자격증을 먼저 선택해주세요.',
+                                                    confirmButtonText: '확인'
+                                                });
                                                 return;
                                             }
 
@@ -375,13 +381,21 @@
 
             const certId = $("#certIdHidden_workbook").val();
             if (!certId) {
-                alert("자격증을 선택해주세요.");
+                Swal.fire({
+                    icon: 'warning',
+                    title: '자격증을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                 return;
             }
 
             const $mode = $("input[name='mode']:checked");
             if ($mode.length === 0) {
-                alert("풀이 방식을 선택해주세요.");
+                Swal.fire({
+                    icon: 'warning',
+                    title: '풀이 방식을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                 return;
             }
 
@@ -390,13 +404,21 @@
             if (mode === "random") {
                 const count = $("#questionCount").val();
                 if (!count || count < 0) {
-                    alert("문제 수를 선택해주세요.");
+                    Swal.fire({
+                    icon: 'warning',
+                    title: '문제 수를 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                     return;
                 }
             } else if (mode === "past") {
                 const examId = $("#examId").val();
                 if (!examId || examId < 0) {
-                    alert("기출시험을 선택해주세요.");
+                    Swal.fire({
+                    icon: 'warning',
+                    title: '기출시험을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                     return;
                 }
             }
@@ -483,7 +505,11 @@
             const loginUri = '${loginUri}';
 
             if (loginedMemberId === 0) {
-                alert("로그인 후 이용 가능합니다.");
+                Swal.fire({
+                    icon: 'warning',
+                    title: '로그인 후 이용 가능합니다.',
+                    confirmButtonText: '확인'
+                });
                 window.location.href = loginUri;
                 return;
             }
@@ -491,7 +517,11 @@
             if (currentStep === 1) {
                 const cert = $("#certIdHidden_workbook").val();
                 if (!cert) {
-                    alert("자격증을 선택해주세요.");
+                    Swal.fire({
+                    icon: 'warning',
+                    title: '자격증을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                     return;
                 }
             }
@@ -499,7 +529,11 @@
             if (currentStep === 2) {
                 const $mode = $("input[name='mode']:checked");
                 if ($mode.length === 0) {
-                    alert("풀이 방식을 선택해주세요.");
+                    Swal.fire({
+                    icon: 'warning',
+                    title: '풀이 방식을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                     return;
                 }
 
@@ -509,12 +543,20 @@
 
                 if (mode === "random") {
                     if (!questionCount || questionCount < 0) {
-                        alert("문제 수를 입력해주세요.");
+                        Swal.fire({
+                    icon: 'warning',
+                    title: '문제 수를 입력해주세요.',
+                    confirmButtonText: '확인'
+                });
                         return;
                     }
                 } else if (mode === "past") {
                     if (!examId || examId < 0) {
-                        alert("기출시험을 선택해주세요.");
+                        Swal.fire({
+                    icon: 'warning',
+                    title: '기출시험을 선택해주세요.',
+                    confirmButtonText: '확인'
+                });
                         return;
                     }
                 }
@@ -590,7 +632,7 @@
                 });
 
             } else {
-                console.warn("❌ 자격증 목록에서 certId 못 찾음", certId);
+                console.warn("자격증 목록에서 certId 못 찾음", certId);
             }
         }
 

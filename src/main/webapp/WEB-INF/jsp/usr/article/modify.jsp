@@ -29,12 +29,20 @@
         const body = $(form).find('.toast-ui-editor').data('data-toast-editor').getMarkdown().trim();
 
         if (form.title.value.length == 0) {
-            alert('제목을 입력해주세요.');
+            Swal.fire({
+                icon: 'warning',
+                title: '제목을 입력해주세요.',
+                confirmButtonText: '확인'
+            });
             return false;
         }
 
         if (body.length == 0) {
-            alert('내용을 입력해주세요.');
+            Swal.fire({
+                icon: 'warning',
+                title: '내용을 입력해주세요.',
+                confirmButtonText: '확인'
+            });
             return false;
         }
 
