@@ -45,38 +45,6 @@
             <img src="/image/dd.png"
                  alt=""
                  style="width: 1500px; height: 581px; object-fit: cover;"/>
-<%--            <div class="absolute bg-white rounded-br-2xl" style="width: 400px; height: 200px; top: 0; left: 0;">--%>
-<%--                <div>--%>
-<%--                    <div class="absolute" style="top: 0; left: 400px;">--%>
-<%--                        <svg width="25" height="25" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">--%>
-<%--                            <defs>--%>
-<%--                                <mask id="cutout">--%>
-<%--                                    <g transform="rotate(90 50 50)">--%>
-<%--                                        <rect width="100" height="100" fill="white"/>--%>
-<%--                                        <circle cx="100" cy="0" r="100" fill="black"/>--%>
-<%--                                    </g>--%>
-<%--                                </mask>--%>
-<%--                            </defs>--%>
-<%--                            <rect width="100" height="100" fill="#ffffff" mask="url(#cutout)"/>--%>
-<%--                        </svg>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div>--%>
-<%--                    <div class="absolute" style="top: 200px; left: 0;">--%>
-<%--                        <svg width="25" height="25" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">--%>
-<%--                            <defs>--%>
-<%--                                <mask id="cutout">--%>
-<%--                                    <g transform="rotate(90 50 50)">--%>
-<%--                                        <rect width="100" height="100" fill="white"/>--%>
-<%--                                        <circle cx="100" cy="0" r="100" fill="black"/>--%>
-<%--                                    </g>--%>
-<%--                                </mask>--%>
-<%--                            </defs>--%>
-<%--                            <rect width="100" height="100" fill="#ffffff" mask="url(#cutout)"/>--%>
-<%--                        </svg>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         </div>
 
     </div>

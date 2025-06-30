@@ -78,6 +78,7 @@
                             </div>
                             <div class="m-2">준비된 문제 유형을 선택해 바로 학습을 시작해보세요!</div>
                             <div class="m-2">문제를 풀자마자 정답 여부를 바로 확인할 수 있어요.</div>
+                            <div class=""><img src="/image/exam.png" alt="EXAM icon" class="w-80 h-80"></div>
                         </div>
 
                         <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
@@ -196,14 +197,16 @@
                                 <div class="w-1/2 p-6 border rounded-xl bg-white hover:shadow-md cursor-pointer relative"
                                      id="cardRandom" style="height: 330px;">
                                     <input type="radio" name="mode" value="random" id="modeRandom" hidden>
-                                    <label for="modeRandom" class="block text-xl font-bold mb-4">랜덤 문제 풀이</label>
+                                    <label for="modeRandom" class="block text-3xl font-bold mb-4 p-6">랜덤 문제 풀이</label>
 
                                     <!-- 랜덤 슬라이더 영역 -->
-                                    <div id="randomOptions" class="hidden mt-4">
-
+                                    <div id="randomOptions" class="hidden mt-6">
+                                        <div class="text-left mt-2 p-6 font-semibold text-grey-100">
+                                            풀 문제 개수를 선택하세요.
+                                        </div>
                                         <input type="range" id="sliderQuestionCount" min="10" max="100" step="10"
                                                value="10" class="w-full accent-blue-500">
-                                        <div class="text-center mt-2 font-semibold text-blue-700" id="sliderDisplay">
+                                        <div class="text-center mt-2 font-semibold text-blue-2" id="sliderDisplay">
                                             10문제
                                         </div>
 
@@ -216,10 +219,11 @@
                                      class="w-1/2 p-6 border rounded-xl bg-white hover:shadow-md cursor-pointer"
                                      style="height: 330px;">
                                     <input type="radio" name="mode" value="past" id="modePast" hidden>
-                                    <label for="modePast" class="block text-xl font-bold mb-4">기출 회차 풀이</label>
+                                    <label for="modePast" class="block text-3xl font-bold mb-4 p-6">기출 회차 풀이</label>
 
                                     <div id="pastOptions"
-                                         class="transition-opacity duration-300 opacity-0 pointer-events-none max-h-56 overflow-y-auto space-y-2">
+                                         class="transition-opacity duration-300 opacity-0 pointer-events-none max-h-40
+                                         mt-10 overflow-y-auto space-y-2">
                                         <div class="text-gray-500">불러오는 중...</div>
                                     </div>
                                     <input type="hidden" name="examId" id="examId" value="-1">
@@ -289,7 +293,7 @@
                                     // 슬라이더 변경 시 문제 수 텍스트 업데이트
                                     $('#randomOptions input[type="range"]').on('input', function () {
                                         const val = $(this).val();
-                                        $('#randomOptions .text-center').text(val + '문제');
+                                        $('#randomOptions #sliderDisplay').text(val + '문제');
                                     });
                                 });
                             </script>
