@@ -191,104 +191,107 @@
 
                         <div id="examStep3" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
-                            <div class="mode-toggle flex justify-around my-3 h-80">
-                                <div class="relative">
-                                    <input type="radio" name="mode" id="modeRandom" value="random" hidden>
-                                    <label for="modeRandom" class="toggle-btn">랜덤</label>
-                                    <%--                                    <div class="questionCountSelectBox invisible relative left-1/2 whitespace-nowrap"--%>
-                                    <%--                                         style="">--%>
-                                    <%--                                        <label for="questionCount"></label>--%>
-                                    <%--                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">--%>
-                                    <%--                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>--%>
-                                    <%--                                            <option value="20">20문제</option>--%>
-                                    <%--                                            <option value="50">50문제</option>--%>
-                                    <%--                                            <option value="100">100문제</option>--%>
-                                    <%--                                            <option value="0">모든 문제 풀기</option>--%>
-                                    <%--                                        </select>--%>
-                                    <%--                                    </div>--%>
-                                    <div class="questionCountSelectBox invisible relative left-1/2 transform -translate-x-1/2 text-center">
-                                        <label for="questionCount" class="block mb-2 font-semibold text-lg">문제 수
-                                            선택</label>
+                            <div class="mode-toggle flex justify-around gap-6">
+                                <!-- 랜덤 카드 -->
+                                <div class="w-1/2 p-6 border rounded-xl bg-white hover:shadow-md cursor-pointer relative"
+                                     id="cardRandom" style="height: 330px;">
+                                    <input type="radio" name="mode" value="random" id="modeRandom" hidden>
+                                    <label for="modeRandom" class="block text-xl font-bold mb-4">랜덤 문제 풀이</label>
 
-                                        <input type="range" id="questionCount" name="questionCount"
-                                               min="10" max="100" step="10" value="10"
-                                               class="w-64 accent-blue-500 cursor-pointer">
+                                    <!-- 랜덤 슬라이더 영역 -->
+                                    <div id="randomOptions" class="hidden mt-4">
 
-                                        <div id="questionCountDisplay" class="mt-2 text-blue-700 font-bold text-xl">
+                                        <input type="range" id="sliderQuestionCount" min="10" max="100" step="10"
+                                               value="10" class="w-full accent-blue-500">
+                                        <div class="text-center mt-2 font-semibold text-blue-700" id="sliderDisplay">
                                             10문제
                                         </div>
+
+                                        <input type="hidden" name="questionCount" id="questionCount" value="10">
                                     </div>
                                 </div>
 
-<div class="relative">
-    <input type="radio" name="mode" id="modePast" value="past" hidden>
-    <label for="modePast" class="toggle-btn">기출문제 선택</label>
+                                <!-- 기출 카드 -->
+                                <div id="cardPast"
+                                     class="w-1/2 p-6 border rounded-xl bg-white hover:shadow-md cursor-pointer"
+                                     style="height: 330px;">
+                                    <input type="radio" name="mode" value="past" id="modePast" hidden>
+                                    <label for="modePast" class="block text-xl font-bold mb-4">기출 회차 풀이</label>
 
-    <div class="examIdSelectBox invisible absolute left-1/2 -translate-x-1/2 w-[400px] mt-4 z-20 bg-white p-4 rounded shadow-lg">
-        <div class="flex flex-wrap gap-2 justify-start max-h-56 overflow-y-auto" id="examButtonContainer">
-
-        </div>
-        <input type="hidden" name="examId" id="examId" value="-1">
-    </div>
-</div>
-
+                                    <div id="pastOptions"
+                                         class="transition-opacity duration-300 opacity-0 pointer-events-none max-h-56 overflow-y-auto space-y-2">
+                                        <div class="text-gray-500">불러오는 중...</div>
+                                    </div>
+                                    <input type="hidden" name="examId" id="examId" value="-1">
+                                </div>
                             </div>
+
                             <script>
-                                $('input[name="mode"]').change(function () {
-    const selectedMode = $('input[name="mode"]:checked').val();
-    if (selectedMode === 'random') {
-        $('.questionCountSelectBox').removeClass("invisible");
-        $('.examIdSelectBox').addClass("invisible");
-    } else if (selectedMode === 'past') {
-        // **임시로 보여줘야 높이 계산됨**
-        const $examBox = $('.examIdSelectBox');
-        $examBox.removeClass('invisible');
+                                $(document).ready(function () {
+                                    // 카드 클릭 시 라디오 버튼 수동 체크 + change 이벤트 트리거
+                                    $('#cardRandom').on('click', function () {
+                                        $('#cardRandom').removeClass("bg-white").addClass("bg-blue-50");
+                                        $('#cardPast').removeClass("bg-blue-50").addClass("bg-white");
+                                        $('#modeRandom').prop('checked', true).trigger('change');
+                                    });
 
-        const certId = $('#certIdHidden_workbook').val();
-        if (!certId) {
-            alert("먼저 자격증을 선택해주세요.");
-            $examBox.addClass('invisible');
-            return;
-        }
+                                    $('#cardPast').on('click', function () {
+                                        $('#cardPast').removeClass("bg-white").addClass("bg-blue-50");
+                                        $('#cardRandom').removeClass("bg-blue-50").addClass("bg-white");
+                                        $('#modePast').prop('checked', true).trigger('change');
+                                    });
 
-        $.ajax({
-            url: '/usr/api/examByCertId',
-            method: 'GET',
-            data: {certId: certId},
-            success: function (data) {
-                const exams = data.data1;
-                const $container = $('#examButtonContainer');
-                $container.empty();
+                                    // 라디오 버튼 변경 시 UI 처리
+                                    $('input[name="mode"]').change(function () {
+                                        const selected = $(this).val();
 
-                if (exams.length === 0) {
-                    $container.append('<div class="text-red-500 font-semibold">기출시험이 없습니다.</div>');
-                } else {
-                    exams.forEach(function (exam) {
-                        const $btn = $('<button type="button"></button>')
-                            .addClass('exam-btn p-3 rounded-md bg-blue-50 hover:bg-blue-200 border-grey-3 w-full')
-                            .text(exam.extra__certName + '  ' + exam.examDate)
-                            .data('id', exam.id)
-                            .on('click', function () {
-                                $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-2 text-grey-100');
-                                $(this).addClass('bg-blue-2 text-white').removeClass('bg-blue-50 text-black');
-                                $('#examId').val(exam.id);
-                            });
+                                        if (selected === 'random') {
+                                            $('#randomOptions').removeClass('hidden');
+                                            $('#pastOptions').addClass('opacity-0 pointer-events-none');
+                                        }
 
-                        $container.append($btn);
-                    });
-                }
+                                        if (selected === 'past') {
+                                            $('#randomOptions').addClass('hidden');
+                                            $('#pastOptions').removeClass('opacity-0 pointer-events-none');
 
-                // 버튼 생성 후 다시 숨김 처리 (필요 시)
-                // $examBox.addClass('invisible'); // 필요 없으면 생략
-            },
-            error: function () {
-                alert("기출시험 목록을 불러오는 데 실패했습니다.");
-                $examBox.addClass('invisible');
-            }
-        });
-    }
-});
+                                            const certId = $('#certIdHidden_workbook').val();
+                                            if (!certId) {
+                                                alert("자격증을 먼저 선택해주세요.");
+                                                return;
+                                            }
 
+                                            const $container = $('#pastOptions');
+                                            $container.html('<div class="text-gray-400">불러오는 중...</div>');
+
+                                            $.get('/usr/api/examByCertId', {certId}, function (data) {
+                                                $container.empty();
+                                                const exams = data.data1;
+
+                                                if (!exams || exams.length === 0) {
+                                                    return $container.append('<div class="text-red-500">기출시험이 없습니다.</div>');
+                                                }
+
+                                                exams.forEach(exam => {
+                                                    const $btn = $('<button type="button" class="exam-btn w-full bg-white border-grey-3 hover:bg-blue-300 px-4 py-2 rounded text-left"></button>')
+                                                        .text(exam.extra__certName + ' ' + exam.examDate)
+                                                        .on('click', function () {
+                                                            $('#examId').val(exam.id);
+                                                            $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-100 text-black');
+                                                            $(this).addClass('bg-blue-500 text-white').removeClass('bg-blue-100 text-black');
+                                                        });
+
+                                                    $container.append($btn);
+                                                });
+                                            });
+                                        }
+                                    });
+
+                                    // 슬라이더 변경 시 문제 수 텍스트 업데이트
+                                    $('#randomOptions input[type="range"]').on('input', function () {
+                                        const val = $(this).val();
+                                        $('#randomOptions .text-center').text(val + '문제');
+                                    });
+                                });
                             </script>
                         </div>
 
