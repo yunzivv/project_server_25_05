@@ -195,85 +195,78 @@
                                 <div class="relative">
                                     <input type="radio" name="mode" id="modeRandom" value="random" hidden>
                                     <label for="modeRandom" class="toggle-btn">랜덤</label>
-<%--                                    <div class="questionCountSelectBox invisible relative left-1/2 whitespace-nowrap"--%>
-<%--                                         style="">--%>
-<%--                                        <label for="questionCount"></label>--%>
-<%--                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">--%>
-<%--                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>--%>
-<%--                                            <option value="20">20문제</option>--%>
-<%--                                            <option value="50">50문제</option>--%>
-<%--                                            <option value="100">100문제</option>--%>
-<%--                                            <option value="0">모든 문제 풀기</option>--%>
-<%--                                        </select>--%>
-<%--                                    </div>--%>
-<div class="questionCountSelectBox invisible relative left-1/2 transform -translate-x-1/2 text-center">
-    <label for="questionCount" class="block mb-2 font-semibold text-lg">문제 수 선택</label>
+                                    <%--                                    <div class="questionCountSelectBox invisible relative left-1/2 whitespace-nowrap"--%>
+                                    <%--                                         style="">--%>
+                                    <%--                                        <label for="questionCount"></label>--%>
+                                    <%--                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">--%>
+                                    <%--                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>--%>
+                                    <%--                                            <option value="20">20문제</option>--%>
+                                    <%--                                            <option value="50">50문제</option>--%>
+                                    <%--                                            <option value="100">100문제</option>--%>
+                                    <%--                                            <option value="0">모든 문제 풀기</option>--%>
+                                    <%--                                        </select>--%>
+                                    <%--                                    </div>--%>
+                                    <div class="questionCountSelectBox invisible relative left-1/2 transform -translate-x-1/2 text-center">
+                                        <label for="questionCount" class="block mb-2 font-semibold text-lg">문제 수
+                                            선택</label>
 
-    <input type="range" id="questionCount" name="questionCount"
-           min="10" max="100" step="10" value="10"
-           class="w-64 accent-blue-500 cursor-pointer">
+                                        <input type="range" id="questionCount" name="questionCount"
+                                               min="10" max="100" step="10" value="10"
+                                               class="w-64 accent-blue-500 cursor-pointer">
 
-    <div id="questionCountDisplay" class="mt-2 text-blue-700 font-bold text-xl">
-        10문제
-    </div>
-</div>
-                                </div>
-                                <div class="relative">
-                                    <input type="radio" name="mode" id="modePast" value="past" hidden>
-                                    <label for="modePast" class="toggle-btn">기출문제 선택</label>
-                                    <div class="examIdSelectBox invisible relative left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-                                         >
-                                        <label for="examId"></label>
-                                        <select id="examId" name="examId" required style="overflow-y: auto;" class="p-2 border-grey-4 rounded-lg">
-                                            <option value="-1" selected></option>
-                                        </select>
+                                        <div id="questionCountDisplay" class="mt-2 text-blue-700 font-bold text-xl">
+                                            10문제
+                                        </div>
                                     </div>
                                 </div>
+
+<div class="relative">
+    <input type="radio" name="mode" id="modePast" value="past" hidden>
+    <label for="modePast" class="toggle-btn">기출문제 선택</label>
+
+    <div class="examIdSelectBox invisible absolute top-full left-1/2 -translate-x-1/2 w-[320px] mt-4 z-20 bg-white p-4 rounded shadow-lg">
+        <div class="flex flex-wrap gap-2 justify-start max-h-40 overflow-y-auto" id="examButtonContainer">
+
+        </div>
+        <input type="hidden" name="examId" id="examId" value="-1">
+    </div>
+</div>
+
                             </div>
                             <script>
-                                $(function () {
-                                    $('input[name="mode"]').change(function () {
-                                        const selectedMode = $('input[name="mode"]:checked').val();
-                                        if (selectedMode === 'random') {
-                                            $('.questionCountSelectBox').removeClass("invisible");
-                                            $('.examIdSelectBox').addClass("invisible");
-                                        } else if (selectedMode === 'past') {
-                                            $('.examIdSelectBox').removeClass("invisible");
-                                            $('.questionCountSelectBox').addClass("invisible");
+                                $.ajax({
+                                    url: '/usr/api/examByCertId',
+                                    method: 'GET',
+                                    data: {certId: certId},
+                                    success: function (data) {
+                                        const exams = data.data1;
+                                        const $container = $('#examButtonContainer');
+                                        $container.empty();
 
-                                            const certId = $('#certIdHidden_workbook').val();
-                                            if (!certId) {
-                                                alert("먼저 자격증을 선택해주세요.");
-                                                return;
-                                            }
+                                        if (exams.length === 0) {
+                                            $container.append('<div class="text-red-500 font-semibold">기출시험이 없습니다.</div>');
+                                        } else {
+                                            exams.forEach(function (exam) {
+                                                const $btn = $('<button type="button"></button>')
+                                                    .addClass('exam-btn px-3 py-2 rounded-md bg-blue-50 hover:bg-blue-200 text-sm border border-blue-300')
+                                                    .text(exam.extra__certName + ' ' + exam.examDate)
+                                                    .data('id', exam.id)
+                                                    .on('click', function () {
+                                                        // 선택 표시
+                                                        $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-50 text-black');
+                                                        $(this).addClass('bg-blue-500 text-white').removeClass('bg-blue-50 text-black');
 
-                                            // AJAX 요청으로 기출시험 목록 불러오기
-                                            $.ajax({
-                                                url: '/usr/api/examByCertId',
-                                                method: 'GET',
-                                                data: {certId: certId},
-                                                success: function (data) {
-                                                    const exams = data.data1;
-                                                    const $examSelect = $('#examId');
-                                                    $examSelect.empty();
-                                                    if (exams.length === 0) {
-                                                        $examSelect.append('<option value="">기출시험이 없습니다.</option>');
-                                                    } else {
-                                                        $examSelect.append('<option value="-1" selected disabled>기출시험 선택</option>');
-                                                        exams.forEach(function (exam) {
-                                                            const $option = $('<option></option>');
-                                                            $option.val(exam.id);
-                                                            $option.text(exam.extra__certName + ' ' + exam.examDate);
-                                                            $examSelect.append($option);
-                                                        });
-                                                    }
-                                                },
-                                                error: function () {
-                                                    alert("기출시험 목록을 불러오는 데 실패했습니다.");
-                                                }
+                                                        // 실제 선택 값 세팅
+                                                        $('#examId').val(exam.id);
+                                                    });
+
+                                                $container.append($btn);
                                             });
                                         }
-                                    });
+                                    },
+                                    error: function () {
+                                        alert("기출시험 목록을 불러오는 데 실패했습니다.");
+                                    }
                                 });
                             </script>
                         </div>
@@ -395,23 +388,23 @@
         }
 
         $(function () {
-    $('#questionCount').on('input', function () {
-        const val = $(this).val();
-        $('#questionCountDisplay').text(val + '문제');
-    });
+            $('#questionCount').on('input', function () {
+                const val = $(this).val();
+                $('#questionCountDisplay').text(val + '문제');
+            });
 
-    $('input[name="mode"]').change(function () {
-        const selectedMode = $('input[name="mode"]:checked').val();
-        if (selectedMode === 'random') {
-            $('.questionCountSelectBox').removeClass("invisible");
-            $('.examIdSelectBox').addClass("invisible");
-        } else if (selectedMode === 'past') {
-            $('.examIdSelectBox').removeClass("invisible");
-            $('.questionCountSelectBox').addClass("invisible");
-            // 기존 AJAX 로직 유지
-        }
-    });
-});
+            $('input[name="mode"]').change(function () {
+                const selectedMode = $('input[name="mode"]:checked').val();
+                if (selectedMode === 'random') {
+                    $('.questionCountSelectBox').removeClass("invisible");
+                    $('.examIdSelectBox').addClass("invisible");
+                } else if (selectedMode === 'past') {
+                    $('.examIdSelectBox').removeClass("invisible");
+                    $('.questionCountSelectBox').addClass("invisible");
+                    // 기존 AJAX 로직 유지
+                }
+            });
+        });
 
         function showStep(index) {
             $steps.each(function (i) {
