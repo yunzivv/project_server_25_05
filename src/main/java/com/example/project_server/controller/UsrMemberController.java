@@ -64,7 +64,6 @@ public class UsrMemberController {
 
         Member member = memberService.getMemberById(id);
 
-        rq.printConfirmAndRedirect(Ut.f("%s님 가입을 축하합니다.", name), "/");
 
         return Ut.jsSucceseReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
     }
