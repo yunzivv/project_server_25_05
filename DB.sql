@@ -262,6 +262,8 @@ INSERT INTO memberCert SET
                            updateDate = NOW(),
                            certificateNumber = 11144541;
 
+
+
 SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS rank_num
 FROM memberCert
 WHERE memberId = 4

@@ -258,7 +258,6 @@
         }
     }
 
-    // ✅ 시험 제출 시 호출
     function submitExam() {
         $(".question-container").addClass("hidden");
         $(".result-container").removeClass("hidden");
@@ -286,7 +285,6 @@
         saveExamResult();
     }
 
-    // ✅ 시험 결과 저장
     function saveExamResult() {
         const certId = ${certificate.id};
         const examId = ${examId != null ? examId : 0};
