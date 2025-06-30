@@ -224,8 +224,8 @@
     <input type="radio" name="mode" id="modePast" value="past" hidden>
     <label for="modePast" class="toggle-btn">기출문제 선택</label>
 
-    <div class="examIdSelectBox invisible absolute top-full left-1/2 -translate-x-1/2 w-[320px] mt-4 z-20 bg-white p-4 rounded shadow-lg">
-        <div class="flex flex-wrap gap-2 justify-start max-h-40 overflow-y-auto" id="examButtonContainer">
+    <div class="examIdSelectBox invisible absolute left-1/2 -translate-x-1/2 w-[400px] mt-4 z-20 bg-white p-4 rounded shadow-lg">
+        <div class="flex flex-wrap gap-2 justify-start max-h-56 overflow-y-auto" id="examButtonContainer">
 
         </div>
         <input type="hidden" name="examId" id="examId" value="-1">
@@ -234,40 +234,61 @@
 
                             </div>
                             <script>
-                                $.ajax({
-                                    url: '/usr/api/examByCertId',
-                                    method: 'GET',
-                                    data: {certId: certId},
-                                    success: function (data) {
-                                        const exams = data.data1;
-                                        const $container = $('#examButtonContainer');
-                                        $container.empty();
+                                $('input[name="mode"]').change(function () {
+    const selectedMode = $('input[name="mode"]:checked').val();
+    if (selectedMode === 'random') {
+        $('.questionCountSelectBox').removeClass("invisible");
+        $('.examIdSelectBox').addClass("invisible");
+    } else if (selectedMode === 'past') {
+        // **임시로 보여줘야 높이 계산됨**
+        const $examBox = $('.examIdSelectBox');
+        $examBox.removeClass('invisible');
 
-                                        if (exams.length === 0) {
-                                            $container.append('<div class="text-red-500 font-semibold">기출시험이 없습니다.</div>');
-                                        } else {
-                                            exams.forEach(function (exam) {
-                                                const $btn = $('<button type="button"></button>')
-                                                    .addClass('exam-btn px-3 py-2 rounded-md bg-blue-50 hover:bg-blue-200 text-sm border border-blue-300')
-                                                    .text(exam.extra__certName + ' ' + exam.examDate)
-                                                    .data('id', exam.id)
-                                                    .on('click', function () {
-                                                        // 선택 표시
-                                                        $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-50 text-black');
-                                                        $(this).addClass('bg-blue-500 text-white').removeClass('bg-blue-50 text-black');
+        const certId = $('#certIdHidden_workbook').val();
+        if (!certId) {
+            alert("먼저 자격증을 선택해주세요.");
+            $examBox.addClass('invisible');
+            return;
+        }
 
-                                                        // 실제 선택 값 세팅
-                                                        $('#examId').val(exam.id);
-                                                    });
+        $.ajax({
+            url: '/usr/api/examByCertId',
+            method: 'GET',
+            data: {certId: certId},
+            success: function (data) {
+                const exams = data.data1;
+                const $container = $('#examButtonContainer');
+                $container.empty();
 
-                                                $container.append($btn);
-                                            });
-                                        }
-                                    },
-                                    error: function () {
-                                        alert("기출시험 목록을 불러오는 데 실패했습니다.");
-                                    }
-                                });
+                if (exams.length === 0) {
+                    $container.append('<div class="text-red-500 font-semibold">기출시험이 없습니다.</div>');
+                } else {
+                    exams.forEach(function (exam) {
+                        const $btn = $('<button type="button"></button>')
+                            .addClass('exam-btn p-3 rounded-md bg-blue-50 hover:bg-blue-200 border-grey-3 w-full')
+                            .text(exam.extra__certName + '  ' + exam.examDate)
+                            .data('id', exam.id)
+                            .on('click', function () {
+                                $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-2 text-grey-100');
+                                $(this).addClass('bg-blue-2 text-white').removeClass('bg-blue-50 text-black');
+                                $('#examId').val(exam.id);
+                            });
+
+                        $container.append($btn);
+                    });
+                }
+
+                // 버튼 생성 후 다시 숨김 처리 (필요 시)
+                // $examBox.addClass('invisible'); // 필요 없으면 생략
+            },
+            error: function () {
+                alert("기출시험 목록을 불러오는 데 실패했습니다.");
+                $examBox.addClass('invisible');
+            }
+        });
+    }
+});
+
                             </script>
                         </div>
 
