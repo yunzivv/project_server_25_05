@@ -103,7 +103,7 @@ public class UsrExamController {
         int loginedMemberId = rq.getLoginedMemberId();
 
         if(examId == -1){
-            examId = 0; // 랜덤 문제 풀이 시 시험ID 0처리
+            examId = 0; // 랜덤 문제 풀이 시 시험ID 0 처리
         }
 
         examService.doRecord(loginedMemberId, certId, examId, elapsedTime, totalQuest, correctQuest);

@@ -191,27 +191,38 @@
 
                         <div id="examStep3" class="step w-full text-lg" style="height: 460px;">
                             <div class="my-6 text-4xl font-black">랜덤 또는 기출 방식 중 원하는 문제 풀이 방식을 선택하세요.</div>
-                            <div class="mode-toggle flex justify-around mt-36">
+                            <div class="mode-toggle flex justify-around my-3 h-80">
                                 <div class="relative">
                                     <input type="radio" name="mode" id="modeRandom" value="random" hidden>
                                     <label for="modeRandom" class="toggle-btn">랜덤</label>
-                                    <div class="questionCountSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-                                         style="top: 200%;">
-                                        <label for="questionCount"></label>
-                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">
-                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>
-                                            <option value="20">20문제</option>
-                                            <option value="50">50문제</option>
-                                            <option value="100">100문제</option>
-                                            <option value="0">모든 문제 풀기</option>
-                                        </select>
-                                    </div>
+<%--                                    <div class="questionCountSelectBox invisible relative left-1/2 whitespace-nowrap"--%>
+<%--                                         style="">--%>
+<%--                                        <label for="questionCount"></label>--%>
+<%--                                        <select id="questionCount" name="questionCount" required class="p-2 border-grey-4 rounded-lg">--%>
+<%--                                            <option value="-1" selected disabled>풀 문제 개수 선택</option>--%>
+<%--                                            <option value="20">20문제</option>--%>
+<%--                                            <option value="50">50문제</option>--%>
+<%--                                            <option value="100">100문제</option>--%>
+<%--                                            <option value="0">모든 문제 풀기</option>--%>
+<%--                                        </select>--%>
+<%--                                    </div>--%>
+<div class="questionCountSelectBox invisible relative left-1/2 transform -translate-x-1/2 text-center">
+    <label for="questionCount" class="block mb-2 font-semibold text-lg">문제 수 선택</label>
+
+    <input type="range" id="questionCount" name="questionCount"
+           min="10" max="100" step="10" value="10"
+           class="w-64 accent-blue-500 cursor-pointer">
+
+    <div id="questionCountDisplay" class="mt-2 text-blue-700 font-bold text-xl">
+        10문제
+    </div>
+</div>
                                 </div>
                                 <div class="relative">
                                     <input type="radio" name="mode" id="modePast" value="past" hidden>
                                     <label for="modePast" class="toggle-btn">기출문제 선택</label>
-                                    <div class="examIdSelectBox invisible absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-                                         style="top: 200%;">
+                                    <div class="examIdSelectBox invisible relative left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+                                         >
                                         <label for="examId"></label>
                                         <select id="examId" name="examId" required style="overflow-y: auto;" class="p-2 border-grey-4 rounded-lg">
                                             <option value="-1" selected></option>
@@ -382,6 +393,25 @@
             });
             return index;
         }
+
+        $(function () {
+    $('#questionCount').on('input', function () {
+        const val = $(this).val();
+        $('#questionCountDisplay').text(val + '문제');
+    });
+
+    $('input[name="mode"]').change(function () {
+        const selectedMode = $('input[name="mode"]:checked').val();
+        if (selectedMode === 'random') {
+            $('.questionCountSelectBox').removeClass("invisible");
+            $('.examIdSelectBox').addClass("invisible");
+        } else if (selectedMode === 'past') {
+            $('.examIdSelectBox').removeClass("invisible");
+            $('.questionCountSelectBox').addClass("invisible");
+            // 기존 AJAX 로직 유지
+        }
+    });
+});
 
         function showStep(index) {
             $steps.each(function (i) {
