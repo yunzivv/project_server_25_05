@@ -114,7 +114,7 @@ public class UsrArticleController {
 		Article article = articleService.writeArticle(title, body, rq.getLoginedMemberId(), boardId);
 		int id = articleService.getLastInsertId();
 
-		return Ut.jsReplace("S-1", Ut.f("게시글 %d 번 작성 완료", id), Ut.f("../article/detail?id=%d", id));
+		return Ut.jsSucceseReplace("S-1", Ut.f("게시글 %d 번 작성 완료", id), Ut.f("../article/detail?id=%d", id));
 	}
 
 	@RequestMapping("/usr/article/modify")
@@ -146,7 +146,7 @@ public class UsrArticleController {
 
 		articleService.modifyArticle(id, title, body);
 
-		return Ut.jsReplace("S-1", Ut.f("%d 번 게시물 수정 완료", id), Ut.f("../article/detail?id=%d", id));
+		return Ut.jsSucceseReplace("S-1", Ut.f("%d 번 게시물 수정 완료", id), Ut.f("../article/detail?id=%d", id));
 	}
 
 	@RequestMapping("/usr/article/doDelete")
@@ -169,7 +169,7 @@ public class UsrArticleController {
 
 		articleService.deleteArticle(id);
 
-		return Ut.jsReplace("S-1", Ut.f("%d번 게시물 삭제 완료", id), "../article/list");
+		return Ut.jsSucceseReplace("S-1", Ut.f("%d번 게시물 삭제 완료", id), "../article/list");
 	}
 
 }

@@ -78,7 +78,7 @@
                             </div>
                             <div class="m-2">준비된 문제 유형을 선택해 바로 학습을 시작해보세요!</div>
                             <div class="m-2">문제를 풀자마자 정답 여부를 바로 확인할 수 있어요.</div>
-                            <div class=""><img src="/image/exam.png" alt="EXAM icon" class="w-80 h-80"></div>
+                            <div class="flex justify-end relative" style="right: -500px; top: -150px; width: 500px; height: 500px;"><img src="/image/exam2.png" alt="EXAM icon"></div>
                         </div>
 
                         <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
@@ -276,16 +276,17 @@
                                                 }
 
                                                 exams.forEach(exam => {
-                                                    const $btn = $('<button type="button" class="exam-btn w-full bg-white border-grey-3 hover:bg-blue-300 px-4 py-2 rounded text-left"></button>')
+                                                    const $btn = $('<button type="button" class="exam-btn w-full bg-white text-grey-100 border-grey-3 hover:bg-blue-100 px-4 py-2 rounded text-left"></button>')
                                                         .text(exam.extra__certName + ' ' + exam.examDate)
                                                         .on('click', function () {
                                                             $('#examId').val(exam.id);
-                                                            $('.exam-btn').removeClass('bg-blue-500 text-white').addClass('bg-blue-100 text-black');
-                                                            $(this).addClass('bg-blue-500 text-white').removeClass('bg-blue-100 text-black');
+                                                            $('.exam-btn').removeClass('bg-blue-2 text-white').addClass('bg-white text-grey-100 hello');
+                                                            $(this).addClass('bg-blue-2 text-white').removeClass('bg-white text-grey-100');
                                                         });
 
                                                     $container.append($btn);
                                                 });
+
                                             });
                                         }
                                     });

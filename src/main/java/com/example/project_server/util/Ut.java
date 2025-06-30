@@ -38,6 +38,104 @@ public class Ut {
 				""", resultMsg, replaceUri);
 	}
 
+    public static String jsSucceseReplace(String resultCode, String msg, String replaceUri) {
+        if (resultCode == null) resultCode = "";
+        if (msg == null) msg = "";
+        if (replaceUri == null) replaceUri = "/";
+
+        String resultMsg = msg
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "");
+
+        return Ut.f("""
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			window.onload = function () {
+				let resultMsg = "%s".trim();
+
+				if (resultMsg.length > 0) {
+					Swal.fire({
+						icon: 'success',
+						title: resultMsg,
+						confirmButtonText: '확인'
+					}).then(() => {
+						location.replace('%s');
+					});
+				} else {
+					location.replace('%s');
+				}
+			};
+		</script>
+		""", resultMsg, replaceUri, replaceUri);
+    }
+
+    public static String jsFailReplace(String resultCode, String msg, String replaceUri) {
+        if (msg == null) msg = "";
+        if (replaceUri == null) replaceUri = "/";
+
+        String resultMsg = msg
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "");
+
+        return Ut.f("""
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			window.onload = function () {
+				let resultMsg = "%s".trim();
+
+				if (resultMsg.length > 0) {
+					Swal.fire({
+						icon: 'error',
+						title: resultMsg,
+						confirmButtonText: '확인'
+					}).then(() => {
+						location.replace('%s');
+					});
+				} else {
+					location.replace('%s');
+				}
+			};
+		</script>
+		""", resultMsg, replaceUri, replaceUri);
+    }
+
+
+    public static String jsWarningReplace(String resultCode, String msg, String replaceUri) {
+        if (msg == null) msg = "";
+        if (replaceUri == null) replaceUri = "/";
+
+        String resultMsg = msg
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "");
+
+        return Ut.f("""
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			window.onload = function () {
+				let resultMsg = "%s".trim();
+
+				if (resultMsg.length > 0) {
+					Swal.fire({
+						icon: 'warning',
+						title: resultMsg,
+						confirmButtonText: '확인'
+					}).then(() => {
+						location.replace('%s');
+					});
+				} else {
+					location.replace('%s');
+				}
+			};
+		</script>
+		""", resultMsg, replaceUri, replaceUri);
+    }
+
 	public static String jsHistoryBack(String resultCode, String msg) {
 		if (resultCode == null) {
 			resultCode = "";

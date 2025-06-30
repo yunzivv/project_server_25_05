@@ -140,27 +140,8 @@ public class UsrCertificateController {
             return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
 
         certificateService.doAdd(rq.getLoginedMemberId(), certName, certId, startDate, endDate, certificateNumber);
-        return Ut.jsReplace("S-1", "자격증 등록이 완료되었습니다.", "../member/myCert");
+        return Ut.jsSucceseReplace("S-1", "자격증 등록이 완료되었습니다.", "../member/myCert");
     }
-
-//	@RequestMapping("/usr/cert/doModify")
-//	@ResponseBody
-//	public String doModify(HttpServletRequest req, int memberCertId, String certname, LocalDate startDate, LocalDate endDate, String certificateNumber) {
-//
-//		Rq rq = (Rq) req.getAttribute("rq");
-//
-//		if (Ut.isEmpty(certname))
-//			return Ut.jsHistoryBack("F-1", "자격증명을 입력하세요.");
-//
-//		Certificate certificate = certificateService.getCertByName(certname);
-//		if(certificate == null) {
-//			certificate = new Certificate();
-//			certificate.setId(0);
-//		}
-//
-//		certificateService.doModify(rq.getLoginedMemberId(), certname, certificate.getId(), startDate, endDate, certificateNumber);
-//		return null;
-//	}
 
     @RequestMapping("/usr/cert/doDelete")
     @ResponseBody
@@ -182,7 +163,7 @@ public class UsrCertificateController {
 
         certificateService.deleteMemberCert(id);
 
-        return Ut.jsReplace("S-1", Ut.f("%d번 회원 자격증 삭제 성공", id), "../member/myCert");
+        return Ut.jsSucceseReplace("S-1", "등록된 회원 자격증 삭제 성공", "../member/myCert");
     }
 
 

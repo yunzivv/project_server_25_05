@@ -32,27 +32,29 @@
             </div>
             <div class="examHistory mt-10 px-8 py-4">
                 <div class="font-bold text-2xl mb-4">문제은행 히스토리</div>
-                <table class="m-10">
-                    <thead class="h-5 text-base bg-grey-1 text-blue-2 border-b">
-                    <tr>
-                        <th scope="col" class="px-10 py-4 w-2/5">자격증</th>
-                        <th scope="col" class="px-10 py-4">푼 날</th>
-                        <th scope="col" class="px-10 py-4">총 푼 문제</th>
-                        <th scope="col" class="px-10 py-4">맞춘 문제</th>
-                        <th scope="col" class="px-10 py-4 whitespace-nowrap">경과 시간</th>
-                    </tr>
-                    </thead>
-                    <c:forEach var="exam" items="${exams}">
-                        <tr class="bg-grey-1 cursor-pointer text-center">
-                            <td class="p-4 text-left"> ${exam.extra__certName}</td>
-                            <td><a class="block text-left pl-6"> ${exam.regDate.toString().substring(0,10)}</a>
-                            </td>
-                            <td class="p-4">${exam.totalQuest}</td>
-                            <td class="p-4">${exam.correctQuest}</td>
-                            <td class="p-4">${exam.elapsedTime}</td>
+                <div class="m-10 rounded-lg overflow-hidden">
+                    <table class="w-full">
+                        <thead class="h-5 text-base bg-grey-1 text-blue-2 border-b">
+                        <tr>
+                            <th scope="col" class="px-10 py-4 w-2/5">자격증</th>
+                            <th scope="col" class="px-10 py-4">문제 푼 날짜</th>
+                            <th scope="col" class="px-10 py-4">전체 문제 수</th>
+                            <th scope="col" class="px-10 py-4">맞춘 문제 수</th>
+                            <th scope="col" class="px-10 py-4 whitespace-nowrap">풀이 시간</th>
                         </tr>
-                    </c:forEach>
-                </table>
+                        </thead>
+                        <c:forEach var="exam" items="${exams}">
+                            <tr class="bg-grey-1 cursor-pointer text-center">
+                                <td class="p-4 text-left"> ${exam.extra__certName}</td>
+                                <td><a class="block text-left pl-6"> ${exam.regDate.toString().substring(0,10)}</a>
+                                </td>
+                                <td class="p-4">${exam.totalQuest}</td>
+                                <td class="p-4">${exam.correctQuest}</td>
+                                <td class="p-4">${exam.elapsedTime}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
             <div class="side hidden xl:block w-52"></div>
             <div class="block min-[1280px]:hidden w-1/12"></div>

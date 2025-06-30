@@ -66,7 +66,7 @@ public class UsrMemberController {
 
         rq.printConfirmAndRedirect(Ut.f("%s님 가입을 축하합니다.", name), "/");
 
-        return Ut.jsReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
+        return Ut.jsSucceseReplace("S-1", Ut.f("%s 님 회원가입을 축하합니다.", nickName), "/");
     }
 
     @RequestMapping("/usr/member/login")
@@ -95,7 +95,7 @@ public class UsrMemberController {
 
         rq.login(member);
 
-        return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), afterLoginUri);
+        return Ut.jsSucceseReplace("S-1", Ut.f("%s님 환영합니다", member.getNickName()), afterLoginUri);
     }
 
     @RequestMapping("/usr/member/doLogout")
@@ -155,7 +155,7 @@ public class UsrMemberController {
 
         int memberUpdate = memberService.modifyMember(loginedMemberId, loginId, loginPw, name, nickName, cellPhone, email);
 
-        return Ut.jsReplace("S-1", Ut.f("%s 회원님 정보 수정이 완료되었습니다.", nickName),
+        return Ut.jsSucceseReplace("S-1", Ut.f("%s 회원님 정보 수정이 완료되었습니다.", nickName),
                 "../member/myInfo");
     }
 
@@ -203,7 +203,7 @@ public class UsrMemberController {
 
         ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
 
-        return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
+        return Ut.jsSucceseReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
                 afterFindLoginPwUri);
     }
 
@@ -260,7 +260,7 @@ public class UsrMemberController {
 
         certificateService.doChangAlertModeCert(memberCertId);
 
-        return Ut.jsReplace("S-1", Ut.f("%d 번 회원 자격증 수정 완료되었습니다.", memberCertId), "../member/myCert?");
+        return Ut.jsSucceseReplace("S-1", Ut.f("%d 번 회원 자격증 수정 완료되었습니다.", memberCertId), "../member/myCert?");
     }
 
     @RequestMapping("/usr/member/myPost")

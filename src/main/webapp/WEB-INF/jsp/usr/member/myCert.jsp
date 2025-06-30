@@ -119,7 +119,7 @@
                         <div class="swiper-slide">
                             <div class="slide-card p-3 rounded-xl overflow-hidden bg-grey-1 shadow-md relative"
                                  style="width: 500px; height: 313px;">
-                                <div class="cardCover w-full h-full absolute top-0 left-0 bg-white/50 z-10 transition-opacity"></div>
+                                <div class="cardCover w-full h-full absolute top-0 left-0 bg-white/50 z-10 transition-opacity pointer-events-none"></div>
                                 <div class="cardHead h-1/6 text-center text-3xl font-bold text-grey-100 tracking-widest">
                                     회원정보자격
                                 </div>
@@ -127,9 +127,9 @@
                                     <div class="img w-1/3 h-full p-2"><img src="/image/user.png" alt="USER"></div>
                                     <div class="info flex flex-col justify-between w-2/3 h-full text-lg p-5">
                                         <span>자 격 명: ${cert.certname}</span>
-                                        <span>성    명: ${member.name}</span>
                                         <span>자격번호: ${cert.certificateNumber}</span>
                                         <span>취 득 일: ${cert.startDate}</span>
+                                        <span>만 료 일: ${cert.endDate}</span>
                                     </div>
                                 </div>
                                 <div class="cardBottom h-1/6 flex justify-between items-center p-2 text-center">
@@ -213,8 +213,18 @@
     }
 
     function confirmDelete(id) {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            location.href = "../cert/doDelete?id=" + id;
-        }
+        Swal.fire({
+            title: '정말 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "../cert/doDelete?id=" + id;
+            }
+        });
     }
 </script>

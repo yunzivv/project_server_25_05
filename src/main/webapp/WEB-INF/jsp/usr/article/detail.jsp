@@ -167,14 +167,7 @@
         </div>
     </div>
 </div>
-[사용자 입력]
-- 삭제하려는 게시물의 삭제 버튼 클릭
 
-[프로세스]
-- 삭제 여부 한 번 더 확인 후 게시물의 delStatus 변경
-
-[안내 메시지]
-- "정말 삭제하시겠습니까?"
 
 <div class="comment-box container flex justify-center flex-col mx-auto mt-4 mb-20">
     <c:if test="${not empty comments }">
