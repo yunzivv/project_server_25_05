@@ -156,12 +156,12 @@ public class UsrCertificateController {
         }
 
         if (memberCert.getMemberId() != rq.getLoginedMemberId()) {
-            return Ut.jsFailBack("F-A", Ut.f("%d번 회원 자격증 대한 권한이 없습니다.", id));
+            return Ut.jsFailBack("F-A", Ut.f("등록된 %d번 회원 자격증 대한 권한이 없습니다.", id));
         }
 
         certificateService.deleteMemberCert(id);
 
-        return Ut.jsSucceseReplace("S-1", "등록된 회원 자격증 삭제 성공", "../member/myCert");
+        return Ut.jsSucceseReplace("S-1", "등록된 자격증이 삭제되었습니다.", "../member/myCert");
     }
 
 

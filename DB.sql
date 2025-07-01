@@ -1,5 +1,5 @@
 ############################################################# 개인 프로젝트 ##################################################################################
-
+DROP DATABASE IF EXISTS project_25_05;
 CREATE DATABASE project_25_05;
 USE project_25_05;
 
@@ -16,7 +16,7 @@ CREATE TABLE article(
                         hits INT UNSIGNED NOT NULL DEFAULT 0
 );
 
-# 게시물 테이블 데이터 추가
+# 게시판 테이블
 CREATE TABLE board (
                        id TINYINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                        `code` VARCHAR(20) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE board (
 );
 
 
-# 리액션 테이블
+# 댓글 테이블
 CREATE TABLE `comment` (
                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                            memberId INT UNSIGNED NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `comment` (
 );
 
 
-# 게시판 테이블
+# 좋아요 테이블
 CREATE TABLE reaction (
                           id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                           relTypeCode VARCHAR(20) NOT NULL COMMENT '관련 데이터 타입 코드',
@@ -90,7 +90,7 @@ CREATE TABLE choices (
 );
 
 
-# 자격증 문제 테이블
+# 자격증 테이블
 CREATE TABLE certificate (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              `name` VARCHAR(50) NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE `member`(
                          delDate DATETIME COMMENT '탈퇴날짜'
 );
 
-# 직무 카테고리 테이블
+# 멤버 삽입
 INSERT INTO `member`
 SET regDate = NOW(),
     updateDate = NOW(),
@@ -177,7 +177,7 @@ SET regDate = NOW(),
     cellPhone = '01012345678',
     email = 'admin@spring.com';
 
-# 직무 코드 테이블
+# 멤버 삽입
 INSERT INTO `member`
 SET regDate = NOW(),
     updateDate = NOW(),
@@ -252,21 +252,14 @@ INSERT INTO board SET
 
 
 
-INSERT INTO memberCert SET
-                           memberid = 3,
-                           certId = 3,
-                           certname = 'ㅇ요요요',
-                           startDate = NOW(),
-                           endDate = NOW(),
-                           regDate = NOW(),
-                           updateDate = NOW(),
-                           certificateNumber = 11144541;
-
-
-
-SELECT *, ROW_NUMBER() OVER (PARTITION BY memberId ORDER BY startDate ASC) AS rank_num
-FROM memberCert
-WHERE memberId = 4
-ORDER BY rank_num DESC;
-
-ALTER TABLE article MODIFY COLUMN BODY LONGTEXT;
+CREATE TABLE memberExam (
+                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                            memberId INT UNSIGNED NOT NULL,
+                            certId INT UNSIGNED NOT NULL,
+                            examId INT UNSIGNED,
+                            elapsedTime TIME NOT NULL,
+                            totalQuest INT UNSIGNED NOT NULL,
+                            correctQuest INT UNSIGNED NOT NULL,
+                            regDate DATETIME NOT NULL,
+                            updateDate DATETIME NOT NULL
+);
