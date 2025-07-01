@@ -104,7 +104,7 @@ CREATE TABLE certificate (
 );
 
 
-# 자격증 언급 테이블
+# 자격증 과목 테이블
 CREATE TABLE certSubject (
                              id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                              certId INT UNSIGNED NOT NULL,
@@ -250,16 +250,3 @@ INSERT INTO board SET
                       regdate = NOW(),
                       updatedate = NOW();
 
-
-
-CREATE TABLE memberExam (
-                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                            memberId INT UNSIGNED NOT NULL,
-                            certId INT UNSIGNED NOT NULL,
-                            examId INT UNSIGNED,
-                            elapsedTime TIME NOT NULL,
-                            totalQuest INT UNSIGNED NOT NULL,
-                            correctQuest INT UNSIGNED NOT NULL,
-                            regDate DATETIME NOT NULL,
-                            updateDate DATETIME NOT NULL
-);
