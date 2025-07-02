@@ -64,7 +64,7 @@
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">
-                        <img src="/image/diagram.png" alt="Diagram icon" class="w-full h-full object-contain">
+                        <img src="/image/main_hub.png" alt="Diagram icon" class="w-full h-full object-contain">
                     </div>
                 </div>
             </a>
@@ -81,7 +81,7 @@
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">
-                        <img src="/image/study.png" alt="Study icon" class="w-full h-full object-contain">
+                        <img src="/image/main_workbook.png" alt="Study icon" class="w-full h-full object-contain">
                     </div>
                 </div>
             </a>
@@ -98,7 +98,7 @@
                         <i class="fa-solid fa-chevron-right text-white"></i>
                     </div>
                     <div class="w-[200px] h-[200px] self-end">
-                        <img src="/image/certificate.png" alt="Trophy icon" class="w-full h-full object-contain">
+                        <img src="/image/main_wallet.png" alt="Trophy icon" class="w-full h-full object-contain">
                     </div>
                 </div>
             </a>

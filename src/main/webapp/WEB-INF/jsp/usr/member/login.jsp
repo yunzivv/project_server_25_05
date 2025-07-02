@@ -38,7 +38,7 @@
         </div>
         <div class="login_cover bg-grey-1 rounded-3xl"></div>
         <div class="w-1/2 relative bg-blue-2 flex items-center pt-20">
-            <img src="/image/signin2.png" alt="LOGIN IMG">
+            <img src="/image/signIn.png" alt="LOGIN IMG">
             <div class="absolute" style="top: 0; left: 100%;">
                 <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>

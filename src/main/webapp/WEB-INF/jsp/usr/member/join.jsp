@@ -253,7 +253,7 @@
             </form>
         </div>
         <div class="w-1/2 relative bg-blue-2 flex items-center">
-            <img src="/image/signup2.png" alt="LOGIN IMG">
+            <img src="/image/signUp.png" alt="LOGIN IMG">
             <div class="absolute" style="top: 0; left: -20px;">
                 <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>

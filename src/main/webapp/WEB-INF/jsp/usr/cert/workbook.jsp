@@ -80,7 +80,7 @@
                             <div class="m-2">문제를 풀자마자 정답 여부를 바로 확인할 수 있어요.</div>
                             <div class="flex justify-end relative"
                                  style="right: -500px; top: -150px; width: 500px; height: 500px;"><img
-                                    src="/image/exam2.png" alt="EXAM icon"></div>
+                                    src="/image/workBook_step1.png" alt="EXAM icon"></div>
                         </div>
 
                         <div id="examStep2" class="step w-full text-lg flex flex-col" style="height: 460px;">
