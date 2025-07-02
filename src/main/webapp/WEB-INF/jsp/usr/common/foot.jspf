@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%--    <footer class="rounded-lg m-4 bg-neutral-100 text-neutral-400">--%>
-<%--        <div class="flex flex-col justify-start w-full mx-auto max-w-screen-xl p-4">--%>
-<%--            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0 ">--%>
-<%--                <li>--%>
-<%--                    <a href="#" class="hover:underline me-6">About Ninza</a>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <a href="https://onesquareminesweeper.com/" class="hover:underline me-6">Minesweeper</a>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <a href="#" class="hover:underline me-6">Contact Impossible</a>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <a href="#" class="hover:underline">FAQ</a>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
-<%--            <span class="mt-3 block">Created by <strong>yunzi</strong> © 2025 – No rights reserved </span>--%>
-<%--            <span class="block">E-mail. yunzi@ninza.com </span>--%>
-<%--        </div>--%>
-<%--    </footer>--%>
+    <footer class="rounded-lg m-10 bg-neutral-100 text-neutral-400 py-3">
+        <div class="flex flex-col justify-start w-full mx-auto max-w-screen-xl p-4">
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0 ">
+                <li>
+                    <a href="#" class="hover:underline me-6">About</a>
+                </li>
+                <li>
+                    <a href="https://onesquareminesweeper.com/" class="hover:underline me-6">How Yo</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-6">Contact</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline">FAQ</a>
+                </li>
+            </ul>
+            <span class="mt-3 block">Created by <strong>yunzi</strong> © 2025 – No rights reserved </span>
+            <span class="block">E-mail. yunzi@gmail.com </span>
+        </div>
+    </footer>
 
 </body>
 </html>

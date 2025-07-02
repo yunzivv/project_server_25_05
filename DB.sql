@@ -61,7 +61,7 @@ CREATE TABLE exam (
                       updateDate DATETIME NOT NULL
 );
 
-# 자격증 시험 문제 테이블
+# 시험 문제 테이블
 CREATE TABLE questions (
                            id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                            certId INT UNSIGNED,
@@ -78,7 +78,7 @@ CREATE TABLE questions (
 );
 
 
-# 자격증 시험 보기 테이블
+# 시험 선택지 테이블
 CREATE TABLE choices (
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          questId INT UNSIGNED NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE certSubject (
                              updateDate DATETIME NOT NULL
 );
 
-# 자격증 테이블
+# 직무 카테고리 테이블
 CREATE TABLE jobCat (
                         id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         `name` VARCHAR(50) NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE jobCat (
                         updateDate DATETIME NOT NULL
 );
 
-# 자격증 시험 테이블
+# 직무 테이블
 CREATE TABLE jobCode (
                          id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          jobCatId INT UNSIGNED NOT NULL,
