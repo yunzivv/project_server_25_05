@@ -82,9 +82,6 @@
                   class="mt-20 w-5/6 flex flex-col items-center">
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
                 <div class="flex flex-col w-2/3 h-full mb-4">
-                    <%--                    <input type="text" name="loginId"--%>
-                    <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-4 mb-4"--%>
-                    <%--                           placeholder="ID">--%>
                     <input class="bg-white border-grey-2 text-sm rounded-lg block p-4"
                            autocomplete="off" type="text" placeholder="아이디" name="loginId"/>
                     <div class="self-start m-1 msg-area msgFromName opacity-0 text-right text-red-400 mb-2">* 아이디가 입력되지
@@ -108,17 +105,6 @@
                 </div>
             </form>
         </div>
-<%--        <div class="showLoginId hidden w-1/2 mb-8 p-12 flex flex-col justify-center items-center text-lg tracking-wide">--%>
-<%--            <div class="flex-grow flex items-center justify-center">--%>
-<%--                <span class="member-name font-semibold"></span> &nbsp; 님의 아이디는&nbsp;&nbsp;--%>
-<%--                <span class="member-loginId font-semibold"></span> &nbsp;입니다.--%>
-<%--            </div>--%>
-<%--            <div class="login-menu flex justify-around my-4 px-20 w-full">--%>
-<%--                <a class=" hover:underline" href="join">Join</a>--%>
-<%--                <a class=" hover:underline" href="login">Login</a>--%>
-<%--                <a class=" hover:underline" href="findLoginId">Find ID</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
     </div>
 </div>
 

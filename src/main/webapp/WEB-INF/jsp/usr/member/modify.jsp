@@ -82,9 +82,6 @@
 		 		</div>
 		 		<button type="submit" class="py-2.5 px-5 me-2 mb-2 w-96 text-sm font-large bg-neutral-800 text-neutral-200 rounded-lg hover:bg-neutral-700">UPDATE</button>
 			</form>
-<!-- 			<div class="sub-menu text-center my-4 flex justify-center"> -->
-<!-- 				<a class="hover:text-underline" href="login">UPDATE</a>	 -->
-<!-- 			</div> -->
 		</div>
 	</div>
 

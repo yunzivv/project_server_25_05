@@ -353,13 +353,12 @@
 
             <div class=""></div>
         </div>
-
     </div>
 
-    <%--    <div class="side hidden xl:block w-20 bg-grey-1"></div>--%>
     <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 
 </div>
+
 <script>
     $(document).ready(function () {
 
@@ -373,7 +372,7 @@
     });
 </script>
 
-
+<%--직무 선택시 해당 데이터 차트 출력--%>
 <script>
     $(document).ready(function () {
 
@@ -429,70 +428,6 @@
                     console.log(jobCodeName);
                     console.log(jobCodeId);
                     const certs = data.data3;           // 자격증 배열
-
-                    <%--                    const certTypeRaw = data.data4;--%>
-                    <%--const typeMap = {1: '국가자격', 2: '국가공인 민간자격', 0: '민간자격'};--%>
-                    <%--const backgroundColors = ['#2f73d9', '#d1d1d1', '#dedede'];--%>
-
-                    <%--const stackedDatasets = Object.keys(typeMap).map((type, i) => {--%>
-                    <%--    const found = certTypeRaw.find(e => e.extra__certType == type);--%>
-                    <%--    const value = found ? found.extra__certCountByType : 0;--%>
-                    <%--    return {--%>
-                    <%--        label: typeMap[type],--%>
-                    <%--        data: [value], // 수평 1줄--%>
-                    <%--        backgroundColor: backgroundColors[i]--%>
-                    <%--    };--%>
-                    <%--});--%>
-
-                    <%--// 기존 차트 제거--%>
-                    <%--if (window.certCatChart) {--%>
-                    <%--    window.certCatChart.destroy();--%>
-                    <%--}--%>
-
-                    <%--// 재그리기--%>
-                    <%--const stackedCtx = document.getElementById('certCatRate').getContext('2d');--%>
-                    <%--window.certCatChart = new Chart(stackedCtx, {--%>
-                    <%--    type: 'bar',--%>
-                    <%--    data: {--%>
-                    <%--        labels: ['선택 직무'],--%>
-                    <%--        datasets: stackedDatasets--%>
-                    <%--    },--%>
-                    <%--    options: {--%>
-                    <%--        indexAxis: 'y',--%>
-                    <%--        responsive: false,--%>
-                    <%--        maintainAspectRatio: false,--%>
-                    <%--        plugins: {--%>
-                    <%--            legend: {--%>
-                    <%--                position: 'right',--%>
-                    <%--                labels: {--%>
-                    <%--                    usePointStyle: true,--%>
-                    <%--                    pointStyle: 'rect',--%>
-                    <%--                    font: { size: 12 }--%>
-                    <%--                }--%>
-                    <%--            },--%>
-                    <%--            tooltip: {--%>
-                    <%--                callbacks: {--%>
-                    <%--                    label: function (context) {--%>
-                    <%--                        return `${context.dataset.label}: ${context.raw}회`;--%>
-                    <%--                    }--%>
-                    <%--                }--%>
-                    <%--            }--%>
-                    <%--        },--%>
-                    <%--        scales: {--%>
-                    <%--            x: {--%>
-                    <%--                stacked: true,--%>
-                    <%--                beginAtZero: true,--%>
-                    <%--                ticks: {--%>
-                    <%--                    precision: 0--%>
-                    <%--                }--%>
-                    <%--            },--%>
-                    <%--            y: {--%>
-                    <%--                stacked: true--%>
-                    <%--            }--%>
-                    <%--        }--%>
-                    <%--    }--%>
-                    <%--});--%>
-
 
                     jobCodeName_box.empty();
                     $box.empty();

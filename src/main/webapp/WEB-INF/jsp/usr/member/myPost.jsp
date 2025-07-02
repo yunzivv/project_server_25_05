@@ -29,7 +29,6 @@
                 <c:forEach var="article" items="${articles}">
                     <a href="../article/detail?id=${article.id}" class="block">
                         <div class="pt-8 px-10 pb-4 rounded-lg bg-white m-5 border-grey-2 hover:shadow cursor-pointer transition">
-<%--                        <div class="absolute" style="top: 20px; right: 30px;">${article.regDate.toString().substring(0,10)}</div>--%>
                             <div class="text-2xl font-semibold m-3">${article.title}</div>
                             <div class="h-40 overflow-hidden p-4" style="overflow-wrap: anywhere;">
                                 <c:choose>
@@ -91,10 +90,6 @@
 
 
 </div>
-
-<%--    <div class="side hidden xl:block w-28 bg-grey-1"></div>--%>
-<%--    <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>--%>
-
 
 <script>
     $(document).ready(function () {

@@ -5,26 +5,13 @@
 <%@ include file="../common/head.jspf" %>
 
 
-<script>
-    $(document).ready(function () {
-        $('.header').addClass('active');
-        $('.nav_box > ul > li:nth-child(2) i').addClass('active');
-
-        $('.side_bar_left').addClass('active');
-        $('.side_bar_left > .workbook_sub_menu ').removeClass('hidden');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a').addClass('active');
-        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a > i').addClass('active');
-    });
-
-</script>
-
 <div class="flex w-full">
     <div class="side hidden xl:block shrink-0" style="width: 250px;">
         <%@ include file="../common/side.jspf" %>
     </div>
     <div class="block min-[1280px]:hidden w-1/12"></div>
 
-    <div class="flex-grow"><%--style="height: calc(100vh - 100px);"--%>
+    <div class="flex-grow">
 
         <div class="mx-auto my-16 w-9/12" style="height: 600px;">
 
@@ -135,22 +122,6 @@
                                             box.show();
                                         });
                                     }
-
-                                    $(document).ready(function () {
-                                        $("#certNameInput_workbook").on("input", searchCertName);
-                                        $("#searchBtn_workbook").on("click", searchCertName);
-
-                                        // 바깥 클릭 시 자동완성 박스 숨기기
-                                        $(document).on("click", function (e) {
-                                            const box = $("#autocompleteBox_workbook");
-                                            const input = $("#certNameInput_workbook");
-
-                                            if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
-                                                box.hide();
-                                            }
-                                        });
-                                    });
-
                                 </script>
                             </div>
                             <div class="flex-grow m-3 flex flex-col relative overflow-hidden">
@@ -334,12 +305,20 @@
 
     </div>
 
-    <%--    <div class="side hidden xl:block w-20 bg-grey-1"></div>--%>
     <div class="block min-[1280px]:hidden w-1/12 bg-grey-1"></div>
 </div>
 
 <script>
     $(document).ready(function () {
+
+        $('.header').addClass('active');
+        $('.nav_box > ul > li:nth-child(2) i').addClass('active');
+
+        $('.side_bar_left').addClass('active');
+        $('.side_bar_left > .workbook_sub_menu ').removeClass('hidden');
+        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a').addClass('active');
+        $('.side_bar_left > .workbook_sub_menu > li:nth-child(1) > a > i').addClass('active');
+
         const $steps = $(".step");
 
         function updateStepperUI(index) {
@@ -375,6 +354,19 @@
             });
         }
 
+        $("#certNameInput_workbook").on("input", searchCertName);
+        $("#searchBtn_workbook").on("click", searchCertName);
+
+        // 바깥 클릭 시 자동완성 박스 숨기기
+        $(document).on("click", function (e) {
+            const box = $("#autocompleteBox_workbook");
+            const input = $("#certNameInput_workbook");
+
+            if (!box.is(e.target) && box.has(e.target).length === 0 && !input.is(e.target)) {
+                box.hide();
+            }
+        });
+
 
         $("#startBtn").on("click", function (e) {
             e.preventDefault(); // 기본 submit 막고 수동 제출
@@ -405,20 +397,20 @@
                 const count = $("#questionCount").val();
                 if (!count || count < 0) {
                     Swal.fire({
-                    icon: 'warning',
-                    title: '문제 수를 선택해주세요.',
-                    confirmButtonText: '확인'
-                });
+                        icon: 'warning',
+                        title: '문제 수를 선택해주세요.',
+                        confirmButtonText: '확인'
+                    });
                     return;
                 }
             } else if (mode === "past") {
                 const examId = $("#examId").val();
                 if (!examId || examId < 0) {
                     Swal.fire({
-                    icon: 'warning',
-                    title: '기출시험을 선택해주세요.',
-                    confirmButtonText: '확인'
-                });
+                        icon: 'warning',
+                        title: '기출시험을 선택해주세요.',
+                        confirmButtonText: '확인'
+                    });
                     return;
                 }
             }
@@ -518,10 +510,10 @@
                 const cert = $("#certIdHidden_workbook").val();
                 if (!cert) {
                     Swal.fire({
-                    icon: 'warning',
-                    title: '자격증을 선택해주세요.',
-                    confirmButtonText: '확인'
-                });
+                        icon: 'warning',
+                        title: '자격증을 선택해주세요.',
+                        confirmButtonText: '확인'
+                    });
                     return;
                 }
             }
@@ -530,10 +522,10 @@
                 const $mode = $("input[name='mode']:checked");
                 if ($mode.length === 0) {
                     Swal.fire({
-                    icon: 'warning',
-                    title: '풀이 방식을 선택해주세요.',
-                    confirmButtonText: '확인'
-                });
+                        icon: 'warning',
+                        title: '풀이 방식을 선택해주세요.',
+                        confirmButtonText: '확인'
+                    });
                     return;
                 }
 
@@ -544,19 +536,19 @@
                 if (mode === "random") {
                     if (!questionCount || questionCount < 0) {
                         Swal.fire({
-                    icon: 'warning',
-                    title: '문제 수를 입력해주세요.',
-                    confirmButtonText: '확인'
-                });
+                            icon: 'warning',
+                            title: '문제 수를 입력해주세요.',
+                            confirmButtonText: '확인'
+                        });
                         return;
                     }
                 } else if (mode === "past") {
                     if (!examId || examId < 0) {
                         Swal.fire({
-                    icon: 'warning',
-                    title: '기출시험을 선택해주세요.',
-                    confirmButtonText: '확인'
-                });
+                            icon: 'warning',
+                            title: '기출시험을 선택해주세요.',
+                            confirmButtonText: '확인'
+                        });
                         return;
                     }
                 }

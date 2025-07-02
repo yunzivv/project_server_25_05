@@ -5,14 +5,6 @@
 <%@ include file="../common/head.jspf" %>
 <%@ include file="../common/toastUiEditorLib.jspf" %>
 
-<%--<script>--%>
-
-<%--    $(document).ready(function () {--%>
-<%--        // $('.back').addClass("hidden");--%>
-<%--        $('.header').addClass('active');--%>
-<%--        $('.nav_box > ul > li:nth-child(3) i').addClass('active');--%>
-<%--    });--%>
-<%--</script>--%>
 <script>
     $(document).ready(function () {
 
@@ -80,9 +72,6 @@
 %>
 
 <div class="container mx-auto my-24 p-6 w-4/5 border border-solid border-neutral-300 rounded-xl overflow-hidden">
-
-    <%--		<div class="font-semibold text-4xl text-neutral-800 px-1 py-6"></div>--%>
-
     <form onsubmit="articleWrite__submit(this); return false;" action="doWrite" method="POST" class="w-full">
         <div class="flex justify-center flex-col">
             <div class="flex px-3">

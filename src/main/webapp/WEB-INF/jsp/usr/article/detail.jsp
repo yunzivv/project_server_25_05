@@ -43,9 +43,9 @@
         localStorage.setItem(localStorageKey, true);
 
         $.get('../article/doIncHits', {
-            id: params.id, <!-- 매개변수 설정 -->
-            ajaxMode: 'Y' <!-- 매개변수 설정 -->
-        }, function (data) { <!-- incHits의 return 값이 data에 저장된다. -->
+            id: params.id,
+            ajaxMode: 'Y'
+        }, function (data) {
             $('.article_detail_hit_count').html("조회수 : " + data.data1);
             console.log(data);
             console.log($("comment_reaction_box").find(".good_btn").val());
@@ -98,10 +98,8 @@
             <div class="title text-3xl font-bold">${article.title }</div>
 
             <div class="articleInfo flex my-2">
-                <!-- 				article info -->
                 <div class="writeInfo text-neutral-800 m-1">
                     <span> 작성일 : ${article.regDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>
-<%--                    <span> 수정 일자 : ${article.updateDate.toString().substring(0, 10)} &nbsp;&nbsp;&nbsp;</span>--%>
                     <span> 작성자 : ${article.extra__writer } &nbsp;&nbsp;&nbsp;</span>
                     <span> 게시판 : ${article.extra__boardCode } &nbsp;&nbsp;&nbsp;</span>
                     <span class="article_detail_hit_count"> 조회수 : ${article.hits } </span>

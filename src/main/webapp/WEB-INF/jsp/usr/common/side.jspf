@@ -13,8 +13,6 @@
     <ul class="workbook_sub_menu hidden flex flex-col w-full">
         <li><a class="block w-52 py-4 px-8" href="../cert/analysis">자격증 공부하기
             <i class="highlight fa-solid fa-circle"></i></a></li>
-<%--        <li><a class="block py-4 px-8" href="../member/myCert">내 자격증--%>
-<%--            <i class="highlight fa-solid fa-circle"></i></a></li>--%>
     </ul>
 
     <ul class="community_sub_menu hidden flex flex-col w-full">

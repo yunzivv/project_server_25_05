@@ -8,7 +8,6 @@
     <div class="h-full flex justify-center items-center">
         <div class="question-container flex flex-col w-4/5 h-5/6 bg-grey-2 pt-2 rounded-xl overflow-hidden">
 
-            <!-- examHead: 고정 -->
             <div class="examHead flex items-center">
                 <button onclick="confirmExit()"><i class="fa-solid fa-circle text-red-500 ml-4"></i></button>
                 <i class="fa-solid fa-circle text-yellow-400 mx-4"></i>
@@ -53,6 +52,7 @@
                             <span class="elapsedTime">
                             </span>
                         </div>
+
                         <!-- 문제 내용 -->
                         <div class="px-20">
                             <div class="questionBody m-5">
@@ -78,7 +78,6 @@
                                 </c:forEach>
                             </div>
                         </div>
-
                     </div>
                 </c:forEach>
 
@@ -139,7 +138,8 @@
         </div>
     </div>
 </div>
-</div>
+
+
 <script>
 
     totalAnswered = 0;
@@ -152,8 +152,10 @@
     const subjectStats = {};
 
     $(document).ready(function () {
+
         $('.back').addClass("hidden");
 
+        // 시간 저장
         examStartTime = new Date();
 
         setInterval(function () {
@@ -170,6 +172,7 @@
         }, 1000);
     });
 
+    // 정답 여부
     function checkAnswer(el) {
         const isCorrect = el.getAttribute("data-correct") === "true";
         const box = el.closest(".question-box");
@@ -213,11 +216,13 @@
         updateAccuracy(correctCount, totalAnswered);
     }
 
+    // 정답률
     function updateAccuracy(correctCount, totalAnswered) {
         const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
         $(".answerCorrectRate").text(accuracy);
     }
 
+    // 시험 종료(중단)
     function confirmExit() {
         Swal.fire({
             title: '시험을 종료하시겠습니까?',
@@ -238,6 +243,7 @@
     const boxes = $(".question-container .question-box");
     const nextBtn = $("#nextButton");
 
+    // 다음 문제
     function showNextQuestion() {
         if (currentIndex < boxes.length - 1) {
             boxes[currentIndex].classList.add("hidden");
@@ -253,6 +259,7 @@
         }
     }
 
+    // 이전 문제
     function showPrevQuestion() {
         if (currentIndex > 0) {
             boxes[currentIndex].classList.add("hidden");
@@ -272,6 +279,7 @@
         }
     }
 
+    // 시험 제출(전체 문제 풀이 완료)
     function submitExam() {
         $(".question-container").addClass("hidden");
         $(".result-container").removeClass("hidden");
@@ -299,6 +307,7 @@
         saveExamResult();
     }
 
+    // 시험 결과 기록
     function saveExamResult() {
         const certId = ${certificate.id};
         const examId = ${examId != null ? examId : 0};
@@ -322,90 +331,6 @@
         });
     }
 
-
-    $(document).ready(function () {
-        $('.back').addClass("hidden");
-    });
-</script>
-
-<script>
-    let totalAnswered = 0;
-    let correctCount = 0;
-
-    // 과목별 통계
-    const subjectStats = {};
-
-    function checkAnswer(el) {
-        const isCorrect = el.getAttribute("data-correct") === "true";
-
-        const box = el.closest(".question-box");
-        const subjectNum = parseInt(box.getAttribute("data-subject-num"));
-        const subjectName = box.getAttribute("data-subject-name");
-
-        if (!subjectStats[subjectNum]) {
-            subjectStats[subjectNum] = {
-                subjectNum: subjectNum,
-                name: subjectName,
-                total: 0,
-                correct: 0
-            };
-        }
-
-        subjectStats[subjectNum].total++;
-
-        const siblings = el.parentElement.querySelectorAll('.choice-option');
-
-        siblings.forEach(option => {
-            const correct = option.getAttribute("data-correct") === "true";
-
-            if (correct) {
-                option.classList.add("bg-green-200");
-            }
-
-            if (option === el && !isCorrect) {
-                option.classList.add("bg-red-200");
-            }
-
-            // 선택지 비활성화
-            option.onclick = null;
-            option.classList.add("pointer-events-none");
-        });
-
-        if (isCorrect) {
-            correctCount++;
-            subjectStats[subjectNum].correct++;
-        }
-
-        totalAnswered++;
-        updateAccuracy(correctCount, totalAnswered);
-    }
-
-
-    // 정답률
-    function updateAccuracy(correctCount, totalAnswered) {
-        const accuracy = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
-        $(".answerCorrectRate").text(accuracy);
-    }
-
-</script>
-
-<%--시험 시간 기록--%>
-<script>
-    let examStartTime;
-
-    $(document).ready(function () {
-        examStartTime = new Date();
-
-        setInterval(function () {
-            const now = new Date();
-            const elapsedMs = now - examStartTime;
-
-            const minutes = String(Math.floor(elapsedMs / 60000)).padStart(2, '0');
-            const seconds = String(Math.floor((elapsedMs % 60000) / 1000)).padStart(2, '0');
-
-            $('.elapsedTime').text(minutes + " : " + seconds);
-        }, 1000);
-    });
 </script>
 
 

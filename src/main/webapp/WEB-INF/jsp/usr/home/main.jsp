@@ -50,8 +50,8 @@
     </div>
 
     <div class="mainSection2 my-32">
-<%--    <div>CERTIFY에서 자격증의 모든 것을 함께하세요</div>--%>
         <div class="flex justify-center">
+
             <%--hub--%>
             <a href="../cert/analysis"
                class="helpMenu flex flex-col justify-between w-3/12 rounded-xl m-4 p-6 block">

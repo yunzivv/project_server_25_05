@@ -218,38 +218,6 @@
                         회원가입
                     </button>
                 </div>
-
-                <%--                <div class="flex flex-col w-2/3 h-full mb-4">--%>
-                <%--                    <input type="text" name="name"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="이름">--%>
-                <%--                    <input type="text" name="loginId"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="ID">--%>
-                <%--                    <input type="text" name="loginPw"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="Password">--%>
-                <%--                    <input type="password" name="checkLoginPw"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="비밀번호 확인">--%>
-                <%--                    <input type="text" name="nickName"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="닉네임">--%>
-                <%--                    <input type="tel" name="cellPhone" pattern="[0-9]{11}" required--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="전화번호">--%>
-                <%--                    <!-- 			<div class="text-neutral-400 mb-6 px-2">Enter your tel without highpen(-)</div> -->--%>
-                <%--                    <input type="email" name="email"--%>
-                <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-3 mb-4"--%>
-                <%--                           placeholder="e-mail">--%>
-                <%--                    <button type="submit"--%>
-                <%--                            class="p-3 mb-2 font-semibold bg-blue-2 text-grey-1 rounded-lg">--%>
-                <%--                        JOIN--%>
-                <%--                    </button>--%>
-                <%--                </div>--%>
-                <%--                <div class="login-menu flex justify-around my-4 px-20 w-full">--%>
-                <%--                    <a class="hover:text-underline" href="login">SIGN IN</a>--%>
-                <%--                </div>--%>
             </form>
         </div>
         <div class="w-1/2 relative bg-blue-2 flex items-center">

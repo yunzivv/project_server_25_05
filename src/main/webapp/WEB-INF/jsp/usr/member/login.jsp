@@ -73,9 +73,6 @@
             </a>
         </div>
         <div class="login_form w-1/2 flex flex-col justify-center items-center opacity-0">
-            <%--            <div class="title w-full p-4 text-4xl font-semibold">--%>
-            <%--                Login--%>
-            <%--            </div>--%>
             <form name="login" action="doLogin" method="POST" class="mt-20 w-5/6 flex flex-col items-center">
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
                 <div class="flex flex-col w-2/3 h-full mb-4">

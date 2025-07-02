@@ -99,9 +99,6 @@
                   class="mt-20 w-5/6 flex flex-col items-center">
                 <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
                 <div class="flex flex-col w-2/3 h-full mb-4">
-                    <%--                    <input type="text" name="loginId"--%>
-                    <%--                           class="bg-white border-grey-2 text-sm rounded-lg block p-4 mb-4"--%>
-                    <%--                           placeholder="ID">--%>
                     <input class="bg-white border-grey-2 text-sm rounded-lg block p-4"
                            autocomplete="off" type="text" placeholder="이름"
                            name="name"/>
